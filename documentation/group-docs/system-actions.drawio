@@ -1,0 +1,209 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0" version="29.4.0">
+  <diagram name="Page-1" id="kdb5EXy6K9VRrwKHXdCV">
+    <mxGraphModel dx="1601" dy="910" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MyJINuktNvwmGYxQMO6V-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;WHAT SYSTEM DO??&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="830" x="110" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-18" parent="1" style="shape=table;startSize=0;container=1;collapsible=0;childLayout=tableLayout;" value="" vertex="1">
+          <mxGeometry height="330" width="860" x="100" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-19" parent="MyJINuktNvwmGYxQMO6V-18" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=1" value="" vertex="1">
+          <mxGeometry height="30" width="860" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-20" parent="MyJINuktNvwmGYxQMO6V-19" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;i&gt;Owners/Management&lt;/i&gt;" vertex="1">
+          <mxGeometry height="30" width="170" as="geometry">
+            <mxRectangle height="30" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-21" parent="MyJINuktNvwmGYxQMO6V-19" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;i&gt;Class Instructor&lt;/i&gt;" vertex="1">
+          <mxGeometry height="30" width="210" x="170" as="geometry">
+            <mxRectangle height="30" width="210" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-22" parent="MyJINuktNvwmGYxQMO6V-19" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;i&gt;Trainers (?)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="30" width="170" x="380" as="geometry">
+            <mxRectangle height="30" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-23" parent="MyJINuktNvwmGYxQMO6V-19" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;i&gt;Members&lt;/i&gt;" vertex="1">
+          <mxGeometry height="30" width="310" x="550" as="geometry">
+            <mxRectangle height="30" width="310" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-28" parent="MyJINuktNvwmGYxQMO6V-18" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="" vertex="1">
+          <mxGeometry height="300" width="860" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-29" parent="MyJINuktNvwmGYxQMO6V-28" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" value="&lt;div align=&quot;left&quot;&gt;+ view member profile info even if member is offsite.&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;+ view health statistic tracking of members while they are onsite&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ can view all gym management info&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ can view &amp;amp; edit membership pricing.&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ receive notifications of alerts to potential safety/health issues by system&lt;/div&gt;" vertex="1">
+          <mxGeometry height="300" width="170" as="geometry">
+            <mxRectangle height="300" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-30" parent="MyJINuktNvwmGYxQMO6V-28" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" value="&lt;div align=&quot;left&quot;&gt;+ view member profile info of members in their class even if member is offsite&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&lt;/span&gt;+ view health statistic tracking of members in their class while they are onsite&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ receive notifications of alerts to potential safety/health issues by system&lt;/div&gt;" vertex="1">
+          <mxGeometry height="300" width="210" x="170" as="geometry">
+            <mxRectangle height="300" width="210" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-31" parent="MyJINuktNvwmGYxQMO6V-28" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;div align=&quot;left&quot;&gt;+ view member profile info of a trainee even if member is offsite&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&lt;/span&gt;+ view health statistic tracking of trainee while they are onsite&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ receive notifications of alerts to potential safety/health issues by system&lt;/div&gt;" vertex="1">
+          <mxGeometry height="300" width="170" x="380" as="geometry">
+            <mxRectangle height="300" width="170" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-32" parent="MyJINuktNvwmGYxQMO6V-28" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;div align=&quot;left&quot;&gt;+ edit their profile&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+&amp;nbsp;monitor/view heart rate/other basic health statistics reasonably available through wearable&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ see their class schedules&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ see their usage statistics&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ get suggested classes to take based on usage&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ get suggested workouts to take based on usage&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;~FUN APP IDEAS~&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ get suggested a workout &quot;challenge&quot;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ get suggested other members to take on workout challenges with&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ can view a leadership board based on usage or frequency of a specific usage stat&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ can view goals/challenges achieved by others in the gym&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="300" width="310" x="550" as="geometry">
+            <mxRectangle height="300" width="310" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-43" parent="1" style="shape=table;startSize=40;container=1;collapsible=0;childLayout=tableLayout;fontStyle=1" value="DATA TRACKED/OFFERED BY THE SYSTEM" vertex="1">
+          <mxGeometry height="680" width="877" x="100" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-77" parent="MyJINuktNvwmGYxQMO6V-43" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry height="20" width="877" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-78" parent="MyJINuktNvwmGYxQMO6V-77" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;i&gt;General Category&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="117" as="geometry">
+            <mxRectangle height="20" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-79" parent="MyJINuktNvwmGYxQMO6V-77" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;i&gt;Specific Category&lt;/i&gt;" vertex="1">
+          <mxGeometry height="20" width="117" x="117" as="geometry">
+            <mxRectangle height="20" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-80" parent="MyJINuktNvwmGYxQMO6V-77" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=center;" value="&lt;div align=&quot;center&quot;&gt;&lt;i&gt;Data Held&lt;/i&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="643" x="234" as="geometry">
+            <mxRectangle height="20" width="643" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-44" parent="MyJINuktNvwmGYxQMO6V-43" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" value="" vertex="1">
+          <mxGeometry height="150" width="877" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-62" parent="MyJINuktNvwmGYxQMO6V-44" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;b&gt;MEMBER PROFILE INFO&lt;/b&gt;" vertex="1">
+          <mxGeometry height="150" width="117" as="geometry">
+            <mxRectangle height="150" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-45" parent="MyJINuktNvwmGYxQMO6V-44" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;br&gt;GENERAL&lt;div&gt;MEMBER INFORMATION&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;(like, what would be held in a static profile)&lt;/div&gt;&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="117" x="117" as="geometry">
+            <mxRectangle height="150" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-48" parent="MyJINuktNvwmGYxQMO6V-44" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" value="&#xa;&lt;div align=&quot;left&quot;&gt;+ First/Last name&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ Date of birth&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ email&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ phone number&lt;/div&gt;&lt;div&gt;+ disclosed medical injuries&lt;/div&gt;&lt;div&gt;+ basic activity history&lt;/div&gt;&lt;div&gt;+ pricing plan&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;+ card information for autobilling&lt;/div&gt;&#xa;&#xa;" vertex="1">
+          <mxGeometry height="150" width="643" x="234" as="geometry">
+            <mxRectangle height="150" width="643" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-68" parent="MyJINuktNvwmGYxQMO6V-43" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry height="90" width="877" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-69" parent="MyJINuktNvwmGYxQMO6V-68" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#000000;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1">
+          <mxGeometry height="90" width="117" as="geometry">
+            <mxRectangle height="90" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-70" parent="MyJINuktNvwmGYxQMO6V-68" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&#xa;&lt;div&gt;MEMBER USAGE STATISTICS&lt;/div&gt;&#xa;&#xa;" vertex="1">
+          <mxGeometry height="90" width="117" x="117" as="geometry">
+            <mxRectangle height="90" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-71" parent="MyJINuktNvwmGYxQMO6V-68" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" value="&#xa;&lt;div align=&quot;left&quot;&gt;+ classes attended through membership (include date, duration, instructor)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;+ equipment used (include date, duration, type)&lt;/div&gt;&#xa;&#xa;" vertex="1">
+          <mxGeometry height="90" width="643" x="234" as="geometry">
+            <mxRectangle height="90" width="643" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-72" parent="MyJINuktNvwmGYxQMO6V-43" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry height="90" width="877" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-73" parent="MyJINuktNvwmGYxQMO6V-72" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#000000;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1">
+          <mxGeometry height="90" width="117" as="geometry">
+            <mxRectangle height="90" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-74" parent="MyJINuktNvwmGYxQMO6V-72" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&#xa;&lt;div&gt;HEALTH SAFETY STATISTICS&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;(measured onsite? after tap in to entry?)&lt;/div&gt;&#xa;&#xa;" vertex="1">
+          <mxGeometry height="90" width="117" x="117" as="geometry">
+            <mxRectangle height="90" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-75" parent="MyJINuktNvwmGYxQMO6V-72" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" value="&#xa;&lt;div&gt;+ heart rate&lt;/div&gt;&lt;div&gt;+ other basic health stats? (research needed)&lt;/div&gt;&#xa;&#xa;" vertex="1">
+          <mxGeometry height="90" width="643" x="234" as="geometry">
+            <mxRectangle height="90" width="643" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-59" parent="MyJINuktNvwmGYxQMO6V-43" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry height="90" width="877" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-63" parent="MyJINuktNvwmGYxQMO6V-59" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;OVERALL GYM MANAGEMENT INFO&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="117" as="geometry">
+            <mxRectangle height="90" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-60" parent="MyJINuktNvwmGYxQMO6V-59" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="MEMBERSHIP PRICING" vertex="1">
+          <mxGeometry height="90" width="117" x="117" as="geometry">
+            <mxRectangle height="90" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-61" parent="MyJINuktNvwmGYxQMO6V-59" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" value="&lt;div&gt;+ pricing scheme for members (we can just offer one--like a monthly or something, or we can have day pass, monthly, yearly... something like that)&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;+ editable by managers&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="643" x="234" as="geometry">
+            <mxRectangle height="90" width="643" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-56" parent="MyJINuktNvwmGYxQMO6V-43" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry height="90" width="877" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-64" parent="MyJINuktNvwmGYxQMO6V-56" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#000000;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="" vertex="1">
+          <mxGeometry height="90" width="117" as="geometry">
+            <mxRectangle height="90" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-57" parent="MyJINuktNvwmGYxQMO6V-56" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="GYM USAGE STATISTICS" vertex="1">
+          <mxGeometry height="90" width="117" x="117" as="geometry">
+            <mxRectangle height="90" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-58" parent="MyJINuktNvwmGYxQMO6V-56" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" value="&lt;div&gt;+ classes offered (type/name, instructor, time, room its in, how many people signed up, max capacity of signups)&lt;/div&gt;&lt;div&gt;+ instructor profiles (name, classes they teach)&lt;/div&gt;&lt;div&gt;+ usage stats of specific equipment&lt;/div&gt;&lt;div&gt;+ usage stats of any room that is not a designated classroom (how many people in per day? who was in?)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="643" x="234" as="geometry">
+            <mxRectangle height="90" width="643" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-50" parent="MyJINuktNvwmGYxQMO6V-43" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;strokeColor=inherit;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1">
+          <mxGeometry height="110" width="877" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-65" parent="MyJINuktNvwmGYxQMO6V-50" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=#000000;top=0;left=0;bottom=0;right=0;pointerEvents=1;" vertex="1">
+          <mxGeometry height="110" width="117" as="geometry">
+            <mxRectangle height="110" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-51" parent="MyJINuktNvwmGYxQMO6V-50" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;" value="CAMERA FEED MONITORING" vertex="1">
+          <mxGeometry height="110" width="117" x="117" as="geometry">
+            <mxRectangle height="110" width="117" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-52" parent="MyJINuktNvwmGYxQMO6V-50" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;strokeColor=inherit;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;pointerEvents=1;align=left;" value="&lt;div&gt;+ fall detection&lt;/div&gt;&lt;div&gt;+ conflict/aggression (facial expression monitoring?)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="643" x="234" as="geometry">
+            <mxRectangle height="110" width="643" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-117" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;b&gt;ACTIONS SUPPORTED WITH THE DATA IN SYSTEM&lt;/b&gt;" vertex="1">
+          <mxGeometry height="50" width="860" x="100" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-118" edge="1" parent="1" source="MyJINuktNvwmGYxQMO6V-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.598;entryDx=0;entryDy=0;entryPerimeter=0;" target="MyJINuktNvwmGYxQMO6V-117">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MyJINuktNvwmGYxQMO6V-119" edge="1" parent="1" source="MyJINuktNvwmGYxQMO6V-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.614;entryDx=0;entryDy=0;entryPerimeter=0;" target="MyJINuktNvwmGYxQMO6V-117">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="80" y="965" />
+              <mxPoint x="80" y="140" />
+              <mxPoint x="100" y="140" />
+            </Array>
+            <mxPoint x="90" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
