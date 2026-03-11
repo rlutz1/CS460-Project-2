@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0" version="29.6.1">
+  <diagram name="Page-1" id="LyW3QqGRyCL79jibPltF">
+    <mxGraphModel dx="732" dy="416" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#FFFFFF;fillColor=#000000;" value="&lt;div&gt;&lt;font style=&quot;font-size: 18px; color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;Gym&amp;nbsp;&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px; color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;Space&amp;nbsp;&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 18px; color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;Manager&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;3&quot; style=&quot;color: rgba(0, 0, 0, 0);&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;3&quot; style=&quot;color: rgb(255, 255, 255);&quot;&gt;&lt;i&gt;GSM&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="290" width="160" x="320" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;i&gt;Inputs&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="70" x="125" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;i&gt;Outputs&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="70" x="640" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Camera Feed" vertex="1">
+          <mxGeometry height="40" width="160" x="80" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Member Wearable Signals" vertex="1">
+          <mxGeometry height="40" width="160" x="80" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Management/Employee Application Interaction" vertex="1">
+          <mxGeometry height="40" width="160" x="80" y="332" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Member Application Interaction" vertex="1">
+          <mxGeometry height="40" width="160" x="80" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Audio Sensors" vertex="1">
+          <mxGeometry height="40" width="160" x="80" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Safety and/or&amp;nbsp;Health Emergency&amp;nbsp;Violation Notification" vertex="1">
+          <mxGeometry height="50" width="160" x="595" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Member Profile Information" vertex="1">
+          <mxGeometry height="40" width="160" x="595" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Gym Usage Information" vertex="1">
+          <mxGeometry height="40" width="160" x="595" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Class/Training Program Recommendations for Group and Individuals" vertex="1">
+          <mxGeometry height="48" width="160" x="595" y="341" as="geometry" />
+        </mxCell>
+        <mxCell id="JETYHhNpC7GDHPz9FyFn-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Gym Facility Information" vertex="1">
+          <mxGeometry height="38" width="160" x="595" y="292" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
