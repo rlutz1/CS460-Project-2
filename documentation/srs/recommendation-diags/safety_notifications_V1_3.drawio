@@ -1,0 +1,155 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="AH1miMmjfix_06vcu2Nx">
+    <mxGraphModel dx="2656" dy="1183" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;b&gt;Monitoring&lt;/b&gt;&lt;/div&gt;&lt;div&gt;do: analyze camera feed data and member wearable &amp;nbsp;in class&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="160" x="80" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-15" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="YZ01fu9KkL-w6KSaXwyo-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-16" parent="1" style="shape=ellipse;fillColor=#000000;strokeColor=none;html=1;sketch=0;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="150" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="GSMS boots up" vertex="1">
+          <mxGeometry height="30" width="80" x="160" y="895" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-14" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="YZ01fu9KkL-w6KSaXwyo-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-31" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="YZ01fu9KkL-w6KSaXwyo-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="1495" />
+              <mxPoint x="340" y="1120" />
+              <mxPoint x="200" y="1120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-18" parent="1" style="whiteSpace=wrap;html=1;rounded=1;arcSize=25;" value="&lt;b&gt;&amp;nbsp;Safety Event Verification&lt;/b&gt;&lt;div&gt;do: Identify contextualize event with member health and fitness history.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="210" x="260" y="1495" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-24" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Members Recognized [Health risk OR Fitness risk]" vertex="1">
+          <mxGeometry height="30" width="160" x="20" y="1510" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-27" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="No Risk Confirmed" vertex="1">
+          <mxGeometry height="30" width="60" x="170" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-30" parent="1" style="whiteSpace=wrap;html=1;rounded=1;arcSize=25;" value="&lt;b&gt;Determine Severity&lt;/b&gt;&lt;div&gt;do: classify events as Alert or Warning type&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="210" x="540" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-27" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="YZ01fu9KkL-w6KSaXwyo-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-35" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="YZ01fu9KkL-w6KSaXwyo-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="1350" />
+              <mxPoint x="220" y="1190" />
+              <mxPoint x="160" y="1190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-34" parent="1" style="whiteSpace=wrap;html=1;rounded=1;arcSize=25;" value="&lt;b&gt;Conflict Event Verification&lt;/b&gt;&lt;div&gt;do: Contextualize event with recent audio information.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="210" x="40" y="1350" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-36" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Member Recognized [Physical Abuse OR Verbal Abuse]" vertex="1">
+          <mxGeometry height="30" width="130" x="40" y="1290" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-39" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="No Conflict Confirmed" vertex="1">
+          <mxGeometry height="30" width="120" x="210" y="1090" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-44" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Safety Risk Confirmed&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="140" x="490" y="1510" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-34" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="YZ01fu9KkL-w6KSaXwyo-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-47" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Notifying&lt;/b&gt;&lt;div&gt;do: Notify instructor and affected members in class&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="460" y="985" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-49" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Conflict Risk Confirmed&amp;nbsp;" vertex="1">
+          <mxGeometry height="30" width="220" x="390" y="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-63" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Logging&lt;/b&gt;&lt;div&gt;do: log event details for specified class, recognized members, and instructors.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="260" x="410" y="1075" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-73" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="/ request_response(eventId)" vertex="1">
+          <mxGeometry height="30" width="120" x="290" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-79" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-77" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="1689.7058823529414" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-77" parent="1" style="shape=ellipse;fillColor=#000000;strokeColor=none;html=1;sketch=0;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="-55" y="1680" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-78" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="SAFETY &amp;amp; CONFLICT MONITORING SYSTEM" vertex="1">
+          <mxGeometry height="30" width="280" x="250" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-80" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="/ request_response(evenId)" vertex="1">
+          <mxGeometry height="30" width="60" x="50" y="1650" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-83" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="YZ01fu9KkL-w6KSaXwyo-82">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-81" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="do:&lt;div&gt;wait for attendee response&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="180" y="1660" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-86" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="680" y="1690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-82" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Update Event Log&lt;/b&gt;&lt;br&gt;&lt;div&gt;do: update log of safety event as resolved&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="170" x="450" y="1660" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-85" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Notification Acknowledged" vertex="1">
+          <mxGeometry height="30" width="60" x="340" y="1660" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-87" parent="1" style="shape=ellipse;fillColor=#000000;strokeColor=none;html=1;sketch=0;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="690" y="1680" as="geometry" />
+        </mxCell>
+        <mxCell id="YZ01fu9KkL-w6KSaXwyo-91" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="680" y="1670" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-15" edge="1" parent="1" source="E3Ar-RVsLVY6-fN9EaYc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="YZ01fu9KkL-w6KSaXwyo-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-36" edge="1" parent="1" source="E3Ar-RVsLVY6-fN9EaYc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="E3Ar-RVsLVY6-fN9EaYc-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Facial Recognition&lt;/b&gt;&lt;div&gt;do: connect detected incident with affected, enrolled members.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="200" x="-50" y="1170" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-11" edge="1" parent="1" source="E3Ar-RVsLVY6-fN9EaYc-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="YZ01fu9KkL-w6KSaXwyo-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;General Logging&lt;/b&gt;&lt;div&gt;do: generate default risk log and message incident with associated class and instructor details&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="210" x="105" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Risk Detected [Health OR Fitness OR Physica abusel OR Verbal abuse]" vertex="1">
+          <mxGeometry height="30" width="150" x="-30" y="1080" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-22" edge="1" parent="1" source="E3Ar-RVsLVY6-fN9EaYc-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.623;entryY=-0.01;entryDx=0;entryDy=0;entryPerimeter=0;" target="YZ01fu9KkL-w6KSaXwyo-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-30" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Member Not Recognized" vertex="1">
+          <mxGeometry height="30" width="130" x="-55" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-32" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.705;entryY=0.983;entryDx=0;entryDy=0;entryPerimeter=0;" target="YZ01fu9KkL-w6KSaXwyo-63">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-33" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.662;entryY=1.046;entryDx=0;entryDy=0;entryPerimeter=0;" target="YZ01fu9KkL-w6KSaXwyo-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3Ar-RVsLVY6-fN9EaYc-37" edge="1" parent="1" source="YZ01fu9KkL-w6KSaXwyo-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.847;entryY=-0.044;entryDx=0;entryDy=0;entryPerimeter=0;" target="E3Ar-RVsLVY6-fN9EaYc-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
