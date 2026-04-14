@@ -1,0 +1,97 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="OsLhJjffbh-sMuRLpiZp">
+    <mxGraphModel dx="1269" dy="728" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8KFM2JgspDT8RVhq55oc-3" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="560" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-4" parent="1" style="shape=ellipse;fillColor=#000000;strokeColor=none;html=1;sketch=0;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="570" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-8" edge="1" parent="1" source="8KFM2JgspDT8RVhq55oc-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="8KFM2JgspDT8RVhq55oc-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-6" parent="1" style="shape=ellipse;fillColor=#000000;strokeColor=none;html=1;sketch=0;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="130" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-10" edge="1" parent="1" source="8KFM2JgspDT8RVhq55oc-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="8KFM2JgspDT8RVhq55oc-27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-11" edge="1" parent="1" source="8KFM2JgspDT8RVhq55oc-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="8KFM2JgspDT8RVhq55oc-16">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Query&lt;/b&gt;&lt;br&gt;do: query class times for that room" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Member enters room" vertex="1">
+          <mxGeometry height="20" width="130" x="147" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="[Room does not have an active class at this time]" vertex="1">
+          <mxGeometry height="50" width="150" x="210" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="[Room does have an active class at this time]" vertex="1">
+          <mxGeometry height="50" width="150" x="150" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-20" edge="1" parent="1" source="8KFM2JgspDT8RVhq55oc-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="8KFM2JgspDT8RVhq55oc-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-23" edge="1" parent="1" source="8KFM2JgspDT8RVhq55oc-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="8KFM2JgspDT8RVhq55oc-24">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Query&lt;/b&gt;&lt;br&gt;do: query members enrolled in that class" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-17" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="560" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-18" parent="1" style="shape=ellipse;fillColor=#000000;strokeColor=none;html=1;sketch=0;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="570" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-22" edge="1" parent="1" source="8KFM2JgspDT8RVhq55oc-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="8KFM2JgspDT8RVhq55oc-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Notify&lt;/b&gt;&lt;div&gt;do: push Warning notification to instructor application&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="380" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-21" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="[Member is not enrolled]" vertex="1">
+          <mxGeometry height="30" width="160" x="206" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-24" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="560" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-25" parent="1" style="shape=ellipse;fillColor=#000000;strokeColor=none;html=1;sketch=0;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="570" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-26" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="[Member is enrolled]" vertex="1">
+          <mxGeometry height="30" width="130" x="221" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-28" edge="1" parent="1" source="8KFM2JgspDT8RVhq55oc-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="8KFM2JgspDT8RVhq55oc-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Notify&lt;/b&gt;&lt;div&gt;do: push Warning notification to attendant applications&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="380" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-32" edge="1" parent="1" source="8KFM2JgspDT8RVhq55oc-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="8KFM2JgspDT8RVhq55oc-30" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="530" as="sourcePoint" />
+            <mxPoint x="560" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="&lt;b&gt;Track Attendance&lt;/b&gt;&lt;div&gt;do: log member attendance&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="380" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="8KFM2JgspDT8RVhq55oc-33" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="room usage tracking/attendance; sneaking in the doorway sensors" vertex="1">
+          <mxGeometry height="30" width="240" x="280" y="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
