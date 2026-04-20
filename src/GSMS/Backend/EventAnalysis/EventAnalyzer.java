@@ -48,6 +48,15 @@ public class EventAnalyzer {
 
     } // end method
 
+    /**
+     * sends an alert/notification to the Notification Dispatcher, as well as its priority.
+     * @param alert
+     * @param alertLevel
+     */
+    public void pushAlert(String alert, String alertLevel) {
+
+    }
+
 
 
 } // end class
