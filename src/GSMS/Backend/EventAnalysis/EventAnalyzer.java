@@ -42,9 +42,9 @@ public class EventAnalyzer {
      * Additionally an entry point to receive signals from doorway sensors
      * as read from the member wearables
      * @param roomId
-     * @param member
+     * @param memberId
      */
-    public void getWearableData(String roomId, String member Id) {
+    public void getWearableData(String roomId, String memberId) {
 
     } // end method
 
