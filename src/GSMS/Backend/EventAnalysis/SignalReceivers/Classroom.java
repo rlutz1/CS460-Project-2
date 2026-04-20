@@ -1,4 +1,4 @@
-package Backend.EventAnalysis.SignalReceivers;
+package GSMS.Backend.EventAnalysis.SignalReceivers;
 
 /**
  * class to stand as component for classroom abstraction

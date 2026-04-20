@@ -1,4 +1,4 @@
-package Backend.Notification;
+package GSMS.Backend.Notification;
 
 /**
  * class to stand as component for notification dispatcher

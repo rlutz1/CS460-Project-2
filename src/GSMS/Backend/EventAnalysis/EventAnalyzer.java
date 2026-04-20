@@ -1,4 +1,4 @@
-package Backend.EventAnalysis;
+package GSMS.Backend.EventAnalysis;
 
 /**
  * class to stand as component for event analyzer
