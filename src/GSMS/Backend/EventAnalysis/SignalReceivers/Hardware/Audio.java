@@ -6,4 +6,17 @@ package GSMS.Backend.EventAnalysis.SignalReceivers.Hardware;
 
 public class Audio {
 
+    public Audio() {
+
+    } // end constructor
+
+    /**
+     * entry point to receive signal data tied
+     * to this specific classroom’s sensors and feeds.
+     * @param signal
+     */
+    public void receiveSignal(String signal) {
+
+    } // end method
+
 } // end class
