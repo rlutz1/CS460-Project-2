@@ -6,4 +6,16 @@ package GSMS.Backend.DataManagement;
 
 public class Logger {
 
+    public Logger() {
+
+    } // end constructor
+
+    /**
+     * log a given notification of any alert level to the database
+     * @param notification
+     */
+    public void logNotification(String notification) {
+
+    } // end method
+
 } // end class
