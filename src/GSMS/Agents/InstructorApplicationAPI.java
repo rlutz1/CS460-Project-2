@@ -1,4 +1,4 @@
-package GSMS.Backend.Agents;
+package GSMS.Agents;
 
 /**
  * a stand-in class for being an API for incoming

@@ -1,4 +1,4 @@
-package GSMS.Backend.Root;
+package GSMS.Root;
 
 /**
  * the "root" of the back end.
@@ -8,5 +8,8 @@ package GSMS.Backend.Root;
 
 public class GymSpaceManagementController {
 
+    public GymSpaceManagementController() {
+
+    } // end constructor
 
 } // end class

@@ -1,4 +1,4 @@
-package GSMS.Backend.EventAnalysis.SignalReceivers.Hardware;
+package GSMS.EventAnalysis.SignalReceivers.Hardware;
 
 /**
  * class to stand as component for camera feed recipient

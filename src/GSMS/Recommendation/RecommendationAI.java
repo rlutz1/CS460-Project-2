@@ -1,4 +1,4 @@
-package GSMS.Backend.Recommendation;
+package GSMS.Recommendation;
 
 import java.util.List;
 

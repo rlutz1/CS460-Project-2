@@ -1,4 +1,4 @@
-package GSMS.Backend.Recommendation;
+package GSMS.Recommendation;
 
 /**
  * class to stand as component for recc dispatcher

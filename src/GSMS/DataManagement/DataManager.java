@@ -1,4 +1,4 @@
-package GSMS.Backend.DataManagement;
+package GSMS.DataManagement;
 
 import java.util.List;
 

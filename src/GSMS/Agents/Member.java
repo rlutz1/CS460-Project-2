@@ -1,14 +1,14 @@
-package GSMS.Backend.Agents;
+package GSMS.Agents;
 
 /**
- * stand in for the instructor component,
+ * stand in for the member component
  * in charge of OUT going info to an
- * instructor application
+ * member application
  */
 
-public class Instructor {
+public class Member {
 
-    public Instructor() {
+    public Member() {
 
     } // end constructor
 

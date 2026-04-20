@@ -1,4 +1,4 @@
-package GSMS.Backend.Notification;
+package GSMS.Notification;
 
 import java.util.List;
 

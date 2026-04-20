@@ -1,4 +1,4 @@
-package GSMS.Backend.DataManagement;
+package GSMS.DataManagement;
 
 /**
  * class to stand as component for logger
