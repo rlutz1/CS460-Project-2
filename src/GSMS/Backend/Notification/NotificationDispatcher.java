@@ -23,6 +23,15 @@ public class NotificationDispatcher {
      */
     public void receiveNotification(String notification, String alertLevel, String recipientInfo) {
 
+        sendNotification(null, null); // end by sending the notification
+    } // end method
+
+    /**
+     * send out a notification to this agent
+     * @param agentId
+     */
+    public void sendNotification(String notification, String agentId) {
+
     } // end method
 
 
