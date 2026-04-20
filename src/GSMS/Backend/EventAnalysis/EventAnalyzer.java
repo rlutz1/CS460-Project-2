@@ -10,13 +10,14 @@ public class EventAnalyzer {
 
     } // end constructor
 
-    /**
-     * call to scan all rooms in the gym
-     * and retrieve data from various devices
-     */
-    public void scanRooms() {
+    /*
+    getSystemState(roomID):
+    returns current occupancy, active alerts, and activities of a given room.
 
-    } // end method
+    scanRooms():
+    call to scan all rooms in the gym
+    and retrieve data from various devices
+    */
 
     /**
      * entry point to receive decibel levels collected
@@ -49,13 +50,17 @@ public class EventAnalyzer {
     } // end method
 
     /**
-     * sends an alert/notification to the Notification Dispatcher, as well as its priority.
+     * sends an alert/notification to the
+     * Notification Dispatcher, as well as its alert level
+     * and an optional target identification
+     * (instructor, member).
      * @param alert
      * @param alertLevel
+     * @param targetId
      */
-    public void pushAlert(String alert, String alertLevel) {
+    public void pushAlert(String alert, String alertLevel, String targetId) {
 
-    }
+    } // end method
 
 
 

@@ -8,4 +8,17 @@ package GSMS.Backend.Agents;
 
 public class Member {
 
+    public Member() {
+
+    } // end constructor
+
+    /**
+     * directive to send out network-ready data
+     * over the network to a specific instructor application
+     * @param notificationOrInformation
+     */
+    public void sendInformation(String notificationOrInformation) {
+
+    } // end method
+
 } // end class

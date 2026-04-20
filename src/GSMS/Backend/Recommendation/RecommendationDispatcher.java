@@ -17,18 +17,19 @@ public class RecommendationDispatcher {
     /**
      * entry point to receive an analysis or generation request
      * @param senderId
+     * @param requestType
      * @param requestData
      */
-    public void receiveRequest(String senderId, String requestData) {
+    public void receiveRequest(String senderId, String requestType, String requestData) {
 
     } // end method
 
     /**
      * send out a response to this agent
-     * @param instructorID
+     * @param instructorId
      * @param responseData
      */
-    public void sendItinerary(String instructorID, String responseData) {
+    public void sendItinerary(String instructorId, String responseData) {
 
     } // end method
 
