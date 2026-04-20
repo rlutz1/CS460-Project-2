@@ -1,3 +1,5 @@
+package Backend.EventAnalysis.SignalReceivers;
+
 /**
  * class to stand as component for classroom abstraction
  */

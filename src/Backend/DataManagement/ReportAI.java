@@ -1,3 +1,5 @@
+package Backend.DataManagement;
+
 /**
  * class to stand as component for report AI
  */

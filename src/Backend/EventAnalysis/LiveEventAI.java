@@ -1,3 +1,5 @@
+package Backend.EventAnalysis;
+
 /**
  * class to stand as component for live event AI
  */

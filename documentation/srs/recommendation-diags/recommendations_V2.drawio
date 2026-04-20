@@ -1,7 +1,7 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Page-1" id="j9yjV4YHm9vRq_0bVymW">
     <mxGraphModel dx="1381" dy="2005" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
-      <root>
+      <Root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="9e1Oar02h7sMwWUUDwk4-5" edge="1" parent="1" source="wjJj56kZ_HiQ-fBdoFqB-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;">
@@ -129,7 +129,7 @@
         <mxCell id="9e1Oar02h7sMwWUUDwk4-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="push_recommendation(Workout, MemberID)" vertex="1">
           <mxGeometry height="40" width="150" x="335" y="400" as="geometry" />
         </mxCell>
-      </root>
+      </Root>
     </mxGraphModel>
   </diagram>
 </mxfile>

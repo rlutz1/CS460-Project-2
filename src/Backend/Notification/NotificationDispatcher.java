@@ -1,3 +1,5 @@
+package Backend.Notification;
+
 /**
  * class to stand as component for notification dispatcher
  */
