@@ -23,6 +23,8 @@ public class EventAnalyzer {
 
     public void pushAttendance(String classId, String agentIds) {}
 
+    public void contextualize() {}
+
     /**
      * entry point to receive decibel levels collected
      * from audio sensors in a given room
