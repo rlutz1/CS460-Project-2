@@ -2,8 +2,11 @@ package MemberApplication;
 
 public class MemberApplication {
 
-    public MemberApplication() {
+    private String privateId;
 
+    // when creating new member, have unique id associated to specific member
+    public MemberApplication(String id) {
+        privateId = id;
     } // end constructor
 
     /**
@@ -12,7 +15,11 @@ public class MemberApplication {
      * @param id
      */
     public void getClassSchedule(String id) {
-
+        if (id.matches(privateId)) {
+            // do something
+        } else {
+            // unauthorized access
+        }
     } // end method
 
     /**
@@ -22,7 +29,11 @@ public class MemberApplication {
      * @param exerciseType
      */
     public void getGeneratedWorkout(String id, String exerciseType) {
-
+        if (id.matches(privateId)) {
+            // do something
+        } else {
+            // unauthorized access
+        }
     } // end method
 
     /**
@@ -31,7 +42,11 @@ public class MemberApplication {
      * @param id
      */
     public void getMemberProfile(String id) {
-
+        if (id.matches(privateId)) {
+            // do something
+        } else {
+            // unauthorized access, reject
+        }
     } // end method
 
 } // end class

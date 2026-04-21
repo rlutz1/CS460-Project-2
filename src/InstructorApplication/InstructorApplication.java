@@ -5,8 +5,11 @@ package InstructorApplication;
  */
 public class InstructorApplication {
 
-    public InstructorApplication() {
-
+    private String privateId;
+    private boolean isCoveredEntity;
+    public InstructorApplication(String id, boolean isCoveredEntity) {
+        privateId = id;
+        this.isCoveredEntity = isCoveredEntity;
     } // end method
 
     /**
@@ -25,7 +28,11 @@ public class InstructorApplication {
      * @param instructorId
      */
     public void getInstructorProfile(String instructorId) {
-
+        if (instructorId.matches(privateId)) {
+            // do something
+        } else {
+            // unauthorized access
+        }
     } // end method
 
 } // end class

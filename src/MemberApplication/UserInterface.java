@@ -7,7 +7,7 @@ package MemberApplication;
 public class UserInterface {
 
     public UserInterface() {
-
+        MemberApplication member = new MemberApplication("M001"); // Dummy for new members (increasing as more members added)
     } // end constructor
 
     /**
