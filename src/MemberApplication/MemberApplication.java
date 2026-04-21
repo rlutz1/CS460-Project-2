@@ -18,7 +18,7 @@ public class MemberApplication {
         if (id.matches(privateId)) {
             // do something
         } else {
-            // unauthorized access
+            System.err.println("Unauthorized request to another account! Request Denied");
         }
     } // end method
 
@@ -32,7 +32,7 @@ public class MemberApplication {
         if (id.matches(privateId)) {
             // do something
         } else {
-            // unauthorized access
+            System.err.println("Unauthorized request to another account! Request Denied");
         }
     } // end method
 
@@ -45,7 +45,7 @@ public class MemberApplication {
         if (id.matches(privateId)) {
             // do something
         } else {
-            // unauthorized access, reject
+            System.err.println("Unauthorized access to another account! Access Denied");
         }
     } // end method
 

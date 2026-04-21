@@ -31,7 +31,7 @@ public class InstructorApplication {
         if (instructorId.matches(privateId)) {
             // do something
         } else {
-            // unauthorized access
+            System.err.println("Unauthorized access to another account! Access Denied");
         }
     } // end method
 
