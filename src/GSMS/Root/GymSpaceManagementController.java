@@ -12,4 +12,8 @@ public class GymSpaceManagementController {
 
     } // end constructor
 
+    public void scheduleJob(String info) {}
+
+    public void requestJob(String info, String sender) {}
+
 } // end class
