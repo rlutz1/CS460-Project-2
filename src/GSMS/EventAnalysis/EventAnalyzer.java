@@ -19,6 +19,10 @@ public class EventAnalyzer {
     and retrieve data from various devices
     */
 
+    public void verifyRoomAccess(String roomId, String memberId) {}
+
+    public void pushAttendance(String classId, String agentIds) {}
+
     /**
      * entry point to receive decibel levels collected
      * from audio sensors in a given room

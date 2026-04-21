@@ -21,7 +21,7 @@ public class NotificationDispatcher {
      * should be able to take the notification and alert level
      * and determine the appropriate receipients
      */
-    public void receiveNotification(String notification, String alertLevel, String recipientInfo) {
+    public void receiveNotification(String notification, String alertLevel, String recipientId) {
 
         sendNotification(null, null); // end by sending the notification
     } // end method
