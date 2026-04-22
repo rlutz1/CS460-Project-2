@@ -23,16 +23,16 @@ public class UserInterface {
      * displays the appropriate message and visual
      * indicators appropriate for the warning level
      * of a notification for the member/instructor applications
-     * @param level
+     * @param alertLevel
      * @param msg
      */
-    public void displayNotification(String level, String msg) {
+    public void displayNotification(String alertLevel, String msg) {
 
     } // end method
 
     /**
      * Marks the current notification on display as resolved
-     * - to transmit back to the Gym Space Management Controller
+     * to transmit back to the Gym Space Management Controller
      */
     public void markNotificationResolved() {
 
