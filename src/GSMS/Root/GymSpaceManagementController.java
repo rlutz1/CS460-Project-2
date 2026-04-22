@@ -12,8 +12,25 @@ public class GymSpaceManagementController {
 
     } // end constructor
 
-    public void scheduleJob(String info) {}
+    /**
+     * an entry point upon receipt of a request from the
+     * Member or Instructor APIs to initiate the process delegation to an internal
+     * component based on the request
+     * @param info
+     */
+    public void scheduleJob(String info) {
 
-    public void requestJob(String info, String sender) {}
+    } // end method
+
+    /**
+     * an entry point for other
+     * components to pass along a needed communication between themselves and
+     * another internal component.
+     * @param info
+     * @param sender
+     */
+    public void requestJob(String info, String sender) {
+
+    } // end method
 
 } // end class
