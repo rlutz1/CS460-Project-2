@@ -32,7 +32,7 @@ public class Driver extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/basic-apps.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/basic-instructor-member-apps.fxml"));
 
         Scene scene = new Scene(root, 700, 500);
 
