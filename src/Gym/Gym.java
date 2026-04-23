@@ -24,33 +24,14 @@ public class Gym implements Initializable {
 
 
     } // end constructor
-    @FXML
-    private StackPane stackPane;
-    @FXML
-    private Text text2;
-    private RotateTransition rotate;
+//    @FXML // tag to signify fx:id to refer to in the
+//    private StackPane stackPane;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        rotate = new RotateTransition(Duration.millis(2500), stackPane);
-//        rotate.setToAngle(360);
-//        rotate.setFromAngle(0);
-//        rotate.setInterpolator(Interpolator.LINEAR);
-//        rotate.statusProperty().addListener(
-//                (observableValue, oldValue, newValue) -> {
-//                    text2.setText("Was " + oldValue + ", Now " + newValue);
-//                });
-//        text2.strokeProperty().bind(new When(rotate.statusProperty()
-//                .isEqualTo(Animation.Status.RUNNING))
-//                .then(Color.GREEN).otherwise(Color.RED));
+
     }
-//    @FXML
-//    private void handleMouseClick(MouseEvent mouseEvent) {
-//        if (rotate.getStatus().equals(Animation.Status.RUNNING)) {
-//            rotate.pause();
-//        } else {
-//            rotate.play();
-//        }
-//    }
+
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) {
         System.out.println("Starting Instructor Application.");
@@ -62,6 +43,32 @@ public class Gym implements Initializable {
     }
 
 } // end class
+
+// old initialize code, keeping for notes
+//        rotate = new RotateTransition(Duration.millis(2500), stackPane);
+//        rotate.setToAngle(360);
+//        rotate.setFromAngle(0);
+//        rotate.setInterpolator(Interpolator.LINEAR);
+//        rotate.statusProperty().addListener(
+//                (observableValue, oldValue, newValue) -> {
+//                    text2.setText("Was " + oldValue + ", Now " + newValue);
+//                });
+//        text2.strokeProperty().bind(new When(rotate.statusProperty()
+//                .isEqualTo(Animation.Status.RUNNING))
+//                .then(Color.GREEN).otherwise(Color.RED));
+
+// keeping for notes
+//    @FXML
+//    private void handleMouseClick(MouseEvent mouseEvent) {
+//        if (rotate.getStatus().equals(Animation.Status.RUNNING)) {
+//            rotate.pause();
+//        } else {
+//            rotate.play();
+//        }
+//    }
+
+
+
 /*
 package org.modernclient;
 import javafx.animation.Animation;
