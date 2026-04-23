@@ -6,12 +6,18 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
+import java.io.IOException;
+import java.net.URL;
+
 /**
  * idea is to start demo from this puppy, a "driver" of the demo
  * this will start the MAIN demo space.
  */
 
 public class Driver extends Application {
+
+    public final static String MAIN_FXML = "/fxml/gym.fxml";
+    public final static String ROOT_WINDOW_NAME = "GSMS Simulator";
 
     /**
      * main method to start up the demo.
@@ -31,14 +37,19 @@ public class Driver extends Application {
      * @throws Exception
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/gym.fxml"));
+    public void start(Stage primaryStage) throws IOException {
+        URL main = getClass().getResource(MAIN_FXML); // grab main xml
 
-        Scene scene = new Scene(root);
+        if (main != null) { // null catch
+            Parent root = FXMLLoader.load(main); // load it
+            Scene scene = new Scene(root); // make primary stage root
+            primaryStage.setTitle(ROOT_WINDOW_NAME);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } else {
+            System.out.println("Something went wrong: " + MAIN_FXML + " returned null on start.");
+        } // end if
 
-        primaryStage.setTitle("GSMS Simulator");
-        primaryStage.setScene(scene);
-        primaryStage.show();
     } // end method
 
 } // end class

@@ -26,6 +26,11 @@ import java.util.ResourceBundle;
  */
 public class Gym implements Initializable {
 
+    public final static String MAIN_INSTRUCTOR_FXML = "/fxml/instructor-app.fxml";
+    public final static String INSTRUCTOR_WINDOW_NAME = "Instructor Application";
+    public final static String MAIN_MEMBER_FXML = "/fxml/member-app.fxml";
+    public final static String MEMBER_WINDOW_NAME = "Member Application";
+
     public Gym() {
 
 
@@ -41,21 +46,36 @@ public class Gym implements Initializable {
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Instructor Application.");
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/instructor-app.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Instructor Application");
-        stage.setScene(new Scene(root));
-        stage.show();
+
+        URL main = getClass().getResource(MAIN_INSTRUCTOR_FXML); // grab main xml
+
+        if (main != null) { // null catch
+            Parent root = FXMLLoader.load(main); // load it
+            Stage stage = new Stage();
+            stage.setTitle(INSTRUCTOR_WINDOW_NAME);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } else {
+            System.out.println("Something went wrong: " + MAIN_INSTRUCTOR_FXML + " returned null on start.");
+        } // end if
+
     } // end method
 
     @FXML
     private void startMemberApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Member Application.");
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/member-app.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Member Application");
-        stage.setScene(new Scene(root));
-        stage.show();
+
+        URL main = getClass().getResource(MAIN_MEMBER_FXML); // grab main xml
+
+        if (main != null) { // null catch
+            Parent root = FXMLLoader.load(main); // load it
+            Stage stage = new Stage();
+            stage.setTitle(MEMBER_WINDOW_NAME);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } else {
+            System.out.println("Something went wrong: " + MAIN_MEMBER_FXML + " returned null on start.");
+        } // end if
     } // end method
 
 } // end class
