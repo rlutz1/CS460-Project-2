@@ -24,24 +24,46 @@ import java.util.ResourceBundle;
  * this is the PHYSICAL gym container for simulating
  * our actual gym space with javafx
  */
-public class Gym implements Initializable {
+//public class Gym {
+public class Gym {
 
     public final static String MAIN_INSTRUCTOR_FXML = "/fxml/instructor-app.fxml";
     public final static String INSTRUCTOR_WINDOW_NAME = "Instructor Application";
     public final static String MAIN_MEMBER_FXML = "/fxml/member-app.fxml";
     public final static String MEMBER_WINDOW_NAME = "Member Application";
 
+    //    @FXML // tag to signify fx:id to refer to in the
+    //    private StackPane stackPane;
+
+
     public Gym() {
 
-
     } // end constructor
-//    @FXML // tag to signify fx:id to refer to in the
-//    private StackPane stackPane;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    /**
+     * invoked at runtime. this is better compared to the
+     * traditional "implements Initializable", do to JavaFX
+     * injecting those fields automatically. according to
+     * javadocs, injection is suggested when possible.
+     *
+     * a difference between this and constructor:
+     *
+     * In a few words: The constructor is called first,
+     * then any @FXML annotated fields are populated, then initialize() is called.
+     * This means the constructor does not have access to @FXML fields referring to
+     * components defined in the .fxml file, while initialize() does have access to them.
+     *
+     * so, any code for setting up anything for ui components should be
+     * done here if they are fx:id components.
+     * constructor will not have access to these.
+     * ref:
+     * https://stackoverflow.com/questions/34785417/javafx-fxml-controller-constructor-vs-initialize-method
+     */
+    @FXML
+    public void initialize() {
+//        System.out.println("init");
+    } // end method
 
-    }
 
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) throws IOException {
@@ -85,6 +107,9 @@ public class Gym implements Initializable {
 
 
 } // end class
+
+
+
 
 // old initialize code, keeping for notes
 //        rotate = new RotateTransition(Duration.millis(2500), stackPane);
