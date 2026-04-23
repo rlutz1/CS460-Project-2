@@ -5,12 +5,18 @@ import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.beans.binding.When;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,14 +39,24 @@ public class Gym implements Initializable {
     }
 
     @FXML
-    private void startInstructorApp(MouseEvent mouseEvent) {
+    private void startInstructorApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Instructor Application.");
-    }
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/instructor-app.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Instructor Application");
+        stage.setScene(new Scene(root));
+        stage.show();
+    } // end method
 
     @FXML
-    private void startMemberApp(MouseEvent mouseEvent) {
+    private void startMemberApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Member Application.");
-    }
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/member-app.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Member Application");
+        stage.setScene(new Scene(root));
+        stage.show();
+    } // end method
 
 } // end class
 

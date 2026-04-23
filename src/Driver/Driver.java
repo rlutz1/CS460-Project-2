@@ -18,7 +18,7 @@ public class Driver extends Application {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("What's up, sluts.");
+        System.out.println("Beginning driver...");
         launch(args);
     } // end main method
 
@@ -34,7 +34,7 @@ public class Driver extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/gym.fxml"));
 
-        Scene scene = new Scene(root, 1000, 800);
+        Scene scene = new Scene(root);
 
         primaryStage.setTitle("GSMS Simulator");
         primaryStage.setScene(scene);

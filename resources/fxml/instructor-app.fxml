@@ -8,7 +8,7 @@
 
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="InstructorApplication.UserInterface"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
+      fx:controller="InstructorApplication.InstructorApplication"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
