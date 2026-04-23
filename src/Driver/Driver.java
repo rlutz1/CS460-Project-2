@@ -32,11 +32,11 @@ public class Driver extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/basic-instructor-member-apps.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/gym.fxml"));
 
-        Scene scene = new Scene(root, 700, 500);
+        Scene scene = new Scene(root, 1000, 800);
 
-        primaryStage.setTitle("FXML Welcome");
+        primaryStage.setTitle("GSMS Simulator");
         primaryStage.setScene(scene);
         primaryStage.show();
     } // end method

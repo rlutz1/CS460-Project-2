@@ -31,25 +31,34 @@ public class Gym implements Initializable {
     private RotateTransition rotate;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        rotate = new RotateTransition(Duration.millis(2500), stackPane);
-        rotate.setToAngle(360);
-        rotate.setFromAngle(0);
-        rotate.setInterpolator(Interpolator.LINEAR);
-        rotate.statusProperty().addListener(
-                (observableValue, oldValue, newValue) -> {
-                    text2.setText("Was " + oldValue + ", Now " + newValue);
-                });
-        text2.strokeProperty().bind(new When(rotate.statusProperty()
-                .isEqualTo(Animation.Status.RUNNING))
-                .then(Color.GREEN).otherwise(Color.RED));
+//        rotate = new RotateTransition(Duration.millis(2500), stackPane);
+//        rotate.setToAngle(360);
+//        rotate.setFromAngle(0);
+//        rotate.setInterpolator(Interpolator.LINEAR);
+//        rotate.statusProperty().addListener(
+//                (observableValue, oldValue, newValue) -> {
+//                    text2.setText("Was " + oldValue + ", Now " + newValue);
+//                });
+//        text2.strokeProperty().bind(new When(rotate.statusProperty()
+//                .isEqualTo(Animation.Status.RUNNING))
+//                .then(Color.GREEN).otherwise(Color.RED));
     }
+//    @FXML
+//    private void handleMouseClick(MouseEvent mouseEvent) {
+//        if (rotate.getStatus().equals(Animation.Status.RUNNING)) {
+//            rotate.pause();
+//        } else {
+//            rotate.play();
+//        }
+//    }
     @FXML
-    private void handleMouseClick(MouseEvent mouseEvent) {
-        if (rotate.getStatus().equals(Animation.Status.RUNNING)) {
-            rotate.pause();
-        } else {
-            rotate.play();
-        }
+    private void startInstructorApp(MouseEvent mouseEvent) {
+        System.out.println("Starting Instructor Application.");
+    }
+
+    @FXML
+    private void startMemberApp(MouseEvent mouseEvent) {
+        System.out.println("Starting Member Application.");
     }
 
 } // end class
