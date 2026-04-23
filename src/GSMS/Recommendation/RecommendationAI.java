@@ -12,15 +12,6 @@ public class RecommendationAI {
 
     } // end constructor
 
-    /*
-    getMemberProfile(memberID):
-    sends a request to the Data Manager to retrieve a member’s profile
-    given by their ID and retrieves it upon success.
-    The profile information given here is limited to
-    a member’s vitals, exercise routine in the gym,
-    and medical conditions.
-     */
-
     /**
      * returns an exercise itinerary, given enrolled members'
      * profiles and the instructor-created itinerary

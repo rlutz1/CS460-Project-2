@@ -17,11 +17,11 @@ public class LiveEventAI {
      * it returns an event category as well as an
      * associated probability based on the given processed
      * data.
-     * @param signalType
      * @param data
+     * @param signalType
      * @return
      */
-    public String detectEvent(String signalType, String data) {
+    public String detectEvent(String data, String signalType) {
         return null;
     } // end method
 

@@ -67,12 +67,19 @@ public class DataManager {
      * retrieve all alerts about a specific target
      * (member, instructor, class)
      * with an optional alertLevel and time frame
+     * @param agentId
      * @param targetId
      * @param alertLevel
      * @param timeFrame
      * @return
      */
-    public List<String> retrieveLogs(String targetId, String alertLevel, String timeFrame) {
+    public List<String> retrieveLogs(
+            String agentId,
+            String targetId,
+            String alertLevel,
+            String timeFrame
+    )
+    {
         return null;
     } // end method
 

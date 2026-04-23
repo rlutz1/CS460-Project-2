@@ -14,7 +14,7 @@ public class Member {
 
     /**
      * directive to send out network-ready data
-     * over the network to a specific instructor application
+     * over the network to a specific member application
      * @param notificationOrInformation
      */
     public void sendInformation(String notificationOrInformation) {

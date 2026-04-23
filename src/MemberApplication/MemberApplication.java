@@ -2,51 +2,36 @@ package MemberApplication;
 
 public class MemberApplication {
 
-    private String privateId;
+    public MemberApplication() {
 
-    // when creating new member, have unique id associated to specific member
-    public MemberApplication(String id) {
-        privateId = id;
     } // end constructor
 
     /**
      * Gets the list of member-specific class
      * schedules for the day
-     * @param id
+     * @param memberId
      */
-    public void getClassSchedule(String id) {
-        if (id.matches(privateId)) {
-            // do something
-        } else {
-            System.err.println("Unauthorized request to another account! Request Denied");
-        }
+    public void getClassSchedule(String memberId) {
+
     } // end method
 
     /**
      * Requests for a member-specific workout
      * based on workout type
-     * @param id
+     * @param memberId
      * @param exerciseType
      */
-    public void getGeneratedWorkout(String id, String exerciseType) {
-        if (id.matches(privateId)) {
-            // do something
-        } else {
-            System.err.println("Unauthorized request to another account! Request Denied");
-        }
+    public void getGeneratedWorkout(String memberId, String exerciseType) {
+
     } // end method
 
     /**
      * Gets the entire general and health-fitness related
      * profile information of a member
-     * @param id
+     * @param memberId
      */
-    public void getMemberProfile(String id) {
-        if (id.matches(privateId)) {
-            // do something
-        } else {
-            System.err.println("Unauthorized access to another account! Access Denied");
-        }
+    public void getMemberProfile(String memberId) {
+
     } // end method
 
 } // end class

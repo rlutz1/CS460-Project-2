@@ -1,5 +1,7 @@
 package GSMS.EventAnalysis;
 
+import java.util.List;
+
 /**
  * class to stand as component for event analyzer
  */
@@ -9,21 +11,6 @@ public class EventAnalyzer {
     public EventAnalyzer() {
 
     } // end constructor
-
-    /*
-    getSystemState(roomID):
-    returns current occupancy, active alerts, and activities of a given room.
-
-    scanRooms():
-    call to scan all rooms in the gym
-    and retrieve data from various devices
-    */
-
-    public void verifyRoomAccess(String roomId, String memberId) {}
-
-    public void pushAttendance(String classId, String agentIds) {}
-
-    public void contextualize() {}
 
     /**
      * entry point to receive decibel levels collected
@@ -56,10 +43,47 @@ public class EventAnalyzer {
     } // end method
 
     /**
+     * given a doorway sensor’s signal of access to a room,
+     * initiate a deterministic protocol to verify that this
+     * member should be in the room, tracking attendance if they are, and sending
+     * notifications to attendants if they are not.
+     * @param roomId
+     * @param memberId
+     */
+    public void verifyRoomAccess(String roomId, String memberId) {
+
+    } // end method
+
+    /**
+     * internal functionality to
+     * send a single member, or optionally a list of members,
+     * to the Logger to log their attendance
+     * @param classId
+     * @param memberId
+     */
+    public void pushAttendance(String classId, String memberId) {
+
+    } // end method
+
+    /**
+     * overload:
+     * internal functionality to
+     * send a single member, or optionally a list of members,
+     * to the Logger to log their attendance
+     * @param classId
+     * @param memberId
+     */
+    public void pushAttendance(String classId, List<String> memberId) {
+
+    } // end method
+
+
+    /**
      * sends an alert/notification to the
      * Notification Dispatcher, as well as its alert level
      * and an optional target identification
-     * (instructor, member).
+     * (instructor, member, entire room).
+     * TODO: can overload this to give AgentId, RoomId types
      * @param alert
      * @param alertLevel
      * @param targetId
