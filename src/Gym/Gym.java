@@ -78,6 +78,12 @@ public class Gym implements Initializable {
         } // end if
     } // end method
 
+    // testing only
+    public void test() {
+        System.out.println("testing hehe");
+    } // end method
+
+
 } // end class
 
 // old initialize code, keeping for notes

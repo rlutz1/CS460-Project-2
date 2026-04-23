@@ -1,5 +1,6 @@
 package Driver;
 
+import Gym.Gym;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -8,6 +9,7 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 import java.net.URL;
+//import ;
 
 /**
  * idea is to start demo from this puppy, a "driver" of the demo
@@ -41,7 +43,13 @@ public class Driver extends Application {
         URL main = getClass().getResource(MAIN_FXML); // grab main xml
 
         if (main != null) { // null catch
-            Parent root = FXMLLoader.load(main); // load it
+            FXMLLoader loader = new FXMLLoader(main); // loader
+            Parent root = loader.load();
+
+            // how to grab the object associated with the fxml load (MUST BE AFTER .load()):
+            //  Gym gym = loader.getController();
+            //  gym.test();
+
             Scene scene = new Scene(root); // make primary stage root
             primaryStage.setTitle(ROOT_WINDOW_NAME);
             primaryStage.setScene(scene);
