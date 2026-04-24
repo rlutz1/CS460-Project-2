@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" minHeight="738.0" minWidth="1000.0" prefHeight="738.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
+<VBox alignment="TOP_CENTER" minHeight="738.0" minWidth="1000.0" prefHeight="738.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="Gym.Gym"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
