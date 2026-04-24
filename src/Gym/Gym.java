@@ -80,8 +80,9 @@ public class Gym {
     } // end method
 
     /*
-     * ======================
+     * =========================================================================
      * SCENARIO DRIVERS
+     * =========================================================================
      */
 
     /**
@@ -99,7 +100,7 @@ public class Gym {
     } // end method
 
     /**
-     * start the demo sequence
+     * go to the next demo step in the sequence
      * @param mouseEvent click
      */
     @FXML
@@ -108,7 +109,7 @@ public class Gym {
     } // end method
 
     /**
-     * start the demo sequence
+     * restart the demo sequence, clearing out all before
      * @param mouseEvent click
      */
     @FXML
@@ -121,7 +122,9 @@ public class Gym {
     } // end method
 
     /*
+     * =========================================================================
      * GENERAL FUNCTIONALITY
+     * =========================================================================
      */
 
     /**
@@ -131,9 +134,6 @@ public class Gym {
      */
     public void appendLoggingWindow(String str) {
         frontendLogger.appendText("\n" + str);
-//        if (str.charAt(str.length() - 1) != '\n') {
-//            frontendLogger.appendText("\n");
-//        } // end if
     } // end method
 
     /**
