@@ -66,6 +66,32 @@ public class Gym {
 
 
     @FXML
+    private void testCameraFeed(MouseEvent mouseEvent) {
+        System.out.println("Sending a camera feed signal.");
+    } // end method
+
+    @FXML
+    private void testWearableSignal(MouseEvent mouseEvent) {
+        System.out.println("Sending a wearable medical stat signal.");
+    } // end method
+
+    @FXML
+    private void testAudioSensor(MouseEvent mouseEvent) {
+        System.out.println("Sending an audio sensor signal.");
+    } // end method
+
+    @FXML
+    private void testDoorwaySensor(MouseEvent mouseEvent) {
+        System.out.println("Sending a doorway sensor signal.");
+    } // end method
+
+    @FXML
+    private void sendAll3Signals(MouseEvent mouseEvent) {
+        System.out.println("Sending camera, audio, and wearable signal.");
+    } // end method
+
+
+    @FXML
     private void startInstructorApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Instructor Application.");
 
