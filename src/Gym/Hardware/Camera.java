@@ -1,6 +1,10 @@
 package Gym.Hardware;
 
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
+
 public class Camera {
+
+    public Video component; // to receive signals from front end
 
     public Camera() {
 
@@ -12,7 +16,8 @@ public class Camera {
      * intervals over the network or upon trigger
      */
     public void sendSignal() {
-
+        // TODO: when GSMC init, give this a reference to the associated component.
+        // then: component.receiveSignal(...)
     } // end method
 
 } // end class

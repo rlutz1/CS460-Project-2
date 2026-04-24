@@ -1,24 +1,18 @@
 package Gym;
 
-import javafx.animation.Animation;
-import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
-import javafx.beans.binding.When;
+import Gym.Hardware.AudioSensor;
+import Gym.Hardware.Camera;
+import Gym.Hardware.DoorwaySensor;
+import Gym.Hardware.WearableSensors;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * this is the PHYSICAL gym container for simulating
@@ -35,9 +29,18 @@ public class Gym {
     //    @FXML // tag to signify fx:id to refer to in the
     //    private StackPane stackPane;
 
+    // following are for testing only for now, not fxml components
+    private final AudioSensor audioTester;
+    private final Camera cameraTester;
+    private final WearableSensors wearableTester;
+    private final DoorwaySensor doorwayTester;
+
 
     public Gym() {
-
+        audioTester = new AudioSensor();
+        cameraTester = new Camera();
+        wearableTester = new WearableSensors();
+        doorwayTester = new DoorwaySensor();
     } // end constructor
 
     /**
@@ -63,33 +66,6 @@ public class Gym {
     public void initialize() {
 //        System.out.println("init");
     } // end method
-
-
-    @FXML
-    private void testCameraFeed(MouseEvent mouseEvent) {
-        System.out.println("Sending a camera feed signal.");
-    } // end method
-
-    @FXML
-    private void testWearableSignal(MouseEvent mouseEvent) {
-        System.out.println("Sending a wearable medical stat signal.");
-    } // end method
-
-    @FXML
-    private void testAudioSensor(MouseEvent mouseEvent) {
-        System.out.println("Sending an audio sensor signal.");
-    } // end method
-
-    @FXML
-    private void testDoorwaySensor(MouseEvent mouseEvent) {
-        System.out.println("Sending a doorway sensor signal.");
-    } // end method
-
-    @FXML
-    private void sendAll3Signals(MouseEvent mouseEvent) {
-        System.out.println("Sending camera, audio, and wearable signal.");
-    } // end method
-
 
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) throws IOException {
@@ -124,6 +100,44 @@ public class Gym {
         } else {
             System.out.println("Something went wrong: " + MAIN_MEMBER_FXML + " returned null on start.");
         } // end if
+    } // end method
+
+    /*
+     * =========================================================================
+     * TESTING FUNCTIONS
+     * =========================================================================
+     */
+
+    @FXML
+    private void testCameraFeed(MouseEvent mouseEvent) {
+        System.out.println("Sending a camera feed signal.");
+        cameraTester.sendSignal();
+    } // end method
+
+    @FXML
+    private void testWearableSignal(MouseEvent mouseEvent) {
+        System.out.println("Sending a wearable medical stat signal.");
+        wearableTester.sendSignal();
+    } // end method
+
+    @FXML
+    private void testAudioSensor(MouseEvent mouseEvent) {
+        System.out.println("Sending an audio sensor signal.");
+        audioTester.sendSignal();
+    } // end method
+
+    @FXML
+    private void testDoorwaySensor(MouseEvent mouseEvent) {
+        System.out.println("Sending a doorway sensor signal.");
+        doorwayTester.sendSignal();
+    } // end method
+
+    @FXML
+    private void sendAll3Signals(MouseEvent mouseEvent) {
+        System.out.println("Sending camera, audio, and wearable signal.");
+        cameraTester.sendSignal();
+        audioTester.sendSignal();
+        wearableTester.sendSignal();
     } // end method
 
     // testing only
