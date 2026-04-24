@@ -30,10 +30,10 @@ public class Gym {
     //    private StackPane stackPane;
 
     // following are for testing only for now, not fxml components
-    private final AudioSensor audioTester;
-    private final Camera cameraTester;
-    private final WearableSensors wearableTester;
-    private final DoorwaySensor doorwayTester;
+    public AudioSensor audioTester;
+    public Camera cameraTester;
+    public WearableSensors wearableTester;
+    public DoorwaySensor doorwayTester;
 
 
     public Gym() {
