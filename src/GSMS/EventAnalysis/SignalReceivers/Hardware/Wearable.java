@@ -7,6 +7,8 @@ package GSMS.EventAnalysis.SignalReceivers.Hardware;
 
 public class Wearable {
 
+    private String wearableData;
+    //TODO: shift so that audio can respond back to clasroom of signals read.
     public Wearable() {
 
     } // end constructor
@@ -17,7 +19,7 @@ public class Wearable {
      * @param signal
      */
     public void receiveSignal(String signal) {
-
+        wearableData = signal;
     } // end method
 
 } // end class

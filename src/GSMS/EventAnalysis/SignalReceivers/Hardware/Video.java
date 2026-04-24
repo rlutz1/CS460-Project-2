@@ -6,6 +6,8 @@ package GSMS.EventAnalysis.SignalReceivers.Hardware;
 
 public class Video {
 
+    private String videoData;
+    //TODO: shift so that audio can respond back to clasroom of signals read.
     public Video() {
 
     } // end constructor
@@ -16,7 +18,7 @@ public class Video {
      * @param signal
      */
     public void receiveSignal(String signal) {
-
+        videoData = signal;
     } // end method
 
 } // end class

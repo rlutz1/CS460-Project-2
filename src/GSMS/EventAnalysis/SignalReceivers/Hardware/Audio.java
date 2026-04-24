@@ -1,13 +1,17 @@
 package GSMS.EventAnalysis.SignalReceivers.Hardware;
 
+import GSMS.EventAnalysis.SignalReceivers.Classroom;
+
 /**
  * class to stand as component for audio sensor recipient
  */
 
 public class Audio {
 
-    public Audio() {
+    private int decibelLevel;
 
+    //TODO: shift so that audio can respond back to clasroom of signals read.
+    public Audio() {
     } // end constructor
 
     /**
@@ -16,6 +20,7 @@ public class Audio {
      * @param signal
      */
     public void receiveSignal(String signal) {
+        decibelLevel = Integer.parseInt(signal);
 
     } // end method
 
