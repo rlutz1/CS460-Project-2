@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -28,6 +30,16 @@ public class Gym {
 
     //    @FXML // tag to signify fx:id to refer to in the
     //    private StackPane stackPane;
+    @FXML
+    public TextArea frontendLogger; // for printing to the front end, could be handy
+
+    @FXML
+    public Button startButton; // for printing to the front end, could be handy
+    @FXML
+    public Button nextButton; // for printing to the front end, could be handy
+    @FXML
+    public Button restartButton; // for printing to the front end, could be handy
+
 
     // following are for testing only for now, not fxml components
     public AudioSensor audioTester;
@@ -67,6 +79,68 @@ public class Gym {
 //        System.out.println("init");
     } // end method
 
+    /*
+     * ======================
+     * SCENARIO DRIVERS
+     */
+
+    /**
+     * start the demo sequence
+     * @param mouseEvent click
+     */
+    @FXML
+    private void start(MouseEvent mouseEvent) {
+        System.out.println("Starting demo sequence.");
+        appendLoggingWindow("Starting demo.");
+        startButton.setDisable(true); // disable start button
+        nextButton.setDisable(false);// enable next button
+        restartButton.setDisable(false); // enable restart
+
+    } // end method
+
+    /**
+     * start the demo sequence
+     * @param mouseEvent click
+     */
+    @FXML
+    private void next(MouseEvent mouseEvent) {
+        System.out.println("Next demo frame.");
+    } // end method
+
+    /**
+     * start the demo sequence
+     * @param mouseEvent click
+     */
+    @FXML
+    private void restart(MouseEvent mouseEvent) {
+        System.out.println("Restarting demo sequence from beginning.");
+        appendLoggingWindow("Resetting demo.");
+        startButton.setDisable(false); // enable start button
+        nextButton.setDisable(true);// disable next button
+        restartButton.setDisable(true); // disable restart
+    } // end method
+
+    /*
+     * GENERAL FUNCTIONALITY
+     */
+
+    /**
+     * append the front-end logging window. for
+     * general purpose.
+     * @param str str to add
+     */
+    public void appendLoggingWindow(String str) {
+        frontendLogger.appendText("\n" + str);
+//        if (str.charAt(str.length() - 1) != '\n') {
+//            frontendLogger.appendText("\n");
+//        } // end if
+    } // end method
+
+    /**
+     * start an "instructor application".
+     * @param mouseEvent click
+     * @throws IOException
+     */
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Instructor Application.");
@@ -85,6 +159,11 @@ public class Gym {
 
     } // end method
 
+    /**
+     * start a "member application".
+     * @param mouseEvent click
+     * @throws IOException
+     */
     @FXML
     private void startMemberApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Member Application.");
