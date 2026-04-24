@@ -3,7 +3,7 @@ package Gym;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
 import Gym.Hardware.DoorwaySensor;
-import Gym.Hardware.WearableSensors;
+import Gym.Hardware.WearableSensor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,14 +32,14 @@ public class Gym {
     // following are for testing only for now, not fxml components
     public AudioSensor audioTester;
     public Camera cameraTester;
-    public WearableSensors wearableTester;
+    public WearableSensor wearableTester;
     public DoorwaySensor doorwayTester;
 
 
     public Gym() {
         audioTester = new AudioSensor();
         cameraTester = new Camera();
-        wearableTester = new WearableSensors();
+        wearableTester = new WearableSensor();
         doorwayTester = new DoorwaySensor();
     } // end constructor
 

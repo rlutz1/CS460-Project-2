@@ -2,11 +2,11 @@ package Gym.Hardware;
 
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 
-public class WearableSensors {
+public class WearableSensor {
 
     public Wearable component; // to receive signals from front end
 
-    public WearableSensors() {
+    public WearableSensor() {
 
     } // end constructor
 
