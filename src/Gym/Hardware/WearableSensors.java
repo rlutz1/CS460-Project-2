@@ -1,12 +1,12 @@
 package Gym.Hardware;
 
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 
-public class Camera {
+public class WearableSensors {
 
-    public Video component; // to receive signals from front end
+    public Wearable component; // to receive signals from front end
 
-    public Camera() {
+    public WearableSensors() {
 
     } // end constructor
 
@@ -16,7 +16,7 @@ public class Camera {
      * intervals over the network or upon trigger
      */
     public void sendSignal() {
-        System.out.println("Camera feed ping.");
+        System.out.println("Wearable ping.");
         // TODO: when GSMC init, give this a reference to the associated component.
         // then: component.receiveSignal(...)
     } // end method
