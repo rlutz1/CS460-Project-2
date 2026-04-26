@@ -12,6 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,8 +35,17 @@ public class Gym {
 
     private final DemoManager manager = new DemoManager(); // for managing demo steps
 
-    //    @FXML // tag to signify fx:id to refer to in the
-    //    private StackPane stackPane;
+    // things to setup the middle 3 use cases.
+    @FXML
+    public StackPane mainStage; // testing, but idea is the main stage built in scene builder
+    @FXML
+    public AnchorPane targetMember;
+    @FXML
+    public Circle targetInstructor;
+    @FXML
+    public HBox otherMembers;
+
+
     @FXML
     public TextArea frontendLogger; // for printing to the front end, could be handy
 
@@ -79,6 +92,7 @@ public class Gym {
      */
     @FXML
     public void initialize() {
+        manager.mainStage = this.mainStage;
         // any fxml component initialization here.
     } // end method
 
@@ -100,7 +114,7 @@ public class Gym {
         nextButton.setDisable(false);// enable next button
         restartButton.setDisable(false); // enable restart
 
-        manager.next();
+        manager.next(); // run the manager first state
     } // end method
 
     /**
@@ -111,7 +125,7 @@ public class Gym {
     private void next(MouseEvent mouseEvent) {
         System.out.println("Next demo frame.");
 
-        manager.next();
+        manager.next(); // run the manager next state
     } // end method
 
     /**
@@ -125,6 +139,8 @@ public class Gym {
         startButton.setDisable(false); // enable start button
         nextButton.setDisable(true);// disable next button
         restartButton.setDisable(true); // disable restart
+        // TODO: reset the main stage to first needed state
+        manager.reset(); // reset the demo manager
     } // end method
 
     /*
