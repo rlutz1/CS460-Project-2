@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DemoManager {
 
-    private List<DemoState> states; // list of frames, or states for demo
+    private final List<DemoState> states; // list of frames, or states for demo
     private int currState;
 
     public DemoManager() {
