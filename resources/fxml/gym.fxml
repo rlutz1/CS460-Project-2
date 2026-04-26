@@ -44,7 +44,7 @@
                         <AnchorPane fx:id="targetMember" layoutX="14.0" layoutY="419.0" prefHeight="60.0" prefWidth="60.0">
                            <children>
                               <Circle fill="#22ff1f" layoutX="30.0" layoutY="30.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#1ff8ffc8" layoutX="30.0" layoutY="30.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="#21fbff00" layoutX="30.0" layoutY="30.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
                            </children>
                         </AnchorPane>
                      </children>

@@ -1,13 +1,14 @@
 package Gym.DemoManagement;
 
-import javafx.animation.Interpolator;
-import javafx.animation.SequentialTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -59,17 +60,10 @@ public class DemoManager {
      * initialize the demo state list.
      */
     private void init() {
-//        this.states.add(new DemoState() {
-//            @Override
-//            public void activate() {
-//                Actions.test();
-//            }
-//            @Override
-//            public String toString() {
-//                return "Testing state here!";
-//            }
-//        });
 
+        // TESTING! ALL HARDCODING BELOW AS I FIGURE OUT HOW TO BEST DO THIS
+
+        // move the target in the classroom
         this.states.add(new DemoState() {
             @Override
             public void activate() {
@@ -77,13 +71,9 @@ public class DemoManager {
 
                 TranslateTransition transition1 = new TranslateTransition(Duration.seconds(3), targetMember);
                 transition1.setToX(710);
-//                transition1.setToY(0);
                 transition1.setInterpolator(Interpolator.EASE_IN);
 
-
-
                 TranslateTransition transition2 = new TranslateTransition(Duration.seconds(3), targetMember);
-//                transition2.setToX(0);
                 transition2.setToY(-245);
                 transition2.setInterpolator(Interpolator.EASE_IN);
 
@@ -99,6 +89,94 @@ public class DemoManager {
                 return "Target moving into classroom";
             }
         });
+
+        // move the target in the classroom
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                int workoutPace = 1; // seconds
+
+                for (Node member : otherMembers.getChildren()) {
+                    SequentialTransition seq = new SequentialTransition();
+
+                    ScaleTransition transition1 = new ScaleTransition(Duration.seconds(workoutPace), member);
+                    transition1.setToX(0.5);
+                    transition1.setInterpolator(Interpolator.EASE_IN);
+
+                    ScaleTransition transition2 = new ScaleTransition(Duration.seconds(workoutPace), member);
+                    transition2.setToX(1);
+                    transition2.setInterpolator(Interpolator.EASE_IN);
+
+                    seq.getChildren().addAll(
+                            transition1,
+                            transition2
+                    );
+
+                    seq.setCycleCount(Animation.INDEFINITE); // loop til we want it to stop
+                    seq.play();
+                } // end loop
+
+                SequentialTransition seq = new SequentialTransition();
+
+                ScaleTransition transition1 = new ScaleTransition(Duration.seconds(workoutPace), targetMember);
+                transition1.setToX(0.5);
+                transition1.setInterpolator(Interpolator.EASE_IN);
+
+                ScaleTransition transition2 = new ScaleTransition(Duration.seconds(workoutPace), targetMember);
+                transition2.setToX(1);
+                transition2.setInterpolator(Interpolator.EASE_IN);
+
+                seq.getChildren().addAll(
+                        transition1,
+                        transition2
+                );
+
+                seq.setCycleCount(Animation.INDEFINITE); // loop til we want it to stop
+                seq.play();
+                // TODO: likely need to ensure these are stopped manually. something does not like and occasional crash
+            }
+            @Override
+            public String toString() {
+                return "Trigger movement cycle (class begins).";
+            }
+        });
+
+
+        // member starts having overexhaustion
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+
+//                SequentialTransition seq = new SequentialTransition();
+
+                FillTransition transition1 = new FillTransition(Duration.millis(3000), (Shape)targetMember.getChildren().getFirst());
+                transition1.setToValue(Color.YELLOW);
+                transition1.setAutoReverse(true);
+
+//                seq.getChildren().addAll(
+//                        transition1
+////                        transition2
+//                );
+                transition1.play();
+//                seq.play();
+                // TODO: likely need to ensure these are stopped manually. something does not like and occasional crash
+            }
+            @Override
+            public String toString() {
+                return "Trigger movement cycle (class begins).";
+            }
+        });
     } // end method
+
+    //        this.states.add(new DemoState() {
+    //            @Override
+    //            public void activate() {
+    //                Actions.test();
+    //            }
+    //            @Override
+    //            public String toString() {
+    //                return "Testing state here!";
+    //            }
+    //        });
 
 } // end class
