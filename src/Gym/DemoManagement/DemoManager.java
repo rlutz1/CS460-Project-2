@@ -74,7 +74,7 @@ public class DemoManager {
                 transition1.setInterpolator(Interpolator.EASE_IN);
 
                 TranslateTransition transition2 = new TranslateTransition(Duration.seconds(3), targetMember);
-                transition2.setToY(-245);
+                transition2.setToY(-240);
                 transition2.setInterpolator(Interpolator.EASE_IN);
 
                 seq.getChildren().addAll(
@@ -147,23 +147,15 @@ public class DemoManager {
             @Override
             public void activate() {
 
-//                SequentialTransition seq = new SequentialTransition();
-
                 FillTransition transition1 = new FillTransition(Duration.millis(3000), (Shape)targetMember.getChildren().getFirst());
                 transition1.setToValue(Color.YELLOW);
                 transition1.setAutoReverse(true);
 
-//                seq.getChildren().addAll(
-//                        transition1
-////                        transition2
-//                );
                 transition1.play();
-//                seq.play();
-                // TODO: likely need to ensure these are stopped manually. something does not like and occasional crash
             }
             @Override
             public String toString() {
-                return "Trigger movement cycle (class begins).";
+                return "Member starts having exhaustion.";
             }
         });
     } // end method
