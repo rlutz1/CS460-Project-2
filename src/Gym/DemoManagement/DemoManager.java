@@ -1,10 +1,13 @@
 package Gym.DemoManagement;
 
+import javafx.animation.Interpolator;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,14 +58,30 @@ public class DemoManager {
      * initialize the demo state list.
      */
     private void init() {
+//        this.states.add(new DemoState() {
+//            @Override
+//            public void activate() {
+//                Actions.test();
+//            }
+//            @Override
+//            public String toString() {
+//                return "Testing state here!";
+//            }
+//        });
+
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Actions.test();
+                TranslateTransition transition = new TranslateTransition(Duration.seconds(5), targetMember);
+                transition.setToX(200);
+                transition.setToY(200);
+                transition.setInterpolator(Interpolator.LINEAR);
+
+                transition.play();
             }
             @Override
             public String toString() {
-                return "Testing state here!";
+                return "Target moving into classroom";
             }
         });
     } // end method
