@@ -1,7 +1,10 @@
 package Gym.DemoManagement;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +19,10 @@ public class DemoManager {
     private final List<DemoState> states; // list of frames, or states for demo
     private int currState;
 
-//    @FXML
     public StackPane mainStage;
+    public AnchorPane targetMember;
+    public Circle targetInstructor;
+    public HBox otherMembers;
 
     public DemoManager() {
         this.states = new ArrayList<>();
@@ -54,7 +59,6 @@ public class DemoManager {
             @Override
             public void activate() {
                 Actions.test();
-                System.out.println(mainStage);
             }
             @Override
             public String toString() {

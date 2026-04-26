@@ -92,8 +92,11 @@ public class Gym {
      */
     @FXML
     public void initialize() {
+        // yield all these to manager
         manager.mainStage = this.mainStage;
-        // any fxml component initialization here.
+        manager.targetMember = this.targetMember;
+        manager.targetInstructor = this.targetInstructor;
+        manager.otherMembers = this.otherMembers;
     } // end method
 
     /*
