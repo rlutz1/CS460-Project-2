@@ -1,6 +1,7 @@
 package GSMS.EventAnalysis.SignalReceivers;
 
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
+import Gym.Hardware.Camera;
 
 import static GSMS.EventAnalysis.SignalReceivers.SignalType.AUDIO;
 
@@ -12,9 +13,9 @@ public class Classroom {
 
     private int classroomId;
 
-    private Signal<String> videoFeedData;
-    private Signal<Integer> audioDecibelData;
-    private Signal<String> wearableInfoData;
+    private String videoFeedData;
+    private Integer audioDecibelData;
+    private String wearableInfoData;
 
     public Classroom(int classroomId) {
         this.classroomId = classroomId;
@@ -29,13 +30,13 @@ public class Classroom {
     public void receiveSignal(Signal<?> signal, SignalType signalType) {
         switch (signalType) {
             case AUDIO:
-                audioDecibelData = (Signal<Integer>) signal;
+                audioDecibelData = ((Signal<Integer>) signal).getSignalData();
                 break;
             case VIDEO:
-                videoFeedData = (Signal<String>) signal;
+                videoFeedData = ((Signal<String>) signal).getSignalData();
                 break;
             case WEARABLE:
-                wearableInfoData = (Signal<String>) signal;
+                wearableInfoData = ((Signal<String>) signal).getSignalData();
                 break;
         }
     } // end method
