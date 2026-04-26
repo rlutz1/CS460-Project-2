@@ -76,7 +76,7 @@ public class Gym {
      */
     @FXML
     public void initialize() {
-//        System.out.println("init");
+        // any fxml component initialization here.
     } // end method
 
     /*

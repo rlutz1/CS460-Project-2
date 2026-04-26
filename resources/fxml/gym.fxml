@@ -4,10 +4,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -15,7 +17,12 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Canvas height="600.0" layoutX="81.0" layoutY="22.0" width="800.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="20.0" />
+            <StackPane prefHeight="600.0" prefWidth="800.0" AnchorPane.leftAnchor="5.0">
+               <children>
+                  <Canvas height="600.0" width="800.0" />
+                  <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
             <VBox layoutX="14.0" layoutY="611.0" prefHeight="70.0" prefWidth="514.0" style="-fx-background-color: lightgrey;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0">
                <children>
                   <Label alignment="TOP_CENTER" prefHeight="26.0" prefWidth="518.0" text="Scenario Control Panel">
@@ -99,7 +106,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea id="frontendLogger" fx:id="frontendLogger" editable="false" prefHeight="356.0" prefWidth="170.0" text="GSMS Initialized.&lt;br /&gt;" wrapText="true" />
+                  <TextArea id="frontendLogger" fx:id="frontendLogger" editable="false" prefHeight="356.0" prefWidth="170.0" text="GSMS Initialized." wrapText="true" />
                </children>
             </VBox>
       </children>
