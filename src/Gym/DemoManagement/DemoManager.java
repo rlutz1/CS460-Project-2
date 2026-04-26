@@ -1,6 +1,7 @@
 package Gym.DemoManagement;
 
 import javafx.animation.Interpolator;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -72,12 +73,26 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                TranslateTransition transition = new TranslateTransition(Duration.seconds(5), targetMember);
-                transition.setToX(200);
-                transition.setToY(200);
-                transition.setInterpolator(Interpolator.LINEAR);
+                SequentialTransition seq = new SequentialTransition();
 
-                transition.play();
+                TranslateTransition transition1 = new TranslateTransition(Duration.seconds(3), targetMember);
+                transition1.setToX(710);
+//                transition1.setToY(0);
+                transition1.setInterpolator(Interpolator.EASE_IN);
+
+
+
+                TranslateTransition transition2 = new TranslateTransition(Duration.seconds(3), targetMember);
+//                transition2.setToX(0);
+                transition2.setToY(-245);
+                transition2.setInterpolator(Interpolator.EASE_IN);
+
+                seq.getChildren().addAll(
+                        transition1,
+                        transition2
+                );
+
+                seq.play();
             }
             @Override
             public String toString() {
