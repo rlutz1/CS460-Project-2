@@ -1,5 +1,6 @@
 package Gym;
 
+import Gym.DemoManagement.DemoManager;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
 import Gym.Hardware.DoorwaySensor;
@@ -27,6 +28,8 @@ public class Gym {
     public final static String INSTRUCTOR_WINDOW_NAME = "Instructor Application";
     public final static String MAIN_MEMBER_FXML = "/fxml/member-app.fxml";
     public final static String MEMBER_WINDOW_NAME = "Member Application";
+
+    private final DemoManager manager = new DemoManager(); // for managing demo steps
 
     //    @FXML // tag to signify fx:id to refer to in the
     //    private StackPane stackPane;
@@ -97,6 +100,7 @@ public class Gym {
         nextButton.setDisable(false);// enable next button
         restartButton.setDisable(false); // enable restart
 
+        manager.next();
     } // end method
 
     /**
@@ -106,6 +110,8 @@ public class Gym {
     @FXML
     private void next(MouseEvent mouseEvent) {
         System.out.println("Next demo frame.");
+
+        manager.next();
     } // end method
 
     /**

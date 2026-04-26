@@ -16,6 +16,7 @@ public class DemoManager {
     public DemoManager() {
         this.states = new ArrayList<>();
         this.currState = 0; // first state always
+        init(); // init the manager
     } // end constructor
 
     /**
@@ -29,6 +30,23 @@ public class DemoManager {
             System.out.println(state.toString());
             state.activate(); // activate the state
         } // end if
+    } // end method
+
+    /**
+     * this is going to be incredibly hardcoded, but testing.
+     * initialize the demo state list.
+     */
+    private void init() {
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                Actions.test();
+            }
+            @Override
+            public String toString() {
+                return "Testing state here!";
+            }
+        });
     } // end method
 
 } // end class
