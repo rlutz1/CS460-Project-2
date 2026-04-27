@@ -9,6 +9,8 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: probably everything shouldn't be static, this was done for ease of initial use
+// TODO: just make this a transition manager with non static fields, init in the demo manager.
 public class Transitions {
 
     public static List<Transition> LiveTransitions = new ArrayList<>();
@@ -176,6 +178,26 @@ public class Transitions {
         });
 
         seq.play();
+    } // end method
+
+    /**
+     * Scenario 4:
+     * trigger a health emergency for a member
+     * @param target
+     * @param emergencyRate
+     */
+    public static void TriggerHealthEmergency(Node target, int emergencyRate) {
+        FillTransition emergency = new FillTransition(Duration.seconds(emergencyRate), (Shape)target);
+        emergency.setToValue(Color.RED);
+        emergency.setAutoReverse(true);
+
+        LiveTransitions.add(emergency); // add to a list of live transitions
+
+        emergency.setOnFinished(event -> {
+            LiveTransitions.remove(emergency); // remove myself once i'm finished
+        });
+
+        emergency.play();
     } // end method
 
     public static void test() {

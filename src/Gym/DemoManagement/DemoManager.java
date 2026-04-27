@@ -106,7 +106,7 @@ public class DemoManager {
 //        initScenario1();
         initScenario2();
         initScenario3();
-//        initScenario4();
+        initScenario4();
 //        initScenario5();
     } // end method
 
@@ -317,6 +317,60 @@ public class DemoManager {
      * remove out the fourth scenario frames
      */
     private void initScenario4() {
+        // a health emergency arises between a member.
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                Transitions.TriggerHealthEmergency(targetMember.getChildren().getFirst(), 1);
+            }
+            @Override
+            public String toString() {
+                return "Health emergency arises in a member members.";
+            }
+        });
+
+        // trigger the sending of some bad signals to the backend.
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                cameraFeed.sendSignal(); // TODO: this needs to be talked about with the guys in backend
+                audioSensor.sendSignal(); // TODO: and work with what they're wanting. give a parameter? enum?
+                wearable.sendSignal();
+            }
+            @Override
+            public String toString() {
+                return "Sending triggering feed to the backend.";
+            }
+        });
+
+        // notification expected from the back end to both application windows
+
+        // instructor stops workouts
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                // stop all animations
+                Transitions.LiveTransitions.forEach(Animation::stop);
+                Transitions.LiveTransitions.clear();
+                // stop everyone from "working out"
+                targetMember.setScaleX(1);
+                targetMember.setScaleY(1);
+                for (Node member : otherMembers.getChildren()) {
+                    member.setScaleX(1);
+                    member.setScaleY(1);
+                } // end loop
+            }
+            @Override
+            public String toString() {
+                return "Instructor stops class";
+            }
+        });
+
+        // instructor attends to the collapsed member, calling emergency services
+
+        // services arrive, take member away
+
+        // class is done: instructor leaves, all other members leave
 
     } // end method
 
