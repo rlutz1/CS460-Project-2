@@ -116,7 +116,67 @@ public class Transitions {
         relief.play();
     } // end method
 
-//    public static void SendProblemSignals
+    /**
+     * Scenario 3:
+     * trigger conflict between 2 specific members
+     * @param target1
+     * @param target2
+     */
+    public static void TriggerConflict(Node target1, Node target2, int angerRate) {
+        ParallelTransition seq = new ParallelTransition();
+
+        FillTransition angry1 = new FillTransition(Duration.seconds(angerRate), (Shape)target1);
+        angry1.setToValue(Color.ORANGERED);
+        angry1.setAutoReverse(true);
+
+        FillTransition angry2 = new FillTransition(Duration.seconds(angerRate), (Shape)target2);
+        angry2.setToValue(Color.ORANGERED);
+        angry2.setAutoReverse(true);
+
+        seq.getChildren().addAll(
+                angry1,
+                angry2
+        );
+
+        LiveTransitions.add(seq); // add to a list of live transitions
+
+        seq.setOnFinished(event -> {
+            LiveTransitions.remove(seq); // remove myself once i'm finished
+        });
+
+        seq.play();
+    } // end method
+
+    /**
+     * Scenario 3:
+     * trigger conflict between 2 specific members
+     * @param target1
+     * @param target2
+     */
+    public static void RelieveConflict(Node target1, Node target2, int reliefRate) {
+        ParallelTransition seq = new ParallelTransition();
+
+        FillTransition relief1 = new FillTransition(Duration.seconds(reliefRate), (Shape)target1);
+        relief1.setToValue(Color.web("#22ff1f"));
+        relief1.setAutoReverse(true);
+
+        FillTransition relief2 = new FillTransition(Duration.seconds(reliefRate), (Shape)target2);
+        relief2.setToValue(Color.web("#22ff1f"));
+        relief2.setAutoReverse(true);
+
+        seq.getChildren().addAll(
+                relief1,
+                relief2
+        );
+
+        LiveTransitions.add(seq); // add to a list of live transitions
+
+        seq.setOnFinished(event -> {
+            LiveTransitions.remove(seq); // remove myself once i'm finished
+        });
+
+        seq.play();
+    } // end method
 
     public static void test() {
         System.out.println("action test print?");

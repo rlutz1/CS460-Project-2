@@ -47,7 +47,7 @@ public class DemoManager {
      * buttons are pressed.
      */
     public void next() {
-        if (this.currState == 0) { resetStage(); } // reset all animated things to original state
+        if (this.currState == 0) { resetStage(); } // reset all animated things to original state to enable looping
         if (!this.states.isEmpty()) {
             DemoState state = this.states.get(this.currState);
             this.currState = ((this.currState + 1) % this.states.size()); // for looping
@@ -105,7 +105,7 @@ public class DemoManager {
     private void init() {
 //        initScenario1();
         initScenario2();
-//        initScenario3();
+        initScenario3();
 //        initScenario4();
 //        initScenario5();
     } // end method
@@ -128,7 +128,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.EnterClassroom(targetMember, 5, 710, -240);
+                Transitions.EnterClassroom(targetMember, 2, 710, -270);
             }
             @Override
             public String toString() {
@@ -235,7 +235,82 @@ public class DemoManager {
      * remove out the third scenario frames
      */
     private void initScenario3() {
+        // a conflict arises between 2 members.
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                Transitions.TriggerConflict(targetMember.getChildren().getFirst(), otherMembers.getChildren().getLast(), 2);
+            }
+            @Override
+            public String toString() {
+                return "Conflict arises between two members.";
+            }
+        });
 
+        // trigger the sending of some bad signals to the backend.
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                cameraFeed.sendSignal(); // TODO: this needs to be talked about with the guys in backend
+                audioSensor.sendSignal(); // TODO: and work with what they're wanting. give a parameter? enum?
+                wearable.sendSignal();
+            }
+            @Override
+            public String toString() {
+                return "Sending triggering feed to the backend.";
+            }
+        });
+
+        // notification expected from the back end to both application windows
+
+        // stop workouts and pause, instructor attempting to resolve conflict
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                // stop all animations
+                Transitions.LiveTransitions.forEach(Animation::stop);
+                Transitions.LiveTransitions.clear();
+                // stop everyone from "working out"
+                targetMember.setScaleX(1);
+                targetMember.setScaleY(1);
+                for (Node member : otherMembers.getChildren()) {
+                    member.setScaleX(1);
+                    member.setScaleY(1);
+                } // end loop
+            }
+            @Override
+            public String toString() {
+                return "Instructor stops class";
+            }
+        });
+
+        // conflict deescalation
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                Transitions.RelieveConflict(targetMember.getChildren().getFirst(), otherMembers.getChildren().getLast(), 5);
+            }
+            @Override
+            public String toString() {
+                return "Conflict deescalates between two members.";
+            }
+        });
+
+        // instructor continues class.
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                for (Node member : otherMembers.getChildren()) {
+                    Transitions.Workout(member, 1, 0.5);
+                } // end loop
+
+                Transitions.Workout(targetMember, 1, 0.5);
+            }
+            @Override
+            public String toString() {
+                return "Trigger movement cycle (class continues).";
+            }
+        });
     } // end method
 
     /**
