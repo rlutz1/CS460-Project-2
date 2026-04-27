@@ -54,6 +54,14 @@ public class DemoManager {
      */
     public void reset() {
         this.currState = 0;
+        // attempts below to reset stage--revisit, need to stop animations too.
+//        List<Node> children = new ArrayList<>(mainStage.getChildren());
+//        for (Node child : children) {
+//            child.getTransforms().clear();
+//
+//        }
+//        mainStage.getChildren().clear();
+//        mainStage.getChildren().addAll(children);
     } // end method
 
     /**
