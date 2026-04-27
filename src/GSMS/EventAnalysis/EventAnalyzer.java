@@ -1,5 +1,7 @@
 package GSMS.EventAnalysis;
 
+import GSMS.EventAnalysis.SignalReceivers.Classroom;
+
 import java.util.List;
 
 /**
@@ -7,10 +9,23 @@ import java.util.List;
  */
 
 public class EventAnalyzer {
-
+    private List<Classroom> classrooms;
     public EventAnalyzer() {
-
     } // end constructor
+
+    /************************* NON-SAD * helper START *************************/
+    public void addClassroom(Classroom classroom) {
+        classrooms.add(classroom);
+    }
+    private Classroom findClassroom(int classroomId) {
+        for (Classroom classroom : classrooms) {
+            if (classroom.getClassroomId().equals(classroomId)) {
+                return classroom;
+            }
+        }
+        return null;
+    }
+    /************************* NON-SAD * helper END   *************************/
 
     /**
      * entry point to receive decibel levels collected
@@ -18,7 +33,12 @@ public class EventAnalyzer {
      * @param roomId
      */
     public void getAudioData(String roomId) {
-
+        Classroom room = findClassroom(Integer.parseInt(roomId));
+        if (room != null) {
+            //TODO:  will want to give this to the LiveEventAI object
+            // eventually (have to sort out the best way )
+            room.getAudioDecibelData();
+        }
     } // end method
 
     /**
@@ -27,7 +47,12 @@ public class EventAnalyzer {
      * @param roomId
      */
     public void getVideoData(String roomId) {
-
+        Classroom room = findClassroom(Integer.parseInt(roomId));
+        if (room != null) {
+            //TODO:  will want to give this to the LiveEventAI object
+            // eventually (have to sort out the best way )
+            room.getVideoFeedData();
+        }
     } // end method
 
     /**
@@ -39,7 +64,12 @@ public class EventAnalyzer {
      * @param memberId
      */
     public void getWearableData(String roomId, String memberId) {
-
+        Classroom room = findClassroom(Integer.parseInt(roomId));
+        if (room != null) {
+            //TODO:  will want to give this to the LiveEventAI object
+            // eventually (have to sort out the best way )
+            room.getWearableInfoData();
+        }
     } // end method
 
     /**
@@ -51,7 +81,11 @@ public class EventAnalyzer {
      * @param memberId
      */
     public void verifyRoomAccess(String roomId, String memberId) {
-
+        Classroom room = findClassroom(Integer.parseInt(roomId));
+        if (room != null) {
+            room.getWearableInfoData();
+            //TODO: get the doorway specific sensory details.
+        }
     } // end method
 
     /**

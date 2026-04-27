@@ -11,15 +11,31 @@ import static GSMS.EventAnalysis.SignalReceivers.SignalType.AUDIO;
 
 public class Classroom {
 
-    private int classroomId;
+    private String classroomId;
 
     private String videoFeedData;
     private Integer audioDecibelData;
     private String wearableInfoData;
 
-    public Classroom(int classroomId) {
+    public Classroom(String classroomId) {
         this.classroomId = classroomId;
     } // end constructor
+    /************************* NON-SAD * helper START *************************/
+    public String getClassroomId() {
+        return classroomId;
+    }
+    public String getVideoFeedData() {
+        return videoFeedData;
+    }
+
+    public Integer getAudioDecibelData() {
+        return audioDecibelData;
+    }
+
+    public String getWearableInfoData() {
+        return wearableInfoData;
+    }
+    /************************* NON-SAD * helper END   *************************/
 
     /**
      * entry point to receive signal
@@ -40,5 +56,8 @@ public class Classroom {
                 break;
         }
     } // end method
+
+
+
 
 } // end class
