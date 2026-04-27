@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -21,32 +20,27 @@
       <children>
             <StackPane fx:id="mainStage" prefHeight="600.0" prefWidth="800.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <Canvas height="600.0" width="800.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffe88a7c" height="600.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff90213c" height="300.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff901f" height="300.0" layoutX="400.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
-                        <AnchorPane fx:id="targetClass" layoutX="400.0" prefHeight="300.0" prefWidth="400.0">
-                           <children>
-                              <HBox fx:id="otherMembers" layoutX="20.0" layoutY="178.0" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-                                    <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-                                 </children>
-                              </HBox>
-                              <Circle fx:id="targetInstructor" fill="#d476ff" layoutX="200.0" layoutY="44.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children>
-                        </AnchorPane>
                         <AnchorPane fx:id="targetMember" layoutX="14.0" layoutY="419.0" prefHeight="60.0" prefWidth="60.0">
                            <children>
                               <Circle fill="#22ff1f" layoutX="30.0" layoutY="30.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
                               <Circle fill="#21fbff00" layoutX="30.0" layoutY="30.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
                            </children>
                         </AnchorPane>
+                        <HBox fx:id="otherMembers" layoutX="420.0" layoutY="150.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fill="#22ff1f" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children>
+                        </HBox>
+                        <Circle fx:id="targetInstructor" fill="#d476ff" layoutX="600.0" layoutY="50.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
                      </children>
                   </AnchorPane>
                </children>
