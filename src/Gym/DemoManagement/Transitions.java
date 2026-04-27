@@ -56,7 +56,7 @@ public class Transitions {
      * @param squeeze
      */
     public static void Workout(Node target, int pace, double squeeze) {
-        SequentialTransition seq = new SequentialTransition();
+        SequentialTransition seq = new SequentialTransition(target);
 
         ScaleTransition workout = new ScaleTransition(Duration.seconds(pace), target);
         workout.setToX(squeeze);
@@ -187,6 +187,23 @@ public class Transitions {
      * @param emergencyRate
      */
     public static void TriggerHealthEmergency(Node target, int emergencyRate) {
+        // stop the member from moving
+        Transition tTarget = null;
+        for (Transition t : LiveTransitions){
+            // TODO: the parent thing--this needs to be fixed so that im not needing
+            // implicit knowledge of the node handed to me. has to do with member
+            // being an anchorpane, not just a circle. gnarly, but works for a second.
+            if (t instanceof SequentialTransition  && ((SequentialTransition)t).getNode() == target.getParent()) {
+                tTarget = t;
+                break;
+            } // end if
+        } // end loop
+        if (tTarget != null) {
+            tTarget.stop();
+            LiveTransitions.remove(tTarget);
+        } // end if
+
+
         FillTransition emergency = new FillTransition(Duration.seconds(emergencyRate), (Shape)target);
         emergency.setToValue(Color.RED);
         emergency.setAutoReverse(true);
@@ -222,6 +239,40 @@ public class Transitions {
         });
 
         help.play();
+    } // end method
+
+    /**
+     * Scenario 2:
+     * enter the target classroom
+     * @param target
+     * @param walkingSpeed
+     * @param x
+     * @param y
+     */
+    public static void ExitClassroom(Node target, int walkingSpeed, int x, int y) {
+        SequentialTransition seq = new SequentialTransition();
+
+        TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);
+        walkX.setToX(x);
+        walkX.setInterpolator(Interpolator.EASE_IN);
+
+        TranslateTransition walkY = new TranslateTransition(Duration.seconds(walkingSpeed), target);
+        walkY.setToY(y);
+        walkY.setInterpolator(Interpolator.EASE_IN);
+
+        seq.getChildren().addAll(
+                walkY,
+                walkX
+        );
+
+        LiveTransitions.add(seq); // add to a list of live transitions
+
+        seq.setOnFinished(event -> {
+            LiveTransitions.remove(seq); // remove myself once i'm finished
+            target.setVisible(false);
+        });
+
+        seq.play();
     } // end method
 
     public static void test() {

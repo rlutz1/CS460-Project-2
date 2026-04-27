@@ -89,18 +89,24 @@ public class DemoManager {
         targetMember.setScaleX(1);
         targetMember.setScaleY(1);
         ((Shape)(targetMember.getChildren().getFirst())).setFill(Color.web("#22ff1f"));
+        targetMember.setVisible(true);
+
         for (Node member : otherMembers.getChildren()) {
             member.setTranslateX(0);
             member.setTranslateY(0);
             member.setScaleX(1);
             member.setScaleY(1);
             ((Shape)member).setFill(Color.web("#22ff1f"));
+            member.setVisible(true);
         } // end loop
+        otherMembers.setVisible(true);
+
         targetInstructor.setTranslateX(0);
         targetInstructor.setTranslateY(0);
         targetInstructor.setScaleX(1);
         targetInstructor.setScaleY(1);
         targetInstructor.setFill(Color.web("#d476ff"));
+        targetInstructor.setVisible(true);
     } // end method
 
     /**
@@ -109,8 +115,8 @@ public class DemoManager {
      */
     private void init() {
 //        initScenario1();
-//        initScenario2();
-//        initScenario3();
+        initScenario2();
+        initScenario3();
         initScenario4();
 //        initScenario5();
     } // end method
@@ -383,10 +389,31 @@ public class DemoManager {
             }
         });
 
-
         // services arrive, take member away
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                Transitions.ExitClassroom(targetMember, 2, -20, 20);
+            }
+            @Override
+            public String toString() {
+                return "Sick member whisked from classroom";
+            }
+        });
 
         // class is done: instructor leaves, all other members leave
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                otherMembers.setVisible(false);
+                targetInstructor.setVisible(false);
+//                Transitions.ExitClassroom(targetMember, 2, -20, 20);
+            }
+            @Override
+            public String toString() {
+                return "Everyone leaves, class dismissed.";
+            }
+        });
 
     } // end method
 
