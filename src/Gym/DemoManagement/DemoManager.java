@@ -1,18 +1,15 @@
 package Gym.DemoManagement;
 
+import Gym.Hardware.AudioSensor;
+import Gym.Hardware.Camera;
+import Gym.Hardware.WearableSensors;
 import javafx.animation.*;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
-import javafx.util.Duration;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +27,12 @@ public class DemoManager {
     public AnchorPane targetMember;
     public Circle targetInstructor;
     public HBox otherMembers;
+
+    // for testing and sending basic crap to backend
+    // this may change to be more representative of the scenario, environment.
+    public AudioSensor audioSensor;
+    public Camera cameraFeed;
+    public WearableSensors wearable;
 
     public DemoManager() {
         this.states = new ArrayList<>();
@@ -56,10 +59,10 @@ public class DemoManager {
     public void reset() {
         this.currState = 0;
         // stop all current animations
-        for  (Transition anim : Actions.LiveTransitions) {
+        for  (Transition anim : Transitions.LiveTransitions) {
             anim.stop();
         } // end loop
-        Actions.LiveTransitions.clear();
+        Transitions.LiveTransitions.clear();
         // attempts below to reset stage--revisit
 //        List<Node> children = new ArrayList<>(mainStage.getChildren());
 //        for (Node child : mainStage.getChildren()) {
@@ -75,14 +78,29 @@ public class DemoManager {
      * initialize the demo state list.
      */
     private void init() {
+//        initScenario1();
+        initScenario2();
+//        initScenario3();
+//        initScenario4();
+//        initScenario5();
+    } // end method
 
-        // TESTING! ALL HARDCODING BELOW AS I FIGURE OUT HOW TO BEST DO THIS
+    /**
+     * remove out the first scenario frames
+     */
+    private void initScenario1() {
 
+    } // end method
+
+    /**
+     * remove out the second scenario frames
+     */
+    private void initScenario2() {
         // move the target in the classroom
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Actions.EnterClassroom(targetMember, 5, 710, -240);
+                Transitions.EnterClassroom(targetMember, 5, 710, -240);
             }
             @Override
             public String toString() {
@@ -90,15 +108,15 @@ public class DemoManager {
             }
         });
 
-        // move the target in the classroom
+        // move everyone in room is working out
         this.states.add(new DemoState() {
             @Override
             public void activate() {
                 for (Node member : otherMembers.getChildren()) {
-                    Actions.Workout(member, 1, 0.5);
+                    Transitions.Workout(member, 1, 0.5);
                 } // end loop
 
-                Actions.Workout(targetMember, 1, 0.5);
+                Transitions.Workout(targetMember, 1, 0.5);
             }
             @Override
             public String toString() {
@@ -107,33 +125,95 @@ public class DemoManager {
         });
 
 
-        // member starts having overexhaustion
+        // member starts having over exhaustion
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-
-                FillTransition transition1 = new FillTransition(Duration.millis(3000), (Shape)targetMember.getChildren().getFirst());
-                transition1.setToValue(Color.YELLOW);
-                transition1.setAutoReverse(true);
-
-                transition1.play();
+                Transitions.TriggerExhaustion(targetMember.getChildren().getFirst(), 4);
             }
             @Override
             public String toString() {
                 return "Member starts having exhaustion.";
             }
         });
+
+        // trigger the sending of some bad signals to the backend.
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                cameraFeed.sendSignal(); // TODO: this needs to be talked about with the guys in backend
+                audioSensor.sendSignal(); // TODO: and work with what they're wanting. give a parameter? enum?
+                wearable.sendSignal();
+            }
+            @Override
+            public String toString() {
+                return "Sending triggering feed to the backend.";
+            }
+        });
+
+        // notification expected from the back end to both application windows
+
+        // stop workouts and pause
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                Transitions.LiveTransitions.forEach(Animation::stop);
+                Transitions.LiveTransitions.clear();
+            }
+            @Override
+            public String toString() {
+                return "Instructor stops class";
+            }
+        });
+
+        // member feels better
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                Transitions.RelieveExhaustion(targetMember.getChildren().getFirst(), 4);
+            }
+            @Override
+            public String toString() {
+                return "Member's exhaustion is relieving.";
+            }
+        });
+
+        // instructor continues class.
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                for (Node member : otherMembers.getChildren()) {
+                    Transitions.Workout(member, 1, 0.5);
+                } // end loop
+
+                Transitions.Workout(targetMember, 1, 0.5);
+            }
+            @Override
+            public String toString() {
+                return "Trigger movement cycle (class continues).";
+            }
+        });
     } // end method
 
-    //        this.states.add(new DemoState() {
-    //            @Override
-    //            public void activate() {
-    //                Actions.test();
-    //            }
-    //            @Override
-    //            public String toString() {
-    //                return "Testing state here!";
-    //            }
-    //        });
+    /**
+     * remove out the third scenario frames
+     */
+    private void initScenario3() {
+
+    } // end method
+
+    /**
+     * remove out the fourth scenario frames
+     */
+    private void initScenario4() {
+
+    } // end method
+
+    /**
+     * remove out the fifth scenario frames
+     */
+    private void initScenario5() {
+
+    } // end method
 
 } // end class
