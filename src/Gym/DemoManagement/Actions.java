@@ -40,8 +40,31 @@ public class Actions {
         seq.play();
     } // end method
 
-    public static void Workout(Node target) {
+    public static void Workout(Node target, int pace, double squeeze) {
+        SequentialTransition seq = new SequentialTransition();
 
+        ScaleTransition workout = new ScaleTransition(Duration.seconds(pace), target);
+        workout.setToX(squeeze);
+        workout.setInterpolator(Interpolator.EASE_IN);
+
+        ScaleTransition relax = new ScaleTransition(Duration.seconds(pace), target);
+        relax.setToX(1);
+        relax.setInterpolator(Interpolator.EASE_IN);
+
+        seq.getChildren().addAll(
+                workout,
+                relax
+        );
+
+        seq.setCycleCount(Animation.INDEFINITE); // loop til we want it to stop
+
+        LiveTransitions.add(seq); // add to a list of live transitions
+
+//        seq.setOnFinished(event -> {
+//            LiveTransitions.remove(seq); // remove myself once i'm finished
+//        });
+
+        seq.play();
     } // end method
 
     public static void TriggerExhaustion(Node target) {

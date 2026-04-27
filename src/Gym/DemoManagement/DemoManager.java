@@ -12,6 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,11 +55,16 @@ public class DemoManager {
      */
     public void reset() {
         this.currState = 0;
-        // attempts below to reset stage--revisit, need to stop animations too.
+        // stop all current animations
+        for  (Transition anim : Actions.LiveTransitions) {
+            anim.stop();
+        } // end loop
+        Actions.LiveTransitions.clear();
+        // attempts below to reset stage--revisit
 //        List<Node> children = new ArrayList<>(mainStage.getChildren());
-//        for (Node child : children) {
-//            child.getTransforms().clear();
-//
+//        for (Node child : mainStage.getChildren()) {
+//            child.setTranslateX(0);
+//            child.setTranslateY(0);
 //        }
 //        mainStage.getChildren().clear();
 //        mainStage.getChildren().addAll(children);
@@ -88,46 +94,11 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                int workoutPace = 1; // seconds
-
                 for (Node member : otherMembers.getChildren()) {
-                    SequentialTransition seq = new SequentialTransition();
-
-                    ScaleTransition transition1 = new ScaleTransition(Duration.seconds(workoutPace), member);
-                    transition1.setToX(0.5);
-                    transition1.setInterpolator(Interpolator.EASE_IN);
-
-                    ScaleTransition transition2 = new ScaleTransition(Duration.seconds(workoutPace), member);
-                    transition2.setToX(1);
-                    transition2.setInterpolator(Interpolator.EASE_IN);
-
-                    seq.getChildren().addAll(
-                            transition1,
-                            transition2
-                    );
-
-                    seq.setCycleCount(Animation.INDEFINITE); // loop til we want it to stop
-                    seq.play();
+                    Actions.Workout(member, 1, 0.5);
                 } // end loop
 
-                SequentialTransition seq = new SequentialTransition();
-
-                ScaleTransition transition1 = new ScaleTransition(Duration.seconds(workoutPace), targetMember);
-                transition1.setToX(0.5);
-                transition1.setInterpolator(Interpolator.EASE_IN);
-
-                ScaleTransition transition2 = new ScaleTransition(Duration.seconds(workoutPace), targetMember);
-                transition2.setToX(1);
-                transition2.setInterpolator(Interpolator.EASE_IN);
-
-                seq.getChildren().addAll(
-                        transition1,
-                        transition2
-                );
-
-                seq.setCycleCount(Animation.INDEFINITE); // loop til we want it to stop
-                seq.play();
-                // TODO: likely need to ensure these are stopped manually. something does not like and occasional crash
+                Actions.Workout(targetMember, 1, 0.5);
             }
             @Override
             public String toString() {
