@@ -1,5 +1,6 @@
 package GSMS.EventAnalysis.SignalReceivers;
 
+import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
 import Gym.Hardware.Camera;
 
@@ -11,18 +12,18 @@ import static GSMS.EventAnalysis.SignalReceivers.SignalType.AUDIO;
 
 public class Classroom {
 
-    private String classroomId;
+    private RoomId classroomId;
 
     private String videoFeedData;
     private Integer audioDecibelData;
     private String wearableInfoData;
 
-    public Classroom(String classroomId) {
+    public Classroom(RoomId classroomId) {
         this.classroomId = classroomId;
     } // end constructor
     /************************* NON-SAD * helper START *************************/
     public String getClassroomId() {
-        return classroomId;
+        return classroomId.getId();
     }
     public String getVideoFeedData() {
         return videoFeedData;
