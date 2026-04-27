@@ -47,6 +47,7 @@ public class DemoManager {
      * buttons are pressed.
      */
     public void next() {
+        if (this.currState == 0) { resetStage(); } // reset all animated things to original state
         if (!this.states.isEmpty()) {
             DemoState state = this.states.get(this.currState);
             this.currState = ((this.currState + 1) % this.states.size()); // for looping
@@ -60,12 +61,29 @@ public class DemoManager {
      */
     public void reset() {
         this.currState = 0;
+        resetStage();
+    } // end method
+
+    /**
+     * method to
+     * 1. stop all animations.
+     * 2. reset all animated objects to original state.
+     */
+    private void resetStage() {
         // stop all current animations
         for  (Transition anim : Transitions.LiveTransitions) {
             anim.stop();
         } // end loop
         Transitions.LiveTransitions.clear();
-        // attempts below to reset stage--revisit
+
+        resetAllTransitionalObjects(); // reset all the animated objects
+    } // end mehtod
+
+    /**
+     * method to hold the hard reset of any and all objects that have
+     * a transition at ANY point. add any and all here.
+     */
+    private void resetAllTransitionalObjects() {
         targetMember.setTranslateX(0);
         targetMember.setTranslateY(0);
         targetMember.setScaleX(1);
@@ -77,9 +95,7 @@ public class DemoManager {
             member.setScaleX(1);
             member.setScaleY(1);
             ((Shape)member).setFill(Color.web("#22ff1f"));
-        }
-//        mainStage.getChildren().clear();
-//        mainStage.getChildren().addAll(children);
+        } // end loop
     } // end method
 
     /**
