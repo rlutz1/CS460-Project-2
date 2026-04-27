@@ -76,22 +76,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                SequentialTransition seq = new SequentialTransition();
-
-                TranslateTransition transition1 = new TranslateTransition(Duration.seconds(3), targetMember);
-                transition1.setToX(710);
-                transition1.setInterpolator(Interpolator.EASE_IN);
-
-                TranslateTransition transition2 = new TranslateTransition(Duration.seconds(3), targetMember);
-                transition2.setToY(-240);
-                transition2.setInterpolator(Interpolator.EASE_IN);
-
-                seq.getChildren().addAll(
-                        transition1,
-                        transition2
-                );
-
-                seq.play();
+                Actions.EnterClassroom(targetMember, 5, 710, -240);
             }
             @Override
             public String toString() {
