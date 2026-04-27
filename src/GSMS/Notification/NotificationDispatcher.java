@@ -10,6 +10,12 @@ import java.util.List;
  * + knowing who should receive the notifications it is sent
  */
 
+/** The alert level determines the Routing logic
+ *   WARNING (Use Case 1 - Exhaustion):
+ *   CRITICAL (Use Case 2 - Conflict)
+ *   EMERGENCY (Use Case 4 - Health Emergency):
+ */
+
 public class NotificationDispatcher {
 
     public NotificationDispatcher() {
