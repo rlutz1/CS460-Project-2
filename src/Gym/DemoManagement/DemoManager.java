@@ -96,6 +96,11 @@ public class DemoManager {
             member.setScaleY(1);
             ((Shape)member).setFill(Color.web("#22ff1f"));
         } // end loop
+        targetInstructor.setTranslateX(0);
+        targetInstructor.setTranslateY(0);
+        targetInstructor.setScaleX(1);
+        targetInstructor.setScaleY(1);
+        targetInstructor.setFill(Color.web("#d476ff"));
     } // end method
 
     /**
@@ -104,8 +109,8 @@ public class DemoManager {
      */
     private void init() {
 //        initScenario1();
-        initScenario2();
-        initScenario3();
+//        initScenario2();
+//        initScenario3();
         initScenario4();
 //        initScenario5();
     } // end method
@@ -367,6 +372,17 @@ public class DemoManager {
         });
 
         // instructor attends to the collapsed member, calling emergency services
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                Transitions.InstructorToHelp(targetInstructor, 0.5, 150, 50);
+            }
+            @Override
+            public String toString() {
+                return "Instructor rushes to help, calls emergency services.";
+            }
+        });
+
 
         // services arrive, take member away
 

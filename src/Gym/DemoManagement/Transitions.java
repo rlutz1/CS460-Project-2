@@ -200,6 +200,30 @@ public class Transitions {
         emergency.play();
     } // end method
 
+
+    /**
+     * Scenario 4:
+     * instructor moves to help the afflicted
+     * @param target
+     * @param walkingSpeed
+     * @param x
+     * @param y
+     */
+    public static void InstructorToHelp(Node target, double walkingSpeed, int x, int y) {
+        TranslateTransition help = new TranslateTransition(Duration.seconds(walkingSpeed), target);
+        help.setToX(x);
+        help.setToY(y);
+        help.setInterpolator(Interpolator.LINEAR);
+
+        LiveTransitions.add(help); // add to a list of live transitions
+
+        help.setOnFinished(event -> {
+            LiveTransitions.remove(help); // remove myself once i'm finished
+        });
+
+        help.play();
+    } // end method
+
     public static void test() {
         System.out.println("action test print?");
     } // end method
