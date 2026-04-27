@@ -8,7 +8,9 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +66,18 @@ public class DemoManager {
         } // end loop
         Transitions.LiveTransitions.clear();
         // attempts below to reset stage--revisit
-//        List<Node> children = new ArrayList<>(mainStage.getChildren());
-//        for (Node child : mainStage.getChildren()) {
-//            child.setTranslateX(0);
-//            child.setTranslateY(0);
-//        }
+        targetMember.setTranslateX(0);
+        targetMember.setTranslateY(0);
+        targetMember.setScaleX(1);
+        targetMember.setScaleY(1);
+        ((Shape)(targetMember.getChildren().getFirst())).setFill(Color.web("#22ff1f"));
+        for (Node member : otherMembers.getChildren()) {
+            member.setTranslateX(0);
+            member.setTranslateY(0);
+            member.setScaleX(1);
+            member.setScaleY(1);
+            ((Shape)member).setFill(Color.web("#22ff1f"));
+        }
 //        mainStage.getChildren().clear();
 //        mainStage.getChildren().addAll(children);
     } // end method
@@ -89,7 +98,10 @@ public class DemoManager {
      * remove out the first scenario frames
      */
     private void initScenario1() {
-
+        // TODO
+        // set an initial scene.
+        // control goes over to the applications
+        // transition to scenario 2
     } // end method
 
     /**
@@ -157,8 +169,16 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
+                // stop all animations
                 Transitions.LiveTransitions.forEach(Animation::stop);
                 Transitions.LiveTransitions.clear();
+                // stop everyone from "working out"
+                targetMember.setScaleX(1);
+                targetMember.setScaleY(1);
+                for (Node member : otherMembers.getChildren()) {
+                    member.setScaleX(1);
+                    member.setScaleY(1);
+                } // end loop
             }
             @Override
             public String toString() {

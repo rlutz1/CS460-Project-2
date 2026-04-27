@@ -73,10 +73,6 @@ public class Transitions {
 
         LiveTransitions.add(seq); // add to a list of live transitions
 
-//        seq.setOnFinished(event -> {
-//            LiveTransitions.remove(seq); // remove myself once i'm finished
-//        });
-
         seq.play();
     } // end method
 

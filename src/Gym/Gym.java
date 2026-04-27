@@ -98,6 +98,7 @@ public class Gym {
         manager.targetMember = this.targetMember;
         manager.targetInstructor = this.targetInstructor;
         manager.otherMembers = this.otherMembers;
+
         manager.audioSensor = this.audioTester;
         manager.cameraFeed = this.cameraTester;
         manager.wearable = this.wearableTester;
