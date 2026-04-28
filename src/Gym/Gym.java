@@ -4,15 +4,19 @@ import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
 import Gym.Hardware.DoorwaySensor;
 import Gym.Hardware.WearableSensors;
+import MemberApplication.MemberApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * this is the PHYSICAL gym container for simulating
@@ -34,6 +38,13 @@ public class Gym {
     public Camera cameraTester;
     public WearableSensors wearableTester;
     public DoorwaySensor doorwayTester;
+
+    private int memberCount = 1;
+    private String currentMember;
+    public List<MemberApplication> members = new ArrayList<>();
+    private int instructorCount = 1;
+    private String currentInstructor;
+    public List<MemberApplication> instructors = new ArrayList<>();
 
 
     public Gym() {
@@ -68,6 +79,12 @@ public class Gym {
     } // end method
 
     @FXML
+    private ComboBox<String> memberSelection;
+
+    @FXML
+    private ComboBox<String> instructorSelection;
+
+    @FXML
     private void startInstructorApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Instructor Application.");
 
@@ -75,6 +92,14 @@ public class Gym {
 
         if (main != null) { // null catch
             Parent root = FXMLLoader.load(main); // load it
+            if (instructorSelection.getValue().matches("New Member")) {
+                currentMember = "M" + instructorCount;
+                instructorSelection.getItems().add(currentInstructor);
+                instructors.add(new MemberApplication());
+                instructorCount++;
+            } else {
+                currentInstructor = instructorSelection.getValue();
+            }
             Stage stage = new Stage();
             stage.setTitle(INSTRUCTOR_WINDOW_NAME);
             stage.setScene(new Scene(root));
@@ -93,6 +118,14 @@ public class Gym {
 
         if (main != null) { // null catch
             Parent root = FXMLLoader.load(main); // load it
+            if (memberSelection.getValue().matches("New Member")) {
+                currentMember = "M" + memberCount;
+                memberSelection.getItems().add(currentMember);
+                members.add(new MemberApplication());
+                memberCount++;
+            } else {
+                currentMember = memberSelection.getValue();
+            }
             Stage stage = new Stage();
             stage.setTitle(MEMBER_WINDOW_NAME);
             stage.setScene(new Scene(root));

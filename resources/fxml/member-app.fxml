@@ -23,7 +23,7 @@
                         <Font name="Calibri" size="18.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#requestItinerary" prefHeight="102.0" prefWidth="132.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Make Itinerary" textAlignment="CENTER" wrapText="true">
+                <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#requestItinerary" prefHeight="102.0" prefWidth="132.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Make Itinerary Request" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font name="Calibri" size="18.0" />
                     </font>

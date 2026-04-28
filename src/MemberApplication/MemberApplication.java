@@ -10,19 +10,29 @@ public class MemberApplication {
     private RecommendationDispatcher dispatch = new RecommendationDispatcher();
 
     // Placeholder code
-    String id = "M001";
-    int age = 35;
-    int normalHeartRateAvg = 70;
-    int targetHeartRate = 220 - age;
-    boolean isAthlete = false;
+    public String id;
+    private int age;
+    private int normalHeartRateAvg;
+    private int targetHeartRate; // Maybe keep separate?
+    private String conditions; // the "PRIV_" is meant for database to keep such info safe from anyone other than member and permitted individuals
+    private boolean isAthlete;
 
     public MemberApplication() {
-//        String id = "M001";
-//        int age = 35;
-//        int normalHeartRateAvg = 70;
-//        int targetHeartRate = 220 - age;
-//        boolean isAthlete = false;
+        this.id = "M1";
+        this.age = 35;
+        this.normalHeartRateAvg = 70;
+        this.targetHeartRate = 220 - age; // Maybe keep separate?
+        this.conditions = "PRIV_ Type 2 Diabetes"; // the "PRIV_" is meant for database to keep such info safe from anyone other than member and permitted individuals
+        this.isAthlete = false;
     } // end constructor
+    public MemberApplication(String id, int age, int normalHeartRateAvg, String conditions, boolean isAthlete) {
+        this.id = id;
+        this.age = age;
+        this.normalHeartRateAvg = normalHeartRateAvg;
+        this.targetHeartRate = 220 - age; // Maybe keep separate?
+        this.conditions = conditions; // the "PRIV_" is meant for database to keep such info safe from anyone other than member and permitted individuals
+        this.isAthlete = isAthlete;
+    }
 
     /**
      * Gets the list of member-specific class
@@ -66,7 +76,21 @@ public class MemberApplication {
         if (request.getText() == null || request.getText().trim().isEmpty()) {
             memberLog.appendText("No request made\n");
         } else {
-            memberLog.appendText(request.getText() + "\n");
+            String foos[] = request.getText().toLowerCase().split("\n");
+            for (String foo:foos) {
+                if (foo.equals("clear")) {
+                    memberLog.clear();
+                } else {
+                    String output = dispatch.receiveRequest(id, foo, age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
+                    if (output == "invalid request") {
+                        memberLog.appendText("Sorry, system is offline\n");
+                        System.out.println("failure!");
+                    } else {
+                        memberLog.appendText(output);
+                        System.out.println("success!");
+                    }
+                }
+            }
             request.clear();
         }
     }
@@ -89,7 +113,7 @@ public class MemberApplication {
     public void requestItinerary(MouseEvent mouseEvent) {
         String itinerary;
         memberLog.appendText("Sending request to system...\n");
-        itinerary = dispatch.receiveRequest(id, "make itinerary", age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
+        itinerary = dispatch.receiveRequest(id, "make itinerary request", age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
         if (itinerary == "invalid request") {
             memberLog.appendText("Sorry, system is offline\n");
             System.out.println("failure!");

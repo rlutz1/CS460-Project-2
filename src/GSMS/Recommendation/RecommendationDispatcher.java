@@ -25,16 +25,23 @@ public class RecommendationDispatcher {
     public String receiveRequest(String senderId, String requestType, String requestData) {
         String result;
         switch (requestType) {
-            case "make itinerary":
+            case "make itinerary request":
                 System.out.println("making itinerary for member " + senderId);
+                result = "Lift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
+                break;
+            case "generate itinerary":
+                System.out.println("generating itinerary based on preferences from " + senderId);
                 result = "Lift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
                 break;
             case "view schedule":
                 System.out.println("Retrieving gym schedule for member " + senderId);
                 result = "Nothing planned for today! Schedule now, ya slacker!\n";
                 break;
+            case "clear":
+                result = "clear";
+                break;
             default:
-                result = "invalid request!";
+                result = "Invalid request!\n";
                 System.out.println(result);
         }
         return result;
@@ -47,8 +54,13 @@ public class RecommendationDispatcher {
      * @param instructorId
      * @param responseData
      */
-    public void sendItinerary(String instructorId, String responseData) {
-
+    public String sendItinerary(String instructorId, String responseData) {
+        String output;
+        String data[] = responseData.split(" ");
+        String member = data[0];
+        String itinerary = data[1];
+        output = instructorId + " has made itinerary for " + member + ":\n" + itinerary + "\n";
+        return output;
     } // end method
 
     /**
@@ -58,8 +70,9 @@ public class RecommendationDispatcher {
      * @param memberId
      * @param responseData
      */
-    public void sendGeneratedWorkout(String memberId, String responseData) {
-
+    public String sendGeneratedWorkout(String memberId, String responseData) {
+        String output = memberId + " gets the following workout:\n" + responseData + "\n";
+        return output;
     } // end method
 
 } // end class

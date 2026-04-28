@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_CENTER" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gym.Gym"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
+<?import javafx.collections.*?>
+<?import java.lang.String?>
+<VBox alignment="TOP_CENTER" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gym.Gym"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -45,7 +42,7 @@
                   </GridPane>
                </children>
             </VBox>
-            <VBox layoutX="647.0" layoutY="646.0" prefHeight="70.0" prefWidth="338.0" style="-fx-background-color: lavender;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="5.0">
+            <VBox layoutX="647.0" layoutY="646.0" prefHeight="111.0" prefWidth="338.0" style="-fx-background-color: lavender;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="5.0">
                <children>
                   <Label alignment="TOP_CENTER" prefHeight="26.0" prefWidth="473.0" text="Application Simluator">
                      <font>
@@ -60,10 +57,31 @@
                     <rowConstraints>
                       <RowConstraints maxHeight="20.8" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button alignment="TOP_CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#startMemberApp" text="Member Application" GridPane.halignment="CENTER" GridPane.valignment="BASELINE" />
-                        <Button alignment="TOP_CENTER" mnemonicParsing="false" onMouseClicked="#startInstructorApp" text="Instructor Application" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BASELINE" />
+                        <Button alignment="TOP_CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#startMemberApp" prefHeight="25.0" prefWidth="155.0" text="Member Application" GridPane.halignment="CENTER" GridPane.valignment="BASELINE" />
+                        <Button alignment="TOP_CENTER" mnemonicParsing="false" onMouseClicked="#startInstructorApp" prefHeight="25.0" prefWidth="155.0" text="Instructor Application" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BASELINE" />
+                        <ComboBox fx:id="instructorSelection" nodeOrientation="LEFT_TO_RIGHT" prefWidth="155.0" value="New Instructor" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="7.0" />
+                           </GridPane.margin>
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="New Instructor"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                        <ComboBox fx:id="memberSelection" nodeOrientation="LEFT_TO_RIGHT" prefWidth="155.0" value="New Member" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="7.0" />
+                           </GridPane.margin>
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="New Member"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
                      </children>
                   </GridPane>
                </children>
