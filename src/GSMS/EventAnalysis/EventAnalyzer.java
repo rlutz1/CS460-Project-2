@@ -1,6 +1,7 @@
 package GSMS.EventAnalysis;
 
 import GSMS.EventAnalysis.SignalReceivers.Classroom;
+import GSMS.Root.GymSpaceManagementController;
 
 import java.util.List;
 
@@ -9,8 +10,14 @@ import java.util.List;
  */
 
 public class EventAnalyzer {
+    private static final String JOB_SENDER_ID = "EVENT_ANALYZER" ;
+    private GymSpaceManagementController root;
     private List<Classroom> classrooms;
-    public EventAnalyzer() {
+    private LiveEventAI liveEventAI;
+    public EventAnalyzer(GymSpaceManagementController root) {}
+    public EventAnalyzer(GymSpaceManagementController root, LiveEventAI liveEventAI) {
+        this.root = root;
+        this.liveEventAI = liveEventAI;
     } // end constructor
 
     /************************* NON-SAD * helper START *************************/
@@ -123,7 +130,9 @@ public class EventAnalyzer {
      * @param targetId
      */
     public void pushAlert(String alert, String alertLevel, String targetId) {
-
+        String fullNotification =
+                "ALERTLEVEL: "+alertLevel+"\n. ALERT: "+alert;
+        root.requestJob(fullNotification, JOB_SENDER_ID);
     } // end method
 
 
