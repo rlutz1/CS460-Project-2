@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import javafx.collections.*?>
-<?import java.lang.String?>
 <VBox alignment="TOP_CENTER" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gym.Gym"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -42,9 +42,9 @@
                   </GridPane>
                </children>
             </VBox>
-            <VBox layoutX="647.0" layoutY="646.0" prefHeight="111.0" prefWidth="338.0" style="-fx-background-color: lavender;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="5.0">
+            <VBox layoutX="647.0" layoutY="646.0" prefHeight="92.0" prefWidth="338.0" style="-fx-background-color: lavender;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="5.0">
                <children>
-                  <Label alignment="TOP_CENTER" prefHeight="26.0" prefWidth="473.0" text="Application Simluator">
+                  <Label alignment="TOP_CENTER" prefHeight="26.0" prefWidth="338.0" text="Application Simluator">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -68,7 +68,7 @@
                            </GridPane.margin>
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="New Instructor"/>
+                                    <String fx:value="New Instructor" />
                                 </FXCollections>
                             </items>
                         </ComboBox>
@@ -78,7 +78,7 @@
                            </GridPane.margin>
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="New Member"/>
+                                    <String fx:value="New Member" />
                                 </FXCollections>
                             </items>
                         </ComboBox>

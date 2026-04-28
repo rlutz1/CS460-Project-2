@@ -4,6 +4,7 @@ import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
 import Gym.Hardware.DoorwaySensor;
 import Gym.Hardware.WearableSensors;
+import InstructorApplication.InstructorApplication;
 import MemberApplication.MemberApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +45,7 @@ public class Gym {
     public List<MemberApplication> members = new ArrayList<>();
     private int instructorCount = 1;
     private String currentInstructor;
-    public List<MemberApplication> instructors = new ArrayList<>();
+    public List<InstructorApplication> instructors = new ArrayList<>();
 
 
     public Gym() {
@@ -92,16 +93,16 @@ public class Gym {
 
         if (main != null) { // null catch
             Parent root = FXMLLoader.load(main); // load it
-            if (instructorSelection.getValue().matches("New Member")) {
-                currentMember = "M" + instructorCount;
+            if (instructorSelection.getValue().matches("New Instructor")) {
+                currentInstructor = "I" + instructorCount;
                 instructorSelection.getItems().add(currentInstructor);
-                instructors.add(new MemberApplication());
+                instructors.add(new InstructorApplication());
                 instructorCount++;
             } else {
                 currentInstructor = instructorSelection.getValue();
             }
             Stage stage = new Stage();
-            stage.setTitle(INSTRUCTOR_WINDOW_NAME);
+            stage.setTitle(currentInstructor + " " + INSTRUCTOR_WINDOW_NAME);
             stage.setScene(new Scene(root));
             stage.show();
         } else {
@@ -127,7 +128,7 @@ public class Gym {
                 currentMember = memberSelection.getValue();
             }
             Stage stage = new Stage();
-            stage.setTitle(MEMBER_WINDOW_NAME);
+            stage.setTitle(currentMember + " " + MEMBER_WINDOW_NAME);
             stage.setScene(new Scene(root));
             stage.show();
         } else {

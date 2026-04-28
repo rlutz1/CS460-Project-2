@@ -71,6 +71,10 @@ public class MemberApplication {
     @FXML
     private TextArea newNotificationLog;
 
+//    public void updateNotifications(String notifications){
+//        newNotificationLog.appendText(notifications);
+//    }
+
     @FXML
     public void sendAction(MouseEvent mouseEvent) {
         if (request.getText() == null || request.getText().trim().isEmpty()) {

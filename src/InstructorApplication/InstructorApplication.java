@@ -15,7 +15,7 @@ public class InstructorApplication {
     private RecommendationDispatcher dispatch = new RecommendationDispatcher();
     public InstructorApplication(){
 //    public InstructorApplication(String id, boolean isCoveredEntity) {
-        id = "I1";
+        this.id = "I1";
         this.isCoveredEntity = true;
     } // end method
 

@@ -24,14 +24,15 @@ public class RecommendationDispatcher {
      */
     public String receiveRequest(String senderId, String requestType, String requestData) {
         String result;
+        String splitData[] = requestData.replace(",", "").split(" ");
         switch (requestType) {
             case "make itinerary request":
                 System.out.println("making itinerary for member " + senderId);
                 result = "Lift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
                 break;
             case "generate itinerary":
-                System.out.println("generating itinerary based on preferences from " + senderId);
-                result = "Lift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
+                System.out.println("generating itinerary based on recommendations from " + senderId + " to " + splitData[2]);
+                result = senderId +"'s recommendation to " + splitData[2] + ":\n\tLift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
                 break;
             case "view schedule":
                 System.out.println("Retrieving gym schedule for member " + senderId);
