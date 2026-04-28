@@ -1,6 +1,6 @@
 package GSMS.Notification;
 
-import java.util.List;
+import GSMS.Root.GymSpaceManagementController;
 
 /**
  * class to stand as component for notification dispatcher
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class NotificationDispatcher {
 
-    public NotificationDispatcher() {
+    public NotificationDispatcher(GymSpaceManagementController gymSpaceManagementController) {
 
     } // end constructor
 
