@@ -22,8 +22,22 @@ public class RecommendationDispatcher {
      * @param requestType
      * @param requestData
      */
-    public void receiveRequest(String senderId, String requestType, String requestData) {
-
+    public String receiveRequest(String senderId, String requestType, String requestData) {
+        String result;
+        switch (requestType) {
+            case "make itinerary":
+                System.out.println("making itinerary for member " + senderId);
+                result = "Lift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
+                break;
+            case "view schedule":
+                System.out.println("Retrieving gym schedule for member " + senderId);
+                result = "Nothing planned for today! Schedule now, ya slacker!\n";
+                break;
+            default:
+                result = "invalid request!";
+                System.out.println(result);
+        }
+        return result;
     } // end method
 
     /**

@@ -7,9 +7,10 @@ public class InstructorApplication {
 
     private String privateId;
     private boolean isCoveredEntity;
-    public InstructorApplication(String id, boolean isCoveredEntity) {
-        privateId = id;
-        this.isCoveredEntity = isCoveredEntity;
+    public InstructorApplication(){
+//    public InstructorApplication(String id, boolean isCoveredEntity) {
+//        privateId = id;
+//        this.isCoveredEntity = isCoveredEntity;
     } // end method
 
     /**
