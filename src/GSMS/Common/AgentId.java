@@ -10,9 +10,10 @@ import java.util.Objects;
 public class AgentId {
 
     private final String id;
+    private final String name;
+    private final AgentType type;
 
     /**
-     * TODO: may be handy to have agent type in here as well. enum?
      * @param id Raw string identifier for this agent.
      *           Must not be null or blank.
      */
@@ -21,6 +22,21 @@ public class AgentId {
             throw new IllegalArgumentException("AgentId must not be null or blank.");
         } // end if
         this.id = id;
+        this.name = "Unknown";
+        this.type = AgentType.ANY;
+    } // end constructor
+
+    /**
+     * @param id Raw string identifier for this agent.
+     *           Must not be null or blank.
+     */
+    public AgentId(String id, String name, AgentType type) {
+        if (id == null || id.isBlank()) {
+            throw new IllegalArgumentException("AgentId must not be null or blank.");
+        } // end if
+        this.id = id;
+        this.name = name;
+        this.type = type;
     } // end constructor
 
     /**
@@ -29,6 +45,16 @@ public class AgentId {
     public String getId() {
         return id;
     }
+
+    /**
+     * @return a readable name of the agent
+     */
+    public String getName() { return name; }
+
+    /**
+     * @return the type of the agent (instructor/member)
+     */
+    public AgentType getType() { return type; }
 
     @Override
     public String toString() {
