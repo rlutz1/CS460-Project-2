@@ -168,54 +168,57 @@ public class GymSpaceManagementController implements AgentRegistry {
         scheduleJob(info, "UNKNOWN");
     } // end method
 
-    /**
-     * Entry point for inter-component communication. Other backend components
-     * call this when they need the GSMC to coordinate an action that crosses
-     * component boundaries.
-     *
-     * Expected sender values:
-     *   "EVENT_ANALYZER" → sensor-triggered event needing cross-component action
-     *   "RECOMMENDATION" → workout/itinerary result ready to deliver
-     *   "DATA_MANAGER" → report generation complete, ready to return
-     *
-     * @param info   Serialized payload describing the needed action.
-     * @param sender String identifying the requesting component.
-     */
-    public void requestJob(String info, String sender) {
-        System.out.println("[GSMC] requestJob | sender=" + sender + " | info=" + info);
-
-        if (info == null || info.isBlank()) {
-            System.err.println("[GSMC] requestJob: received null or blank info. Ignored.");
-            return;
-        } // end if
-
-        // TODO: expand routing cases as components are implemented
-        switch (sender) {
-
-            case "EVENT_ANALYZER":
-                // EventAnalyzer is requesting cross-component coordination
-                // (e.g. room access verification needs a DataManager lookup)
-                // TODO: parse info and delegate to DataManager or NotificationDispatcher
-                break;
-
-            case "RECOMMENDATION":
-                // RecommendationDispatcher has a result ready to route back to a member
-                // TODO: parse memberId/instructorId from info and call Member/Instructor sendInformation() directly,
-                //  or route via the agent registry
-                break;
-
-            case "DATA_MANAGER":
-                // DataManager has a report ready to return to the requesting application
-                // TODO: parse target application from info and deliver
-                break;
-
-            default:
-                System.err.println("[GSMC] requestJob: unrecognized sender '"
-                        + sender + "'. No action taken.");
-
-        } // end switch
-
-    } // end method
+//    ====================================================================
+//    NOTE: COMMENTING DUE TO REMOVAL FROM THE SAD
+//    ====================================================================
+//    /**
+//     * Entry point for inter-component communication. Other backend components
+//     * call this when they need the GSMC to coordinate an action that crosses
+//     * component boundaries.
+//     *
+//     * Expected sender values:
+//     *   "EVENT_ANALYZER" → sensor-triggered event needing cross-component action
+//     *   "RECOMMENDATION" → workout/itinerary result ready to deliver
+//     *   "DATA_MANAGER" → report generation complete, ready to return
+//     *
+//     * @param info   Serialized payload describing the needed action.
+//     * @param sender String identifying the requesting component.
+//     */
+//    public void requestJob(String info, String sender) {
+//        System.out.println("[GSMC] requestJob | sender=" + sender + " | info=" + info);
+//
+//        if (info == null || info.isBlank()) {
+//            System.err.println("[GSMC] requestJob: received null or blank info. Ignored.");
+//            return;
+//        } // end if
+//
+//        // TODO: expand routing cases as components are implemented
+//        switch (sender) {
+//
+//            case "EVENT_ANALYZER":
+//                // EventAnalyzer is requesting cross-component coordination
+//                // (e.g. room access verification needs a DataManager lookup)
+//                // TODO: parse info and delegate to DataManager or NotificationDispatcher
+//                break;
+//
+//            case "RECOMMENDATION":
+//                // RecommendationDispatcher has a result ready to route back to a member
+//                // TODO: parse memberId/instructorId from info and call Member/Instructor sendInformation() directly,
+//                //  or route via the agent registry
+//                break;
+//
+//            case "DATA_MANAGER":
+//                // DataManager has a report ready to return to the requesting application
+//                // TODO: parse target application from info and deliver
+//                break;
+//
+//            default:
+//                System.err.println("[GSMC] requestJob: unrecognized sender '"
+//                        + sender + "'. No action taken.");
+//
+//        } // end switch
+//
+//    } // end method
 
     /*
     The AgentRegistry implementation
