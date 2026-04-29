@@ -1,7 +1,9 @@
 package GSMS.Root;
 
 import GSMS.Agents.Instructor;
+import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.Member;
+import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Common.RoomId;
 import GSMS.DataManagement.DataManager;
@@ -80,6 +82,12 @@ public class GymSpaceManagementController implements AgentRegistry {
     /** Maps a Member's AgentId string to the RoomId string they are currently in. */
     private final Map<String, String>       memberRoom;
 
+    // following necessary API components to enable correct communication flow with incoming app requests
+    private final MemberApplicationAPI      memberApi;
+    private final InstructorApplicationAPI  instructorApi;
+
+
+
     /*
     The Constructor - which wires all components
     /*
@@ -107,6 +115,10 @@ public class GymSpaceManagementController implements AgentRegistry {
         this.roomMembers        = new HashMap<>();
         this.roomInstructor     = new HashMap<>();
         this.memberRoom         = new HashMap<>();
+
+        // initialize the API needed for application communication receipt
+        this.memberApi     = new MemberApplicationAPI();
+        this.instructorApi = new InstructorApplicationAPI();
 
         System.out.println("[GSMC] All components initialized.");
 
