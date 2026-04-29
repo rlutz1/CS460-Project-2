@@ -28,4 +28,7 @@ replay_pid*
 *.iml
 out/
 target/
+
+# custom roxanne items
 /jars-for-scene-builder/
+/compiled/
