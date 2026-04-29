@@ -1,5 +1,6 @@
 package GSMS.DataManagement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,6 +8,12 @@ import java.util.List;
  */
 
 public class DataManager {
+    // Potential variables for storage to apply to database?
+    public record AlertPair(String key, Enum level) {}
+    private List<AlertPair> notificationList = new ArrayList<>();
+    private List<String> attendanceList = new ArrayList<>();
+    private List<String> memberList = new ArrayList<>();
+    private List<String> instructorList = new ArrayList<>();
 
     public DataManager() {
 
