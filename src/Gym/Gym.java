@@ -223,6 +223,7 @@ public class Gym {
             InstructorApplication instructorApp = loader.getController();
             instructorApp.setMyStage(stage);
             instructorApp.setApi(api);
+            instructorApp.setId(id);
 
             instructorSelection.getItems().add(id.getId());
             instructorSelection.setValue(id.getId());
@@ -268,6 +269,7 @@ public class Gym {
             MemberApplication memberApp = loader.getController();
             memberApp.setMyStage(stage);
             memberApp.setApi(api);
+            memberApp.setId(id);
 
             memberSelection.getItems().add(id.getId());
             memberSelection.setValue(id.getId());

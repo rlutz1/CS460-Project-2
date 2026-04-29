@@ -160,7 +160,8 @@ public class MemberApplication {
      * @param notificationOrInformation Notification type if time
      */
     public void receiveInformation(String notificationOrInformation) {
-
+        // assume right now it's just a recc TODO make notification type and enum
+        memberLog.appendText(notificationOrInformation + "\n");
     } // end method
 
     // ==============================================================================
@@ -173,6 +174,14 @@ public class MemberApplication {
      */
     public void setMyStage(Stage stage) {
         this.myStage = stage;
+    } // end method
+
+    /**
+     * add an id to associate with this application.
+     * @param id
+     */
+    public void setId(AgentId id) {
+        this.id = id;
     } // end method
 
     /**

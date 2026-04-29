@@ -3,6 +3,7 @@ package GSMS.Agents;
 
 import GSMS.Common.AgentId;
 import GSMS.Common.JobInfo;
+import GSMS.Common.JobType;
 import GSMS.Common.RecommendationType;
 import GSMS.Root.GymSpaceManagementController;
 
@@ -21,6 +22,7 @@ public class MemberApplicationAPI {
 
     public void transmitRecommendationRequest(AgentId memberId, String exerciseType) {
         gsmc.scheduleJob(new JobInfo(
+                JobType.RECOMMENDATION_ENGINE,
                 memberId,
                 RecommendationType.SYSTEM_GENERATE,
                 exerciseType

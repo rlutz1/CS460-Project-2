@@ -34,19 +34,25 @@ public class RecommendationDispatcher {
         switch (requestType) {
             case SYSTEM_GENERATE:
                 // generate with AI
-                recommendation = this.ai.generateWorkout(DataManager.getProfile(senderId, null), requestData);
+                recommendation = ai.generateWorkout(DataManager.getProfile(senderId, null), requestData);
                 break;
 
             case ANALYZE:
+                // low priority, not in demo
                 // analyze with AI
                 // generate list of enrolled members with DataManager.getProfile()
-                // recommendation = this.ai.analyzeItinerary(list of enrolled, requestData)
+                // recommendation = ai.analyzeItinerary(list of enrolled, requestData)
                 break;
             default:
                 System.out.println("[RECC DISPATCH] A request type was received that is not recognized: " + requestType);
-        }
-        // TODO:
-        AgentContainer.MemberApps.get(senderId).sendInformation(recommendation);
+        } // end switch case
+
+        switch (senderId.getType()) {
+            case MEMBER -> AgentContainer.MemberApps.get(senderId).sendInformation(recommendation);
+            case INSTRUCTOR -> AgentContainer.InstructorApps.get(senderId).sendInformation(recommendation);
+            default -> System.out.println("[RECC DISPATCH] Somehow a sender id was sent with not defined type: " + senderId);
+        } // end switch case
+
 //        String result;
 //        String splitData[] = requestData.replace(",", "").split(" ");
 //        switch (requestType) {

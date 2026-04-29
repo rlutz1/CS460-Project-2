@@ -164,6 +164,14 @@ public class InstructorApplication {
     } // end method
 
     /**
+     * add an id to associate with this application.
+     * @param id
+     */
+    public void setId(AgentId id) {
+        this.id = id;
+    } // end method
+
+    /**
      * START the application.
      */
     public void start() {
