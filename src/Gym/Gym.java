@@ -201,6 +201,14 @@ public class Gym {
         instructorApplications.get(agentId).start();
     } // end method
 
+    /**
+     * initialize an instructor application.
+     * not starting it--but mapping it to an agent dynamically.
+     * @param id
+     * @param name
+     * @return
+     * @throws IOException
+     */
     private InstructorApplication initInstructorApp(AgentId id, String name) throws IOException {
         URL main = getClass().getResource(MAIN_INSTRUCTOR_FXML); // grab main xml
 
@@ -217,6 +225,8 @@ public class Gym {
 
             instructorSelection.getItems().add(id.getId());
             instructorSelection.setValue(id.getId());
+            // TODO would like to add agent id and name to the app here
+
             return instructorApp;
         } else {
             System.out.println("Something went wrong: " + MAIN_INSTRUCTOR_FXML + " returned null on start.");
@@ -224,8 +234,6 @@ public class Gym {
         return null;
     } // end method
 
-
-//    private Stage memberapp; // this works
     /**
      * start a "member application".
      * @param mouseEvent click
@@ -240,7 +248,14 @@ public class Gym {
         memberApplications.get(agentId).start();
     } // end method
 
-
+    /**
+     * initialize a member application.
+     * not starting it--but mapping it to an agent dynamically.
+     * @param id
+     * @param name
+     * @return
+     * @throws IOException
+     */
     private MemberApplication initMemberApp(AgentId id, String name) throws IOException {
         URL main = getClass().getResource(MAIN_MEMBER_FXML); // grab main xml
         if (main != null) { // null catch
@@ -255,6 +270,7 @@ public class Gym {
 
             memberSelection.getItems().add(id.getId());
             memberSelection.setValue(id.getId());
+            // TODO would like to add agent id and name to the app here
 
             return memberApp;
         } else {
@@ -329,77 +345,3 @@ public class Gym {
 
 
 } // end class
-
-
-
-
-// old initialize code, keeping for notes
-//        rotate = new RotateTransition(Duration.millis(2500), stackPane);
-//        rotate.setToAngle(360);
-//        rotate.setFromAngle(0);
-//        rotate.setInterpolator(Interpolator.LINEAR);
-//        rotate.statusProperty().addListener(
-//                (observableValue, oldValue, newValue) -> {
-//                    text2.setText("Was " + oldValue + ", Now " + newValue);
-//                });
-//        text2.strokeProperty().bind(new When(rotate.statusProperty()
-//                .isEqualTo(Animation.Status.RUNNING))
-//                .then(Color.GREEN).otherwise(Color.RED));
-
-// keeping for notes
-//    @FXML
-//    private void handleMouseClick(MouseEvent mouseEvent) {
-//        if (rotate.getStatus().equals(Animation.Status.RUNNING)) {
-//            rotate.pause();
-//        } else {
-//            rotate.play();
-//        }
-//    }
-
-
-
-/*
-package org.modernclient;
-import javafx.animation.Animation;
-import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
-import javafx.beans.binding.When;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
-import java.net.URL;
-import java.util.ResourceBundle;
-public class FXMLController implements Initializable {
-    @FXML
-    private StackPane stackPane;
-    @FXML
-    private Text text2;
-    private RotateTransition rotate;
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        rotate = new RotateTransition(Duration.millis(2500), stackPane);
-        rotate.setToAngle(360);
-        rotate.setFromAngle(0);
-        rotate.setInterpolator(Interpolator.LINEAR);
-        rotate.statusProperty().addListener(
-                           (observableValue, oldValue, newValue) -> {
-            text2.setText("Was " + oldValue + ", Now " + newValue);
-        });
-        text2.strokeProperty().bind(new When(rotate.statusProperty()
-                 .isEqualTo(Animation.Status.RUNNING))
-                 .then(Color.GREEN).otherwise(Color.RED));
-    }
-    @FXML
-    private void handleMouseClick(MouseEvent mouseEvent) {
-        if (rotate.getStatus().equals(Animation.Status.RUNNING)) {
-            rotate.pause();
-        } else {
-            rotate.play();
-        }
-    }
-}
- */

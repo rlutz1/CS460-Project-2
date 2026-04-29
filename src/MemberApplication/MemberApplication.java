@@ -1,5 +1,6 @@
 package MemberApplication;
 
+import GSMS.Common.AgentId;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
@@ -11,9 +12,11 @@ public class MemberApplication {
     private RecommendationDispatcher dispatch = new RecommendationDispatcher();
 
     private Stage myStage; // this is for holding onto the initialized application to show later
+//    private AgentId id; // for ease of use as needed.
+//    private String name; // for ease of use as needed.
 
     // Placeholder code
-    public String id;
+    public String id; // TODO: refer to AgentId above instead, would be better
     private int age;
     private int normalHeartRateAvg;
     private int targetHeartRate; // Maybe keep separate?

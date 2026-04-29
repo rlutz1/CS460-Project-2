@@ -1,5 +1,6 @@
 package InstructorApplication;
 
+import GSMS.Common.AgentId;
 import GSMS.Recommendation.RecommendationDispatcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -12,8 +13,10 @@ import javafx.stage.Stage;
 public class InstructorApplication {
 
     private Stage myStage; // this is for holding onto the initialized application to show later
+//    private AgentId id; // for ease of use as needed.
+//    private String name; // for ease of use as needed.
 
-    private String id;
+    private String id; // TODO: refer to AgentId above instead, would be better
     private boolean isCoveredEntity;
     private RecommendationDispatcher dispatch = new RecommendationDispatcher();
     public InstructorApplication(){
