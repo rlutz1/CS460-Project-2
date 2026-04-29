@@ -146,6 +146,14 @@ public class MemberApplication {
         }
     }
 
+    /**
+     * Access point to receive information from network.
+     * @param notificationOrInformation Notification type if time
+     */
+    public void receiveInformation(String notificationOrInformation) {
+
+    } // end method
+
     // ==============================================================================
     // BELOW IS FOR INITIALIZTION OF APPS
     // ==============================================================================

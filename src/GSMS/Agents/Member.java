@@ -46,7 +46,8 @@ public class Member {
         System.out.println("[Member " + agentId + "] sendInformation: "
                 + notificationOrInformation);
 
-        // app.
+        // use the access point to give the application data
+        app.receiveInformation(notificationOrInformation);
     } // end method
 
 } // end class
