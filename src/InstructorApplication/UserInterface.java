@@ -8,7 +8,7 @@ public class UserInterface {
 
     public UserInterface() {
         // Dummy instructor with full access
-        InstructorApplication instructor = new InstructorApplication("I001", true);
+//        InstructorApplication instructor = new InstructorApplication("I001", true);
     } // end constructor
 
     /**
