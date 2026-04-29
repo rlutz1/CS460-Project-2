@@ -1,5 +1,8 @@
 package GSMS.EventAnalysis;
 
+import GSMS.EventAnalysis.SignalReceivers.Classroom;
+import GSMS.Root.GymSpaceManagementController;
+
 import java.util.List;
 
 /**
@@ -7,10 +10,29 @@ import java.util.List;
  */
 
 public class EventAnalyzer {
-
-    public EventAnalyzer() {
-
+    private static final String JOB_SENDER_ID = "EVENT_ANALYZER" ;
+    private GymSpaceManagementController root;
+    private List<Classroom> classrooms;
+    private LiveEventAI liveEventAI;
+    public EventAnalyzer(GymSpaceManagementController root) {}
+    public EventAnalyzer(GymSpaceManagementController root, LiveEventAI liveEventAI) {
+        this.root = root;
+        this.liveEventAI = liveEventAI;
     } // end constructor
+
+    /************************* NON-SAD * helper START *************************/
+    public void addClassroom(Classroom classroom) {
+        classrooms.add(classroom);
+    }
+    private Classroom findClassroom(int classroomId) {
+        for (Classroom classroom : classrooms) {
+            if (classroom.getClassroomId().equals(classroomId)) {
+                return classroom;
+            }
+        }
+        return null;
+    }
+    /************************* NON-SAD * helper END   *************************/
 
     /**
      * entry point to receive decibel levels collected
@@ -18,7 +40,12 @@ public class EventAnalyzer {
      * @param roomId
      */
     public void getAudioData(String roomId) {
-
+        Classroom room = findClassroom(Integer.parseInt(roomId));
+        if (room != null) {
+            //TODO:  will want to give this to the LiveEventAI object
+            // eventually (have to sort out the best way )
+            room.getAudioDecibelData();
+        }
     } // end method
 
     /**
@@ -27,7 +54,12 @@ public class EventAnalyzer {
      * @param roomId
      */
     public void getVideoData(String roomId) {
-
+        Classroom room = findClassroom(Integer.parseInt(roomId));
+        if (room != null) {
+            //TODO:  will want to give this to the LiveEventAI object
+            // eventually (have to sort out the best way )
+            room.getVideoFeedData();
+        }
     } // end method
 
     /**
@@ -39,7 +71,12 @@ public class EventAnalyzer {
      * @param memberId
      */
     public void getWearableData(String roomId, String memberId) {
-
+        Classroom room = findClassroom(Integer.parseInt(roomId));
+        if (room != null) {
+            //TODO:  will want to give this to the LiveEventAI object
+            // eventually (have to sort out the best way )
+            room.getWearableInfoData();
+        }
     } // end method
 
     /**
@@ -51,7 +88,11 @@ public class EventAnalyzer {
      * @param memberId
      */
     public void verifyRoomAccess(String roomId, String memberId) {
-
+        Classroom room = findClassroom(Integer.parseInt(roomId));
+        if (room != null) {
+            room.getWearableInfoData();
+            //TODO: get the doorway specific sensory details.
+        }
     } // end method
 
     /**
@@ -89,7 +130,9 @@ public class EventAnalyzer {
      * @param targetId
      */
     public void pushAlert(String alert, String alertLevel, String targetId) {
-
+        String fullNotification =
+                "ALERTLEVEL: "+alertLevel+"\n. ALERT: "+alert;
+        root.requestJob(fullNotification, JOB_SENDER_ID);
     } // end method
 
 
