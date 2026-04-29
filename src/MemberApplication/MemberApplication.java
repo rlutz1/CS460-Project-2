@@ -1,5 +1,6 @@
 package MemberApplication;
 
+import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,6 +15,7 @@ public class MemberApplication {
     private Stage myStage; // this is for holding onto the initialized application to show later
 //    private AgentId id; // for ease of use as needed.
 //    private String name; // for ease of use as needed.
+    private MemberApplicationAPI api;
 
     // Placeholder code
     public String id; // TODO: refer to AgentId above instead, would be better
@@ -162,6 +164,14 @@ public class MemberApplication {
         if (this.myStage != null) {
             this.myStage.show();
         } // end if
+    } // end method
+
+    /**
+     * set the needed API to comm through
+     * @param api
+     */
+    public void setApi(MemberApplicationAPI api) {
+        this.api = api;
     } // end method
 
 } // end class

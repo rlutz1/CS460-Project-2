@@ -8,4 +8,9 @@ package GSMS.Agents;
 
 public class MemberApplicationAPI {
 
+    public MemberApplicationAPI() {} // end constructor
+
+    public transmitRecommendationRequest() {
+
+    } // end method
 } // end class

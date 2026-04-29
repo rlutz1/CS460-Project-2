@@ -1,5 +1,7 @@
 package InstructorApplication;
 
+import GSMS.Agents.InstructorApplicationAPI;
+import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Recommendation.RecommendationDispatcher;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ public class InstructorApplication {
     private Stage myStage; // this is for holding onto the initialized application to show later
 //    private AgentId id; // for ease of use as needed.
 //    private String name; // for ease of use as needed.
+    private InstructorApplicationAPI api;
 
     private String id; // TODO: refer to AgentId above instead, would be better
     private boolean isCoveredEntity;
@@ -159,6 +162,14 @@ public class InstructorApplication {
         if (this.myStage != null) {
             this.myStage.show();
         } // end if
+    } // end method
+
+    /**
+     * set the needed API to comm through
+     * @param api
+     */
+    public void setApi(InstructorApplicationAPI api) {
+        this.api = api;
     } // end method
 
 } // end class

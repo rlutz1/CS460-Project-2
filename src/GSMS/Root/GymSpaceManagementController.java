@@ -387,4 +387,9 @@ public class GymSpaceManagementController implements AgentRegistry {
     /** @return The RecommendationDispatcher component. */
     public RecommendationDispatcher getRecommendationDispatcher() { return recommendationDispatcher; }
 
+    /** @return the member api*/
+    public MemberApplicationAPI getMemberApi()                    { return memberApi; }
+
+    /** @return the member api*/
+    public InstructorApplicationAPI getInstructorApi()            { return instructorApi; }
 } // end class

@@ -2,6 +2,8 @@ package Gym;
 
 import Driver.Driver;
 import Driver.Initializer;
+import GSMS.Agents.InstructorApplicationAPI;
+import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import Gym.DemoManagement.DemoManager;
 import Gym.Hardware.AudioSensor;
@@ -209,7 +211,7 @@ public class Gym {
      * @return
      * @throws IOException
      */
-    private InstructorApplication initInstructorApp(AgentId id, String name) throws IOException {
+    private InstructorApplication initInstructorApp(AgentId id, String name, InstructorApplicationAPI api) throws IOException {
         URL main = getClass().getResource(MAIN_INSTRUCTOR_FXML); // grab main xml
 
         if (main != null) { // null catch
@@ -222,6 +224,7 @@ public class Gym {
 
             InstructorApplication instructorApp = loader.getController();
             instructorApp.setMyStage(stage);
+            instructorApp.setApi(api);
 
             instructorSelection.getItems().add(id.getId());
             instructorSelection.setValue(id.getId());
@@ -256,7 +259,7 @@ public class Gym {
      * @return
      * @throws IOException
      */
-    private MemberApplication initMemberApp(AgentId id, String name) throws IOException {
+    private MemberApplication initMemberApp(AgentId id, String name, MemberApplicationAPI api) throws IOException {
         URL main = getClass().getResource(MAIN_MEMBER_FXML); // grab main xml
         if (main != null) { // null catch
             FXMLLoader loader = new FXMLLoader(main);
@@ -267,6 +270,7 @@ public class Gym {
 
             MemberApplication memberApp = loader.getController();
             memberApp.setMyStage(stage);
+            memberApp.setApi(api);
 
             memberSelection.getItems().add(id.getId());
             memberSelection.setValue(id.getId());
@@ -279,20 +283,23 @@ public class Gym {
         return null;
     } // end method
 
-
-
     /**
      *  gym needs to init the applications for all those people and HOLD
      *  these are kept in a map and differentiated by agent id.
      * @param initPackage
      */
-    public void initAgents(List<Initializer> initPackage) throws IOException {
+    public void initAgents(
+            List<Initializer> initPackage,
+            MemberApplicationAPI memberApi,
+            InstructorApplicationAPI instructorApi
+    ) throws IOException {
         for (Initializer init : initPackage) {
             if (init.typeOfAgent().equals("member")) {
                 // tODO: check initmemberapp for null return
-                memberApplications.put(init.id(), initMemberApp(init.id(), init.name()));
+                memberApplications.put(init.id(), initMemberApp(init.id(), init.name(), memberApi));
             } else if (init.typeOfAgent().equals("instructor")) {
-                instructorApplications.put(init.id(), initInstructorApp(init.id(), init.name()));
+                // tODO: check initinsapp for null return
+                instructorApplications.put(init.id(), initInstructorApp(init.id(), init.name(), instructorApi));
             } else {
                 System.out.println("[GYM INIT] Type of agent needs to be 'member' or 'instructor'.");
             } // end if

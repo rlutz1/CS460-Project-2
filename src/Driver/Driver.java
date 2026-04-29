@@ -117,7 +117,7 @@ public class Driver extends Application {
     //      so that the component can "push" a notification.
     private void initDemoSpace(Gym gym, GymSpaceManagementController gsmc) {
         try {
-            gym.initAgents(AGENTS_ONSITE); // initialize the visual agents and apps
+            gym.initAgents(AGENTS_ONSITE, gsmc.getMemberApi(), gsmc.getInstructorApi()); // initialize the visual agents and apps
 //            gsmc.registerAgentApplications(gym.memberApplications, gym.instructorApplications);
         } catch (IOException ex) {
             ex.printStackTrace();
