@@ -8,9 +8,7 @@ import GSMS.Common.Metadata;
  * members, instructors for the gym
  */
 public record Initializer(
-        String name,
         AgentId id,
-        String typeOfAgent,
         Metadata initialProfileData
 )
 {

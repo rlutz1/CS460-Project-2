@@ -1,6 +1,7 @@
 package Driver;
 
 import GSMS.Common.AgentId;
+import GSMS.Common.AgentType;
 import GSMS.Common.Metadata;
 import GSMS.Root.GymSpaceManagementController;
 import Gym.Gym;
@@ -29,39 +30,25 @@ public class Driver extends Application {
     // hard-code init some people into the system.
     public final static List<Initializer> AGENTS_ONSITE = new ArrayList<>(List.of(
             new Initializer(
-                    "Krex Beeble",
-                    new AgentId("KBEEBLE1"),
-                    "member",
+                    new AgentId("KBEEBLE1", "Krex Beeble", AgentType.MEMBER),
                     new Metadata("Has a bad knee.")),
             new Initializer(
-                    "Giorgio Tsoukalos",
-                    new AgentId("GTSOUKALOS1"),
-                    "member",
+                    new AgentId("GTSOUKALOS1", "Giorgio Tsoukalos", AgentType.MEMBER),
                     new Metadata("When his shoulder acts up, a storm's a'comin'.")),
             new Initializer(
-                    "Ryan Gosling",
-                    new AgentId("RGOSLING1"),
-                    "member",
+                    new AgentId("RGOSLING1", "Ryan Gosling", AgentType.MEMBER),
                     new Metadata("No preconditions--literally a perfect human.")),
             new Initializer(
-                    "Jack Daniels",
-                    new AgentId("JDANIELS1"),
-                    "member",
+                    new AgentId("JDANIELS1", "Jack Daniels", AgentType.MEMBER),
                     new Metadata("Easily exhausted and suffers from dizzy spells.")),
             new Initializer(
-                    "Roxanne Krause",
-                    new AgentId("RKRAUSE1"),
-                    "member",
+                    new AgentId("RKRAUSE1", "Roxanne Krause", AgentType.MEMBER),
                     new Metadata("Highly agitated by everything, hoping a fitness journey will help.")),
             new Initializer(
-                    "Old Man Jenkins",
-                    new AgentId("OMJENKINS1"),
-                    "member",
+                    new AgentId("OMJENKINS1", "Old Man Jenkins", AgentType.MEMBER),
                     new Metadata("Easily irritated, low energy, and basically falling apart. All around mess.")),
             new Initializer(
-                    "Jane Fonda",
-                    new AgentId("JFONDA1"),
-                    "instructor",
+                    new AgentId("JFONDA1", "Jane Fonda", AgentType.INSTRUCTOR),
                     new Metadata("All around babe instructor."))
     ));
 

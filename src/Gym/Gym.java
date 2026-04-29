@@ -3,8 +3,10 @@ package Gym;
 import Driver.Driver;
 import Driver.Initializer;
 import GSMS.Agents.InstructorApplicationAPI;
+import GSMS.Agents.Member;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
+import GSMS.Common.AgentType;
 import Gym.DemoManagement.DemoManager;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
@@ -294,15 +296,27 @@ public class Gym {
             InstructorApplicationAPI instructorApi
     ) throws IOException {
         for (Initializer init : initPackage) {
-            if (init.typeOfAgent().equals("member")) {
-                // tODO: check initmemberapp for null return
-                memberApplications.put(init.id(), initMemberApp(init.id(), init.name(), memberApi));
-            } else if (init.typeOfAgent().equals("instructor")) {
-                // tODO: check initinsapp for null return
-                instructorApplications.put(init.id(), initInstructorApp(init.id(), init.name(), instructorApi));
-            } else {
-                System.out.println("[GYM INIT] Type of agent needs to be 'member' or 'instructor'.");
-            } // end if
+            switch (init.id().getType()) {
+                case AgentType.MEMBER:
+                    MemberApplication memberApp = initMemberApp(init.id(), memberApi);
+                    if (memberApp != null) {
+                        memberApplications.put(init.id(), memberApp);
+                    } else {
+                        System.out.println("[GYM INIT] initMemberApp returned null!");
+                    } // end if
+                    break;
+                case AgentType.INSTRUCTOR:
+                    InstructorApplication instructorApp = initInstructorApp(init.id(), memberApi);
+                    if (instructorApp != null) {
+                        instructorApplications.put(init.id(), instructorApp);
+                    } else {
+                        System.out.println("[GYM INIT] initInstructorApp returned null!");
+                    } // end if
+                    break;
+                default:
+                    System.out.println("[GYM INIT] Type of agent needs to be 'member' or 'instructor'.");
+            } // end switch case
+
         } // end loop
 
     } // end method
