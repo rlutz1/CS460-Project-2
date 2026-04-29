@@ -1,7 +1,5 @@
 package GSMS.Notification;
 
-import GSMS.Root.GymSpaceManagementController;
-
 /**
  * class to stand as component for notification dispatcher
  *
@@ -9,6 +7,8 @@ import GSMS.Root.GymSpaceManagementController;
  * + sending out notifications to members/instructors
  * + knowing who should receive the notifications it is sent
  */
+
+import GSMS.Common.AgentId;
 
 /** The alert level determines the Routing logic
  *   WARNING (Use Case 1 - Exhaustion):
@@ -18,7 +18,7 @@ import GSMS.Root.GymSpaceManagementController;
 
 public class NotificationDispatcher {
 
-    public NotificationDispatcher(GymSpaceManagementController gymSpaceManagementController) {
+    public NotificationDispatcher() {
 
     } // end constructor
 
@@ -29,7 +29,8 @@ public class NotificationDispatcher {
      * @param alertLevel
      * @param recipientId
      */
-    public void receiveNotification(String notification, String alertLevel, String recipientId) {
+    public void receiveNotification(String notification, AlertLevel alertLevel,
+                                    AgentId recipientId) {
 
         // sendNotification(null, null); // end by sending the notification
     } // end method
@@ -39,7 +40,7 @@ public class NotificationDispatcher {
      * @param notification
      * @param agentId
      */
-    public void sendNotification(String notification, String agentId) {
+    public void sendNotification(String notification, AgentId agentId) {
 
     } // end method
 

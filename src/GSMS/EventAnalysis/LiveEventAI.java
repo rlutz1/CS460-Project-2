@@ -1,17 +1,17 @@
 package GSMS.EventAnalysis;
 
+import GSMS.Common.AgentId;
+import GSMS.EventAnalysis.SignalReceivers.Event;
+import GSMS.EventAnalysis.SignalReceivers.SignalType;
+import GSMS.Notification.AlertLevel;
+
 /**
  * class to stand as component for live event AI
  */
 
 public class LiveEventAI {
 
-    private final double DETECTION_THRESHOLD = 0.8;
-
-    private EventAnalyzer eventAnalyzer;
-
-    public LiveEventAI(EventAnalyzer eventAnalyzer) {
-        this.eventAnalyzer = eventAnalyzer;
+    public LiveEventAI() {
     } // end constructor
 
     /**
@@ -23,22 +23,23 @@ public class LiveEventAI {
      * data.
      * @param data
      * @param signalType
-     * @return
+     * @return non-null event safety/conflict details;
+     *         null, when no safety/conflict event detected.
      */
-    public String detectEvent(String data, String signalType) {
+    public Event detectEvent(String data, SignalType signalType) {
 
-        // dummy data for now (prior to actual Ai).
-        String alertLevel = "WARNING";
-        String notifInfo = "Member has fallen."
-        boolean safetyOrConflictDetected = false;
-        double confidenceProbability = 0.5;
+        // dummy event detection for now (prior to actual Ai).
+        AlertLevel alertLevel = AlertLevel.WARNING;
+        String eventInfo = "GENERIC  EVENT  DETECTED";
+        boolean safetyOrConflictDetected = true;
+        double confidenceProbability = 0.8;
 
-        if (safetyOrConflictDetected && confidenceProbability > DETECTION_THRESHOLD) {
-            eventAnalyzer.pushAlert(alertLevel, notifInfo, "eliud123");
+        if ( safetyOrConflictDetected ) {
+            return new Event(alertLevel, eventInfo, confidenceProbability,
+                    new AgentId("12345"));
         }
-
-        // TODO: flesh out with randomized imitated data prior to full on Ai.
         return null;
+
     } // end method
 
 } // end class

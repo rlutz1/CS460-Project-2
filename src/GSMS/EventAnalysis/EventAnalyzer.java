@@ -1,7 +1,13 @@
 package GSMS.EventAnalysis;
 
+import GSMS.Common.AgentId;
+import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Classroom;
-import GSMS.Root.GymSpaceManagementController;
+import GSMS.EventAnalysis.SignalReceivers.Event;
+import GSMS.EventAnalysis.SignalReceivers.SignalType;
+import GSMS.Notification.AlertLevel;
+import GSMS.Notification.NotificationDispatcher;
+import javafx.scene.control.Alert;
 
 import java.util.List;
 
@@ -10,21 +16,20 @@ import java.util.List;
  */
 
 public class EventAnalyzer {
-    private static final String JOB_SENDER_ID = "EVENT_ANALYZER" ;
-    private GymSpaceManagementController root;
+    private static final double THRESHOLD = 0.8;
     private List<Classroom> classrooms;
     private LiveEventAI liveEventAI;
-    public EventAnalyzer(GymSpaceManagementController root) {}
-    public EventAnalyzer(GymSpaceManagementController root, LiveEventAI liveEventAI) {
-        this.root = root;
-        this.liveEventAI = liveEventAI;
+    private NotificationDispatcher notificationDispatcher;
+    public EventAnalyzer() {
+        this.liveEventAI = new LiveEventAI();
+        this.notificationDispatcher = new NotificationDispatcher();
     } // end constructor
 
     /************************* NON-SAD * helper START *************************/
     public void addClassroom(Classroom classroom) {
         classrooms.add(classroom);
     }
-    private Classroom findClassroom(int classroomId) {
+    private Classroom findClassroom(RoomId classroomId) {
         for (Classroom classroom : classrooms) {
             if (classroom.getClassroomId().equals(classroomId)) {
                 return classroom;
@@ -32,32 +37,46 @@ public class EventAnalyzer {
         }
         return null;
     }
+    private void decideIfNeedToNotify(Event event){
+        if (event.probabilityOfCorrectness() > THRESHOLD) {
+            pushAlert(event.eventInfo(),
+                      event.alertLevel(),
+                      event.agentId());
+        }
+    }
     /************************* NON-SAD * helper END   *************************/
 
     /**
      * entry point to receive decibel levels collected
      * from audio sensors in a given room
-     * @param roomId
+     * @param roomId classroom id.
      */
-    public void getAudioData(String roomId) {
-        Classroom room = findClassroom(Integer.parseInt(roomId));
+    public void getAudioData(RoomId roomId) {
+        Classroom room = findClassroom(roomId);
         if (room != null) {
-            //TODO:  will want to give this to the LiveEventAI object
-            // eventually (have to sort out the best way )
-            room.getAudioDecibelData();
+            Event audioEvent =
+                    liveEventAI.detectEvent(room.getAudioDecibelData().toString(),
+                    SignalType.AUDIO);
+            if (audioEvent != null) {
+                decideIfNeedToNotify(audioEvent);
+            }
         }
     } // end method
 
     /**
      * entry point to receive video feed collected
      * from video cameras in a given room
-     * @param roomId
+     * @param roomId classroom id.
      */
-    public void getVideoData(String roomId) {
-        Classroom room = findClassroom(Integer.parseInt(roomId));
+    public void getVideoData(RoomId roomId) {
+        Classroom room = findClassroom(roomId);
         if (room != null) {
-            //TODO:  will want to give this to the LiveEventAI object
-            // eventually (have to sort out the best way )
+            Event videoEvent =
+                    liveEventAI.detectEvent(room.getVideoFeedData(),
+                            SignalType.VIDEO);
+            if (videoEvent != null) {
+                decideIfNeedToNotify(videoEvent);
+            }
             room.getVideoFeedData();
         }
     } // end method
@@ -67,15 +86,18 @@ public class EventAnalyzer {
      * collected from wearable devices from all members in a given room.
      * Additionally an entry point to receive signals from doorway sensors
      * as read from the member wearables
-     * @param roomId
+     * @param roomId classroom id.
      * @param memberId
      */
-    public void getWearableData(String roomId, String memberId) {
-        Classroom room = findClassroom(Integer.parseInt(roomId));
+    public void getWearableData(RoomId roomId, AgentId memberId) {
+        Classroom room = findClassroom(roomId);
         if (room != null) {
-            //TODO:  will want to give this to the LiveEventAI object
-            // eventually (have to sort out the best way )
-            room.getWearableInfoData();
+            Event wearableEvent =
+                    liveEventAI.detectEvent(room.getWearableInfoData(memberId),
+                            SignalType.WEARABLE);
+            if (wearableEvent != null) {
+                decideIfNeedToNotify(wearableEvent);
+            }
         }
     } // end method
 
@@ -87,10 +109,10 @@ public class EventAnalyzer {
      * @param roomId
      * @param memberId
      */
-    public void verifyRoomAccess(String roomId, String memberId) {
-        Classroom room = findClassroom(Integer.parseInt(roomId));
+    public void verifyRoomAccess(RoomId roomId, AgentId memberId) {
+        Classroom room = findClassroom(roomId);
         if (room != null) {
-            room.getWearableInfoData();
+            room.getWearableInfoData(memberId);
             //TODO: get the doorway specific sensory details.
         }
     } // end method
@@ -102,8 +124,8 @@ public class EventAnalyzer {
      * @param classId
      * @param memberId
      */
-    public void pushAttendance(String classId, String memberId) {
-
+    public void pushAttendance(RoomId classId, String memberId) {
+        // TODO: implement this with Logger/Data Manager
     } // end method
 
     /**
@@ -115,7 +137,7 @@ public class EventAnalyzer {
      * @param memberId
      */
     public void pushAttendance(String classId, List<String> memberId) {
-
+        // TODO: implement this with Logger/Data Manager
     } // end method
 
 
@@ -127,12 +149,14 @@ public class EventAnalyzer {
      * TODO: can overload this to give AgentId, RoomId types
      * @param alert
      * @param alertLevel
-     * @param targetId
+     * @param targetId (member/instructor).
      */
-    public void pushAlert(String alert, String alertLevel, String targetId) {
+    public void pushAlert(String alert, AlertLevel alertLevel, AgentId targetId) {
         String fullNotification =
-                "ALERTLEVEL: "+alertLevel+"\n. ALERT: "+alert;
-        root.requestJob(fullNotification, JOB_SENDER_ID);
+                "ALERT LEVEL: "+alertLevel.toString()+"\n. ALERT: "+alert;
+        notificationDispatcher.receiveNotification(fullNotification,
+                                                   alertLevel,
+                                                   targetId);
     } // end method
 
 

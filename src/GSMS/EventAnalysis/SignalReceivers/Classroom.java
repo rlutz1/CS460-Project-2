@@ -1,8 +1,13 @@
 package GSMS.EventAnalysis.SignalReceivers;
 
+import GSMS.Common.AgentId;
 import GSMS.Common.RoomId;
+import GSMS.EventAnalysis.EventAnalyzer;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
 import Gym.Hardware.Camera;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static GSMS.EventAnalysis.SignalReceivers.SignalType.AUDIO;
 
@@ -11,15 +16,17 @@ import static GSMS.EventAnalysis.SignalReceivers.SignalType.AUDIO;
  */
 
 public class Classroom {
-
+    private EventAnalyzer eventAnalyzer;
     private RoomId classroomId;
 
     private String videoFeedData;
     private Integer audioDecibelData;
-    private String wearableInfoData;
+    private Map<AgentId, String> memberIdsToWearableData;
 
-    public Classroom(RoomId classroomId) {
+    public Classroom(EventAnalyzer eventAnalyzer, RoomId classroomId) {
+        this.eventAnalyzer = eventAnalyzer;
         this.classroomId = classroomId;
+        this.memberIdsToWearableData = new HashMap<>();
     } // end constructor
     /************************* NON-SAD * helper START *************************/
     public String getClassroomId() {
@@ -33,8 +40,12 @@ public class Classroom {
         return audioDecibelData;
     }
 
-    public String getWearableInfoData() {
-        return wearableInfoData;
+    public String getWearableInfoData(AgentId agentId) {
+        // should always be non-null.
+        if (memberIdsToWearableData.containsKey(agentId)) {
+            return memberIdsToWearableData.get(agentId);
+        }
+        return null;
     }
     /************************* NON-SAD * helper END   *************************/
 
@@ -48,12 +59,26 @@ public class Classroom {
         switch (signalType) {
             case AUDIO:
                 audioDecibelData = ((Signal<Integer>) signal).getSignalData();
+                eventAnalyzer.getAudioData(classroomId);
                 break;
             case VIDEO:
                 videoFeedData = ((Signal<String>) signal).getSignalData();
+                eventAnalyzer.getVideoData(classroomId);
                 break;
             case WEARABLE:
-                wearableInfoData = ((Signal<String>) signal).getSignalData();
+                // must always be non-null for WEARABLE signals.
+                AgentId memberId = signal.getAgentId();
+
+                // update current memberId-specific wearable data.
+                if (memberIdsToWearableData.containsKey(memberId)) {
+                    memberIdsToWearableData.replace(memberId,
+                            (String) signal.getSignalData());
+                }else{
+                    memberIdsToWearableData.put(memberId,
+                            (String) signal.getSignalData());
+                }
+
+                eventAnalyzer.getWearableData(classroomId, memberId);
                 break;
         }
     } // end method
