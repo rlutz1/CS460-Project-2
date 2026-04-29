@@ -49,6 +49,11 @@ public class Driver extends Application {
                     "member",
                     new Metadata("Easily exhausted and suffers from dizzy spells.")),
             new Initializer(
+                    "Roxanne Krause",
+                    new AgentId("RKRAUSE1"),
+                    "member",
+                    new Metadata("Highly agitated by everything, hoping a fitness journey will help.")),
+            new Initializer(
                     "Old Man Jenkins",
                     new AgentId("OMJENKINS1"),
                     "member",
@@ -111,23 +116,18 @@ public class Driver extends Application {
     //      along with id information to tie to the corresponding backend component
     //      so that the component can "push" a notification.
     private void initDemoSpace(Gym gym, GymSpaceManagementController gsmc) {
+        try {
+            gym.initAgents(AGENTS_ONSITE); // initialize the visual agents and apps
+//            gsmc.registerAgentApplications(gym.memberApplications, gym.instructorApplications);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } // end try/catch
+
 
     } // end method
 
-
-    /**
-     * internal class to encapsulate the instantiation of
-     * members, instructors for the gym
-     */
-    private record Initializer(
-            String name,
-            AgentId id,
-            String typeOfAgent,
-            Metadata initialProfileData
-        )
-    {
-    }
-
 } // end class
+
+
 
 

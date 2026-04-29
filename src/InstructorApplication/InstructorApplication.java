@@ -4,11 +4,14 @@ import GSMS.Recommendation.RecommendationDispatcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * encapsulation of a driver for an instructor application
  */
 public class InstructorApplication {
+
+    private Stage myStage; // this is for holding onto the initialized application to show later
 
     private String id;
     private boolean isCoveredEntity;
@@ -132,5 +135,27 @@ public class InstructorApplication {
             inputArea.clear();
         }
     }
+
+
+    // ==============================================================================
+    // BELOW IS FOR INITIALIZTION OF APPS
+    // ==============================================================================
+
+    /**
+     * when initializing applications, hold the stage for a later starting.
+     * @param stage
+     */
+    public void setMyStage(Stage stage) {
+        this.myStage = stage;
+    } // end method
+
+    /**
+     * START the application.
+     */
+    public void start() {
+        if (this.myStage != null) {
+            this.myStage.show();
+        } // end if
+    } // end method
 
 } // end class

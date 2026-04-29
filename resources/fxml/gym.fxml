@@ -94,23 +94,23 @@
                      <children>
                         <Button alignment="TOP_CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#startMemberApp" prefHeight="25.0" prefWidth="155.0" text="Member Application" GridPane.halignment="CENTER" GridPane.valignment="BASELINE" />
                         <Button alignment="TOP_CENTER" mnemonicParsing="false" onMouseClicked="#startInstructorApp" prefHeight="25.0" prefWidth="155.0" text="Instructor Application" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BASELINE" />
-                        <ComboBox fx:id="instructorSelection" nodeOrientation="LEFT_TO_RIGHT" prefWidth="155.0" value="New Instructor" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <ComboBox fx:id="instructorSelection" nodeOrientation="LEFT_TO_RIGHT" prefWidth="155.0"  GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="7.0" />
                            </GridPane.margin>
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="New Instructor" />
+<!--                                    <String fx:value="New Instructor" />-->
                                 </FXCollections>
                             </items>
                         </ComboBox>
-                        <ComboBox fx:id="memberSelection" nodeOrientation="LEFT_TO_RIGHT" prefWidth="155.0" value="New Member" GridPane.rowIndex="2">
+                        <ComboBox fx:id="memberSelection" nodeOrientation="LEFT_TO_RIGHT" prefWidth="155.0"  GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="7.0" />
                            </GridPane.margin>
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="New Member" />
+<!--                                    <String fx:value="New Member" />-->
                                 </FXCollections>
                             </items>
                         </ComboBox>

@@ -1,16 +1,22 @@
 package Gym;
 
+import Driver.Driver;
+import Driver.Initializer;
+import GSMS.Common.AgentId;
 import Gym.DemoManagement.DemoManager;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
 import Gym.Hardware.DoorwaySensor;
 import Gym.Hardware.WearableSensors;
+import InstructorApplication.InstructorApplication;
+import MemberApplication.MemberApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +27,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * this is the PHYSICAL gym container for simulating
@@ -35,6 +43,9 @@ public class Gym {
     public final static String MEMBER_WINDOW_NAME = "Member Application";
 
     private final DemoManager manager = new DemoManager(); // for managing demo steps
+    // following maps are used for initialization between front/backend and mapping an agent id to a specific application
+    public HashMap<AgentId, MemberApplication> memberApplications = new HashMap<AgentId, MemberApplication>();
+    public HashMap<AgentId, InstructorApplication> instructorApplications = new HashMap<AgentId, InstructorApplication>();
 
     // things to setup the middle 3 use cases.
     @FXML
@@ -51,11 +62,20 @@ public class Gym {
     public TextArea frontendLogger; // for printing to the front end, could be handy
 
     @FXML
-    public Button startButton; // for printing to the front end, could be handy
+    public Button startButton; // start demo
     @FXML
-    public Button nextButton; // for printing to the front end, could be handy
+    public Button nextButton; // next demo state
     @FXML
-    public Button restartButton; // for printing to the front end, could be handy
+    public Button restartButton; // restart demo from beginning
+
+    // these are for app initialization
+    @FXML
+    public ComboBox memberSelection;
+    @FXML
+    public ComboBox instructorSelection;
+
+
+
 
 
     // following are for testing only for now, not fxml components
@@ -63,6 +83,7 @@ public class Gym {
     public Camera cameraTester;
     public WearableSensors wearableTester;
     public DoorwaySensor doorwayTester;
+
 
 
     public Gym() {
@@ -172,21 +193,35 @@ public class Gym {
      * @throws IOException
      */
     @FXML
-    private void startInstructorApp(MouseEvent mouseEvent) throws IOException {
+    private void startInstructorApp(MouseEvent mouseEvent) {
         System.out.println("Starting Instructor Application.");
+        // TODO: on close, app should really add itself back to the drop down. small detail if time.
+        AgentId agentId = new AgentId((String)instructorSelection.getSelectionModel().getSelectedItem());
+        instructorSelection.getItems().remove(agentId.getId());
+        instructorApplications.get(agentId).start();
+    } // end method
 
+    private InstructorApplication initInstructorApp(AgentId id, String name) throws IOException {
         URL main = getClass().getResource(MAIN_INSTRUCTOR_FXML); // grab main xml
 
         if (main != null) { // null catch
-            Parent root = FXMLLoader.load(main); // load it
+
+            FXMLLoader loader = new FXMLLoader(main);
+            Parent root = loader.load(); // load it
             Stage stage = new Stage();
-            stage.setTitle(INSTRUCTOR_WINDOW_NAME);
+            stage.setTitle(INSTRUCTOR_WINDOW_NAME + ": Hello, " + name);
             stage.setScene(new Scene(root));
-            stage.show();
+
+            InstructorApplication instructorApp = loader.getController();
+            instructorApp.setMyStage(stage);
+
+            instructorSelection.getItems().add(id.getId());
+            instructorSelection.setValue(id.getId());
+            return instructorApp;
         } else {
             System.out.println("Something went wrong: " + MAIN_INSTRUCTOR_FXML + " returned null on start.");
         } // end if
-
+        return null;
     } // end method
 
 
@@ -197,20 +232,56 @@ public class Gym {
      * @throws IOException
      */
     @FXML
-    private void startMemberApp(MouseEvent mouseEvent) throws IOException {
+    private void startMemberApp(MouseEvent mouseEvent) {
         System.out.println("Starting Member Application.");
+        // TODO: on close, app should really add itself back to the drop down. small detail if time.
+        AgentId agentId = new AgentId((String)memberSelection.getSelectionModel().getSelectedItem());
+        memberSelection.getItems().remove(agentId.getId());
+        memberApplications.get(agentId).start();
+    } // end method
 
+
+    private MemberApplication initMemberApp(AgentId id, String name) throws IOException {
         URL main = getClass().getResource(MAIN_MEMBER_FXML); // grab main xml
-
         if (main != null) { // null catch
-            Parent root = FXMLLoader.load(main); // load it
+            FXMLLoader loader = new FXMLLoader(main);
+            Parent root = loader.load(); // load it
             Stage stage = new Stage();
-            stage.setTitle(MEMBER_WINDOW_NAME);
+            stage.setTitle(MEMBER_WINDOW_NAME + ": Hello, " + name);
             stage.setScene(new Scene(root));
-            stage.show();
+
+            MemberApplication memberApp = loader.getController();
+            memberApp.setMyStage(stage);
+
+            memberSelection.getItems().add(id.getId());
+            memberSelection.setValue(id.getId());
+
+            return memberApp;
         } else {
             System.out.println("Something went wrong: " + MAIN_MEMBER_FXML + " returned null on start.");
         } // end if
+        return null;
+    } // end method
+
+
+
+    /**
+     *  gym needs to init the applications for all those people and HOLD
+     *  these are kept in a map and differentiated by agent id.
+     * @param initPackage
+     */
+    public void initAgents(List<Initializer> initPackage) throws IOException {
+        for (Initializer init : initPackage) {
+            if (init.typeOfAgent().equals("member")) {
+                // tODO: check initmemberapp for null return
+                memberApplications.put(init.id(), initMemberApp(init.id(), init.name()));
+            } else if (init.typeOfAgent().equals("instructor")) {
+                instructorApplications.put(init.id(), initInstructorApp(init.id(), init.name()));
+            } else {
+                System.out.println("[GYM INIT] Type of agent needs to be 'member' or 'instructor'.");
+            } // end if
+        } // end loop
+
     } // end method
 
     /*

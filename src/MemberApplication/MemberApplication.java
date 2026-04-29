@@ -5,9 +5,12 @@ import javafx.scene.control.*;
 import javafx.scene.input.*;
 
 import GSMS.Recommendation.RecommendationDispatcher;
+import javafx.stage.Stage;
 
 public class MemberApplication {
     private RecommendationDispatcher dispatch = new RecommendationDispatcher();
+
+    private Stage myStage; // this is for holding onto the initialized application to show later
 
     // Placeholder code
     public String id;
@@ -136,4 +139,26 @@ public class MemberApplication {
             request.clear();
         }
     }
+
+    // ==============================================================================
+    // BELOW IS FOR INITIALIZTION OF APPS
+    // ==============================================================================
+
+    /**
+     * when initializing applications, hold the stage for a later starting.
+     * @param stage
+     */
+    public void setMyStage(Stage stage) {
+        this.myStage = stage;
+    } // end method
+
+    /**
+     * START the application.
+     */
+    public void start() {
+        if (this.myStage != null) {
+            this.myStage.show();
+        } // end if
+    } // end method
+
 } // end class
