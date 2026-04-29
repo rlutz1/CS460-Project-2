@@ -12,6 +12,7 @@ public class AgentId {
     private final String id;
 
     /**
+     * TODO: may be handy to have agent type in here as well. enum?
      * @param id Raw string identifier for this agent.
      *           Must not be null or blank.
      */

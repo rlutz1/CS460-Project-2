@@ -189,6 +189,8 @@ public class Gym {
 
     } // end method
 
+
+//    private Stage memberapp; // this works
     /**
      * start a "member application".
      * @param mouseEvent click
