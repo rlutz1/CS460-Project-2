@@ -10,7 +10,7 @@ public class MemberApplicationAPI {
 
     public MemberApplicationAPI() {} // end constructor
 
-    public transmitRecommendationRequest() {
+    public void transmitRecommendationRequest() {
 
     } // end method
 } // end class
