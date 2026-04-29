@@ -1,5 +1,8 @@
 package GSMS.DataManagement;
 
+import GSMS.Agents.AgentContainer;
+import GSMS.Agents.Instructor;
+import GSMS.Agents.Member;
 import GSMS.Common.AgentId;
 import GSMS.Common.Metadata;
 import MemberApplication.MemberApplication;
@@ -24,13 +27,21 @@ public class DataManager {
 
     } // end constructor
 
-    public static void AddProfile(AgentId agentId, String typeOfAgent, Metadata profileInfo, MemberApplication app) {
-        System.out.println("adding profile for " + agentId.getId());
+    public static void AddProfile(AgentId agentId, Metadata profileInfo, MemberApplication app) {
+        // write new member to the database (implicit for now), but what the profile info is for
+        // create a new member component.
+        Member member = new Member(agentId, app);
+        AgentContainer.MemberApps.put(agentId, member);
+        System.out.println("[DATA MAN] Added profile for member " + agentId);
     }
 
-    public static void AddProfile(AgentId agentId, String typeOfAgent, Metadata profileInfo, InstructorApplication app) {
-        System.out.println("adding profile for " + agentId.getId());
-    }
+    public static void AddProfile(AgentId agentId, Metadata profileInfo, InstructorApplication app) {
+        // write new instructor to the database (implicit for now), but what the profile info is for
+        // create a new instructor component.
+        Instructor instructor = new Instructor(agentId, app);
+        AgentContainer.InstructorApps.put(agentId, instructor);
+        System.out.println("[DATA MAN] Added profile for instructor " + agentId);
+    } // end method
 
     public static void AddClass(AgentId instructorId, Metadata classInfo) {
 

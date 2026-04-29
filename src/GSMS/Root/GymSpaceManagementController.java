@@ -103,7 +103,7 @@ public class GymSpaceManagementController implements AgentRegistry {
     public GymSpaceManagementController() {
         //No-dependency components first
         this.logger = new Logger();
-        this.dataManager = new DataManager();
+        this.dataManager = new DataManager(); // TODO: this will be accessed statically as per eliud, so this can be ridden of i think
         this.liveEventAI = new LiveEventAI();
 
 
@@ -397,12 +397,18 @@ public class GymSpaceManagementController implements AgentRegistry {
     /** @return the member api*/
     public InstructorApplicationAPI getInstructorApi()            { return instructorApi; }
 
+
     // ==============================================================================
     // THIS IS FOR INIT ONLY, SIMULATION PURPOSES ONLY!!!
     // ==============================================================================
 
     /**
      * worst code everwritten, but works at a small scale.
+     * initialize the initial members/instructors that already "exist" in the
+     * system on start.
+     *
+     * we could likely move this to scheduleJob and iterate if we really wanted to
+     * but i didn't want to change too much existing code unless it was truly necessary.
      * @param members
      * @param instructors
      * @param inits
@@ -415,28 +421,27 @@ public class GymSpaceManagementController implements AgentRegistry {
     {
         // need to pass to data manager to register components.
         Metadata profileInfo = null;
-        String typeOfAgent = null;
 
         for (Map.Entry<AgentId, MemberApplication> entry : members.entrySet()) {
             for (Initializer init : inits) {
                 if (init.id().getId().equals(entry.getKey().getId())) {
                     profileInfo = init.initialProfileData();
-                    typeOfAgent = init.typeOfAgent();
                     break;
                 }
             }
-            DataManager.AddProfile(entry.getKey(), typeOfAgent, profileInfo, entry.getValue());
+            // give agent id, profile info, and the application for component init
+            DataManager.AddProfile(entry.getKey(), profileInfo, entry.getValue());
         } // end loop
 
         for (Map.Entry<AgentId, InstructorApplication> entry : instructors.entrySet()) {
             for (Initializer init : inits) {
                 if (init.id().getId().equals(entry.getKey().getId())) {
                     profileInfo = init.initialProfileData();
-                    typeOfAgent = init.typeOfAgent();
                     break;
                 }
             }
-            DataManager.AddProfile(entry.getKey(), typeOfAgent, profileInfo, entry.getValue());
+            // give agent id, profile info, and the application for component init
+            DataManager.AddProfile(entry.getKey(), profileInfo, entry.getValue());
         } // end loop
     }
 } // end class

@@ -209,11 +209,10 @@ public class Gym {
      * initialize an instructor application.
      * not starting it--but mapping it to an agent dynamically.
      * @param id
-     * @param name
      * @return
      * @throws IOException
      */
-    private InstructorApplication initInstructorApp(AgentId id, String name, InstructorApplicationAPI api) throws IOException {
+    private InstructorApplication initInstructorApp(AgentId id, InstructorApplicationAPI api) throws IOException {
         URL main = getClass().getResource(MAIN_INSTRUCTOR_FXML); // grab main xml
 
         if (main != null) { // null catch
@@ -221,7 +220,7 @@ public class Gym {
             FXMLLoader loader = new FXMLLoader(main);
             Parent root = loader.load(); // load it
             Stage stage = new Stage();
-            stage.setTitle(INSTRUCTOR_WINDOW_NAME + ": Hello, " + name);
+            stage.setTitle(INSTRUCTOR_WINDOW_NAME + ": Hello, " + id.getName());
             stage.setScene(new Scene(root));
 
             InstructorApplication instructorApp = loader.getController();
@@ -257,17 +256,16 @@ public class Gym {
      * initialize a member application.
      * not starting it--but mapping it to an agent dynamically.
      * @param id
-     * @param name
      * @return
      * @throws IOException
      */
-    private MemberApplication initMemberApp(AgentId id, String name, MemberApplicationAPI api) throws IOException {
+    private MemberApplication initMemberApp(AgentId id, MemberApplicationAPI api) throws IOException {
         URL main = getClass().getResource(MAIN_MEMBER_FXML); // grab main xml
         if (main != null) { // null catch
             FXMLLoader loader = new FXMLLoader(main);
             Parent root = loader.load(); // load it
             Stage stage = new Stage();
-            stage.setTitle(MEMBER_WINDOW_NAME + ": Hello, " + name);
+            stage.setTitle(MEMBER_WINDOW_NAME + ": Hello, " + id.getName());
             stage.setScene(new Scene(root));
 
             MemberApplication memberApp = loader.getController();
@@ -306,7 +304,7 @@ public class Gym {
                     } // end if
                     break;
                 case AgentType.INSTRUCTOR:
-                    InstructorApplication instructorApp = initInstructorApp(init.id(), memberApi);
+                    InstructorApplication instructorApp = initInstructorApp(init.id(), instructorApi);
                     if (instructorApp != null) {
                         instructorApplications.put(init.id(), instructorApp);
                     } else {

@@ -1,6 +1,8 @@
 package GSMS.Agents;
 
 import GSMS.Common.AgentId;
+import InstructorApplication.InstructorApplication;
+import MemberApplication.MemberApplication;
 
 /**
  * Stand-in for the Member component.
@@ -12,12 +14,23 @@ import GSMS.Common.AgentId;
 public class Member {
 
     private final AgentId agentId;
+    private MemberApplication app;
 
     /**
      * @param agentId Unique identifier for this member.
      */
     public Member(AgentId agentId) {
         this.agentId = agentId;
+        this.app = null;
+    } // end constructor
+
+    /**
+     * @param agentId Unique identifier for this member.
+     * @param app the application to talk to
+     */
+    public Member(AgentId agentId, MemberApplication app) {
+        this.agentId = agentId;
+        this.app = app;
     } // end constructor
 
     /** @return This member's unique AgentId. */
@@ -32,6 +45,8 @@ public class Member {
         // TODO: implement network transmission to member application
         System.out.println("[Member " + agentId + "] sendInformation: "
                 + notificationOrInformation);
+
+        // app.
     } // end method
 
 } // end class
