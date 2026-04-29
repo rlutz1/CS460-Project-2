@@ -1,5 +1,6 @@
 package Gym;
 
+import Gym.DemoManagement.DemoManager;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
 import Gym.Hardware.DoorwaySensor;
@@ -8,7 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,8 +34,29 @@ public class Gym {
     public final static String MAIN_MEMBER_FXML = "/fxml/member-app.fxml";
     public final static String MEMBER_WINDOW_NAME = "Member Application";
 
-    //    @FXML // tag to signify fx:id to refer to in the
-    //    private StackPane stackPane;
+    private final DemoManager manager = new DemoManager(); // for managing demo steps
+
+    // things to setup the middle 3 use cases.
+    @FXML
+    public StackPane mainStage; // testing, but idea is the main stage built in scene builder
+    @FXML
+    public AnchorPane targetMember;
+    @FXML
+    public Circle targetInstructor;
+    @FXML
+    public HBox otherMembers;
+
+
+    @FXML
+    public TextArea frontendLogger; // for printing to the front end, could be handy
+
+    @FXML
+    public Button startButton; // for printing to the front end, could be handy
+    @FXML
+    public Button nextButton; // for printing to the front end, could be handy
+    @FXML
+    public Button restartButton; // for printing to the front end, could be handy
+
 
     // following are for testing only for now, not fxml components
     public AudioSensor audioTester;
@@ -64,9 +93,84 @@ public class Gym {
      */
     @FXML
     public void initialize() {
-//        System.out.println("init");
+        // yield all these to manager
+        manager.mainStage = this.mainStage;
+        manager.targetMember = this.targetMember;
+        manager.targetInstructor = this.targetInstructor;
+        manager.otherMembers = this.otherMembers;
+
+        manager.audioSensor = this.audioTester;
+        manager.cameraFeed = this.cameraTester;
+        manager.wearable = this.wearableTester;
     } // end method
 
+    /*
+     * =========================================================================
+     * SCENARIO DRIVERS
+     * =========================================================================
+     */
+
+    /**
+     * start the demo sequence
+     * @param mouseEvent click
+     */
+    @FXML
+    private void start(MouseEvent mouseEvent) {
+        System.out.println("Starting demo sequence.");
+        appendLoggingWindow("Starting demo.");
+        startButton.setDisable(true); // disable start button
+        nextButton.setDisable(false);// enable next button
+        restartButton.setDisable(false); // enable restart
+
+        manager.next(); // run the manager first state
+    } // end method
+
+    /**
+     * go to the next demo step in the sequence
+     * @param mouseEvent click
+     */
+    @FXML
+    private void next(MouseEvent mouseEvent) {
+        System.out.println("Next demo frame.");
+
+        manager.next(); // run the manager next state
+    } // end method
+
+    /**
+     * restart the demo sequence, clearing out all before
+     * @param mouseEvent click
+     */
+    @FXML
+    private void restart(MouseEvent mouseEvent) {
+        System.out.println("Restarting demo sequence from beginning.");
+        appendLoggingWindow("Resetting demo.");
+        startButton.setDisable(false); // enable start button
+        nextButton.setDisable(true);// disable next button
+        restartButton.setDisable(true); // disable restart
+        // TODO: reset the main stage to first needed state
+        manager.reset(); // reset the demo manager
+    } // end method
+
+    /*
+     * =========================================================================
+     * GENERAL FUNCTIONALITY
+     * =========================================================================
+     */
+
+    /**
+     * append the front-end logging window. for
+     * general purpose.
+     * @param str str to add
+     */
+    public void appendLoggingWindow(String str) {
+        frontendLogger.appendText("\n" + str);
+    } // end method
+
+    /**
+     * start an "instructor application".
+     * @param mouseEvent click
+     * @throws IOException
+     */
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Instructor Application.");
@@ -85,6 +189,11 @@ public class Gym {
 
     } // end method
 
+    /**
+     * start a "member application".
+     * @param mouseEvent click
+     * @throws IOException
+     */
     @FXML
     private void startMemberApp(MouseEvent mouseEvent) throws IOException {
         System.out.println("Starting Member Application.");
