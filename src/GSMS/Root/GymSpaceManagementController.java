@@ -1,5 +1,6 @@
 package GSMS.Root;
 
+import Driver.Initializer;
 import GSMS.Agents.Instructor;
 import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.Member;
@@ -399,14 +400,30 @@ public class GymSpaceManagementController implements AgentRegistry {
     // ==============================================================================
     // THIS IS FOR INIT ONLY, SIMULATION PURPOSES ONLY!!!
     // ==============================================================================
+
+    /**
+     * worst code everwritten, but works at a small scale.
+     * @param members
+     * @param instructors
+     * @param inits
+     */
     public void registerAgentApplications(
             HashMap<AgentId, MemberApplication> members,
-            HashMap<AgentId, InstructorApplication> instructors
+            HashMap<AgentId, InstructorApplication> instructors,
+            List<Initializer> inits
         )
     {
         // need to pass to data manager to register components.
+        Metadata profileInfo = null;
+
         members.forEach((id, app) -> {
 //            System.out.println("Key: " + key + ", Value: " + value);
+            for (Initializer init : inits) {
+                if (init.id().getId().equals(id.getId())) {
+                    profileInfo = init.initialProfileData();
+                    break;
+                }
+            }
             DataManager.AddProfile(id, null); // TODO
         });
     }

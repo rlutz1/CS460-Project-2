@@ -118,7 +118,7 @@ public class Driver extends Application {
     private void initDemoSpace(Gym gym, GymSpaceManagementController gsmc) {
         try {
             gym.initAgents(AGENTS_ONSITE, gsmc.getMemberApi(), gsmc.getInstructorApi()); // initialize the visual agents and apps
-            gsmc.registerAgentApplications(gym.memberApplications, gym.instructorApplications);
+            gsmc.registerAgentApplications(gym.memberApplications, gym.instructorApplications, AGENTS_ONSITE); // TODO: may need to give AGENTS_ONSITE as well
         } catch (IOException ex) {
             ex.printStackTrace();
         } // end try/catch
