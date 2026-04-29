@@ -5,6 +5,7 @@ import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.Member;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
+import GSMS.Common.Metadata;
 import GSMS.Common.RoomId;
 import GSMS.DataManagement.DataManager;
 import GSMS.DataManagement.Logger;
@@ -13,6 +14,8 @@ import GSMS.EventAnalysis.LiveEventAI;
 import GSMS.Notification.AgentRegistry;
 import GSMS.Notification.NotificationDispatcher;
 import GSMS.Recommendation.RecommendationDispatcher;
+import MemberApplication.MemberApplication;
+import InstructorApplication.InstructorApplication;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -392,4 +395,19 @@ public class GymSpaceManagementController implements AgentRegistry {
 
     /** @return the member api*/
     public InstructorApplicationAPI getInstructorApi()            { return instructorApi; }
+
+    // ==============================================================================
+    // THIS IS FOR INIT ONLY, SIMULATION PURPOSES ONLY!!!
+    // ==============================================================================
+    public void registerAgentApplications(
+            HashMap<AgentId, MemberApplication> members,
+            HashMap<AgentId, InstructorApplication> instructors
+        )
+    {
+        // need to pass to data manager to register components.
+        members.forEach((id, app) -> {
+//            System.out.println("Key: " + key + ", Value: " + value);
+            DataManager.AddProfile(id, null); // TODO
+        });
+    }
 } // end class

@@ -1,5 +1,8 @@
 package GSMS.DataManagement;
 
+import GSMS.Common.AgentId;
+import GSMS.Common.Metadata;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,13 @@ public class DataManager {
 
     } // end constructor
 
+    public static void AddProfile(AgentId agentId, Metadata profileInfo) {
+
+    }
+
+    public static void AddClass(AgentId instructorId, Metadata classInfo) {
+
+    }
     /**
      * return a member or instructor’s profile information
      * requested by the requesting component

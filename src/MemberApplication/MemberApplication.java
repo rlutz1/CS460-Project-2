@@ -58,7 +58,8 @@ public class MemberApplication {
      * @param exerciseType
      */
     public void getGeneratedWorkout(String memberId, String exerciseType) {
-
+        // TODO: this needs to be called instead. and then:
+        // api.transmitRecommendationRequest(...)
     } // end method
 
     /**
