@@ -2,6 +2,8 @@ package MemberApplication;
 
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
+import GSMS.Notification.AlertLevel;
+import GSMS.Notification.Notification;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
@@ -159,9 +161,14 @@ public class MemberApplication {
      * Access point to receive information from network.
      * @param notificationOrInformation Notification type if time
      */
-    public void receiveInformation(String notificationOrInformation) {
-        // assume right now it's just a recc TODO make notification type and enum
-        memberLog.appendText(notificationOrInformation + "\n");
+    public void receiveInformation(Notification notificationOrInformation) {
+        // assume right now it's just a recc
+        if (notificationOrInformation.getAlertLevel() == AlertLevel.INFORMATIONAL_MESSAGE) {
+            memberLog.appendText(notificationOrInformation + "\n");
+        } else {
+            newNotificationLog.appendText(notificationOrInformation + "\n");
+        }
+
     } // end method
 
     // ==============================================================================

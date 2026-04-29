@@ -3,6 +3,8 @@ package InstructorApplication;
 import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
+import GSMS.Notification.AlertLevel;
+import GSMS.Notification.Notification;
 import GSMS.Recommendation.RecommendationDispatcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -146,8 +148,13 @@ public class InstructorApplication {
      * Access point to receive information from network.
      * @param notificationOrInformation Notification type if time
      */
-    public void receiveInformation(String notificationOrInformation) {
-
+    public void receiveInformation(Notification notificationOrInformation) {
+        // assume right now it's just a recc
+        if (notificationOrInformation.getAlertLevel() == AlertLevel.INFORMATIONAL_MESSAGE) {
+            instructorLog.appendText(notificationOrInformation + "\n");
+        } else {
+            newNotificationLog.appendText(notificationOrInformation + "\n");
+        }
     } // end method
 
 

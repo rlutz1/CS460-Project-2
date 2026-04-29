@@ -18,5 +18,6 @@ package GSMS.Notification;
 public enum AlertLevel {
     WARNING,
     CRITICAL,
-    EMERGENCY
+    EMERGENCY,
+    INFORMATIONAL_MESSAGE // only one change for now, but TODO
 } // end enum
