@@ -58,7 +58,6 @@ public class GymSpaceManagementController implements AgentRegistry {
     private final Logger                 logger;
     private final DataManager            dataManager;
     private final LiveEventAI            liveEventAI;
-    private final NotificationDispatcher notificationDispatcher;
     private final EventAnalyzer          eventAnalyzer;
     private final RecommendationDispatcher recommendationDispatcher;
 
@@ -95,8 +94,6 @@ public class GymSpaceManagementController implements AgentRegistry {
         this.dataManager = new DataManager();
         this.liveEventAI = new LiveEventAI();
 
-        //NotificationDispatcher depends on AgentRegistry (this)
-        this.notificationDispatcher = new NotificationDispatcher(this);
 
         //EventAnalyzer depends on NotificationDispatcher, LiveEventAI, Logger
         this.eventAnalyzer = new EventAnalyzer();
@@ -365,9 +362,6 @@ public class GymSpaceManagementController implements AgentRegistry {
 
     /** @return The EventAnalyzer component. */
     public EventAnalyzer getEventAnalyzer()                       { return eventAnalyzer; }
-
-    /** @return The NotificationDispatcher component. */
-    public NotificationDispatcher getNotificationDispatcher()     { return notificationDispatcher; }
 
     /** @return The DataManager component. */
     public DataManager getDataManager()                           { return dataManager; }
