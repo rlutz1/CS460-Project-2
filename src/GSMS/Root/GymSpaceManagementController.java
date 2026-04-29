@@ -6,6 +6,7 @@ import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.Member;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
+import GSMS.Common.JobInfo;
 import GSMS.Common.Metadata;
 import GSMS.Common.RoomId;
 import GSMS.DataManagement.DataManager;
@@ -121,8 +122,8 @@ public class GymSpaceManagementController implements AgentRegistry {
         this.memberRoom         = new HashMap<>();
 
         // initialize the API needed for application communication receipt
-        this.memberApi     = new MemberApplicationAPI();
-        this.instructorApi = new InstructorApplicationAPI();
+        this.memberApi     = new MemberApplicationAPI(this);
+        this.instructorApi = new InstructorApplicationAPI(this);
 
         System.out.println("[GSMC] All components initialized.");
 
@@ -144,10 +145,11 @@ public class GymSpaceManagementController implements AgentRegistry {
      * @param info Serialized request payload (sender ID, request data, etc.).
      * @param sender String identifying the requesting API ("MEMBER_API" or "INSTRUCTOR_API").
      */
-    public void scheduleJob(String info, String sender) {
-        System.out.println("[GSMC] scheduleJob | sender=" + sender + " | info=" + info);
 
-        if (info == null || info.isBlank()) {
+    public void scheduleJob(JobInfo info) {
+        System.out.println("[GSMC] scheduleJob | sender=" + info.senderId() + " | info=" + info);
+
+        if (info == null) {
             System.err.println("[GSMC] scheduleJob: received null or blank info. Ignored.");
             return;
         } // end if
@@ -155,34 +157,74 @@ public class GymSpaceManagementController implements AgentRegistry {
         // TODO: define a structured request format (e.g. JSON or delimited string and parse requestType
         //  + payload from info. Stub routing shown below using placeholder parsing.
 
-        if (info.contains("GENERATE_WORKOUT")) {
-            // Use Case 3 — member requests a system-generated workout
-            recommendationDispatcher.receiveRequest(sender, "GENERATE_WORKOUT", info);
-
-        } else if (info.contains("ANALYZE_ITINERARY")) {
-            // Use Case 3 instructor path — instructor submits itinerary for analysis
-            recommendationDispatcher.receiveRequest(sender, "ANALYZE_ITINERARY", info);
-
-        } else if (info.contains("GENERATE_REPORT")) {
-            // Use Case 5 — attendant requests a usage or attendance report
-            dataManager.generateReport(sender, "GENERAL", info);
-
-        } else {
-            System.err.println("[GSMC] scheduleJob: unrecognized request type in info='"
+        switch (info.jobType()) {
+            case RECOMMENDATION_ENGINE:
+                recommendationDispatcher.receiveRequest(info.senderId(), info.recommendationOrAnalysis(), info.data());
+                break;
+            default:
+                System.err.println("[GSMC] scheduleJob: unrecognized request type in info='"
                     + info + "'. No component delegated.");
-        } // end if-else
+        }
+
+//        if (info.contains("GENERATE_WORKOUT")) {
+//            // Use Case 3 — member requests a system-generated workout
+//            recommendationDispatcher.receiveRequest(sender, "GENERATE_WORKOUT", info);
+//
+//        } else if (info.contains("ANALYZE_ITINERARY")) {
+//            // Use Case 3 instructor path — instructor submits itinerary for analysis
+//            recommendationDispatcher.receiveRequest(sender, "ANALYZE_ITINERARY", info);
+//
+//        } else if (info.contains("GENERATE_REPORT")) {
+//            // Use Case 5 — attendant requests a usage or attendance report
+//            dataManager.generateReport(sender, "GENERAL", info);
+//
+//        } else {
+//
+//        } // end if-else
 
     } // end method
+    // OLD VERSION:
+//    public void scheduleJob(String info, String sender) {
+//        System.out.println("[GSMC] scheduleJob | sender=" + sender + " | info=" + info);
+//
+//        if (info == null || info.isBlank()) {
+//            System.err.println("[GSMC] scheduleJob: received null or blank info. Ignored.");
+//            return;
+//        } // end if
+//
+//        // TODO: define a structured request format (e.g. JSON or delimited string and parse requestType
+//        //  + payload from info. Stub routing shown below using placeholder parsing.
+//
+//        if (info.contains("GENERATE_WORKOUT")) {
+//            // Use Case 3 — member requests a system-generated workout
+//            recommendationDispatcher.receiveRequest(sender, "GENERATE_WORKOUT", info);
+//
+//        } else if (info.contains("ANALYZE_ITINERARY")) {
+//            // Use Case 3 instructor path — instructor submits itinerary for analysis
+//            recommendationDispatcher.receiveRequest(sender, "ANALYZE_ITINERARY", info);
+//
+//        } else if (info.contains("GENERATE_REPORT")) {
+//            // Use Case 5 — attendant requests a usage or attendance report
+//            dataManager.generateReport(sender, "GENERAL", info);
+//
+//        } else {
+//            System.err.println("[GSMC] scheduleJob: unrecognized request type in info='"
+//                    + info + "'. No component delegated.");
+//        } // end if-else
+//
+//    } // end method
 
-    /**
-     * Preserved original single-parameter overload for backward compatibility
-     * with existing call sites that only pass info.
-     * Delegates to scheduleJob(String info, String sender) with sender="UNKNOWN".
-     * @param info Serialized request payload.
-     */
-    public void scheduleJob(String info) {
-        scheduleJob(info, "UNKNOWN");
-    } // end method
+    // NOTE: commenting out only because we should ALWAYS know who the sender is.
+    // otherwise, we don't know who to send data back to.
+//    /**
+//     * Preserved original single-parameter overload for backward compatibility
+//     * with existing call sites that only pass info.
+//     * Delegates to scheduleJob(String info, String sender) with sender="UNKNOWN".
+//     * @param info Serialized request payload.
+//     */
+//    public void scheduleJob(String info) {
+//        scheduleJob(info, "UNKNOWN");
+//    } // end method
 
 //    ====================================================================
 //    NOTE: COMMENTING DUE TO REMOVAL FROM THE SAD

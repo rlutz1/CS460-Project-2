@@ -1,9 +1,7 @@
 package Gym;
 
-import Driver.Driver;
 import Driver.Initializer;
 import GSMS.Agents.InstructorApplicationAPI;
-import GSMS.Agents.Member;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Common.AgentType;
@@ -18,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;

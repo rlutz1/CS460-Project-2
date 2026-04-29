@@ -54,7 +54,7 @@ public class DataManager {
      * @param dataSpec
      * @return
      */
-    public String getProfile(String agentId, String dataSpec) {
+    public static String getProfile(AgentId agentId, String dataSpec) {
         return null;
     } // end method
 

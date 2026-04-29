@@ -15,16 +15,16 @@ import javafx.stage.Stage;
 public class InstructorApplication {
 
     private Stage myStage; // this is for holding onto the initialized application to show later
-//    private AgentId id; // for ease of use as needed.
-//    private String name; // for ease of use as needed.
+    private AgentId id; // for ease of use as needed.
+
     private InstructorApplicationAPI api;
 
-    private String id; // TODO: refer to AgentId above instead, would be better
+//    private String id; // TODO: refer to AgentId above instead, would be better
     private boolean isCoveredEntity;
-    private RecommendationDispatcher dispatch = new RecommendationDispatcher();
+//    private RecommendationDispatcher dispatch = new RecommendationDispatcher();
     public InstructorApplication(){
 //    public InstructorApplication(String id, boolean isCoveredEntity) {
-        this.id = "I1";
+//        this.id = "I1";
         this.isCoveredEntity = true;
     } // end method
 
@@ -43,8 +43,8 @@ public class InstructorApplication {
      * information for general and classroom-related data.
      * @param instructorId
      */
-    public void getInstructorProfile(String instructorId) {
-        if (instructorId.matches(id)) {
+    public void getInstructorProfile(AgentId instructorId) {
+        if (instructorId.getId().matches(id.getId())) {
             // do something
         } else {
             System.err.println("Unauthorized access to another account! Access Denied");
@@ -62,74 +62,74 @@ public class InstructorApplication {
 
     @FXML
     public void sendAction(MouseEvent mouseEvent) {
-        if (inputArea.getText() == null || inputArea.getText().trim().isEmpty()) {
-            instructorLog.appendText("No request made\n");
-        } else {
-            String foos[] = inputArea.getText().toLowerCase().split("\n");
-            String inputs[] = inputArea.getText().split(" ", 2);
-            String memberId = inputs[0]; // assumes first item is member id
-            for (String foo:foos) {
-                if (foo.equals("clear")) {
-                    instructorLog.clear();
-                } else {
-                    if (memberId.isEmpty() && foo.equals("generate itinerary")) {
-                        instructorLog.appendText("Missing member id!\n");
-                        System.out.println("failure!");
-                    } else {
-                        String output = dispatch.receiveRequest(id, foo, "target member: " + memberId + ", is instructor a covered entity: " + isCoveredEntity);
-                        if (output == "invalid request") {
-                            instructorLog.appendText("Sorry, system is offline\n");
-                            System.out.println("failure!");
-                        } else {
-                            instructorLog.appendText(output);
-                            System.out.println("success!");
-                        }
-                    }
-                }
-            }
-//            String output = dispatch.receiveRequest(id, request.getText(), age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
-//            memberLog.appendText(output);
-            inputArea.clear();
-        }
+//        if (inputArea.getText() == null || inputArea.getText().trim().isEmpty()) {
+//            instructorLog.appendText("No request made\n");
+//        } else {
+//            String foos[] = inputArea.getText().toLowerCase().split("\n");
+//            String inputs[] = inputArea.getText().split(" ", 2);
+//            String memberId = inputs[0]; // assumes first item is member id
+//            for (String foo:foos) {
+//                if (foo.equals("clear")) {
+//                    instructorLog.clear();
+//                } else {
+//                    if (memberId.isEmpty() && foo.equals("generate itinerary")) {
+//                        instructorLog.appendText("Missing member id!\n");
+//                        System.out.println("failure!");
+//                    } else {
+//                        String output = api.receiveRequest(id, foo, "target member: " + memberId + ", is instructor a covered entity: " + isCoveredEntity);
+//                        if (output == "invalid request") {
+//                            instructorLog.appendText("Sorry, system is offline\n");
+//                            System.out.println("failure!");
+//                        } else {
+//                            instructorLog.appendText(output);
+//                            System.out.println("success!");
+//                        }
+//                    }
+//                }
+//            }
+////            String output = dispatch.receiveRequest(id, request.getText(), age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
+////            memberLog.appendText(output);
+//            inputArea.clear();
+//        }
     }
 
     @FXML
     public void sendSchedule(MouseEvent mouseEvent) {
-        String schedule;
-        String inputs[] = inputArea.getText().split(" ", 2);
-        String memberId = inputs[0];  // assumes first item is member id
-        instructorLog.appendText("Retrieving gym schedule\n");
-        schedule = dispatch.receiveRequest(id, "view schedule", "target member: " + memberId + ", is instructor a covered entity: " + isCoveredEntity);
-        if (schedule == "invalid request") {
-            instructorLog.appendText("Sorry, system is offline\n");
-            System.out.println("failure!");
-        } else {
-            instructorLog.appendText(schedule);
-            System.out.println("success!");
-        }
-        inputArea.clear();
+//        String schedule;
+//        String inputs[] = inputArea.getText().split(" ", 2);
+//        String memberId = inputs[0];  // assumes first item is member id
+//        instructorLog.appendText("Retrieving gym schedule\n");
+//        schedule = dispatch.receiveRequest(id, "view schedule", "target member: " + memberId + ", is instructor a covered entity: " + isCoveredEntity);
+//        if (schedule == "invalid request") {
+//            instructorLog.appendText("Sorry, system is offline\n");
+//            System.out.println("failure!");
+//        } else {
+//            instructorLog.appendText(schedule);
+//            System.out.println("success!");
+//        }
+//        inputArea.clear();
     }
 
     @FXML
     public void requestItinerary(MouseEvent mouseEvent) {
-        String itinerary;
-        String inputs[] = inputArea.getText().split(" ", 2);
-        String memberId = inputs[0];  // assumes first item is member id
-        instructorLog.appendText("Sending request to system...\n");
-        if (memberId.isEmpty()) {
-            instructorLog.appendText("Missing member id!\n");
-            System.out.println("failure!");
-        } else {
-            itinerary = dispatch.receiveRequest(id, "generate itinerary", "target member: " + memberId + ", is instructor a covered entity: " + isCoveredEntity);
-            if (itinerary == "invalid request") {
-                instructorLog.appendText("Sorry, system is offline\n");
-                System.out.println("failure!");
-            } else {
-                instructorLog.appendText(itinerary);
-                System.out.println("success!");
-            }
-        }
-        inputArea.clear();
+//        String itinerary;
+//        String inputs[] = inputArea.getText().split(" ", 2);
+//        String memberId = inputs[0];  // assumes first item is member id
+//        instructorLog.appendText("Sending request to system...\n");
+//        if (memberId.isEmpty()) {
+//            instructorLog.appendText("Missing member id!\n");
+//            System.out.println("failure!");
+//        } else {
+//            itinerary = dispatch.receiveRequest(id, "generate itinerary", "target member: " + memberId + ", is instructor a covered entity: " + isCoveredEntity);
+//            if (itinerary == "invalid request") {
+//                instructorLog.appendText("Sorry, system is offline\n");
+//                System.out.println("failure!");
+//            } else {
+//                instructorLog.appendText(itinerary);
+//                System.out.println("success!");
+//            }
+//        }
+//        inputArea.clear();
     }
 
     @FXML

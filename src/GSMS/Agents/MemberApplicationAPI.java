@@ -1,6 +1,11 @@
 package GSMS.Agents;
 
 
+import GSMS.Common.AgentId;
+import GSMS.Common.JobInfo;
+import GSMS.Common.RecommendationType;
+import GSMS.Root.GymSpaceManagementController;
+
 /**
  * a stand-in class for being an API for incoming
  * requests from member applications
@@ -8,9 +13,17 @@ package GSMS.Agents;
 
 public class MemberApplicationAPI {
 
-    public MemberApplicationAPI() {} // end constructor
+    private GymSpaceManagementController gsmc;
 
-    public void transmitRecommendationRequest() {
+    public MemberApplicationAPI(GymSpaceManagementController gsmc) {
+        this.gsmc = gsmc;
+    } // end constructor
 
+    public void transmitRecommendationRequest(AgentId memberId, String exerciseType) {
+        gsmc.scheduleJob(new JobInfo(
+                memberId,
+                RecommendationType.SYSTEM_GENERATE,
+                exerciseType
+        )); // TODO: this is simply working with what is there
     } // end method
 } // end class

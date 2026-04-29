@@ -32,7 +32,7 @@ public class RecommendationAI {
      * @return
      */
     public String generateWorkout(String memberProfile, String exerciseType) {
-        return null;
+        return "A million squats, 20 glute raises, general big booty thiccness.";
     } // end method
 
 } // end class

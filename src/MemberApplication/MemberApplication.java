@@ -6,19 +6,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 
-import GSMS.Recommendation.RecommendationDispatcher;
 import javafx.stage.Stage;
 
 public class MemberApplication {
-    private RecommendationDispatcher dispatch = new RecommendationDispatcher();
+//    private RecommendationDispatcher dispatch = new RecommendationDispatcher();
 
     private Stage myStage; // this is for holding onto the initialized application to show later
-//    private AgentId id; // for ease of use as needed.
-//    private String name; // for ease of use as needed.
-    private MemberApplicationAPI api;
+    private AgentId id; // for ease of use as needed.
+
+    private MemberApplicationAPI api; // this is set during initialization -- see driver
 
     // Placeholder code
-    public String id; // TODO: refer to AgentId above instead, would be better
+//    public String id; // TODO: refer to AgentId above instead, would be better
     private int age;
     private int normalHeartRateAvg;
     private int targetHeartRate; // Maybe keep separate?
@@ -26,7 +25,7 @@ public class MemberApplication {
     private boolean isAthlete;
 
     public MemberApplication() {
-        this.id = "M1";
+//        this.id = "M1";
         this.age = 35;
         this.normalHeartRateAvg = 70;
         this.targetHeartRate = 220 - age; // Maybe keep separate?
@@ -34,7 +33,7 @@ public class MemberApplication {
         this.isAthlete = false;
     } // end constructor
     public MemberApplication(String id, int age, int normalHeartRateAvg, String conditions, boolean isAthlete) {
-        this.id = id;
+//        this.id = id;
         this.age = age;
         this.normalHeartRateAvg = normalHeartRateAvg;
         this.targetHeartRate = 220 - age; // Maybe keep separate?
@@ -57,9 +56,19 @@ public class MemberApplication {
      * @param memberId
      * @param exerciseType
      */
-    public void getGeneratedWorkout(String memberId, String exerciseType) {
+    public void getGeneratedWorkout(AgentId memberId, String exerciseType) {
         // TODO: this needs to be called instead. and then:
         // api.transmitRecommendationRequest(...)
+        api.transmitRecommendationRequest(memberId, exerciseType);
+    } // end method
+
+    /**
+     * for frontend simulation only
+     * @param mouseEvent
+     */
+    @FXML
+    public void getGeneratedWorkout(MouseEvent mouseEvent) {
+        getGeneratedWorkout(id, "Glute day, every day.");
     } // end method
 
     /**
@@ -86,54 +95,54 @@ public class MemberApplication {
 
     @FXML
     public void sendAction(MouseEvent mouseEvent) {
-        if (request.getText() == null || request.getText().trim().isEmpty()) {
-            memberLog.appendText("No request made\n");
-        } else {
-            String foos[] = request.getText().toLowerCase().split("\n");
-            for (String foo:foos) {
-                if (foo.equals("clear")) {
-                    memberLog.clear();
-                } else {
-                    String output = dispatch.receiveRequest(id, foo, age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
-                    if (output == "invalid request") {
-                        memberLog.appendText("Sorry, system is offline\n");
-                        System.out.println("failure!");
-                    } else {
-                        memberLog.appendText(output);
-                        System.out.println("success!");
-                    }
-                }
-            }
-            request.clear();
-        }
+//        if (request.getText() == null || request.getText().trim().isEmpty()) {
+//            memberLog.appendText("No request made\n");
+//        } else {
+//            String foos[] = request.getText().toLowerCase().split("\n");
+//            for (String foo:foos) {
+//                if (foo.equals("clear")) {
+//                    memberLog.clear();
+//                } else {
+//                    String output = api.receiveRequest(id, foo, age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
+//                    if (output == "invalid request") {
+//                        memberLog.appendText("Sorry, system is offline\n");
+//                        System.out.println("failure!");
+//                    } else {
+//                        memberLog.appendText(output);
+//                        System.out.println("success!");
+//                    }
+//                }
+//            }
+//            request.clear();
+//        }
     }
 
     @FXML
     public void sendSchedule(MouseEvent mouseEvent) {
-        String schedule;
-        memberLog.appendText("Retrieving gym schedule\n");
-        schedule = dispatch.receiveRequest(id, "view schedule", age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
-        if (schedule == "invalid request") {
-            memberLog.appendText("Sorry, system is offline\n");
-            System.out.println("failure!");
-        } else {
-            memberLog.appendText(schedule);
-            System.out.println("success!");
-        }
+//        String schedule;
+//        memberLog.appendText("Retrieving gym schedule\n");
+//        schedule = api.receiveRequest(id, "view schedule", age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
+//        if (schedule == "invalid request") {
+//            memberLog.appendText("Sorry, system is offline\n");
+//            System.out.println("failure!");
+//        } else {
+//            memberLog.appendText(schedule);
+//            System.out.println("success!");
+//        }
     }
 
     @FXML
     public void requestItinerary(MouseEvent mouseEvent) {
-        String itinerary;
-        memberLog.appendText("Sending request to system...\n");
-        itinerary = dispatch.receiveRequest(id, "make itinerary request", age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
-        if (itinerary == "invalid request") {
-            memberLog.appendText("Sorry, system is offline\n");
-            System.out.println("failure!");
-        } else {
-            memberLog.appendText(itinerary);
-            System.out.println("success!");
-        }
+//        String itinerary;
+//        memberLog.appendText("Sending request to system...\n");
+//        itinerary = api.receiveRequest(id, "make itinerary request", age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
+//        if (itinerary == "invalid request") {
+//            memberLog.appendText("Sorry, system is offline\n");
+//            System.out.println("failure!");
+//        } else {
+//            memberLog.appendText(itinerary);
+//            System.out.println("success!");
+//        }
     }
 
     @FXML

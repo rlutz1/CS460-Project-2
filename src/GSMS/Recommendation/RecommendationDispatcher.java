@@ -1,5 +1,10 @@
 package GSMS.Recommendation;
 
+import GSMS.Agents.AgentContainer;
+import GSMS.Common.AgentId;
+import GSMS.Common.RecommendationType;
+import GSMS.DataManagement.DataManager;
+
 /**
  * class to stand as component for recc dispatcher
  *
@@ -10,8 +15,10 @@ package GSMS.Recommendation;
 
 public class RecommendationDispatcher {
 
-    public RecommendationDispatcher() {
+    private RecommendationAI ai;
 
+    public RecommendationDispatcher() {
+        this.ai = new RecommendationAI();
     } // end constructor
 
     /**
@@ -22,30 +29,47 @@ public class RecommendationDispatcher {
      * @param requestType
      * @param requestData
      */
-    public String receiveRequest(String senderId, String requestType, String requestData) {
-        String result;
-        String splitData[] = requestData.replace(",", "").split(" ");
+    public void receiveRequest(AgentId senderId, RecommendationType requestType, String requestData) {
+        String recommendation = "No recc generated.";
         switch (requestType) {
-            case "make itinerary request":
-                System.out.println("making itinerary for member " + senderId);
-                result = "Lift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
+            case SYSTEM_GENERATE:
+                // generate with AI
+                recommendation = this.ai.generateWorkout(DataManager.getProfile(senderId, null), requestData);
                 break;
-            case "generate itinerary":
-                System.out.println("generating itinerary based on recommendations from " + senderId + " to " + splitData[2]);
-                result = senderId +"'s recommendation to " + splitData[2] + ":\n\tLift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
-                break;
-            case "view schedule":
-                System.out.println("Retrieving gym schedule for member " + senderId);
-                result = "Nothing planned for today! Schedule now, ya slacker!\n";
-                break;
-            case "clear":
-                result = "clear";
+
+            case ANALYZE:
+                // analyze with AI
+                // generate list of enrolled members with DataManager.getProfile()
+                // recommendation = this.ai.analyzeItinerary(list of enrolled, requestData)
                 break;
             default:
-                result = "Invalid request!\n";
-                System.out.println(result);
+                System.out.println("[RECC DISPATCH] A request type was received that is not recognized: " + requestType);
         }
-        return result;
+        // TODO:
+        AgentContainer.MemberApps.get(senderId).sendInformation(recommendation);
+//        String result;
+//        String splitData[] = requestData.replace(",", "").split(" ");
+//        switch (requestType) {
+//            case "make itinerary request":
+//                System.out.println("making itinerary for member " + senderId);
+//                result = "Lift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
+//                break;
+//            case "generate itinerary":
+//                System.out.println("generating itinerary based on recommendations from " + senderId + " to " + splitData[2]);
+//                result = senderId +"'s recommendation to " + splitData[2] + ":\n\tLift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
+//                break;
+////            case "view schedule":
+////                System.out.println("Retrieving gym schedule for member " + senderId);
+////                result = "Nothing planned for today! Schedule now, ya slacker!\n";
+////                break;
+////            case "clear":
+////                result = "clear";
+////                break;
+//            default:
+//                result = "Invalid request!\n";
+//                System.out.println(result);
+//        }
+//        return result;
     } // end method
 
     /**
