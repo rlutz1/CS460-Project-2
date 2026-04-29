@@ -410,21 +410,33 @@ public class GymSpaceManagementController implements AgentRegistry {
     public void registerAgentApplications(
             HashMap<AgentId, MemberApplication> members,
             HashMap<AgentId, InstructorApplication> instructors,
-            List<Initializer> inits
+            List<Initializer> inits // maybe a map later to make this cleaner
         )
     {
         // need to pass to data manager to register components.
         Metadata profileInfo = null;
+        String typeOfAgent = null;
 
-        members.forEach((id, app) -> {
-//            System.out.println("Key: " + key + ", Value: " + value);
+        for (Map.Entry<AgentId, MemberApplication> entry : members.entrySet()) {
             for (Initializer init : inits) {
-                if (init.id().getId().equals(id.getId())) {
+                if (init.id().getId().equals(entry.getKey().getId())) {
                     profileInfo = init.initialProfileData();
+                    typeOfAgent = init.typeOfAgent();
                     break;
                 }
             }
-            DataManager.AddProfile(id, null); // TODO
-        });
+            DataManager.AddProfile(entry.getKey(), typeOfAgent, profileInfo, entry.getValue());
+        } // end loop
+
+        for (Map.Entry<AgentId, InstructorApplication> entry : instructors.entrySet()) {
+            for (Initializer init : inits) {
+                if (init.id().getId().equals(entry.getKey().getId())) {
+                    profileInfo = init.initialProfileData();
+                    typeOfAgent = init.typeOfAgent();
+                    break;
+                }
+            }
+            DataManager.AddProfile(entry.getKey(), typeOfAgent, profileInfo, entry.getValue());
+        } // end loop
     }
 } // end class

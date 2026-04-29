@@ -2,6 +2,8 @@ package GSMS.DataManagement;
 
 import GSMS.Common.AgentId;
 import GSMS.Common.Metadata;
+import MemberApplication.MemberApplication;
+import InstructorApplication.InstructorApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,12 @@ public class DataManager {
 
     } // end constructor
 
-    public static void AddProfile(AgentId agentId, Metadata profileInfo) {
+    public static void AddProfile(AgentId agentId, String typeOfAgent, Metadata profileInfo, MemberApplication app) {
+        System.out.println("adding profile for " + agentId.getId());
+    }
 
+    public static void AddProfile(AgentId agentId, String typeOfAgent, Metadata profileInfo, InstructorApplication app) {
+        System.out.println("adding profile for " + agentId.getId());
     }
 
     public static void AddClass(AgentId instructorId, Metadata classInfo) {
