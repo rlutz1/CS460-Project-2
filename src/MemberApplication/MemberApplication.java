@@ -164,9 +164,9 @@ public class MemberApplication {
     public void receiveInformation(Notification notificationOrInformation) {
         // assume right now it's just a recc
         if (notificationOrInformation.getAlertLevel() == AlertLevel.INFORMATIONAL_MESSAGE) {
-            memberLog.appendText(notificationOrInformation + "\n");
+            memberLog.appendText(notificationOrInformation.getMessage() + "\n");
         } else {
-            newNotificationLog.appendText(notificationOrInformation + "\n");
+            newNotificationLog.appendText(notificationOrInformation.getMessage() + "\n");
         }
 
     } // end method

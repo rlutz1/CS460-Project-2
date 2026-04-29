@@ -151,9 +151,9 @@ public class InstructorApplication {
     public void receiveInformation(Notification notificationOrInformation) {
         // assume right now it's just a recc
         if (notificationOrInformation.getAlertLevel() == AlertLevel.INFORMATIONAL_MESSAGE) {
-            instructorLog.appendText(notificationOrInformation + "\n");
+            instructorLog.appendText(notificationOrInformation.getMessage() + "\n");
         } else {
-            newNotificationLog.appendText(notificationOrInformation + "\n");
+            newNotificationLog.appendText(notificationOrInformation.getMessage() + "\n");
         }
     } // end method
 

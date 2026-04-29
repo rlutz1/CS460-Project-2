@@ -4,6 +4,8 @@ import GSMS.Agents.AgentContainer;
 import GSMS.Common.AgentId;
 import GSMS.Common.RecommendationType;
 import GSMS.DataManagement.DataManager;
+import GSMS.Notification.AlertLevel;
+import GSMS.Notification.Notification;
 
 /**
  * class to stand as component for recc dispatcher
@@ -47,9 +49,15 @@ public class RecommendationDispatcher {
                 System.out.println("[RECC DISPATCH] A request type was received that is not recognized: " + requestType);
         } // end switch case
 
+        Notification information = new Notification(
+                recommendation,
+                AlertLevel.INFORMATIONAL_MESSAGE,
+                senderId
+        );
+
         switch (senderId.getType()) {
-            case MEMBER -> AgentContainer.MemberApps.get(senderId).sendInformation(recommendation);
-            case INSTRUCTOR -> AgentContainer.InstructorApps.get(senderId).sendInformation(recommendation);
+            case MEMBER -> AgentContainer.MemberApps.get(senderId).sendInformation(information);
+            case INSTRUCTOR -> AgentContainer.InstructorApps.get(senderId).sendInformation(information);
             default -> System.out.println("[RECC DISPATCH] Somehow a sender id was sent with not defined type: " + senderId);
         } // end switch case
 

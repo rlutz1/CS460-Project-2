@@ -1,6 +1,7 @@
 package GSMS.Agents;
 
 import GSMS.Common.AgentId;
+import GSMS.Notification.Notification;
 import InstructorApplication.InstructorApplication;
 
 /**
@@ -43,7 +44,7 @@ public class Instructor {
      * to a specific instructor application.
      * @param notificationOrInformation Serialized notification string to transmit.
      */
-    public void sendInformation(String notificationOrInformation) {
+    public void sendInformation(Notification notificationOrInformation) {
         // TODO: implement network transmission to instructor application
         System.out.println("[Instructor " + agentId + "] sendInformation: "
                 + notificationOrInformation);
