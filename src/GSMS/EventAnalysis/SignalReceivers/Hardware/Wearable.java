@@ -25,6 +25,10 @@ public class Wearable {
         this.memberId = memberId;
     } // end constructor
 
+    public AgentId getMemberIdFromWearable() {
+        return memberId;
+    }
+
     /**
      * entry point to receive signal data tied
      * to this specific classroom’s sensors and feeds.
