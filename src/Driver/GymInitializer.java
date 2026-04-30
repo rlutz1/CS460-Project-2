@@ -8,16 +8,18 @@ import java.util.List;
  * and back end to initialize corresponding components.
  */
 public record GymInitializer(
-        // give all agents, not specific to classroom
+        // give all agents (members && instructors), not specific to classroom
         // likely useful for backend primarily
         List<AgentInitializer> allAgentsOnsite,
-        // classrooms (likely just one for simplicity for now.)
+        // classrooms (likely just one for simplicity.)
         List<ClassroomInitializer> classrooms,
-        // the target member
+
+        /* PRIMARILY FOR FRONTEND SETUP EASE */
+        // the target member to move around
         AgentInitializer targetMember,
-        // the target instructor
+        // the target instructor to move around in the target classroom
         AgentInitializer targetInstructor,
-        // main class room target member goes to that has target instructor
+        // main class room target member goes to that has target instructor and other members
         ClassroomInitializer targetClassroom
     )
 {

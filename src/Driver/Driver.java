@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-//import ;
+
 
 /**
  * idea is to start demo from this puppy, a "driver" of the demo
@@ -27,6 +27,7 @@ public class Driver extends Application {
 
     public final static String MAIN_FXML = "/fxml/gym.fxml";
     public final static String ROOT_WINDOW_NAME = "GSMS Simulator";
+    public final static String TARGET_CLASSROOM_ID = "TARGET_CLASSROOM";
 
     // hard-code init some people into the system.
     public final static List<AgentInitializer> AGENTS_ONSITE = new ArrayList<>(List.of(
@@ -55,7 +56,7 @@ public class Driver extends Application {
 
     public final static List<ClassroomInitializer> CLASSROOMS = new ArrayList<>(List.of(
         new ClassroomInitializer(
-                  new RoomId("TARGET_CLASSROOM"),
+                  new RoomId(TARGET_CLASSROOM_ID),
           1, // number of audio sensors
                   2, // number of cameras
                   1, // number of doorway sensors (very low priority functionality wise.)
