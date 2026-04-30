@@ -105,7 +105,13 @@ public class Driver extends Application {
     private void initDemoSpace(Gym gym, GymSpaceManagementController gsmc) {
         try {
             gym.initAgents(AGENTS_ONSITE, gsmc.getMemberApi(), gsmc.getInstructorApi()); // initialize the visual agents and apps
-            gsmc.registerAgentApplications(gym.memberApplications, gym.instructorApplications, AGENTS_ONSITE); // TODO: may need to give AGENTS_ONSITE as well
+            gsmc.registerAgentApplications(gym.memberApplications, gym.instructorApplications, AGENTS_ONSITE); // init the apps for responses
+            // TODO: need to init the front end components in same way as backend such that i can tie the
+            //       components made back there to the visual front-enders so i can "sendSignal" to the back end.
+            //       i can get a single classroom id with numbers of sensors and members with ids to the back end
+            //       to init, no problem.
+            //       then, i'll need an access point through gsmc to grab all the component refs of a class room
+            //       in order to be able to set up the front end so it can communicate.
         } catch (IOException ex) {
             ex.printStackTrace();
         } // end try/catch

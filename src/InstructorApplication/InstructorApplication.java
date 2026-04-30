@@ -18,15 +18,11 @@ public class InstructorApplication {
 
     private Stage myStage; // this is for holding onto the initialized application to show later
     private AgentId id; // for ease of use as needed.
+    private InstructorApplicationAPI api; // api to communicate through
 
-    private InstructorApplicationAPI api;
-
-//    private String id; // TODO: refer to AgentId above instead, would be better
     private boolean isCoveredEntity;
-//    private RecommendationDispatcher dispatch = new RecommendationDispatcher();
+
     public InstructorApplication(){
-//    public InstructorApplication(String id, boolean isCoveredEntity) {
-//        this.id = "I1";
         this.isCoveredEntity = true;
     } // end method
 
@@ -134,6 +130,8 @@ public class InstructorApplication {
 //        inputArea.clear();
     }
 
+    // TODO: we need to work in the next to methods with displayNotification(...)
+    //       instead of doing directly here.
     @FXML
     public void confirm(MouseEvent mouseEvent) {
         if (newNotificationLog.getText() == null || newNotificationLog.getText().trim().isEmpty()) {

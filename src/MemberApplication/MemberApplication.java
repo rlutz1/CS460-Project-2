@@ -11,15 +11,12 @@ import javafx.scene.input.*;
 import javafx.stage.Stage;
 
 public class MemberApplication {
-//    private RecommendationDispatcher dispatch = new RecommendationDispatcher();
 
     private Stage myStage; // this is for holding onto the initialized application to show later
     private AgentId id; // for ease of use as needed.
-
-    private MemberApplicationAPI api; // this is set during initialization -- see driver
+    private MemberApplicationAPI api; // this is set during initialization; api to communicate through
 
     // Placeholder code
-//    public String id; // TODO: refer to AgentId above instead, would be better
     private int age;
     private int normalHeartRateAvg;
     private int targetHeartRate; // Maybe keep separate?
@@ -27,21 +24,20 @@ public class MemberApplication {
     private boolean isAthlete;
 
     public MemberApplication() {
-//        this.id = "M1";
         this.age = 35;
         this.normalHeartRateAvg = 70;
         this.targetHeartRate = 220 - age; // Maybe keep separate?
         this.conditions = "PRIV_ Type 2 Diabetes"; // the "PRIV_" is meant for database to keep such info safe from anyone other than member and permitted individuals
         this.isAthlete = false;
     } // end constructor
-    public MemberApplication(String id, int age, int normalHeartRateAvg, String conditions, boolean isAthlete) {
-//        this.id = id;
-        this.age = age;
-        this.normalHeartRateAvg = normalHeartRateAvg;
-        this.targetHeartRate = 220 - age; // Maybe keep separate?
-        this.conditions = conditions; // the "PRIV_" is meant for database to keep such info safe from anyone other than member and permitted individuals
-        this.isAthlete = isAthlete;
-    }
+
+//    public MemberApplication(String id, int age, int normalHeartRateAvg, String conditions, boolean isAthlete) {
+//        this.age = age;
+//        this.normalHeartRateAvg = normalHeartRateAvg;
+//        this.targetHeartRate = 220 - age; // Maybe keep separate?
+//        this.conditions = conditions; // the "PRIV_" is meant for database to keep such info safe from anyone other than member and permitted individuals
+//        this.isAthlete = isAthlete;
+//    }
 
     /**
      * Gets the list of member-specific class
@@ -65,7 +61,7 @@ public class MemberApplication {
     } // end method
 
     /**
-     * for frontend simulation only
+     * for frontend simulation only -- wrapper to the real SAD method
      * @param mouseEvent
      */
     @FXML

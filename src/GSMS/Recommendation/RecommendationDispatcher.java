@@ -40,7 +40,7 @@ public class RecommendationDispatcher {
                 break;
 
             case ANALYZE:
-                // low priority, not in demo
+                // low priority, not in demo, so don't stress this for now.
                 // analyze with AI
                 // generate list of enrolled members with DataManager.getProfile()
                 // recommendation = ai.analyzeItinerary(list of enrolled, requestData)
