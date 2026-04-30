@@ -124,10 +124,6 @@ public class Gym {
     public void initialize() {
         // yield all these to manager
         manager.mainStage = this.mainStage;
-        // TODO
-//        manager.targetMember = this.targetMember;
-//        manager.targetInstructor = this.targetInstructor;
-        manager.otherMembers = this.otherMembers;
 
         manager.audioSensor = this.audioTester;
         manager.cameraFeed = this.cameraTester;
@@ -347,6 +343,11 @@ public class Gym {
         for (AgentInitializer member : initPackage.targetClassroom().membersInClass()) {
             otherMembers.getChildren().add(new GeneralMemberGraphic(member.id()));
         } // end loop
+
+        // add to demo manager
+        manager.targetMember = this.targetMember;
+        manager.targetInstructor = this.targetInstructor;
+        manager.otherMembers = this.otherMembers;
     } // end method
 
     /*

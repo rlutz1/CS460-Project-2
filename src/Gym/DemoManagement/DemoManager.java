@@ -1,5 +1,8 @@
 package Gym.DemoManagement;
 
+import Gym.AgentGraphics.GeneralMemberGraphic;
+import Gym.AgentGraphics.TargetInstructorGraphic;
+import Gym.AgentGraphics.TargetMemberGraphic;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
 import Gym.Hardware.WearableSensors;
@@ -26,8 +29,8 @@ public class DemoManager {
     private int currState;
 
     public StackPane mainStage;
-    public AnchorPane targetMember;
-    public Circle targetInstructor;
+    public TargetMemberGraphic targetMember;
+    public TargetInstructorGraphic targetInstructor;
     public HBox otherMembers;
 
     // for testing and sending basic crap to backend
@@ -88,7 +91,7 @@ public class DemoManager {
         targetMember.setTranslateY(0);
         targetMember.setScaleX(1);
         targetMember.setScaleY(1);
-        ((Shape)(targetMember.getChildren().getFirst())).setFill(Color.web("#22ff1f"));
+        targetMember.root.setFill(Color.web("#22ff1f"));
         targetMember.setVisible(true);
 
         for (Node member : otherMembers.getChildren()) {
@@ -96,7 +99,7 @@ public class DemoManager {
             member.setTranslateY(0);
             member.setScaleX(1);
             member.setScaleY(1);
-            ((Shape)member).setFill(Color.web("#22ff1f"));
+            ((GeneralMemberGraphic)member).root.setFill(Color.web("#22ff1f"));
             member.setVisible(true);
         } // end loop
         otherMembers.setVisible(true);
@@ -105,7 +108,7 @@ public class DemoManager {
         targetInstructor.setTranslateY(0);
         targetInstructor.setScaleX(1);
         targetInstructor.setScaleY(1);
-        targetInstructor.setFill(Color.web("#d476ff"));
+        targetInstructor.root.setFill(Color.web("#d476ff"));
         targetInstructor.setVisible(true);
     } // end method
 
