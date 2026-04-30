@@ -25,7 +25,7 @@ public class Transitions {
      * @param x
      * @param y
      */
-    public static void EnterClassroom(AgentGraphic target, int walkingSpeed, int x, int y) {
+    public static void EnterClassroom(AgentGraphic target, int walkingSpeed, double x, double y) {
         SequentialTransition seq = new SequentialTransition();
 
         TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);

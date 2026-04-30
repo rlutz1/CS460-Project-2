@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +140,13 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.EnterClassroom(targetMember, 2, 710, -270);
+                List<Node> members = otherMembers.getChildren();
+                Transitions.EnterClassroom(
+                        targetMember,
+                        2,
+                        otherMembers.getLayoutX() + otherMembers.getWidth(),
+                        - otherMembers.getLayoutY() - otherMembers.getHeight()
+                );
             }
             @Override
             public String toString() {
