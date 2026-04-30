@@ -1,6 +1,6 @@
 package GSMS.Root;
 
-import Driver.Initializer;
+import Driver.AgentInitializer;
 import GSMS.Agents.Instructor;
 import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.Member;
@@ -14,7 +14,6 @@ import GSMS.DataManagement.Logger;
 import GSMS.EventAnalysis.EventAnalyzer;
 import GSMS.EventAnalysis.LiveEventAI;
 import GSMS.Notification.AgentRegistry;
-import GSMS.Notification.NotificationDispatcher;
 import GSMS.Recommendation.RecommendationDispatcher;
 import MemberApplication.MemberApplication;
 import InstructorApplication.InstructorApplication;
@@ -458,14 +457,14 @@ public class GymSpaceManagementController implements AgentRegistry {
     public void registerAgentApplications(
             HashMap<AgentId, MemberApplication> members,
             HashMap<AgentId, InstructorApplication> instructors,
-            List<Initializer> inits // maybe a map later to make this cleaner
+            List<AgentInitializer> inits // maybe a map later to make this cleaner
         )
     {
         // need to pass to data manager to register components.
         Metadata profileInfo = null;
 
         for (Map.Entry<AgentId, MemberApplication> entry : members.entrySet()) {
-            for (Initializer init : inits) {
+            for (AgentInitializer init : inits) {
                 if (init.id().getId().equals(entry.getKey().getId())) {
                     profileInfo = init.initialProfileData();
                     break;
@@ -476,7 +475,7 @@ public class GymSpaceManagementController implements AgentRegistry {
         } // end loop
 
         for (Map.Entry<AgentId, InstructorApplication> entry : instructors.entrySet()) {
-            for (Initializer init : inits) {
+            for (AgentInitializer init : inits) {
                 if (init.id().getId().equals(entry.getKey().getId())) {
                     profileInfo = init.initialProfileData();
                     break;

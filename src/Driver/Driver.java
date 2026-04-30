@@ -28,26 +28,26 @@ public class Driver extends Application {
     public final static String ROOT_WINDOW_NAME = "GSMS Simulator";
 
     // hard-code init some people into the system.
-    public final static List<Initializer> AGENTS_ONSITE = new ArrayList<>(List.of(
-            new Initializer(
+    public final static List<AgentInitializer> AGENTS_ONSITE = new ArrayList<>(List.of(
+            new AgentInitializer(
                     new AgentId("KBEEBLE1", "Krex Beeble", AgentType.MEMBER),
                     new Metadata("Has a bad knee.")),
-            new Initializer(
+            new AgentInitializer(
                     new AgentId("GTSOUKALOS1", "Giorgio Tsoukalos", AgentType.MEMBER),
                     new Metadata("When his shoulder acts up, a storm's a'comin'.")),
-            new Initializer(
+            new AgentInitializer(
                     new AgentId("RGOSLING1", "Ryan Gosling", AgentType.MEMBER),
                     new Metadata("No preconditions--literally a perfect human.")),
-            new Initializer(
+            new AgentInitializer(
                     new AgentId("JDANIELS1", "Jack Daniels", AgentType.MEMBER),
                     new Metadata("Easily exhausted and suffers from dizzy spells.")),
-            new Initializer(
+            new AgentInitializer(
                     new AgentId("RKRAUSE1", "Roxanne Krause", AgentType.MEMBER),
                     new Metadata("Highly agitated by everything, hoping a fitness journey will help.")),
-            new Initializer(
+            new AgentInitializer(
                     new AgentId("OMJENKINS1", "Old Man Jenkins", AgentType.MEMBER),
                     new Metadata("Easily irritated, low energy, and basically falling apart. All around mess.")),
-            new Initializer(
+            new AgentInitializer(
                     new AgentId("JFONDA1", "Jane Fonda", AgentType.INSTRUCTOR),
                     new Metadata("All around babe instructor."))
     ));
@@ -106,12 +106,17 @@ public class Driver extends Application {
         try {
             gym.initAgents(AGENTS_ONSITE, gsmc.getMemberApi(), gsmc.getInstructorApi()); // initialize the visual agents and apps
             gsmc.registerAgentApplications(gym.memberApplications, gym.instructorApplications, AGENTS_ONSITE); // init the apps for responses
+
             // TODO: need to init the front end components in same way as backend such that i can tie the
             //       components made back there to the visual front-enders so i can "sendSignal" to the back end.
             //       i can get a single classroom id with numbers of sensors and members with ids to the back end
             //       to init, no problem.
             //       then, i'll need an access point through gsmc to grab all the component refs of a class room
             //       in order to be able to set up the front end so it can communicate.
+
+//            gym.initHardware();
+//            gsmc.registerHardwareComponents();
+
         } catch (IOException ex) {
             ex.printStackTrace();
         } // end try/catch

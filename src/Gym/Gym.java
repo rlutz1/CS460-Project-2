@@ -1,6 +1,6 @@
 package Gym;
 
-import Driver.Initializer;
+import Driver.AgentInitializer;
 import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
@@ -288,11 +288,11 @@ public class Gym {
      * @param initPackage
      */
     public void initAgents(
-            List<Initializer> initPackage,
+            List<AgentInitializer> initPackage,
             MemberApplicationAPI memberApi,
             InstructorApplicationAPI instructorApi
     ) throws IOException {
-        for (Initializer init : initPackage) {
+        for (AgentInitializer init : initPackage) {
             switch (init.id().getType()) {
                 case AgentType.MEMBER:
                     MemberApplication memberApp = initMemberApp(init.id(), memberApi);
