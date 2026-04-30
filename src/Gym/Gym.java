@@ -9,10 +9,7 @@ import GSMS.Common.AgentType;
 import Gym.AgentGraphics.InstructorGraphic;
 import Gym.AgentGraphics.MemberGraphic;
 import Gym.DemoManagement.DemoManager;
-import Gym.Hardware.AudioSensor;
-import Gym.Hardware.Camera;
-import Gym.Hardware.DoorwaySensor;
-import Gym.Hardware.WearableSensors;
+import Gym.Hardware.*;
 import InstructorApplication.InstructorApplication;
 import MemberApplication.MemberApplication;
 import javafx.fxml.FXML;
@@ -27,12 +24,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -64,14 +64,33 @@ public class Gym {
     @FXML
     public HBox otherMembers; // container to place other members into (not target)
     @FXML
-    public Rectangle targetMemberStartPoint; // for placing dynamically into fxml scene
+    public Rectangle entryWay; // for placing dynamically into fxml scene
     @FXML
     public Rectangle targetInstructorStartPoint; // for placing dynamically into fxml scene
+
+    /* FRONTEND PIECES FROM FXML -- SENSORS */
+    @FXML
+    public Rectangle audio1;
+    @FXML
+    public Circle camera1;
+    @FXML
+    public Circle camera2;
+
+    // corresponding back end pieces
+    // TODO: better to be one and same, but will take a moment to inject into
+    //       scene builder OR put in programmatically. this is the quick choice.
+    // this is hardcoded for now.
+    // it is corresponding to the static components of the scene.
+    public AudioSensor audioSensor1;
+    public Camera cameraFeed1;
+    public Camera cameraFeed2;
+    public List<WearableSensors> wearableSensors = new ArrayList<>(); // to init later
+    public List<Hardware> allSensors; // this is muy mal
 
     /* OBJECTS CREATED DYNAMICALLY AND INSERTED TO FXML LAYOUT */
     public MemberGraphic targetMember;
     public InstructorGraphic targetInstructor;
-    public List<MemberGraphic> generalMembers;
+//    public List<MemberGraphic> generalMembers;
 
     /* FRONTEND PIECES FROM FXML -- INTERACTIVE OBJECTS */
     @FXML
@@ -95,10 +114,10 @@ public class Gym {
 
     /* CONSTRUCTOR */
     public Gym() {
-        audioTester = new AudioSensor();
-        cameraTester = new Camera();
-        wearableTester = new WearableSensors();
-        doorwayTester = new DoorwaySensor();
+        audioTester = new AudioSensor(null);
+        cameraTester = new Camera(null);
+        wearableTester = new WearableSensors(null);
+        doorwayTester = new DoorwaySensor(null);
     } // end constructor
 
     /**
@@ -124,10 +143,7 @@ public class Gym {
     public void initialize() {
         // yield all these to manager
         manager.mainStage = this.mainStage;
-
-        manager.audioSensor = this.audioTester;
-        manager.cameraFeed = this.cameraTester;
-        manager.wearable = this.wearableTester;
+        manager.entryWay = this.entryWay;
     } // end method
 
     /*
@@ -330,8 +346,9 @@ public class Gym {
     public void initOnsiteComponents(GymInitializer initPackage) {
         // insert the target member on necessary stages
         targetMember = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
-        targetMember.setLayoutX(targetMemberStartPoint.getLayoutX() - targetMember.width);
-        targetMember.setLayoutY(targetMemberStartPoint.getLayoutY() - targetMember.height);
+//        targetMember.setLayoutX(entryWay.getLayoutX() - targetMember.width);
+        targetMember.setLayoutX(entryWay.getLayoutX() + entryWay.getWidth());
+        targetMember.setLayoutY(entryWay.getLayoutY()  + (entryWay.getHeight() / 2) - targetMember.height);
         entireGym.getChildren().add(targetMember);
         // insert the target instructor to necessary stages
         targetInstructor= new InstructorGraphic(initPackage.targetInstructor().id(), Color.PURPLE);
@@ -344,10 +361,30 @@ public class Gym {
             otherMembers.getChildren().add(new MemberGraphic(member.id(), Color.GREEN));
         } // end loop
 
+        // initalize the needed front end "signal senders"
+        audioSensor1 = new AudioSensor(initPackage.targetClassroom().roomId());
+        cameraFeed1 = new Camera(initPackage.targetClassroom().roomId());
+        cameraFeed2 = new Camera(initPackage.targetClassroom().roomId());
+
+        allSensors = new ArrayList<>(List.of(
+                audioSensor1,
+                cameraFeed1,
+                cameraFeed2
+        ));
+
+        for (AgentInitializer agent : initPackage.allAgentsOnsite()) {
+            if (agent.id().getType() == AgentType.MEMBER) {
+                WearableSensors wearable = new WearableSensors(agent.id());
+                wearableSensors.add(wearable);
+                allSensors.add(wearable);
+            } // end if
+        } // end loop
+
         // add to demo manager
         manager.targetMember = this.targetMember;
         manager.targetInstructor = this.targetInstructor;
         manager.otherMembers = this.otherMembers;
+        manager.targetHardware = this.allSensors;
     } // end method
 
     /*

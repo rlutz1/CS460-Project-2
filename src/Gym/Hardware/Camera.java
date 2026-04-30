@@ -1,13 +1,15 @@
 package Gym.Hardware;
 
+import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
 
-public class Camera {
+public class Camera implements Hardware {
 
     public Video component; // to receive signals from front end
+    public RoomId room; // for readability
 
-    public Camera() {
-
+    public Camera(RoomId room) {
+        this.room = room;
     } // end constructor
 
     /**

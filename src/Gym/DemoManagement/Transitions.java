@@ -25,7 +25,7 @@ public class Transitions {
      * @param x
      * @param y
      */
-    public static void EnterClassroom(AgentGraphic target, int walkingSpeed, double x, double y) {
+    public static void EnterClassroom(AgentGraphic target, double walkingSpeed, double x, double y) {
         SequentialTransition seq = new SequentialTransition();
 
         TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);
@@ -57,7 +57,7 @@ public class Transitions {
      * @param pace
      * @param squeeze
      */
-    public static void Workout(AgentGraphic target, int pace, double squeeze) {
+    public static void Workout(AgentGraphic target, double pace, double squeeze) {
         SequentialTransition seq = new SequentialTransition(target);
 
         ScaleTransition workout = new ScaleTransition(Duration.seconds(pace), target);
@@ -86,7 +86,7 @@ public class Transitions {
      * @param target
      * @param exhaustionRate
      */
-    public static void TriggerExhaustion(AgentGraphic target, int exhaustionRate) {
+    public static void TriggerExhaustion(AgentGraphic target, double exhaustionRate) {
         FillTransition exhaustion = new FillTransition(Duration.seconds(exhaustionRate), target.root);
         exhaustion.setToValue(Color.YELLOW);
         exhaustion.setAutoReverse(true);
@@ -106,7 +106,7 @@ public class Transitions {
      * @param target
      * @param reliefRate
      */
-    public static void RelieveExhaustion(AgentGraphic target, int reliefRate) {
+    public static void RelieveExhaustion(AgentGraphic target, double reliefRate) {
         FillTransition relief = new FillTransition(Duration.seconds(reliefRate), target.root);
         relief.setToValue(target.baseColor);
         relief.setAutoReverse(true);
@@ -126,7 +126,7 @@ public class Transitions {
      * @param target1
      * @param target2
      */
-    public static void TriggerConflict(AgentGraphic target1, AgentGraphic target2, int angerRate) {
+    public static void TriggerConflict(AgentGraphic target1, AgentGraphic target2, double angerRate) {
         ParallelTransition seq = new ParallelTransition();
 
         FillTransition angry1 = new FillTransition(Duration.seconds(angerRate), target1.root);
@@ -157,7 +157,7 @@ public class Transitions {
      * @param target1
      * @param target2
      */
-    public static void RelieveConflict(AgentGraphic target1, AgentGraphic target2, int reliefRate) {
+    public static void RelieveConflict(AgentGraphic target1, AgentGraphic target2, double reliefRate) {
         ParallelTransition seq = new ParallelTransition();
 
         FillTransition relief1 = new FillTransition(Duration.seconds(reliefRate), target1.root);
@@ -188,7 +188,7 @@ public class Transitions {
      * @param target
      * @param emergencyRate
      */
-    public static void TriggerHealthEmergency(AgentGraphic target, int emergencyRate) {
+    public static void TriggerHealthEmergency(AgentGraphic target, double emergencyRate) {
         // stop the member from moving
         Transition tTarget = null;
         for (Transition t : LiveTransitions){
@@ -225,7 +225,7 @@ public class Transitions {
      * @param x
      * @param y
      */
-    public static void InstructorToHelp(AgentGraphic target, double walkingSpeed, int x, int y) {
+    public static void InstructorToHelp(AgentGraphic target, double walkingSpeed, double x, double y) {
         TranslateTransition help = new TranslateTransition(Duration.seconds(walkingSpeed), target);
         help.setToX(x);
         help.setToY(y);
@@ -248,7 +248,7 @@ public class Transitions {
      * @param x
      * @param y
      */
-    public static void ExitClassroom(AgentGraphic target, int walkingSpeed, int x, int y) {
+    public static void ExitClassroom(AgentGraphic target, double walkingSpeed, double x, double y) {
         SequentialTransition seq = new SequentialTransition();
 
         TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);

@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -23,13 +24,16 @@
             <StackPane fx:id="mainStage" prefHeight="600.0" prefWidth="800.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="20.0">
                <children>
                   <Rectangle fx:id="gymBackground" arcHeight="5.0" arcWidth="5.0" fill="#ffe88a7c" height="600.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-                  <AnchorPane fx:id="entireGym" prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane fx:id="entireGym" prefHeight="600.0" prefWidth="800.0">
                      <children>
                         <Rectangle fx:id="classroom1" arcHeight="5.0" arcWidth="5.0" fill="#ff90213c" height="300.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
                         <Rectangle fx:id="targetClassroom" arcHeight="5.0" arcWidth="5.0" fill="#ff901f" height="300.0" layoutX="400.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
                         <HBox fx:id="otherMembers" layoutX="420.0" layoutY="172.0" prefHeight="70.0" prefWidth="200.0" />
-                        <Rectangle fx:id="targetMemberStartPoint" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="9.0" layoutX="38.0" layoutY="436.0" stroke="BLACK" strokeType="INSIDE" width="6.0" />
-                        <Rectangle fx:id="targetInstructorStartPoint" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="9.0" layoutX="597.0" layoutY="46.0" stroke="BLACK" strokeType="INSIDE" width="6.0" />
+                        <Rectangle fx:id="entryWay" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutY="405.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+                        <Rectangle fx:id="targetInstructorStartPoint" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="9.0" layoutX="597.0" layoutY="46.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="6.0" />
+                        <Circle fx:id="camera1" fill="#acacac" layoutX="415.0" layoutY="27.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="camera2" fill="#acacac" layoutX="786.0" layoutY="27.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Rectangle fx:id="audio1" arcHeight="5.0" arcWidth="5.0" fill="#acacac" height="38.0" layoutX="779.0" layoutY="131.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
                      </children>
                   </AnchorPane>
                </children>

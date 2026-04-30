@@ -5,6 +5,7 @@ import Gym.AgentGraphics.InstructorGraphic;
 import Gym.AgentGraphics.MemberGraphic;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
+import Gym.Hardware.Hardware;
 import Gym.Hardware.WearableSensors;
 import javafx.animation.*;
 import javafx.scene.Node;
@@ -12,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +32,14 @@ public class DemoManager {
     public MemberGraphic targetMember;
     public InstructorGraphic targetInstructor;
     public HBox otherMembers;
+    public Shape entryWay;
+    public List<Hardware> targetHardware;
 
     // for testing and sending basic crap to backend
     // this may change to be more representative of the scenario, environment.
-    public AudioSensor audioSensor;
-    public Camera cameraFeed;
-    public WearableSensors wearable;
+//    public AudioSensor audioSensor;
+//    public Camera cameraFeed;
+//    public WearableSensors wearable;
 
     public DemoManager() {
         this.states = new ArrayList<>();
@@ -144,7 +148,8 @@ public class DemoManager {
                 Transitions.EnterClassroom(
                         targetMember,
                         2,
-                        otherMembers.getLayoutX() + otherMembers.getWidth(),
+                        // TODO: this should be based upon distance away
+                        otherMembers.getLayoutX() + otherMembers.getWidth() - targetMember.width,
                         - otherMembers.getLayoutY() - otherMembers.getHeight()
                 );
             }
@@ -187,9 +192,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                cameraFeed.sendSignal(); // TODO: this needs to be talked about with the guys in backend
-                audioSensor.sendSignal(); // TODO: and work with what they're wanting. give a parameter? enum?
-                wearable.sendSignal();
+                sendBadSignals();
             }
             @Override
             public String toString() {
@@ -269,9 +272,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                cameraFeed.sendSignal(); // TODO: this needs to be talked about with the guys in backend
-                audioSensor.sendSignal(); // TODO: and work with what they're wanting. give a parameter? enum?
-                wearable.sendSignal();
+                sendBadSignals();
             }
             @Override
             public String toString() {
@@ -351,9 +352,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                cameraFeed.sendSignal(); // TODO: this needs to be talked about with the guys in backend
-                audioSensor.sendSignal(); // TODO: and work with what they're wanting. give a parameter? enum?
-                wearable.sendSignal();
+                sendBadSignals();
             }
             @Override
             public String toString() {
@@ -388,7 +387,12 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.InstructorToHelp(targetInstructor, 0.5, 150, 50);
+                Transitions.InstructorToHelp(
+                        targetInstructor,
+                        0.5,
+                        150, // TODO: funky layout positions, hardcoded for now.
+                        70
+                );
             }
             @Override
             public String toString() {
@@ -414,7 +418,6 @@ public class DemoManager {
             public void activate() {
                 otherMembers.setVisible(false);
                 targetInstructor.setVisible(false);
-//                Transitions.ExitClassroom(targetMember, 2, -20, 20);
             }
             @Override
             public String toString() {
@@ -429,6 +432,12 @@ public class DemoManager {
      */
     private void initScenario5() {
 
+    } // end method
+
+    private void sendBadSignals() {
+        for (Hardware hardware : targetHardware) {
+            hardware.sendSignal();
+        } // end method
     } // end method
 
 } // end class

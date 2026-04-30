@@ -114,6 +114,7 @@ public class Driver extends Application {
             primaryStage.setScene(scene);
 
             primaryStage.show();
+
         } else {
             System.out.println("Something went wrong: " + MAIN_FXML + " returned null on start.");
         } // end if
