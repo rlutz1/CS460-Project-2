@@ -1,5 +1,6 @@
 package GSMS.EventAnalysis.SignalReceivers.Hardware;
 
+import GSMS.Common.AgentId;
 import GSMS.EventAnalysis.SignalReceivers.Classroom;
 import GSMS.EventAnalysis.SignalReceivers.Signal;
 import GSMS.EventAnalysis.SignalReceivers.SignalType;
@@ -13,13 +14,15 @@ public class Wearable {
 
     private Classroom classroom;
     private String wearableData;
+    private AgentId memberId;
 
     /**
      * Constructs Wearable with a tied Classroom to send signals to.
      * @param classroom
      */
-    public Wearable(Classroom classroom) {
+    public Wearable(Classroom classroom, AgentId memberId) {
         this.classroom = classroom;
+        this.memberId = memberId;
     } // end constructor
 
     /**
