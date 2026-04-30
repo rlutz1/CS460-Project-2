@@ -28,7 +28,7 @@ public class DemoManager {
     private final List<DemoState> states; // list of frames, or states for demo
     private int currState;
 
-    public StackPane mainStage;
+//    public StackPane mainStage;
     public MemberGraphic targetMember;
     public InstructorGraphic targetInstructor;
     public HBox otherMembers;
@@ -404,7 +404,12 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.ExitClassroom(targetMember, 2, -20, 20);
+                Transitions.ExitClassroom(
+                        targetMember,
+                        2,
+                        -20, // TODO: again, funky layout stuff that needs fixing
+                        20
+                );
             }
             @Override
             public String toString() {

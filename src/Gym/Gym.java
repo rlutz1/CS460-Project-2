@@ -32,14 +32,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * this is the PHYSICAL gym container for simulating
  * our actual gym space with javafx
  */
-//public class Gym {
 public class Gym {
 
     /* METADATA ABOUT THE GYM AND CODE NEEDS */
@@ -60,8 +58,6 @@ public class Gym {
     @FXML
     public AnchorPane entireGym; // the main gym space container
     @FXML
-    public Rectangle targetClassroom; // target classroom in the gym
-    @FXML
     public HBox otherMembers; // container to place other members into (not target)
     @FXML
     public Rectangle entryWay; // for placing dynamically into fxml scene
@@ -79,18 +75,17 @@ public class Gym {
     // corresponding back end pieces
     // TODO: better to be one and same, but will take a moment to inject into
     //       scene builder OR put in programmatically. this is the quick choice.
-    // this is hardcoded for now.
-    // it is corresponding to the static components of the scene.
+    //       this is hardcoded for now.
+    //       it is corresponding to the static components of the scene above.
     public AudioSensor audioSensor1;
     public Camera cameraFeed1;
     public Camera cameraFeed2;
     public List<WearableSensors> wearableSensors = new ArrayList<>(); // to init later
-    public List<Hardware> allSensors; // this is muy mal
+    public List<Hardware> allSensors; // this is muy mal, but helpful for handing off to demo manager
 
     /* OBJECTS CREATED DYNAMICALLY AND INSERTED TO FXML LAYOUT */
     public MemberGraphic targetMember;
     public InstructorGraphic targetInstructor;
-//    public List<MemberGraphic> generalMembers;
 
     /* FRONTEND PIECES FROM FXML -- INTERACTIVE OBJECTS */
     @FXML
@@ -142,8 +137,8 @@ public class Gym {
     @FXML
     public void initialize() {
         // yield all these to manager
-        manager.mainStage = this.mainStage;
         manager.entryWay = this.entryWay;
+        // the rest wait for dynamic creation
     } // end method
 
     /*
@@ -341,6 +336,8 @@ public class Gym {
      * this is to be the actionable driver of initializing visual components dynamically.
      * it is to receive the SAME package as the backend to build out some custom
      * components for mimicking hardware.
+     * TODO: better auto positioning of the dynamic movement of agents
+     * TODO: more dynamic creation of hardware if time
      * @param initPackage
      */
     public void initOnsiteComponents(GymInitializer initPackage) {
