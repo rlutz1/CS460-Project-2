@@ -28,4 +28,13 @@ public class MemberApplicationAPI {
                 exerciseType
         )); // TODO: this is simply working with what is there
     } // end method
+
+    public void transmitScheduleViewingRequest(AgentId memberId, String viewRequest) {
+        gsmc.scheduleJob(new JobInfo(
+                JobType.RECOMMENDATION_ENGINE,
+                memberId,
+                RecommendationType.SEND_SCHEDULE,
+                viewRequest
+        ));
+    }
 } // end class

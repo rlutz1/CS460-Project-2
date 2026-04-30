@@ -45,6 +45,10 @@ public class RecommendationDispatcher {
                 // generate list of enrolled members with DataManager.getProfile()
                 // recommendation = ai.analyzeItinerary(list of enrolled, requestData)
                 break;
+
+            case SEND_SCHEDULE:
+                recommendation = "Nothing planned for today! Schedule now, ya slacker!";
+                break;
             default:
                 System.out.println("[RECC DISPATCH] A request type was received that is not recognized: " + requestType);
         } // end switch case
