@@ -3,6 +3,7 @@ package Driver;
 import GSMS.Common.AgentId;
 import GSMS.Common.AgentType;
 import GSMS.Common.Metadata;
+import GSMS.Common.RoomId;
 import GSMS.Root.GymSpaceManagementController;
 import Gym.Gym;
 import javafx.application.Application;
@@ -51,6 +52,24 @@ public class Driver extends Application {
                     new AgentId("JFONDA1", "Jane Fonda", AgentType.INSTRUCTOR),
                     new Metadata("All around babe instructor."))
     ));
+
+    // for initializing a fake gym
+    public final static GymInitializer GYM_INIT_PACKAGE = new GymInitializer(
+      AGENTS_ONSITE,
+      new ArrayList<>(List.of(
+                  new ClassroomInitializer(
+                      new RoomId("TARGET_CLASSROOM"),
+              1, // number of audio sensors
+                      2, // number of cameras
+                      1, // number of doorway sensors (very low priority functionality wise.)
+                      // agents on this classroom -- right now, all of them
+                      // the first, which we'll treat as the target member to use,
+                      // we will just give with this list since we're not gonna focus on the doorway thing for now.
+                      AGENTS_ONSITE.subList(0, 7)
+                  )
+      )),
+      AGENTS_ONSITE.get(0) // first agent is the target that will be sent into the room.
+    );
 
     /**
      * main method to start up the demo.

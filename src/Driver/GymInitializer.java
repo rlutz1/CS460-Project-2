@@ -12,7 +12,9 @@ public record GymInitializer(
         // likely useful for backend primarily
         List<AgentInitializer> allAgentsOnsite,
         // classrooms (likely just one for simplicity for now.)
-        List<ClassroomInitializer> classrooms
+        List<ClassroomInitializer> classrooms,
+        //
+        AgentInitializer targetMember
     )
 {
 }
