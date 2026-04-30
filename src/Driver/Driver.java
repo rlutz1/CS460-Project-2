@@ -53,22 +53,27 @@ public class Driver extends Application {
                     new Metadata("All around babe instructor."))
     ));
 
+    public final static List<ClassroomInitializer> CLASSROOMS = new ArrayList<>(List.of(
+        new ClassroomInitializer(
+                  new RoomId("TARGET_CLASSROOM"),
+          1, // number of audio sensors
+                  2, // number of cameras
+                  1, // number of doorway sensors (very low priority functionality wise.)
+                  // members in this classroom -- right now, all of them
+                  // the first, which we'll treat as the target member to use,
+                  // we will just give with this list since we're not gonna focus on the doorway thing for now.
+                  AGENTS_ONSITE.subList(0, 6),
+                  AGENTS_ONSITE.subList(6, 7) // just the one instructor
+                  )
+    ));
+
     // for initializing a fake gym
     public final static GymInitializer GYM_INIT_PACKAGE = new GymInitializer(
       AGENTS_ONSITE,
-      new ArrayList<>(List.of(
-                  new ClassroomInitializer(
-                      new RoomId("TARGET_CLASSROOM"),
-              1, // number of audio sensors
-                      2, // number of cameras
-                      1, // number of doorway sensors (very low priority functionality wise.)
-                      // agents on this classroom -- right now, all of them
-                      // the first, which we'll treat as the target member to use,
-                      // we will just give with this list since we're not gonna focus on the doorway thing for now.
-                      AGENTS_ONSITE.subList(0, 7)
-                  )
-      )),
-      AGENTS_ONSITE.get(0) // first agent is the target that will be sent into the room.
+      CLASSROOMS,
+      AGENTS_ONSITE.get(0), // first agent is the target that will be sent into the room.
+      CLASSROOMS.get(0).instructorsInClass().get(0), // target instructor in the class room
+      CLASSROOMS.get(0) // target classroom where all the action is
     );
 
     /**

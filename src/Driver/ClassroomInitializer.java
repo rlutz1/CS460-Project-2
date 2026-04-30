@@ -20,7 +20,8 @@ public record ClassroomInitializer(
         int numDoorwaySensors,
         // give all agents in this room.
         // this is primarily for the frontend, unless useful for back.
-        List<AgentInitializer> agentsInClass
+        List<AgentInitializer> membersInClass,
+        List<AgentInitializer> instructorsInClass
     )
 {
 }

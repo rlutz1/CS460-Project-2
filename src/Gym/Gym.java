@@ -124,8 +124,9 @@ public class Gym {
     public void initialize() {
         // yield all these to manager
         manager.mainStage = this.mainStage;
-        manager.targetMember = this.targetMember;
-        manager.targetInstructor = this.targetInstructor;
+        // TODO
+//        manager.targetMember = this.targetMember;
+//        manager.targetInstructor = this.targetInstructor;
         manager.otherMembers = this.otherMembers;
 
         manager.audioSensor = this.audioTester;
@@ -280,7 +281,6 @@ public class Gym {
 
             memberSelection.getItems().add(id.getId());
             memberSelection.setValue(id.getId());
-            // TODO would like to add agent id and name to the app here
 
             return memberApp;
         } else {
@@ -332,7 +332,21 @@ public class Gym {
      * @param initPackage
      */
     public void initOnsiteComponents(GymInitializer initPackage) {
-
+        // insert the target member on necessary stages
+        targetMember = new TargetMemberGraphic(initPackage.targetMember().id());
+        targetMember.setLayoutX(targetMemberStartPoint.getLayoutX() - targetMember.radius);
+        targetMember.setLayoutY(targetMemberStartPoint.getLayoutY() - targetMember.radius);
+        entireGym.getChildren().add(targetMember);
+        // insert the target instructor to necessary stages
+        targetInstructor= new TargetInstructorGraphic(initPackage.targetInstructor().id());
+        targetInstructor.setLayoutX(targetInstructorStartPoint.getLayoutX() - targetInstructor.radius);
+        targetInstructor.setLayoutY(targetInstructorStartPoint.getLayoutY() - targetInstructor.radius);
+        entireGym.getChildren().add(targetInstructor);
+        // insert the general members to necessary stages
+        // only the target right now. room for change, but not right now, lol
+        for (AgentInitializer member : initPackage.targetClassroom().membersInClass()) {
+            otherMembers.getChildren().add(new GeneralMemberGraphic(member.id()));
+        } // end loop
     } // end method
 
     /*

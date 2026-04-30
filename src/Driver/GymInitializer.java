@@ -13,8 +13,12 @@ public record GymInitializer(
         List<AgentInitializer> allAgentsOnsite,
         // classrooms (likely just one for simplicity for now.)
         List<ClassroomInitializer> classrooms,
-        //
-        AgentInitializer targetMember
+        // the target member
+        AgentInitializer targetMember,
+        // the target instructor
+        AgentInitializer targetInstructor,
+        // main class room target member goes to that has target instructor
+        ClassroomInitializer targetClassroom
     )
 {
 }
