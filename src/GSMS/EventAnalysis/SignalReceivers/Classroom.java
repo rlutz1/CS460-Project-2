@@ -4,9 +4,13 @@ import GSMS.Common.AgentId;
 import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.EventAnalyzer;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 import Gym.Hardware.Camera;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static GSMS.EventAnalysis.SignalReceivers.SignalType.AUDIO;
@@ -23,10 +27,17 @@ public class Classroom {
     private Integer audioDecibelData;
     private Map<AgentId, String> memberIdsToWearableData;
 
+    private Audio audioComponent;
+    private List<Video> videosComponents;
+    private List<Wearable> wearableComponents;
+
     public Classroom(EventAnalyzer eventAnalyzer, RoomId classroomId) {
         this.eventAnalyzer = eventAnalyzer;
         this.classroomId = classroomId;
         this.memberIdsToWearableData = new HashMap<>();
+        this.audioComponent = new Audio(this);
+        this.videosComponents = new ArrayList<>();
+        this.wearableComponents = new ArrayList<>();
     } // end constructor
     /************************* NON-SAD * helper START *************************/
     public String getClassroomId() {
@@ -47,6 +58,24 @@ public class Classroom {
         }
         return null;
     }
+
+    public void addNewVideoComponent(){
+        videosComponents.add(new Video(this));
+    }
+    public void addNewWearableComponent(AgentId memberId){
+        wearableComponents.add(new Wearable(this, memberId));
+    }
+
+    public Audio getAudioComponent(){
+        return audioComponent;
+    }
+    public List<Video> getVideosComponents(){
+        return videosComponents;
+    }
+    public List<Wearable> getWearableComponents(){
+        return wearableComponents;
+    }
+
     /************************* NON-SAD * helper END   *************************/
 
     /**
