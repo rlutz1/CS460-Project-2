@@ -6,9 +6,8 @@ import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Common.AgentType;
-import Gym.AgentGraphics.GeneralMemberGraphic;
-import Gym.AgentGraphics.TargetInstructorGraphic;
-import Gym.AgentGraphics.TargetMemberGraphic;
+import Gym.AgentGraphics.InstructorGraphic;
+import Gym.AgentGraphics.MemberGraphic;
 import Gym.DemoManagement.DemoManager;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
@@ -27,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -69,9 +69,9 @@ public class Gym {
     public Rectangle targetInstructorStartPoint; // for placing dynamically into fxml scene
 
     /* OBJECTS CREATED DYNAMICALLY AND INSERTED TO FXML LAYOUT */
-    public TargetMemberGraphic targetMember;
-    public TargetInstructorGraphic targetInstructor;
-    public List<GeneralMemberGraphic> generalMembers;
+    public MemberGraphic targetMember;
+    public InstructorGraphic targetInstructor;
+    public List<MemberGraphic> generalMembers;
 
     /* FRONTEND PIECES FROM FXML -- INTERACTIVE OBJECTS */
     @FXML
@@ -329,19 +329,19 @@ public class Gym {
      */
     public void initOnsiteComponents(GymInitializer initPackage) {
         // insert the target member on necessary stages
-        targetMember = new TargetMemberGraphic(initPackage.targetMember().id());
-        targetMember.setLayoutX(targetMemberStartPoint.getLayoutX() - targetMember.radius);
-        targetMember.setLayoutY(targetMemberStartPoint.getLayoutY() - targetMember.radius);
+        targetMember = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
+        targetMember.setLayoutX(targetMemberStartPoint.getLayoutX() - targetMember.width);
+        targetMember.setLayoutY(targetMemberStartPoint.getLayoutY() - targetMember.height);
         entireGym.getChildren().add(targetMember);
         // insert the target instructor to necessary stages
-        targetInstructor= new TargetInstructorGraphic(initPackage.targetInstructor().id());
-        targetInstructor.setLayoutX(targetInstructorStartPoint.getLayoutX() - targetInstructor.radius);
-        targetInstructor.setLayoutY(targetInstructorStartPoint.getLayoutY() - targetInstructor.radius);
+        targetInstructor= new InstructorGraphic(initPackage.targetInstructor().id(), Color.PURPLE);
+        targetInstructor.setLayoutX(targetInstructorStartPoint.getLayoutX() - targetInstructor.width);
+        targetInstructor.setLayoutY(targetInstructorStartPoint.getLayoutY() - targetInstructor.height);
         entireGym.getChildren().add(targetInstructor);
         // insert the general members to necessary stages
         // only the target right now. room for change, but not right now, lol
         for (AgentInitializer member : initPackage.targetClassroom().membersInClass()) {
-            otherMembers.getChildren().add(new GeneralMemberGraphic(member.id()));
+            otherMembers.getChildren().add(new MemberGraphic(member.id(), Color.GREEN));
         } // end loop
 
         // add to demo manager

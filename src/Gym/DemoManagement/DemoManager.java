@@ -1,19 +1,16 @@
 package Gym.DemoManagement;
 
-import Gym.AgentGraphics.GeneralMemberGraphic;
-import Gym.AgentGraphics.TargetInstructorGraphic;
-import Gym.AgentGraphics.TargetMemberGraphic;
+import Gym.AgentGraphics.AgentGraphic;
+import Gym.AgentGraphics.InstructorGraphic;
+import Gym.AgentGraphics.MemberGraphic;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
 import Gym.Hardware.WearableSensors;
 import javafx.animation.*;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +26,8 @@ public class DemoManager {
     private int currState;
 
     public StackPane mainStage;
-    public TargetMemberGraphic targetMember;
-    public TargetInstructorGraphic targetInstructor;
+    public MemberGraphic targetMember;
+    public InstructorGraphic targetInstructor;
     public HBox otherMembers;
 
     // for testing and sending basic crap to backend
@@ -91,7 +88,7 @@ public class DemoManager {
         targetMember.setTranslateY(0);
         targetMember.setScaleX(1);
         targetMember.setScaleY(1);
-        targetMember.root.setFill(Color.web("#22ff1f"));
+        targetMember.root.setFill(targetMember.baseColor);
         targetMember.setVisible(true);
 
         for (Node member : otherMembers.getChildren()) {
@@ -99,7 +96,7 @@ public class DemoManager {
             member.setTranslateY(0);
             member.setScaleX(1);
             member.setScaleY(1);
-            ((GeneralMemberGraphic)member).root.setFill(Color.web("#22ff1f"));
+            ((MemberGraphic)member).root.setFill(((AgentGraphic)member).baseColor);
             member.setVisible(true);
         } // end loop
         otherMembers.setVisible(true);
@@ -108,7 +105,7 @@ public class DemoManager {
         targetInstructor.setTranslateY(0);
         targetInstructor.setScaleX(1);
         targetInstructor.setScaleY(1);
-        targetInstructor.root.setFill(Color.web("#d476ff"));
+        targetInstructor.root.setFill(targetInstructor.baseColor);
         targetInstructor.setVisible(true);
     } // end method
 
@@ -155,7 +152,7 @@ public class DemoManager {
             @Override
             public void activate() {
                 for (Node member : otherMembers.getChildren()) {
-                    Transitions.Workout(member, 1, 0.5);
+                    Transitions.Workout((AgentGraphic) member, 1, 0.5);
                 } // end loop
 
                 Transitions.Workout(targetMember, 1, 0.5);
@@ -171,7 +168,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.TriggerExhaustion(targetMember.getChildren().getFirst(), 4);
+                Transitions.TriggerExhaustion(targetMember, 4);
             }
             @Override
             public String toString() {
@@ -220,7 +217,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.RelieveExhaustion(targetMember.getChildren().getFirst(), 4);
+                Transitions.RelieveExhaustion(targetMember, 4);
             }
             @Override
             public String toString() {
@@ -233,7 +230,7 @@ public class DemoManager {
             @Override
             public void activate() {
                 for (Node member : otherMembers.getChildren()) {
-                    Transitions.Workout(member, 1, 0.5);
+                    Transitions.Workout((AgentGraphic) member, 1, 0.5);
                 } // end loop
 
                 Transitions.Workout(targetMember, 1, 0.5);
@@ -253,7 +250,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.TriggerConflict(targetMember.getChildren().getFirst(), otherMembers.getChildren().getLast(), 2);
+                Transitions.TriggerConflict(targetMember, (AgentGraphic) otherMembers.getChildren().getLast(), 2);
             }
             @Override
             public String toString() {
@@ -302,7 +299,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.RelieveConflict(targetMember.getChildren().getFirst(), otherMembers.getChildren().getLast(), 5);
+                Transitions.RelieveConflict(targetMember, (AgentGraphic) otherMembers.getChildren().getLast(), 5);
             }
             @Override
             public String toString() {
@@ -315,7 +312,7 @@ public class DemoManager {
             @Override
             public void activate() {
                 for (Node member : otherMembers.getChildren()) {
-                    Transitions.Workout(member, 1, 0.5);
+                    Transitions.Workout((AgentGraphic) member, 1, 0.5);
                 } // end loop
 
                 Transitions.Workout(targetMember, 1, 0.5);
@@ -335,7 +332,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.TriggerHealthEmergency(targetMember.getChildren().getFirst(), 1);
+                Transitions.TriggerHealthEmergency(targetMember, 1);
             }
             @Override
             public String toString() {

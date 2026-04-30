@@ -1,5 +1,7 @@
 package Gym.DemoManagement;
 
+import Gym.AgentGraphics.AgentGraphic;
+import Gym.AgentGraphics.MemberGraphic;
 import javafx.animation.*;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -23,7 +25,7 @@ public class Transitions {
      * @param x
      * @param y
      */
-    public static void EnterClassroom(Node target, int walkingSpeed, int x, int y) {
+    public static void EnterClassroom(AgentGraphic target, int walkingSpeed, int x, int y) {
         SequentialTransition seq = new SequentialTransition();
 
         TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);
@@ -55,7 +57,7 @@ public class Transitions {
      * @param pace
      * @param squeeze
      */
-    public static void Workout(Node target, int pace, double squeeze) {
+    public static void Workout(AgentGraphic target, int pace, double squeeze) {
         SequentialTransition seq = new SequentialTransition(target);
 
         ScaleTransition workout = new ScaleTransition(Duration.seconds(pace), target);
@@ -84,8 +86,8 @@ public class Transitions {
      * @param target
      * @param exhaustionRate
      */
-    public static void TriggerExhaustion(Node target, int exhaustionRate) {
-        FillTransition exhaustion = new FillTransition(Duration.seconds(exhaustionRate), (Shape)target);
+    public static void TriggerExhaustion(AgentGraphic target, int exhaustionRate) {
+        FillTransition exhaustion = new FillTransition(Duration.seconds(exhaustionRate), target.root);
         exhaustion.setToValue(Color.YELLOW);
         exhaustion.setAutoReverse(true);
 
@@ -104,9 +106,9 @@ public class Transitions {
      * @param target
      * @param reliefRate
      */
-    public static void RelieveExhaustion(Node target, int reliefRate) {
-        FillTransition relief = new FillTransition(Duration.seconds(reliefRate), (Shape)target);
-        relief.setToValue(Color.web("#22ff1f"));
+    public static void RelieveExhaustion(AgentGraphic target, int reliefRate) {
+        FillTransition relief = new FillTransition(Duration.seconds(reliefRate), target.root);
+        relief.setToValue(target.baseColor);
         relief.setAutoReverse(true);
 
         LiveTransitions.add(relief); // add to a list of live transitions
@@ -124,14 +126,14 @@ public class Transitions {
      * @param target1
      * @param target2
      */
-    public static void TriggerConflict(Node target1, Node target2, int angerRate) {
+    public static void TriggerConflict(AgentGraphic target1, AgentGraphic target2, int angerRate) {
         ParallelTransition seq = new ParallelTransition();
 
-        FillTransition angry1 = new FillTransition(Duration.seconds(angerRate), (Shape)target1);
+        FillTransition angry1 = new FillTransition(Duration.seconds(angerRate), target1.root);
         angry1.setToValue(Color.ORANGERED);
         angry1.setAutoReverse(true);
 
-        FillTransition angry2 = new FillTransition(Duration.seconds(angerRate), (Shape)target2);
+        FillTransition angry2 = new FillTransition(Duration.seconds(angerRate), target2.root);
         angry2.setToValue(Color.ORANGERED);
         angry2.setAutoReverse(true);
 
@@ -155,15 +157,15 @@ public class Transitions {
      * @param target1
      * @param target2
      */
-    public static void RelieveConflict(Node target1, Node target2, int reliefRate) {
+    public static void RelieveConflict(AgentGraphic target1, AgentGraphic target2, int reliefRate) {
         ParallelTransition seq = new ParallelTransition();
 
-        FillTransition relief1 = new FillTransition(Duration.seconds(reliefRate), (Shape)target1);
-        relief1.setToValue(Color.web("#22ff1f"));
+        FillTransition relief1 = new FillTransition(Duration.seconds(reliefRate), target1.root);
+        relief1.setToValue(target1.baseColor);
         relief1.setAutoReverse(true);
 
-        FillTransition relief2 = new FillTransition(Duration.seconds(reliefRate), (Shape)target2);
-        relief2.setToValue(Color.web("#22ff1f"));
+        FillTransition relief2 = new FillTransition(Duration.seconds(reliefRate), target2.root);
+        relief2.setToValue(target2.baseColor);
         relief2.setAutoReverse(true);
 
         seq.getChildren().addAll(
@@ -186,14 +188,11 @@ public class Transitions {
      * @param target
      * @param emergencyRate
      */
-    public static void TriggerHealthEmergency(Node target, int emergencyRate) {
+    public static void TriggerHealthEmergency(AgentGraphic target, int emergencyRate) {
         // stop the member from moving
         Transition tTarget = null;
         for (Transition t : LiveTransitions){
-            // TODO: the parent thing--this needs to be fixed so that im not needing
-            // implicit knowledge of the node handed to me. has to do with member
-            // being an anchorpane, not just a circle. gnarly, but works for a second.
-            if (t instanceof SequentialTransition  && ((SequentialTransition)t).getNode() == target.getParent()) {
+            if (t instanceof SequentialTransition  && ((SequentialTransition)t).getNode() == target) {
                 tTarget = t;
                 break;
             } // end if
@@ -204,7 +203,7 @@ public class Transitions {
         } // end if
 
 
-        FillTransition emergency = new FillTransition(Duration.seconds(emergencyRate), (Shape)target);
+        FillTransition emergency = new FillTransition(Duration.seconds(emergencyRate), target.root);
         emergency.setToValue(Color.RED);
         emergency.setAutoReverse(true);
 
@@ -226,7 +225,7 @@ public class Transitions {
      * @param x
      * @param y
      */
-    public static void InstructorToHelp(Node target, double walkingSpeed, int x, int y) {
+    public static void InstructorToHelp(AgentGraphic target, double walkingSpeed, int x, int y) {
         TranslateTransition help = new TranslateTransition(Duration.seconds(walkingSpeed), target);
         help.setToX(x);
         help.setToY(y);
@@ -249,7 +248,7 @@ public class Transitions {
      * @param x
      * @param y
      */
-    public static void ExitClassroom(Node target, int walkingSpeed, int x, int y) {
+    public static void ExitClassroom(AgentGraphic target, int walkingSpeed, int x, int y) {
         SequentialTransition seq = new SequentialTransition();
 
         TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);
