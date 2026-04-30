@@ -29,7 +29,7 @@ public class EventAnalyzer {
     public void addClassroom(Classroom classroom) {
         classrooms.add(classroom);
     }
-    private Classroom findClassroom(RoomId classroomId) {
+    public Classroom findClassroom(RoomId classroomId) {
         for (Classroom classroom : classrooms) {
             if (classroom.getClassroomId().equals(classroomId)) {
                 return classroom;
