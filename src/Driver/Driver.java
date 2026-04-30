@@ -123,7 +123,7 @@ public class Driver extends Application {
     //      so that the component can "push" a notification.
     private void initDemoSpace(Gym gym, GymSpaceManagementController gsmc) {
         try {
-            gym.initAgents(AGENTS_ONSITE, gsmc.getMemberApi(), gsmc.getInstructorApi()); // initialize the visual agents and apps
+            gym.initAgentApplications(AGENTS_ONSITE, gsmc.getMemberApi(), gsmc.getInstructorApi()); // initialize the visual agents and apps
             gsmc.registerAgentApplications(gym.memberApplications, gym.instructorApplications, AGENTS_ONSITE); // init the apps for responses
 
             // TODO: need to init the front end components in same way as backend such that i can tie the
@@ -133,7 +133,8 @@ public class Driver extends Application {
             //       then, i'll need an access point through gsmc to grab all the component refs of a class room
             //       in order to be able to set up the front end so it can communicate.
 
-//            gym.initHardware();
+            // initialize the frontend components for the given metadata
+            gym.initOnsiteComponents(GYM_INIT_PACKAGE);
 //            gsmc.registerHardwareComponents();
 
         } catch (IOException ex) {

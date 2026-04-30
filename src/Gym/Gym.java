@@ -1,10 +1,14 @@
 package Gym;
 
 import Driver.AgentInitializer;
+import Driver.GymInitializer;
 import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Common.AgentType;
+import Gym.AgentGraphics.GeneralMemberGraphic;
+import Gym.AgentGraphics.TargetInstructorGraphic;
+import Gym.AgentGraphics.TargetMemberGraphic;
 import Gym.DemoManagement.DemoManager;
 import Gym.Hardware.AudioSensor;
 import Gym.Hardware.Camera;
@@ -23,7 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,55 +42,58 @@ import java.util.List;
 //public class Gym {
 public class Gym {
 
+    /* METADATA ABOUT THE GYM AND CODE NEEDS */
     public final static String MAIN_INSTRUCTOR_FXML = "/fxml/instructor-app.fxml";
     public final static String INSTRUCTOR_WINDOW_NAME = "Instructor Application";
     public final static String MAIN_MEMBER_FXML = "/fxml/member-app.fxml";
     public final static String MEMBER_WINDOW_NAME = "Member Application";
 
-    private final DemoManager manager = new DemoManager(); // for managing demo steps
     // following maps are used for initialization between front/backend and mapping an agent id to a specific application
     public HashMap<AgentId, MemberApplication> memberApplications = new HashMap<AgentId, MemberApplication>();
     public HashMap<AgentId, InstructorApplication> instructorApplications = new HashMap<AgentId, InstructorApplication>();
 
-    // things to setup the middle 3 use cases.
-    @FXML
-    public StackPane mainStage; // testing, but idea is the main stage built in scene builder
-    @FXML
-    public AnchorPane targetMember;
-    @FXML
-    public Circle targetInstructor;
-    @FXML
-    public HBox otherMembers;
+    private final DemoManager manager = new DemoManager(); // for managing demo steps
 
+    /* FRONTEND PIECES FROM FXML -- DYNAMIC OBJECTS */
+    @FXML
+    public StackPane mainStage; // overarching gym intricacies
+    @FXML
+    public AnchorPane entireGym; // the main gym space container
+    @FXML
+    public Rectangle targetClassroom; // target classroom in the gym
+    @FXML
+    public HBox otherMembers; // container to place other members into (not target)
+    @FXML
+    public Rectangle targetMemberStartPoint; // for placing dynamically into fxml scene
+    @FXML
+    public Rectangle targetInstructorStartPoint; // for placing dynamically into fxml scene
 
+    /* OBJECTS CREATED DYNAMICALLY AND INSERTED TO FXML LAYOUT */
+    public TargetMemberGraphic targetMember;
+    public TargetInstructorGraphic targetInstructor;
+    public List<GeneralMemberGraphic> generalMembers;
+
+    /* FRONTEND PIECES FROM FXML -- INTERACTIVE OBJECTS */
     @FXML
     public TextArea frontendLogger; // for printing to the front end, could be handy
-
     @FXML
     public Button startButton; // start demo
     @FXML
     public Button nextButton; // next demo state
     @FXML
     public Button restartButton; // restart demo from beginning
-
-    // these are for app initialization
     @FXML
-    public ComboBox memberSelection;
+    public ComboBox memberSelection; // for app initialization
     @FXML
-    public ComboBox instructorSelection;
+    public ComboBox instructorSelection; // for app initialization
 
-
-
-
-
-    // following are for testing only for now, not fxml components
+    /* TESTING OBJECTS ONLY */
     public AudioSensor audioTester;
     public Camera cameraTester;
     public WearableSensors wearableTester;
     public DoorwaySensor doorwayTester;
 
-
-
+    /* CONSTRUCTOR */
     public Gym() {
         audioTester = new AudioSensor();
         cameraTester = new Camera();
@@ -287,7 +294,7 @@ public class Gym {
      *  these are kept in a map and differentiated by agent id.
      * @param initPackage
      */
-    public void initAgents(
+    public void initAgentApplications(
             List<AgentInitializer> initPackage,
             MemberApplicationAPI memberApi,
             InstructorApplicationAPI instructorApi
@@ -315,6 +322,16 @@ public class Gym {
             } // end switch case
 
         } // end loop
+
+    } // end method
+
+    /**
+     * this is to be the actionable driver of initializing visual components dynamically.
+     * it is to receive the SAME package as the backend to build out some custom
+     * components for mimicking hardware.
+     * @param initPackage
+     */
+    public void initOnsiteComponents(GymInitializer initPackage) {
 
     } // end method
 
