@@ -4,4 +4,6 @@ public enum SignalType {
     VIDEO,
     AUDIO,
     WEARABLE,
+    // experimental:
+    AUDIO_VISUAL
 }

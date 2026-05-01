@@ -12,17 +12,19 @@ import javafx.scene.control.Alert;
 import java.util.List;
 
 /**
- * class to stand as component for event analyzer
+ * (Parent) class to stand as component for event analyzer
  */
 
 public class EventAnalyzer {
-    private static final double THRESHOLD = 0.8;
-    private List<Classroom> classrooms;
-    private LiveEventAI liveEventAI;
-    private NotificationDispatcher notificationDispatcher;
+    protected static final double THRESHOLD = 0.8;
+    protected List<Classroom> classrooms;
+
+    // Might need to be singletons for
+    // easy use within specific methods.
+    protected LiveEventAI liveEventAI;
+    protected NotificationDispatcher notificationDispatcher;
+
     public EventAnalyzer() {
-        this.liveEventAI = new LiveEventAI();
-        this.notificationDispatcher = new NotificationDispatcher();
     } // end constructor
 
     /************************* NON-SAD * helper START *************************/
@@ -37,7 +39,7 @@ public class EventAnalyzer {
         }
         return null;
     }
-    private void decideIfNeedToNotify(Event event){
+    protected void decideIfNeedToNotify(Event event){
         if (event.probabilityOfCorrectness() > THRESHOLD) {
             pushAlert(event.eventInfo(),
                       event.alertLevel(),
@@ -46,60 +48,50 @@ public class EventAnalyzer {
     }
     /************************* NON-SAD * helper END   *************************/
 
-    /**
-     * entry point to receive decibel levels collected
-     * from audio sensors in a given room
-     * @param roomId classroom id.
-     */
-    public void getAudioData(RoomId roomId) {
-        Classroom room = findClassroom(roomId);
-        if (room != null) {
-            Event audioEvent =
-                    liveEventAI.detectEvent(room.getAudioDecibelData().toString(),
-                    SignalType.AUDIO);
-            if (audioEvent != null) {
-                decideIfNeedToNotify(audioEvent);
-            }
-        }
-    } // end method
+    public void getData(RoomId roomId){
+        // for subclasses to implement
+    }
 
-    /**
-     * entry point to receive video feed collected
-     * from video cameras in a given room
-     * @param roomId classroom id.
-     */
-    public void getVideoData(RoomId roomId) {
-        Classroom room = findClassroom(roomId);
-        if (room != null) {
-            Event videoEvent =
-                    liveEventAI.detectEvent(room.getVideoFeedData(),
-                            SignalType.VIDEO);
-            if (videoEvent != null) {
-                decideIfNeedToNotify(videoEvent);
-            }
-            room.getVideoFeedData();
-        }
-    } // end method
 
-    /**
-     * entry point to receive a list of member vitals
-     * collected from wearable devices from all members in a given room.
-     * Additionally an entry point to receive signals from doorway sensors
-     * as read from the member wearables
-     * @param roomId classroom id.
-     * @param memberId
-     */
-    public void getWearableData(RoomId roomId, AgentId memberId) {
-        Classroom room = findClassroom(roomId);
-        if (room != null) {
-            Event wearableEvent =
-                    liveEventAI.detectEvent(room.getWearableInfoData(memberId),
-                            SignalType.WEARABLE);
-            if (wearableEvent != null) {
-                decideIfNeedToNotify(wearableEvent);
-            }
-        }
-    } // end method
+    // COMMENTING OUT GETTERS AS THEY WON"T BE NEEDED IF WE COMMIT TO THIS
+    // 2-analyzer design:
+//    /**
+//     * entry point to receive video feed collected
+//     * from video cameras in a given room
+//     * @param roomId classroom id.
+//     */
+//    public void getVideoData(RoomId roomId) {
+//        Classroom room = findClassroom(roomId);
+//        if (room != null) {
+//            Event videoEvent =
+//                    liveEventAI.detectEvent(room.getVideoFeedData(),
+//                            SignalType.VIDEO);
+//            if (videoEvent != null) {
+//                decideIfNeedToNotify(videoEvent);
+//            }
+//            room.getVideoFeedData();
+//        }
+//    } // end method
+//
+//    /**
+//     * entry point to receive a list of member vitals
+//     * collected from wearable devices from all members in a given room.
+//     * Additionally an entry point to receive signals from doorway sensors
+//     * as read from the member wearables
+//     * @param roomId classroom id.
+//     * @param memberId
+//     */
+//    public void getWearableData(RoomId roomId, AgentId memberId) {
+//        Classroom room = findClassroom(roomId);
+//        if (room != null) {
+//            Event wearableEvent =
+//                    liveEventAI.detectEvent(room.getWearableInfoData(memberId),
+//                            SignalType.WEARABLE);
+//            if (wearableEvent != null) {
+//                decideIfNeedToNotify(wearableEvent);
+//            }
+//        }
+//    } // end method
 
     /**
      * given a doorway sensor’s signal of access to a room,
