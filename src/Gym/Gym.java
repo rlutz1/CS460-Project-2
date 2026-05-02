@@ -203,7 +203,7 @@ public class Gym {
         startButton.setDisable(false); // enable start button
         nextButton.setDisable(true);// disable next button
         restartButton.setDisable(true); // disable restart
-        // TODO: reset the main stage to first needed state
+
         manager.reset(); // reset the demo manager
     } // end method
 
@@ -230,7 +230,6 @@ public class Gym {
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) {
         System.out.println("Starting Instructor Application.");
-        // TODO: on close, app should really add itself back to the drop down. small detail if time.
         AgentId agentId = new AgentId((String)instructorSelection.getSelectionModel().getSelectedItem());
         instructorSelection.getItems().remove(agentId.getId());
         instructorApplications.get(agentId).start();
@@ -281,7 +280,6 @@ public class Gym {
     @FXML
     private void startMemberApp(MouseEvent mouseEvent) {
         System.out.println("Starting Member Application.");
-        // TODO: on close, app should really add itself back to the drop down. small detail if time.
         AgentId agentId = new AgentId((String)memberSelection.getSelectionModel().getSelectedItem());
         memberSelection.getItems().remove(agentId.getId());
         memberApplications.get(agentId).start();

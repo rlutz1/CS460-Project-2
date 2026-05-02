@@ -204,7 +204,6 @@ public class DemoManager {
             }
         });
 
-
         // transition to scenario 2
     } // end method
 

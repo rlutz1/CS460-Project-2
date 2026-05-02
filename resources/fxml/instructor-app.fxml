@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="858.0" spacing="5" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InstructorApplication.InstructorApplication"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="858.0" spacing="5" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InstructorApplication.InstructorApplication"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="5">
          <children>
-            <TextArea fx:id="inputArea" editable="true" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Action requests and inputs" wrapText="true" HBox.hgrow="ALWAYS">
+            <TextArea fx:id="inputArea" editable="true" minWidth="-Infinity" prefHeight="100.0" prefWidth="246.0" promptText="Action requests and inputs" wrapText="true" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="20.0" />
                </font>
             </TextArea>
-            <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#sendAction" prefHeight="102.0" prefWidth="132.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Confirm Request" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="Calibri" size="24.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="true" mouseTransparent="false" onMouseClicked="#sendSchedule" prefHeight="102.0" prefWidth="132.0" style="-fx-background-color: lavender; -fx-border-color: black" text="View Class Schedule" textAlignment="CENTER" wrapText="true">
+            <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#sendAction" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Confirm Request" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#requestItinerary" prefHeight="102.0" prefWidth="132.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Make Itinerary for Member" textAlignment="CENTER" wrapText="true">
+            <Button mnemonicParsing="true" mouseTransparent="false" onMouseClicked="#sendSchedule" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: lavender; -fx-border-color: black" text="View Class Schedule" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#requestItinerary" prefHeight="102.0" prefWidth="120.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Make Itinerary for Member" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#openGenReportWindow" prefHeight="102.0" prefWidth="100.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Generate Report" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -37,7 +44,7 @@
                   <Font size="27.0" />
                </font>
             </TextArea>
-            <Button mnemonicParsing="false" mouseTransparent="true" onMouseClicked="#confirm" prefHeight="102.0" prefWidth="198.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Acknowledge" textAlignment="CENTER">
+            <Button mnemonicParsing="false" onMouseClicked="#confirm" prefHeight="102.0" prefWidth="198.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Acknowledge" textAlignment="CENTER">
                <font>
                   <Font name="Calibri" size="24.0" />
                </font>

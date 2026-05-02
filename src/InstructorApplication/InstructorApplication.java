@@ -7,14 +7,23 @@ import GSMS.Notification.AlertLevel;
 import GSMS.Notification.Notification;
 import GSMS.Recommendation.RecommendationDispatcher;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * encapsulation of a driver for an instructor application
  */
 public class InstructorApplication {
+
+    public final static String REPORT_WINDOW_FXML = "/fxml/report-window.fxml";
+    public final static String REPORT_WINDOW_TITLE = "Report Request Form";
 
     private Stage myStage; // this is for holding onto the initialized application to show later
     private AgentId id; // for ease of use as needed.
@@ -57,6 +66,33 @@ public class InstructorApplication {
 
     @FXML
     private TextArea newNotificationLog;
+
+    @FXML
+    public void openGenReportWindow(MouseEvent mouseEvent) throws IOException {
+        System.out.println("slkdnasdskdlasmd");
+        URL main = getClass().getResource(REPORT_WINDOW_FXML); // grab main xml
+
+        if (main != null) { // null catch
+            FXMLLoader loader = new FXMLLoader(main);
+            Parent root = loader.load(); // load it
+            Stage stage = new Stage();
+            stage.setTitle(REPORT_WINDOW_TITLE);
+            stage.setScene(new Scene(root));
+
+            ReportWindow reportWindow = loader.getController();
+            reportWindow.parent = this; // set this as the parent controller
+            stage.show();
+        } else {
+            System.out.println("Something went wrong: " + REPORT_WINDOW_FXML + " returned null on start.");
+        } // end if
+    } // end method
+
+    /**
+     * called from the report window
+     */
+    public void generateReport() {
+//        api.requestReport()...
+    } // end method
 
     @FXML
     public void sendAction(MouseEvent mouseEvent) {
