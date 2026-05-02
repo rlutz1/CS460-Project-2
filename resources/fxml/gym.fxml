@@ -23,9 +23,9 @@
       <children>
             <StackPane fx:id="mainStage" prefHeight="600.0" prefWidth="800.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <Rectangle fx:id="gymBackground" arcHeight="5.0" arcWidth="5.0" fill="#ffe88a7c" height="600.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-                  <AnchorPane fx:id="entireGym" prefHeight="600.0" prefWidth="800.0">
+                  <AnchorPane fx:id="entireGym" prefHeight="600.0" prefWidth="800.0" visible="false">
                      <children>
+                        <Rectangle fx:id="gymBackground" arcHeight="5.0" arcWidth="5.0" fill="#ffe88a7c" height="600.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
                         <Rectangle fx:id="classroom1" arcHeight="5.0" arcWidth="5.0" fill="#ff90213c" height="300.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
                         <Rectangle fx:id="targetClassroom" arcHeight="5.0" arcWidth="5.0" fill="#ff901f" height="300.0" layoutX="400.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
                         <HBox fx:id="otherMembers" layoutX="420.0" layoutY="172.0" prefHeight="70.0" prefWidth="200.0" />
@@ -36,6 +36,7 @@
                         <Rectangle fx:id="audio1" arcHeight="5.0" arcWidth="5.0" fill="#acacac" height="38.0" layoutX="779.0" layoutY="131.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
                      </children>
                   </AnchorPane>
+                  <AnchorPane fx:id="targetMemberHouse" prefHeight="200.0" prefWidth="200.0" />
                </children>
             </StackPane>
             <VBox fx:id="scenarioControlPanel" layoutX="5.0" layoutY="689.0" prefHeight="78.0" prefWidth="514.0" style="-fx-background-color: lightgrey;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="5.0">

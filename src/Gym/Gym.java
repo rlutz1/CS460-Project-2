@@ -55,6 +55,10 @@ public class Gym {
     /* FRONTEND PIECES FROM FXML -- DYNAMIC OBJECTS */
     @FXML
     public StackPane mainStage; // overarching gym intricacies
+
+    @FXML
+    public AnchorPane targetMemberHouse; // the anchor pane to signify the member house for scene 1
+
     @FXML
     public AnchorPane entireGym; // the main gym space container
     @FXML
@@ -138,6 +142,8 @@ public class Gym {
     public void initialize() {
         // yield all these to manager
         manager.entryWay = this.entryWay;
+        manager.targetMemberHouse = this.targetMemberHouse;
+        manager.entireGym = this.entireGym;
         // the rest wait for dynamic creation
     } // end method
 

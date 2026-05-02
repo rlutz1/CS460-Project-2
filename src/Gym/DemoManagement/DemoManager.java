@@ -9,6 +9,7 @@ import Gym.Hardware.Hardware;
 import Gym.Hardware.WearableSensors;
 import javafx.animation.*;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -29,6 +30,8 @@ public class DemoManager {
     private int currState;
 
 //    public StackPane mainStage;
+    public AnchorPane targetMemberHouse;
+    public AnchorPane entireGym;
     public MemberGraphic targetMember;
     public InstructorGraphic targetInstructor;
     public HBox otherMembers;
@@ -82,6 +85,7 @@ public class DemoManager {
         Transitions.LiveTransitions.clear();
 
         resetAllTransitionalObjects(); // reset all the animated objects
+
     } // end mehtod
 
     /**
@@ -140,11 +144,23 @@ public class DemoManager {
      * remove out the second scenario frames
      */
     private void initScenario2() {
+        // set up the gym scene
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                targetMemberHouse.setVisible(false);
+                entireGym.setVisible(true);
+            }
+            @Override
+            public String toString() {
+                return "Target arrives at gym.";
+            }
+        });
+
         // move the target in the classroom
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                List<Node> members = otherMembers.getChildren();
                 Transitions.EnterClassroom(
                         targetMember,
                         2,
