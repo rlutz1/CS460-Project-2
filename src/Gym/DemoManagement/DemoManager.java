@@ -86,6 +86,9 @@ public class DemoManager {
 
         resetAllTransitionalObjects(); // reset all the animated objects
 
+        // reset the original scene setup.
+        targetMemberHouse.setVisible(true);
+        entireGym.setVisible(false);
     } // end mehtod
 
     /**
