@@ -26,6 +26,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,9 +61,13 @@ public class Gym {
     @FXML
     public AnchorPane targetMemberHouse; // the anchor pane to signify the member house for scene 1
     @FXML
-    public Circle rug; // hehe rug
+    public Shape rug; // hehe rug
     @FXML
-    public Rectangle sofa; // hehe sofa as start point
+    public Shape sofa; // hehe sofa as start point
+    @FXML
+    public Shape houseDoorway; // hehe sofa as start point
+    @FXML
+    public Text houseChatBubble; // hehe for some text
 
     @FXML
     public AnchorPane entireGym; // the main gym space container
@@ -93,7 +99,7 @@ public class Gym {
 
     /* OBJECTS CREATED DYNAMICALLY AND INSERTED TO FXML LAYOUT */
     public MemberGraphic targetMemberInGym;
-    public MemberGraphic targetMemberAtHome;
+    public MemberGraphic targetMemberInHouse;
     public InstructorGraphic targetInstructor;
 
     /* FRONTEND PIECES FROM FXML -- INTERACTIVE OBJECTS */
@@ -148,6 +154,8 @@ public class Gym {
         // yield all these to manager
         manager.entryWay = this.entryWay;
         manager.targetMemberHouse = this.targetMemberHouse;
+        manager.houseChatBubble = this.houseChatBubble;
+        manager.houseDoorway = this.houseDoorway;
         manager.entireGym = this.entireGym;
         // the rest wait for dynamic creation
     } // end method
@@ -366,10 +374,10 @@ public class Gym {
         entireGym.getChildren().add(targetMemberInGym);
         // insert target member in their house as a separate component for now instead
         // of refactoring a ton about the existing graphic.
-        targetMemberAtHome = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
-        targetMemberAtHome.setLayoutX(sofa.getLayoutX() + targetMemberAtHome.width);
-        targetMemberAtHome.setLayoutY(sofa.getLayoutY());
-        targetMemberHouse.getChildren().add(targetMemberAtHome);
+        targetMemberInHouse = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
+        targetMemberInHouse.setLayoutX(sofa.getLayoutX() + targetMemberInHouse.width);
+        targetMemberInHouse.setLayoutY(sofa.getLayoutY());
+        targetMemberHouse.getChildren().add(targetMemberInHouse);
         // insert the target instructor on the gym stage
         targetInstructor= new InstructorGraphic(initPackage.targetInstructor().id(), Color.PURPLE);
         targetInstructor.setLayoutX(targetInstructorStartPoint.getLayoutX() - targetInstructor.width);
@@ -402,6 +410,7 @@ public class Gym {
 
         // add to demo manager
         manager.targetMemberInGym = this.targetMemberInGym;
+        manager.targetMemberInHouse = this.targetMemberInHouse;
         manager.targetInstructor = this.targetInstructor;
         manager.otherMembers = this.otherMembers;
         manager.targetHardware = this.allSensors;

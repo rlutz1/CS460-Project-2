@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,11 @@ public class DemoManager {
 
 //    public StackPane mainStage;
     public AnchorPane targetMemberHouse;
+    public Text houseChatBubble;
     public AnchorPane entireGym;
     public MemberGraphic targetMemberInGym;
     public MemberGraphic targetMemberInHouse;
+    public Shape houseDoorway;
     public InstructorGraphic targetInstructor;
     public HBox otherMembers;
     public Shape entryWay;
@@ -98,6 +101,13 @@ public class DemoManager {
         targetMemberInGym.root.setFill(targetMemberInGym.baseColor);
         targetMemberInGym.setVisible(true);
 
+        targetMemberInHouse.setTranslateX(0);
+        targetMemberInHouse.setTranslateY(0);
+        targetMemberInHouse.setScaleX(1);
+        targetMemberInHouse.setScaleY(1);
+        targetMemberInHouse.root.setFill(targetMemberInHouse.baseColor);
+        targetMemberInHouse.setVisible(true);
+
         for (Node member : otherMembers.getChildren()) {
             member.setTranslateX(0);
             member.setTranslateY(0);
@@ -121,7 +131,7 @@ public class DemoManager {
      * initialize the demo state list.
      */
     private void init() {
-//        initScenario1();
+        initScenario1();
         initScenario2();
         initScenario3();
         initScenario4();
@@ -133,8 +143,68 @@ public class DemoManager {
      */
     private void initScenario1() {
         // TODO
-        // set an initial scene.
+        // enter the shame zone
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                // just to be sure correct scene is active, but it should be.
+                targetMemberHouse.setVisible(true);
+                entireGym.setVisible(false);
+
+                // simple text bubble for now, if time, make prettier
+                houseChatBubble.setText(
+                        "Ugh, I've been here for hours, covered in Protein Dorito crumbs.\n" +
+                        "Maybe I should at least do something at home..."
+                        );
+            }
+            @Override
+            public String toString() {
+                return "Loser at home, spur a recommendation request.";
+            }
+        });
+
         // control goes over to the applications
+
+        // you know what, screw it, go to the gym
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                // simple text bubble for now, if time, make prettier
+                houseChatBubble.setText(
+                        "Come on, dawg, you're better than this.\n" +
+                        "Dust off the crumbs and get to the gym."
+                );
+            }
+            @Override
+            public String toString() {
+                return "Loser decides to stop being a loser.";
+            }
+        });
+
+        // transition to going to the gym
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                // empty the chat
+                houseChatBubble.setText("");
+
+                // transition him out the house.
+                Transitions.MoveWithExit(
+                        targetMemberInHouse,
+                        3,
+                        houseDoorway.getLayoutX() - targetMemberInHouse.getLayoutX() - 50,
+                        houseDoorway.getLayoutY() - targetMemberInHouse.getLayoutY() + 50,
+                        false,
+                        'y'
+                );
+            }
+            @Override
+            public String toString() {
+                return "Loser decides to stop being a loser.";
+            }
+        });
+
+
         // transition to scenario 2
     } // end method
 
@@ -159,12 +229,14 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.EnterClassroom(
+                Transitions.Move(
                         targetMemberInGym,
                         2,
                         // TODO: this should be based upon distance away
                         otherMembers.getLayoutX() + otherMembers.getWidth() - targetMemberInGym.width,
-                        - otherMembers.getLayoutY() - otherMembers.getHeight()
+                        - otherMembers.getLayoutY() - otherMembers.getHeight(),
+                        true,
+                        'x'
                 );
             }
             @Override
@@ -418,11 +490,13 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.ExitClassroom(
+                Transitions.MoveWithExit(
                         targetMemberInGym,
                         2,
                         -20, // TODO: again, funky layout stuff that needs fixing
-                        20
+                        20,
+                        true,
+                        'y'
                 );
             }
             @Override
