@@ -20,6 +20,7 @@ public class MemberApplication {
     private int age;
     private int normalHeartRateAvg;
     private int targetHeartRate; // Maybe keep separate?
+    private int minSafeRate, maxSafeRate;
     private String conditions; // the "PRIV_" is meant for database to keep such info safe from anyone other than member and permitted individuals
     private boolean isAthlete;
 
@@ -27,6 +28,8 @@ public class MemberApplication {
         this.age = 35;
         this.normalHeartRateAvg = 70;
         this.targetHeartRate = 220 - age; // Maybe keep separate?
+        this.minSafeRate = (int)(this.targetHeartRate * 0.5);
+        this.maxSafeRate = (int)(this.targetHeartRate * 0.85);
         this.conditions = "PRIV_ Type 2 Diabetes"; // the "PRIV_" is meant for database to keep such info safe from anyone other than member and permitted individuals
         this.isAthlete = false;
     } // end constructor
@@ -93,6 +96,29 @@ public class MemberApplication {
 
     @FXML
     public void sendAction(MouseEvent mouseEvent) {
+        if (request.getText() == null || request.getText().trim().isEmpty()) {
+            memberLog.appendText("No request made\n");
+        } else {
+            String actions[] = request.getText().toLowerCase().split("\n");
+            for (String action:actions) {
+                switch (action) {
+                    case "clear":
+                        memberLog.clear();
+                        break;
+                    case "view schedule":
+                        api.transmitScheduleViewingRequest(id, "");
+                        break;
+                    case "generate workout":
+                        getGeneratedWorkout(id, "Glute day, every day.");
+                        break;
+                    default:
+                        api.transmitRecommendationRequest(id, "XXX");
+                        break;
+                }
+            }
+        }
+        request.clear();
+
 //        if (request.getText() == null || request.getText().trim().isEmpty()) {
 //            memberLog.appendText("No request made\n");
 //        } else {
@@ -117,6 +143,7 @@ public class MemberApplication {
 
     @FXML
     public void sendSchedule(MouseEvent mouseEvent) {
+        api.transmitScheduleViewingRequest(id, "");
 //        String schedule;
 //        memberLog.appendText("Retrieving gym schedule\n");
 //        schedule = api.receiveRequest(id, "view schedule", age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);

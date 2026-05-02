@@ -7,5 +7,6 @@ package GSMS.Common;
  */
 public enum RecommendationType {
     SYSTEM_GENERATE,
-    ANALYZE
+    ANALYZE,
+    SEND_SCHEDULE
 } // end enum

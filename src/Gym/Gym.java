@@ -234,6 +234,10 @@ public class Gym {
             Stage stage = new Stage();
             stage.setTitle(INSTRUCTOR_WINDOW_NAME + ": Hello, " + id.getName());
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event -> {
+                instructorSelection.getItems().add(id.getId());
+                instructorSelection.setValue(id.getId());
+            });
 
             InstructorApplication instructorApp = loader.getController();
             instructorApp.setMyStage(stage);
@@ -280,6 +284,10 @@ public class Gym {
             Stage stage = new Stage();
             stage.setTitle(MEMBER_WINDOW_NAME + ": Hello, " + id.getName());
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event -> {
+                memberSelection.getItems().add(id.getId());
+                memberSelection.setValue(id.getId());
+            });
 
             MemberApplication memberApp = loader.getController();
             memberApp.setMyStage(stage);
@@ -308,7 +316,7 @@ public class Gym {
     ) throws IOException {
         for (AgentInitializer init : initPackage) {
             switch (init.id().getType()) {
-                case AgentType.MEMBER:
+                case MEMBER:
                     MemberApplication memberApp = initMemberApp(init.id(), memberApi);
                     if (memberApp != null) {
                         memberApplications.put(init.id(), memberApp);
@@ -316,7 +324,7 @@ public class Gym {
                         System.out.println("[GYM INIT] initMemberApp returned null!");
                     } // end if
                     break;
-                case AgentType.INSTRUCTOR:
+                case INSTRUCTOR:
                     InstructorApplication instructorApp = initInstructorApp(init.id(), instructorApi);
                     if (instructorApp != null) {
                         instructorApplications.put(init.id(), instructorApp);
