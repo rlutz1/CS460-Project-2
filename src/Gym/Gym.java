@@ -58,6 +58,10 @@ public class Gym {
 
     @FXML
     public AnchorPane targetMemberHouse; // the anchor pane to signify the member house for scene 1
+    @FXML
+    public Circle rug; // hehe rug
+    @FXML
+    public Rectangle sofa; // hehe sofa as start point
 
     @FXML
     public AnchorPane entireGym; // the main gym space container
@@ -88,7 +92,8 @@ public class Gym {
     public List<Hardware> allSensors; // this is muy mal, but helpful for handing off to demo manager
 
     /* OBJECTS CREATED DYNAMICALLY AND INSERTED TO FXML LAYOUT */
-    public MemberGraphic targetMember;
+    public MemberGraphic targetMemberInGym;
+    public MemberGraphic targetMemberAtHome;
     public InstructorGraphic targetInstructor;
 
     /* FRONTEND PIECES FROM FXML -- INTERACTIVE OBJECTS */
@@ -252,7 +257,6 @@ public class Gym {
 
             instructorSelection.getItems().add(id.getId());
             instructorSelection.setValue(id.getId());
-            // TODO would like to add agent id and name to the app here
 
             return instructorApp;
         } else {
@@ -355,18 +359,23 @@ public class Gym {
      * @param initPackage
      */
     public void initOnsiteComponents(GymInitializer initPackage) {
-        // insert the target member on necessary stages
-        targetMember = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
-//        targetMember.setLayoutX(entryWay.getLayoutX() - targetMember.width);
-        targetMember.setLayoutX(entryWay.getLayoutX() + entryWay.getWidth());
-        targetMember.setLayoutY(entryWay.getLayoutY()  + (entryWay.getHeight() / 2) - targetMember.height);
-        entireGym.getChildren().add(targetMember);
-        // insert the target instructor to necessary stages
+        // insert the target member on the gym stage
+        targetMemberInGym = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
+        targetMemberInGym.setLayoutX(entryWay.getLayoutX() + entryWay.getWidth());
+        targetMemberInGym.setLayoutY(entryWay.getLayoutY()  + (entryWay.getHeight() / 2) - targetMemberInGym.height);
+        entireGym.getChildren().add(targetMemberInGym);
+        // insert target member in their house as a separate component for now instead
+        // of refactoring a ton about the existing graphic.
+        targetMemberAtHome = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
+        targetMemberAtHome.setLayoutX(sofa.getLayoutX() + targetMemberAtHome.width);
+        targetMemberAtHome.setLayoutY(sofa.getLayoutY());
+        targetMemberHouse.getChildren().add(targetMemberAtHome);
+        // insert the target instructor on the gym stage
         targetInstructor= new InstructorGraphic(initPackage.targetInstructor().id(), Color.PURPLE);
         targetInstructor.setLayoutX(targetInstructorStartPoint.getLayoutX() - targetInstructor.width);
         targetInstructor.setLayoutY(targetInstructorStartPoint.getLayoutY() - targetInstructor.height);
         entireGym.getChildren().add(targetInstructor);
-        // insert the general members to necessary stages
+        // insert the general members on the gym stage
         // only the target right now. room for change, but not right now, lol
         for (AgentInitializer member : initPackage.targetClassroom().membersInClass()) {
             otherMembers.getChildren().add(new MemberGraphic(member.id(), Color.GREEN));
@@ -392,7 +401,7 @@ public class Gym {
         } // end loop
 
         // add to demo manager
-        manager.targetMember = this.targetMember;
+        manager.targetMemberInGym = this.targetMemberInGym;
         manager.targetInstructor = this.targetInstructor;
         manager.otherMembers = this.otherMembers;
         manager.targetHardware = this.allSensors;

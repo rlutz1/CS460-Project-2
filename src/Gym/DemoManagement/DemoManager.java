@@ -3,17 +3,11 @@ package Gym.DemoManagement;
 import Gym.AgentGraphics.AgentGraphic;
 import Gym.AgentGraphics.InstructorGraphic;
 import Gym.AgentGraphics.MemberGraphic;
-import Gym.Hardware.AudioSensor;
-import Gym.Hardware.Camera;
 import Gym.Hardware.Hardware;
-import Gym.Hardware.WearableSensors;
 import javafx.animation.*;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
@@ -32,7 +26,8 @@ public class DemoManager {
 //    public StackPane mainStage;
     public AnchorPane targetMemberHouse;
     public AnchorPane entireGym;
-    public MemberGraphic targetMember;
+    public MemberGraphic targetMemberInGym;
+    public MemberGraphic targetMemberInHouse;
     public InstructorGraphic targetInstructor;
     public HBox otherMembers;
     public Shape entryWay;
@@ -96,12 +91,12 @@ public class DemoManager {
      * a transition at ANY point. add any and all here.
      */
     private void resetAllTransitionalObjects() {
-        targetMember.setTranslateX(0);
-        targetMember.setTranslateY(0);
-        targetMember.setScaleX(1);
-        targetMember.setScaleY(1);
-        targetMember.root.setFill(targetMember.baseColor);
-        targetMember.setVisible(true);
+        targetMemberInGym.setTranslateX(0);
+        targetMemberInGym.setTranslateY(0);
+        targetMemberInGym.setScaleX(1);
+        targetMemberInGym.setScaleY(1);
+        targetMemberInGym.root.setFill(targetMemberInGym.baseColor);
+        targetMemberInGym.setVisible(true);
 
         for (Node member : otherMembers.getChildren()) {
             member.setTranslateX(0);
@@ -165,10 +160,10 @@ public class DemoManager {
             @Override
             public void activate() {
                 Transitions.EnterClassroom(
-                        targetMember,
+                        targetMemberInGym,
                         2,
                         // TODO: this should be based upon distance away
-                        otherMembers.getLayoutX() + otherMembers.getWidth() - targetMember.width,
+                        otherMembers.getLayoutX() + otherMembers.getWidth() - targetMemberInGym.width,
                         - otherMembers.getLayoutY() - otherMembers.getHeight()
                 );
             }
@@ -186,7 +181,7 @@ public class DemoManager {
                     Transitions.Workout((AgentGraphic) member, 1, 0.5);
                 } // end loop
 
-                Transitions.Workout(targetMember, 1, 0.5);
+                Transitions.Workout(targetMemberInGym, 1, 0.5);
             }
             @Override
             public String toString() {
@@ -199,7 +194,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.TriggerExhaustion(targetMember, 4);
+                Transitions.TriggerExhaustion(targetMemberInGym, 4);
             }
             @Override
             public String toString() {
@@ -229,8 +224,8 @@ public class DemoManager {
                 Transitions.LiveTransitions.forEach(Animation::stop);
                 Transitions.LiveTransitions.clear();
                 // stop everyone from "working out"
-                targetMember.setScaleX(1);
-                targetMember.setScaleY(1);
+                targetMemberInGym.setScaleX(1);
+                targetMemberInGym.setScaleY(1);
                 for (Node member : otherMembers.getChildren()) {
                     member.setScaleX(1);
                     member.setScaleY(1);
@@ -246,7 +241,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.RelieveExhaustion(targetMember, 4);
+                Transitions.RelieveExhaustion(targetMemberInGym, 4);
             }
             @Override
             public String toString() {
@@ -262,7 +257,7 @@ public class DemoManager {
                     Transitions.Workout((AgentGraphic) member, 1, 0.5);
                 } // end loop
 
-                Transitions.Workout(targetMember, 1, 0.5);
+                Transitions.Workout(targetMemberInGym, 1, 0.5);
             }
             @Override
             public String toString() {
@@ -279,7 +274,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.TriggerConflict(targetMember, (AgentGraphic) otherMembers.getChildren().getLast(), 2);
+                Transitions.TriggerConflict(targetMemberInGym, (AgentGraphic) otherMembers.getChildren().getLast(), 2);
             }
             @Override
             public String toString() {
@@ -309,8 +304,8 @@ public class DemoManager {
                 Transitions.LiveTransitions.forEach(Animation::stop);
                 Transitions.LiveTransitions.clear();
                 // stop everyone from "working out"
-                targetMember.setScaleX(1);
-                targetMember.setScaleY(1);
+                targetMemberInGym.setScaleX(1);
+                targetMemberInGym.setScaleY(1);
                 for (Node member : otherMembers.getChildren()) {
                     member.setScaleX(1);
                     member.setScaleY(1);
@@ -326,7 +321,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.RelieveConflict(targetMember, (AgentGraphic) otherMembers.getChildren().getLast(), 5);
+                Transitions.RelieveConflict(targetMemberInGym, (AgentGraphic) otherMembers.getChildren().getLast(), 5);
             }
             @Override
             public String toString() {
@@ -342,7 +337,7 @@ public class DemoManager {
                     Transitions.Workout((AgentGraphic) member, 1, 0.5);
                 } // end loop
 
-                Transitions.Workout(targetMember, 1, 0.5);
+                Transitions.Workout(targetMemberInGym, 1, 0.5);
             }
             @Override
             public String toString() {
@@ -359,7 +354,7 @@ public class DemoManager {
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                Transitions.TriggerHealthEmergency(targetMember, 1);
+                Transitions.TriggerHealthEmergency(targetMemberInGym, 1);
             }
             @Override
             public String toString() {
@@ -389,8 +384,8 @@ public class DemoManager {
                 Transitions.LiveTransitions.forEach(Animation::stop);
                 Transitions.LiveTransitions.clear();
                 // stop everyone from "working out"
-                targetMember.setScaleX(1);
-                targetMember.setScaleY(1);
+                targetMemberInGym.setScaleX(1);
+                targetMemberInGym.setScaleY(1);
                 for (Node member : otherMembers.getChildren()) {
                     member.setScaleX(1);
                     member.setScaleY(1);
@@ -424,7 +419,7 @@ public class DemoManager {
             @Override
             public void activate() {
                 Transitions.ExitClassroom(
-                        targetMember,
+                        targetMemberInGym,
                         2,
                         -20, // TODO: again, funky layout stuff that needs fixing
                         20
