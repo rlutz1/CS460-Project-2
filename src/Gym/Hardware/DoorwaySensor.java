@@ -1,13 +1,15 @@
 package Gym.Hardware;
 
+import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 
-public class DoorwaySensor {
+public class DoorwaySensor implements Hardware {
 
     public Wearable component; // to receive signals from front end
+    public RoomId room; // for readability
 
-    public DoorwaySensor() {
-
+    public DoorwaySensor(RoomId room) {
+        this.room = room;
     } // end constructor
 
     /**

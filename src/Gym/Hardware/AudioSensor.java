@@ -1,13 +1,15 @@
 package Gym.Hardware;
 
+import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
 
-public class AudioSensor {
+public class AudioSensor implements Hardware {
 
     public Audio component; // to receive signals from front end
+    public RoomId room; // for readability
 
-    public AudioSensor() {
-
+    public AudioSensor(RoomId room) {
+        this.room = room;
     } // end constructor
 
     /**

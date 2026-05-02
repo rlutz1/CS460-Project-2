@@ -6,25 +6,47 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="MemberApplication.MemberApplication"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="858.0" spacing="5" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MemberApplication.MemberApplication"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
     <children>
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5">
             <children>
-                <TextArea editable="false" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" text="No notifications... " wrapText="true" HBox.hgrow="ALWAYS">
+                <TextArea fx:id="request" editable="true" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Request here" wrapText="true" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </TextArea>
+                <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#sendAction" prefHeight="102.0" prefWidth="132.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Confirm Request" textAlignment="CENTER" wrapText="true">
+                    <font>
+                        <Font name="Calibri" size="24.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="true" mouseTransparent="false" onMouseClicked="#sendSchedule" prefHeight="102.0" prefWidth="132.0" style="-fx-background-color: lavender; -fx-border-color: black" text="View Schedule" textAlignment="CENTER" wrapText="true">
+                    <font>
+                        <Font name="Calibri" size="18.0" />
+                    </font>
+                </Button>
+                <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#getGeneratedWorkout" prefHeight="102.0" prefWidth="132.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Generate Workout" textAlignment="CENTER" wrapText="true">
+                    <font>
+                        <Font name="Calibri" size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5">
+            <children>
+                <TextArea fx:id="newNotificationLog" editable="false" minWidth="-Infinity" mouseTransparent="true" prefHeight="200.0" prefWidth="500.0" promptText="No new notifications... " wrapText="true" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="27.0" />
                     </font>
                 </TextArea>
-                <Button disable="true" mnemonicParsing="false" mouseTransparent="true" prefHeight="102.0" prefWidth="198.0" style="-fx-background-color: lavender;" text="Acknowledge" textAlignment="CENTER">
+                <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#confirm" prefHeight="102.0" prefWidth="198.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Acknowledge" textAlignment="CENTER">
                     <font>
                         <Font name="Calibri" size="24.0" />
                     </font>
                 </Button>
             </children>
         </HBox>
-        <TextArea editable="false" prefHeight="18.0" prefWidth="646.0" style="-fx-background-color: grey;" text="Text area for feedback dump.&#10;" wrapText="true" VBox.vgrow="ALWAYS">
+        <TextArea fx:id="memberLog" editable="false" prefHeight="18.0" prefWidth="762.0" promptText="Text area for feedback dump.&#10;" style="-fx-background-color: grey;" wrapText="true" VBox.vgrow="ALWAYS">
             <font>
                 <Font size="16.0" />
             </font>

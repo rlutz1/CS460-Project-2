@@ -1,13 +1,15 @@
 package Gym.Hardware;
 
+import GSMS.Common.AgentId;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 
-public class WearableSensors {
+public class WearableSensors implements Hardware {
 
     public Wearable component; // to receive signals from front end
+    public AgentId member; // for readability
 
-    public WearableSensors() {
-
+    public WearableSensors(AgentId member) {
+        this.member = member;
     } // end constructor
 
     /**

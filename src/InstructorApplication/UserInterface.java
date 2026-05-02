@@ -7,7 +7,7 @@ package InstructorApplication;
 public class UserInterface {
 
     public UserInterface() {
-
+        // Dummy instructor with full access
     } // end constructor
 
     /**

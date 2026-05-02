@@ -1,5 +1,12 @@
 package GSMS.Recommendation;
 
+import GSMS.Agents.AgentContainer;
+import GSMS.Common.AgentId;
+import GSMS.Common.RecommendationType;
+import GSMS.DataManagement.DataManager;
+import GSMS.Notification.AlertLevel;
+import GSMS.Notification.Notification;
+
 /**
  * class to stand as component for recc dispatcher
  *
@@ -10,8 +17,10 @@ package GSMS.Recommendation;
 
 public class RecommendationDispatcher {
 
-    public RecommendationDispatcher() {
+    private RecommendationAI ai;
 
+    public RecommendationDispatcher() {
+        this.ai = new RecommendationAI();
     } // end constructor
 
     /**
@@ -22,8 +31,63 @@ public class RecommendationDispatcher {
      * @param requestType
      * @param requestData
      */
-    public void receiveRequest(String senderId, String requestType, String requestData) {
+    public void receiveRequest(AgentId senderId, RecommendationType requestType, String requestData) {
+        String recommendation = "No recc generated.";
+        switch (requestType) {
+            case SYSTEM_GENERATE:
+                // generate with AI
+                recommendation = ai.generateWorkout(DataManager.getProfile(senderId, null), requestData);
+                break;
 
+            case ANALYZE:
+                // low priority, not in demo, so don't stress this for now.
+                // analyze with AI
+                // generate list of enrolled members with DataManager.getProfile()
+                // recommendation = ai.analyzeItinerary(list of enrolled, requestData)
+                break;
+
+            case SEND_SCHEDULE:
+                recommendation = "Nothing planned for today! Schedule now, ya slacker!";
+                break;
+            default:
+                System.out.println("[RECC DISPATCH] A request type was received that is not recognized: " + requestType);
+        } // end switch case
+
+        Notification information = new Notification(
+                recommendation,
+                AlertLevel.INFORMATIONAL_MESSAGE,
+                senderId
+        );
+
+        switch (senderId.getType()) {
+            case MEMBER -> AgentContainer.MemberApps.get(senderId).sendInformation(information);
+            case INSTRUCTOR -> AgentContainer.InstructorApps.get(senderId).sendInformation(information);
+            default -> System.out.println("[RECC DISPATCH] Somehow a sender id was sent with not defined type: " + senderId);
+        } // end switch case
+
+//        String result;
+//        String splitData[] = requestData.replace(",", "").split(" ");
+//        switch (requestType) {
+//            case "make itinerary request":
+//                System.out.println("making itinerary for member " + senderId);
+//                result = "Lift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
+//                break;
+//            case "generate itinerary":
+//                System.out.println("generating itinerary based on recommendations from " + senderId + " to " + splitData[2]);
+//                result = senderId +"'s recommendation to " + splitData[2] + ":\n\tLift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
+//                break;
+////            case "view schedule":
+////                System.out.println("Retrieving gym schedule for member " + senderId);
+////                result = "Nothing planned for today! Schedule now, ya slacker!\n";
+////                break;
+////            case "clear":
+////                result = "clear";
+////                break;
+//            default:
+//                result = "Invalid request!\n";
+//                System.out.println(result);
+//        }
+//        return result;
     } // end method
 
     /**
@@ -33,8 +97,13 @@ public class RecommendationDispatcher {
      * @param instructorId
      * @param responseData
      */
-    public void sendItinerary(String instructorId, String responseData) {
-
+    public String sendItinerary(String instructorId, String responseData) {
+        String output;
+        String data[] = responseData.split(" ");
+        String member = data[0];
+        String itinerary = data[1];
+        output = instructorId + " has made itinerary for " + member + ":\n" + itinerary + "\n";
+        return output;
     } // end method
 
     /**
@@ -44,8 +113,9 @@ public class RecommendationDispatcher {
      * @param memberId
      * @param responseData
      */
-    public void sendGeneratedWorkout(String memberId, String responseData) {
-
+    public String sendGeneratedWorkout(String memberId, String responseData) {
+        String output = memberId + " gets the following workout:\n" + responseData + "\n";
+        return output;
     } // end method
 
 } // end class

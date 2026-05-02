@@ -1,5 +1,10 @@
 package GSMS.EventAnalysis;
 
+import GSMS.Common.AgentId;
+import GSMS.EventAnalysis.SignalReceivers.Event;
+import GSMS.EventAnalysis.SignalReceivers.SignalType;
+import GSMS.Notification.AlertLevel;
+
 /**
  * class to stand as component for live event AI
  */
@@ -7,7 +12,6 @@ package GSMS.EventAnalysis;
 public class LiveEventAI {
 
     public LiveEventAI() {
-
     } // end constructor
 
     /**
@@ -19,10 +23,23 @@ public class LiveEventAI {
      * data.
      * @param data
      * @param signalType
-     * @return
+     * @return non-null event safety/conflict details;
+     *         null, when no safety/conflict event detected.
      */
-    public String detectEvent(String data, String signalType) {
+    public Event detectEvent(String data, SignalType signalType) {
+
+        // dummy event detection for now (prior to actual Ai).
+        AlertLevel alertLevel = AlertLevel.WARNING;
+        String eventInfo = "GENERIC  EVENT  DETECTED";
+        boolean safetyOrConflictDetected = true;
+        double confidenceProbability = 0.8;
+
+        if ( safetyOrConflictDetected ) {
+            return new Event(alertLevel, eventInfo, confidenceProbability,
+                    new AgentId("12345"));
+        }
         return null;
+
     } // end method
 
 } // end class

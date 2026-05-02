@@ -1,5 +1,14 @@
 package GSMS.DataManagement;
 
+import GSMS.Agents.AgentContainer;
+import GSMS.Agents.Instructor;
+import GSMS.Agents.Member;
+import GSMS.Common.AgentId;
+import GSMS.Common.Metadata;
+import MemberApplication.MemberApplication;
+import InstructorApplication.InstructorApplication;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,11 +16,36 @@ import java.util.List;
  */
 
 public class DataManager {
+    // Potential variables for storage to apply to database?
+    public record AlertPair(String key, Enum level) {}
+    private List<AlertPair> notificationList = new ArrayList<>();
+    private List<String> attendanceList = new ArrayList<>();
+    private List<String> memberList = new ArrayList<>();
+    private List<String> instructorList = new ArrayList<>();
 
     public DataManager() {
 
     } // end constructor
 
+    public static void AddProfile(AgentId agentId, Metadata profileInfo, MemberApplication app) {
+        // write new member to the database (implicit for now), but what the profile info is for
+        // create a new member component.
+        Member member = new Member(agentId, app);
+        AgentContainer.MemberApps.put(agentId, member);
+        System.out.println("[DATA MAN] Added profile for member " + agentId);
+    }
+
+    public static void AddProfile(AgentId agentId, Metadata profileInfo, InstructorApplication app) {
+        // write new instructor to the database (implicit for now), but what the profile info is for
+        // create a new instructor component.
+        Instructor instructor = new Instructor(agentId, app);
+        AgentContainer.InstructorApps.put(agentId, instructor);
+        System.out.println("[DATA MAN] Added profile for instructor " + agentId);
+    } // end method
+
+    public static void AddClass(AgentId instructorId, Metadata classInfo) {
+
+    }
     /**
      * return a member or instructor’s profile information
      * requested by the requesting component
@@ -20,7 +54,7 @@ public class DataManager {
      * @param dataSpec
      * @return
      */
-    public String getProfile(String agentId, String dataSpec) {
+    public static String getProfile(AgentId agentId, String dataSpec) {
         return null;
     } // end method
 
