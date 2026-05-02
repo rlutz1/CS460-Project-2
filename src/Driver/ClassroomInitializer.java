@@ -11,7 +11,7 @@ import java.util.List;
  * @param numAudioSensors
  * @param numCameras
  * @param numDoorwaySensors
- * @param agentsOnsite
+
  */
 public record ClassroomInitializer(
         RoomId roomId,

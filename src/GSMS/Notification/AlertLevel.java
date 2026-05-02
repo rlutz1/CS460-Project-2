@@ -16,8 +16,10 @@ package GSMS.Notification;
  *   members in that room + the instructor.
  */
 public enum AlertLevel {
+    INFORMATIONAL_MESSAGE, // lowest
     WARNING,
-    CRITICAL,
-    EMERGENCY,
-    INFORMATIONAL_MESSAGE // only one change for now, but TODO
+    ALERT // highest
+//    CRITICAL,
+//    EMERGENCY,
+
 } // end enum
