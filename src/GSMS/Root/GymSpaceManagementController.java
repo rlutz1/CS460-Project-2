@@ -160,6 +160,9 @@ public class GymSpaceManagementController implements AgentRegistry {
             case RECOMMENDATION_ENGINE:
                 recommendationDispatcher.receiveRequest(info.senderId(), info.recommendationOrAnalysis(), info.data());
                 break;
+            case REPORT_GENERATION:
+                DataManager.GenerateReport(info.senderId(), info.targetIds(), info.reportType(), info.timeFrame());
+                break;
             default:
                 System.err.println("[GSMC] scheduleJob: unrecognized request type in info='"
                     + info + "'. No component delegated.");

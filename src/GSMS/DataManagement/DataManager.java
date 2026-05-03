@@ -5,6 +5,10 @@ import GSMS.Agents.Instructor;
 import GSMS.Agents.Member;
 import GSMS.Common.AgentId;
 import GSMS.Common.Metadata;
+import GSMS.Common.ReportPackage;
+import GSMS.Common.ReportType;
+import GSMS.Notification.AlertLevel;
+import GSMS.Notification.Notification;
 import MemberApplication.MemberApplication;
 import InstructorApplication.InstructorApplication;
 
@@ -22,6 +26,8 @@ public class DataManager {
     private List<String> attendanceList = new ArrayList<>();
     private List<String> memberList = new ArrayList<>();
     private List<String> instructorList = new ArrayList<>();
+
+    private static ReportAI ai = new ReportAI();
 
     public DataManager() {
 
@@ -54,7 +60,7 @@ public class DataManager {
      * @param dataSpec
      * @return
      */
-    public static String getProfile(AgentId agentId, String dataSpec) {
+    public static String GetProfile(AgentId agentId, String dataSpec) {
         return null;
     } // end method
 
@@ -66,7 +72,7 @@ public class DataManager {
      * @param dataSpec
      * @return
      */
-    public String getClass(String classId, String dataSpec) {
+    public static String GetClass(String classId, String dataSpec) {
         return null;
     } // end method
 
@@ -76,7 +82,7 @@ public class DataManager {
      * @param agentId
      * @param modifiction
      */
-    public void modifyProfile(String agentId, String modifiction) {
+    public static void ModifyProfile(String agentId, String modifiction) {
 
     } // end method
 
@@ -86,7 +92,7 @@ public class DataManager {
      * @param classId
      * @param modifiction
      */
-    public void modifyClass(String classId, String modifiction) {
+    public static void ModifyClass(String classId, String modifiction) {
 
     } // end method
 
@@ -100,12 +106,12 @@ public class DataManager {
      * @param timeFrame
      * @return
      */
-    public List<String> retrieveLogs(
+    public static List<String> RetrieveLogs(
             String agentId,
             String targetId,
             String alertLevel,
             String timeFrame
-    )
+        )
     {
         return null;
     } // end method
@@ -123,8 +129,26 @@ public class DataManager {
      * @param reportType
      * @param timeFrame
      */
-    public void generateReport(String targetId, String reportType, String timeFrame) {
+    public static void GenerateReport(
+            AgentId senderId,
+            List<String> targetId,
+            ReportType reportType,
+            Metadata timeFrame
+        )
+    {
+        String report = ai.generateReport(new ReportPackage(targetId, reportType, timeFrame));
 
+        Notification information = new Notification(
+                report,
+                AlertLevel.INFORMATIONAL_MESSAGE,
+                senderId
+        );
+
+        switch (senderId.getType()) {
+            case MEMBER -> AgentContainer.MemberApps.get(senderId).sendInformation(information);
+            case INSTRUCTOR -> AgentContainer.InstructorApps.get(senderId).sendInformation(information);
+            default -> System.out.println("[DATA MAN DISPATCH] Somehow a sender id was sent with not defined type: " + senderId);
+        } // end switch case
     } // end method
 
 } // end class

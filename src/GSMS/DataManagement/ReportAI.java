@@ -1,5 +1,7 @@
 package GSMS.DataManagement;
 
+import GSMS.Common.ReportPackage;
+
 /**
  * class to stand as component for report AI
  */
@@ -16,8 +18,8 @@ public class ReportAI {
      * @param profileAndNotificationInformation
      * @return
      */
-    public String generateReport(String profileAndNotificationInformation) {
-        return null;
+    public String generateReport(ReportPackage profileAndNotificationInformation) {
+        return "This instructor is a nightmare and should be fired.";
     } // end method
 
     /**

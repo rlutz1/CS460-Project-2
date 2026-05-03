@@ -103,6 +103,7 @@ public class InstructorApplication {
     ) {
         // send to api
         api.requestReport(
+                id,
                 targetIds,
                 new ReportType(reportTypes),
                 new Metadata(timeStart + "&" + timeEnd)
