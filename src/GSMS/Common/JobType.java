@@ -6,5 +6,6 @@ package GSMS.Common;
  * gsmc.scheduleJob()
  */
 public enum JobType {
-    RECOMMENDATION_ENGINE
+    RECOMMENDATION_ENGINE,
+    REPORT_GENERATION
 } // end enum

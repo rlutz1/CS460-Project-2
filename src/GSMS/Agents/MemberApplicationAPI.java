@@ -26,7 +26,7 @@ public class MemberApplicationAPI {
                 memberId,
                 RecommendationType.SYSTEM_GENERATE,
                 exerciseType
-        )); // TODO: this is simply working with what is there
+        ));
     } // end method
 
     public void transmitScheduleViewingRequest(AgentId memberId, String viewRequest) {
