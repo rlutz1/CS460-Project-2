@@ -1,9 +1,14 @@
 package GSMS.EventAnalysis;
 
+import Driver.ClassroomInitializer;
+import Driver.GymInitializer;
 import GSMS.Common.AgentId;
 import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Classroom;
 import GSMS.EventAnalysis.SignalReceivers.Event;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 import GSMS.EventAnalysis.SignalReceivers.SignalType;
 import GSMS.Notification.AlertLevel;
 import GSMS.Notification.NotificationDispatcher;
@@ -44,6 +49,50 @@ public class EventAnalyzer {
                       event.agentId());
         }
     }
+
+    /** DEMO INITIALIZER SPECIFIC (START)**/
+
+    // TARGET CLASSROOM METHOD:
+    public void initDemEventAnalyzer(GymInitializer gymInitializer) {
+        ClassroomInitializer classInitializer =
+                gymInitializer.targetClassroom();
+
+        // Classroom itself.
+        Classroom initClassroom = new Classroom(this,
+                classInitializer.roomId());
+        // init Audio components.
+        for (int i = 0; i < classInitializer.numAudioSensors(); i++) {
+            initClassroom.addNewAudioComponent();
+        }
+        // init Video Components.
+        for (int i = 0; i < classInitializer.numCameras(); i++) {
+            initClassroom.addNewVideoComponent();
+        }
+        // inti Wearable Componenets.
+        for (int i = 0; i < classInitializer.membersInClass().size(); i++) {
+            initClassroom.addNewWearableComponent(classInitializer.membersInClass()
+                                                                  .get(i)
+                                                                  .id());
+        }
+
+        // add class to this EventAnalyzer.
+        classrooms.add(initClassroom);
+    }
+
+    public List<Audio> getAudioComponenetsToInit(RoomId classroomId) {
+        Classroom classroom = findClassroom(classroomId);
+        return classroom.getAudioComponent();
+    }
+    public List<Video> getVideoComponenetsToInit(RoomId classroomId) {
+        Classroom classroom = findClassroom(classroomId);
+        return classroom.getVideosComponents();
+    }
+    public List<Wearable> getWearablesToInit(RoomId classroomId) {
+        Classroom classroom = findClassroom(classroomId);
+        return classroom.getWearableComponents();
+    }
+    /** DEMO INITIALIZER SPECIFIC (END)**/
+
     /************************* NON-SAD * helper END   *************************/
 
     /**
