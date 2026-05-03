@@ -13,8 +13,8 @@ public record JobInfo(
         AgentId senderId, // AGENT sending, member or instructor. we need this for feedback
         RecommendationType recommendationOrAnalysis, // whether or not generating or analyzing
         List<String> targetIds, // for report generation: what agents, classes, rooms to focus on
-        ReportType reportType, //
-        Metadata timeFrame,
+        ReportType reportType,  // report types to focus on
+        Metadata timeFrame, // the timeframe for the report
         String data // general use field
     )
 {
