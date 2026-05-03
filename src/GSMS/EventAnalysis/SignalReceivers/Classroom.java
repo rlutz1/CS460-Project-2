@@ -37,8 +37,8 @@ public class Classroom {
         this.wearableComponents = new ArrayList<>();
     } // end constructor
     /************************* NON-SAD * helper START *************************/
-    public String getClassroomId() {
-        return classroomId.getId();
+    public RoomId getClassroomId() {
+        return classroomId;
     }
     public String getVideoFeedData() {
         return videoFeedData;

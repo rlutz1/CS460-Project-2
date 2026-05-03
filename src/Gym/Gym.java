@@ -6,6 +6,9 @@ import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Common.AgentType;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 import Gym.AgentGraphics.InstructorGraphic;
 import Gym.AgentGraphics.MemberGraphic;
 import Gym.DemoManagement.DemoManager;
@@ -364,7 +367,15 @@ public class Gym {
      * TODO: more dynamic creation of hardware if time
      * @param initPackage
      */
-    public void initOnsiteComponents(GymInitializer initPackage) {
+    public void initOnsiteComponents(
+            GymInitializer initPackage,
+            List<Audio> audioListeners,
+            List<Video> videoListeners,
+            List<Wearable> wearableListeners
+
+    ) {
+        /* VISUAL FRONTEND PEOPLE GRAPHICS */
+
         // insert the target member on the gym stage
         targetMemberInGym = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
         targetMemberInGym.setLayoutX(entryWay.getLayoutX() + entryWay.getWidth());
@@ -387,10 +398,17 @@ public class Gym {
             otherMembers.getChildren().add(new MemberGraphic(member.id(), Color.GREEN));
         } // end loop
 
+        /* END VISUAL FRONTEND PEOPLE GRAPHICS */
+
+        /* VISUAL FRONTEND HARDWARE, CONNECTING TO BACKEND LISTENERS */
+
         // initalize the needed front end "signal senders"
         audioSensor1 = new AudioSensor(initPackage.targetClassroom().roomId());
+        audioSensor1.component = audioListeners.getFirst(); // set up component
         cameraFeed1 = new Camera(initPackage.targetClassroom().roomId());
+        cameraFeed1.component = videoListeners.getFirst(); // set up component
         cameraFeed2 = new Camera(initPackage.targetClassroom().roomId());
+        cameraFeed2.component = videoListeners.get(1); // set up component
 
         allSensors = new ArrayList<>(List.of(
                 audioSensor1,
@@ -398,13 +416,19 @@ public class Gym {
                 cameraFeed2
         ));
 
+        int i = 0;
         for (AgentInitializer agent : initPackage.allAgentsOnsite()) {
             if (agent.id().getType() == AgentType.MEMBER) {
                 WearableSensors wearable = new WearableSensors(agent.id());
+                wearable.component = wearableListeners.get(i++); // set up component
                 wearableSensors.add(wearable);
                 allSensors.add(wearable);
             } // end if
         } // end loop
+
+        /* END VISUAL FRONTEND HARDWARE, CONNECTING TO BACKEND LISTENERS */
+
+        /* CONNECT FRONTEND DEMO PIECES TO MANAGER */
 
         // add to demo manager
         manager.targetMemberInGym = this.targetMemberInGym;
@@ -412,6 +436,8 @@ public class Gym {
         manager.targetInstructor = this.targetInstructor;
         manager.otherMembers = this.otherMembers;
         manager.targetHardware = this.allSensors;
+
+        /* END CONNECT FRONTEND DEMO PIECES TO MANAGER */
     } // end method
 
     /*

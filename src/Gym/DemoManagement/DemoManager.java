@@ -142,7 +142,7 @@ public class DemoManager {
      * remove out the first scenario frames
      */
     private void initScenario1() {
-        // TODO
+
         // enter the shame zone
         this.states.add(new DemoState() {
             @Override

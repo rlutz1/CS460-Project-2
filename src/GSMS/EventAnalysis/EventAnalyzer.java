@@ -82,11 +82,11 @@ public class EventAnalyzer {
         classrooms.add(initClassroom);
     }
 
-    public List<Audio> getAudioComponenetsToInit(RoomId classroomId) {
+    public List<Audio> getAudioComponentsToInit(RoomId classroomId) {
         Classroom classroom = findClassroom(classroomId);
         return classroom.getAudioComponent();
     }
-    public List<Video> getVideoComponenetsToInit(RoomId classroomId) {
+    public List<Video> getVideoComponentsToInit(RoomId classroomId) {
         Classroom classroom = findClassroom(classroomId);
         return classroom.getVideosComponents();
     }
