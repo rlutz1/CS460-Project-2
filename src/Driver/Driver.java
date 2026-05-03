@@ -147,7 +147,6 @@ public class Driver extends Application {
                     gsmc.getEventAnalyzer().getAudioComponentsToInit(GYM_INIT_PACKAGE.targetClassroom().roomId()),
                     gsmc.getEventAnalyzer().getVideoComponentsToInit(GYM_INIT_PACKAGE.targetClassroom().roomId()),
                     gsmc.getEventAnalyzer().getWearablesToInit(GYM_INIT_PACKAGE.targetClassroom().roomId())
-
             );
 
         } catch (IOException ex) {

@@ -8,7 +8,9 @@ package GSMS.Notification;
  * + knowing who should receive the notifications it is sent
  */
 
+import GSMS.Agents.AgentContainer;
 import GSMS.Common.AgentId;
+import GSMS.Common.AgentType;
 
 /** The alert level determines the Routing logic
  *   WARNING (Use Case 1 - Exhaustion):
@@ -29,10 +31,10 @@ public class NotificationDispatcher {
      * @param alertLevel
      * @param recipientId
      */
-    public void receiveNotification(String notification, AlertLevel alertLevel,
+    public void receiveNotification(Notification notification, AlertLevel alertLevel,
                                     AgentId recipientId) {
-
-        // sendNotification(null, null); // end by sending the notification
+        // right now, testing -- send to just the agent received
+         sendNotification(notification, recipientId); // end by sending the notification
     } // end method
 
     /**
@@ -40,8 +42,12 @@ public class NotificationDispatcher {
      * @param notification
      * @param agentId
      */
-    public void sendNotification(String notification, AgentId agentId) {
-
+    public void sendNotification(Notification notification, AgentId agentId) {
+        switch (agentId.getType()) {
+            case MEMBER -> AgentContainer.MemberApps.get(agentId).sendInformation(notification);
+            case INSTRUCTOR -> AgentContainer.InstructorApps.get(agentId).sendInformation(notification);
+            default -> System.out.println("[NOTIF DISPATCH] Somehow a sender id was sent with not defined type: " + agentId);
+        }
     } // end method
 
 } // end class

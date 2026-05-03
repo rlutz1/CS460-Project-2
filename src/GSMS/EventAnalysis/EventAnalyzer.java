@@ -11,6 +11,7 @@ import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 import GSMS.EventAnalysis.SignalReceivers.SignalType;
 import GSMS.Notification.AlertLevel;
+import GSMS.Notification.Notification;
 import GSMS.Notification.NotificationDispatcher;
 import javafx.scene.control.Alert;
 
@@ -22,7 +23,7 @@ import java.util.List;
  */
 
 public class EventAnalyzer {
-    private static final double THRESHOLD = 0.8;
+    private static final double THRESHOLD = 0.7;
     private List<Classroom> classrooms;
     private LiveEventAI liveEventAI;
     private NotificationDispatcher notificationDispatcher;
@@ -44,11 +45,14 @@ public class EventAnalyzer {
         return null;
     }
     private void decideIfNeedToNotify(Event event){
+        System.out.println("slkdnasbkjdns");
         if (event.probabilityOfCorrectness() > THRESHOLD) {
             pushAlert(event.eventInfo(),
                       event.alertLevel(),
                       event.agentId());
+
         }
+        // TODO: log regardless insert here
     }
 
     /** DEMO INITIALIZER SPECIFIC (START)**/
@@ -204,8 +208,13 @@ public class EventAnalyzer {
      * @param targetId (member/instructor).
      */
     public void pushAlert(String alert, AlertLevel alertLevel, AgentId targetId) {
-        String fullNotification =
-                "ALERT LEVEL: "+alertLevel.toString()+"\n. ALERT: "+alert;
+        Notification fullNotification = new Notification(
+                "ALERT LEVEL: " + alertLevel.toString() + "\n. ALERT: " + alert,
+                alertLevel,
+                targetId
+        );
+//        String fullNotification =
+//                "ALERT LEVEL: "+alertLevel.toString()+"\n. ALERT: "+alert;
         notificationDispatcher.receiveNotification(fullNotification,
                                                    alertLevel,
                                                    targetId);
