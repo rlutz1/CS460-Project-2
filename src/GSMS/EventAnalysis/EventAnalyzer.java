@@ -14,6 +14,7 @@ import GSMS.Notification.AlertLevel;
 import GSMS.Notification.NotificationDispatcher;
 import javafx.scene.control.Alert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,6 +55,8 @@ public class EventAnalyzer {
 
     // TARGET CLASSROOM METHOD:
     public void initDemEventAnalyzer(GymInitializer gymInitializer) {
+        classrooms = new ArrayList<>(); // adding due to null list error
+
         ClassroomInitializer classInitializer =
                 gymInitializer.targetClassroom();
 

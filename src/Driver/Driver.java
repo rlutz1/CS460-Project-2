@@ -142,7 +142,7 @@ public class Driver extends Application {
 
             // initialize the frontend components for the given metadata
             gym.initOnsiteComponents(GYM_INIT_PACKAGE);
-//            gsmc.registerHardwareComponents();
+            gsmc.getEventAnalyzer().initDemEventAnalyzer(GYM_INIT_PACKAGE);
 
         } catch (IOException ex) {
             ex.printStackTrace();
