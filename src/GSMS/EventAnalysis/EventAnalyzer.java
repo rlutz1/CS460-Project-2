@@ -50,7 +50,6 @@ public class EventAnalyzer {
             pushAlert(event.eventInfo(),
                       event.alertLevel(),
                       event.agentId());
-
         }
         // TODO: log regardless insert here
     }

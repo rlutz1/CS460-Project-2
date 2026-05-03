@@ -29,7 +29,7 @@ public class Audio {
     public void receiveSignal(String signal) {
         decibelLevel = Integer.parseInt(signal);
         classroom.receiveSignal(new Signal<Integer>(decibelLevel),
-                                    SignalType.VIDEO);
+                                    SignalType.AUDIO);
     } // end method
 
 } // end class
