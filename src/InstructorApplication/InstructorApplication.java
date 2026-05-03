@@ -3,6 +3,8 @@ package InstructorApplication;
 import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
+import GSMS.Common.Metadata;
+import GSMS.Common.ReportType;
 import GSMS.Notification.AlertLevel;
 import GSMS.Notification.Notification;
 import GSMS.Recommendation.RecommendationDispatcher;
@@ -30,6 +32,7 @@ public class InstructorApplication {
     private Stage myStage; // this is for holding onto the initialized application to show later
     private AgentId id; // for ease of use as needed.
     private InstructorApplicationAPI api; // api to communicate through
+    private Stage reportWindow;
 
     private boolean isCoveredEntity;
 
@@ -77,13 +80,13 @@ public class InstructorApplication {
         if (main != null) { // null catch
             FXMLLoader loader = new FXMLLoader(main);
             Parent root = loader.load(); // load it
-            Stage stage = new Stage();
-            stage.setTitle(REPORT_WINDOW_TITLE);
-            stage.setScene(new Scene(root));
+            reportWindow = new Stage();
+            reportWindow.setTitle(REPORT_WINDOW_TITLE);
+            reportWindow.setScene(new Scene(root));
 
-            ReportWindow reportWindow = loader.getController();
-            reportWindow.parent = this; // set this as the parent controller
-            stage.show();
+            ReportWindow controller = loader.getController();
+            controller.parent = this; // set this as the parent controller
+            reportWindow.show();
         } else {
             System.out.println("Something went wrong: " + REPORT_WINDOW_FXML + " returned null on start.");
         } // end if
@@ -93,13 +96,20 @@ public class InstructorApplication {
      * called from the report window
      */
     public void generateReport(
-            String classId,
-            String instructorId,
-            String reportType,
-            String timeFrame
+            List<String> targetIds,
+            List<String> reportTypes,
+            String timeStart,
+            String timeEnd
     ) {
-        List<String> targetIds = new ArrayList<String>(List.of(classId, instructorId));
-        api.requestReport(targetIds, reportType, timeFrame);
+        // send to api
+        api.requestReport(
+                targetIds,
+                new ReportType(reportTypes),
+                new Metadata(timeStart + "&" + timeEnd)
+        );
+        // close the report window
+        reportWindow.close();
+        reportWindow = null;
     } // end method
 
     @FXML
