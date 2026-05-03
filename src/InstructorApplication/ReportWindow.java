@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 public class ReportWindow {
 
     public InstructorApplication parent;
-
+    // TODO: this would make more sense contextually as check boxes.
     @FXML
     public ComboBox classIds;
     @FXML
@@ -25,10 +25,12 @@ public class ReportWindow {
     @FXML
     public void initialize() {
         // right now we're going to HARD code this puppy to test functionality.
-        classIds.getItems().add("JFONDA1|AEROBICS");
-        classIds.getItems().add("JTAYLOR1|CARDIO");
+        classIds.getItems().add("ALL");
+        classIds.getItems().add("JFONDA1,AEROBICS");
+        classIds.getItems().add("JTAYLOR1,CARDIO");
         classIds.setValue(classIds.getItems().getFirst());
 
+        instructorIds.getItems().add("ALL");
         instructorIds.getItems().add("JFONDA1");
         instructorIds.getItems().add("JTAYLOR1");
         instructorIds.setValue(instructorIds.getItems().getFirst());
@@ -54,7 +56,12 @@ public class ReportWindow {
     @FXML
     public void submit(MouseEvent mouseEvent) {
         if (parent != null) {
-            parent.generateReport();
+            parent.generateReport(
+                    (String)classIds.getValue(),
+                    (String)instructorIds.getValue(),
+                    (String)reportType.getValue(),
+                    (String)timeFrame.getValue()
+            );
             // TODO: would be nice if the window autoclosed here, but not necessary
         } // end if
     } // end method

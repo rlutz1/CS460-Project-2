@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * encapsulation of a driver for an instructor application
@@ -90,8 +92,14 @@ public class InstructorApplication {
     /**
      * called from the report window
      */
-    public void generateReport() {
-//        api.requestReport()...
+    public void generateReport(
+            String classId,
+            String instructorId,
+            String reportType,
+            String timeFrame
+    ) {
+        List<String> targetIds = new ArrayList<String>(List.of(classId, instructorId));
+        api.requestReport(targetIds, reportType, timeFrame);
     } // end method
 
     @FXML
