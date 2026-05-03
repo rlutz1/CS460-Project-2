@@ -1,11 +1,8 @@
 package Gym.DemoManagement;
 
 import Gym.AgentGraphics.AgentGraphic;
-import Gym.AgentGraphics.MemberGraphic;
 import javafx.animation.*;
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
@@ -18,28 +15,49 @@ public class Transitions {
     public static List<Transition> LiveTransitions = new ArrayList<>();
 
     /**
-     * Scenario 2:
-     * enter the target classroom
+     * generally, move a target node
      * @param target
      * @param walkingSpeed
      * @param x
      * @param y
      */
-    public static void EnterClassroom(AgentGraphic target, double walkingSpeed, double x, double y) {
+    public static void Move(
+            AgentGraphic target,
+            double walkingSpeed,
+            double x,
+            double y,
+            boolean sequential, // i want to go one direction, then other.
+            char first // only if sequential: 'x' for that direction first, 'y' for other.
+    ) {
         SequentialTransition seq = new SequentialTransition();
+        if (sequential) {
+            TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);
+            walkX.setToX(x);
+            walkX.setInterpolator(Interpolator.EASE_IN);
 
-        TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);
-        walkX.setToX(x);
-        walkX.setInterpolator(Interpolator.EASE_IN);
+            TranslateTransition walkY = new TranslateTransition(Duration.seconds(walkingSpeed), target);
+            walkY.setToY(y);
+            walkY.setInterpolator(Interpolator.EASE_IN);
+            if (first == 'x') {
+                seq.getChildren().addAll(
+                        walkX,
+                        walkY
+                );
+            } else {
+                seq.getChildren().addAll(
+                        walkY,
+                        walkX
 
-        TranslateTransition walkY = new TranslateTransition(Duration.seconds(walkingSpeed), target);
-        walkY.setToY(y);
-        walkY.setInterpolator(Interpolator.EASE_IN);
+                );
+            } // end if
 
-        seq.getChildren().addAll(
-                walkX,
-                walkY
-        );
+        } else {
+            TranslateTransition walk = new TranslateTransition(Duration.seconds(walkingSpeed), target);
+            walk.setToX(x);
+            walk.setToY(y);
+            walk.setInterpolator(Interpolator.EASE_IN);
+            seq.getChildren().addAll(walk);
+        } // end if
 
         LiveTransitions.add(seq); // add to a list of live transitions
 
@@ -248,21 +266,42 @@ public class Transitions {
      * @param x
      * @param y
      */
-    public static void ExitClassroom(AgentGraphic target, double walkingSpeed, double x, double y) {
+    public static void MoveWithExit(AgentGraphic target,
+                                    double walkingSpeed,
+                                    double x,
+                                    double y,
+                                    boolean sequential, // i want to go one direction, then other.
+                                    char first // only if sequential: 'x' for that direction first, 'y' for other.
+    ) {
         SequentialTransition seq = new SequentialTransition();
+        if (sequential) {
+            TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);
+            walkX.setToX(x);
+            walkX.setInterpolator(Interpolator.EASE_IN);
 
-        TranslateTransition walkX = new TranslateTransition(Duration.seconds(walkingSpeed), target);
-        walkX.setToX(x);
-        walkX.setInterpolator(Interpolator.EASE_IN);
+            TranslateTransition walkY = new TranslateTransition(Duration.seconds(walkingSpeed), target);
+            walkY.setToY(y);
+            walkY.setInterpolator(Interpolator.EASE_IN);
+            if (first == 'x') {
+                seq.getChildren().addAll(
+                        walkX,
+                        walkY
+                );
+            } else {
+                seq.getChildren().addAll(
+                        walkY,
+                        walkX
 
-        TranslateTransition walkY = new TranslateTransition(Duration.seconds(walkingSpeed), target);
-        walkY.setToY(y);
-        walkY.setInterpolator(Interpolator.EASE_IN);
+                );
+            } // end if
 
-        seq.getChildren().addAll(
-                walkY,
-                walkX
-        );
+        } else {
+            TranslateTransition walk = new TranslateTransition(Duration.seconds(walkingSpeed), target);
+            walk.setToX(x);
+            walk.setToY(y);
+            walk.setInterpolator(Interpolator.EASE_IN);
+            seq.getChildren().addAll(walk);
+        } // end if
 
         LiveTransitions.add(seq); // add to a list of live transitions
 

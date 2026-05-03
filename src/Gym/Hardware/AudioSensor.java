@@ -19,8 +19,7 @@ public class AudioSensor implements Hardware {
      */
     public void sendSignal() {
         System.out.println("Audio sensor ping.");
-        // TODO: when GSMC init, give this a reference to the associated component.
-        // then: component.receiveSignal(...)
+        component.receiveSignal("10");
     } // end method
 
 } // end class

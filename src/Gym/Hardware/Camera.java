@@ -19,8 +19,7 @@ public class Camera implements Hardware {
      */
     public void sendSignal() {
         System.out.println("Camera feed ping.");
-        // TODO: when GSMC init, give this a reference to the associated component.
-        // then: component.receiveSignal(...)
+        component.receiveSignal("violence"); // TODO
     } // end method
 
 } // end class

@@ -6,14 +6,11 @@ import GSMS.EventAnalysis.EventAnalyzer;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
-import Gym.Hardware.Camera;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static GSMS.EventAnalysis.SignalReceivers.SignalType.AUDIO;
 
 /**
  * class to stand as component for classroom abstraction
@@ -27,7 +24,7 @@ public class Classroom {
     private Integer audioDecibelData;
     private Map<AgentId, String> memberIdsToWearableData;
 
-    private Audio audioComponent;
+    private List<Audio> audioComponents;
     private List<Video> videosComponents;
     private List<Wearable> wearableComponents;
 
@@ -35,13 +32,13 @@ public class Classroom {
         this.eventAnalyzer = eventAnalyzer;
         this.classroomId = classroomId;
         this.memberIdsToWearableData = new HashMap<>();
-        this.audioComponent = new Audio(this);
+        this.audioComponents = new ArrayList<>();
         this.videosComponents = new ArrayList<>();
         this.wearableComponents = new ArrayList<>();
     } // end constructor
     /************************* NON-SAD * helper START *************************/
-    public String getClassroomId() {
-        return classroomId.getId();
+    public RoomId getClassroomId() {
+        return classroomId;
     }
     public String getVideoFeedData() {
         return videoFeedData;
@@ -58,7 +55,9 @@ public class Classroom {
         }
         return null;
     }
-
+    public void addNewAudioComponent() {
+        audioComponents.add(new Audio(this));
+    }
     public void addNewVideoComponent(){
         videosComponents.add(new Video(this));
     }
@@ -66,8 +65,8 @@ public class Classroom {
         wearableComponents.add(new Wearable(this, memberId));
     }
 
-    public Audio getAudioComponent(){
-        return audioComponent;
+    public List<Audio> getAudioComponent(){
+        return audioComponents;
     }
     public List<Video> getVideosComponents(){
         return videosComponents;

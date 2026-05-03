@@ -16,6 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox alignment="TOP_CENTER" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gym.Gym"> <!-- controller! refers to package-path.ControllerClassName that has the logic for any actions here! -->
   <children>
@@ -23,9 +24,27 @@
       <children>
             <StackPane fx:id="mainStage" prefHeight="600.0" prefWidth="800.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <Rectangle fx:id="gymBackground" arcHeight="5.0" arcWidth="5.0" fill="#ffe88a7c" height="600.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-                  <AnchorPane fx:id="entireGym" prefHeight="600.0" prefWidth="800.0">
+                  <AnchorPane fx:id="targetMemberHouse" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0">
                      <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d4d4d4" height="600.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" width="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
+                        <Circle fx:id="rug" fill="#527596" layoutX="400.0" layoutY="284.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8d969e" height="53.0" layoutX="307.0" layoutY="97.0" stroke="BLACK" strokeType="INSIDE" width="187.0" />
+                        <Rectangle fx:id="sofa" arcHeight="5.0" arcWidth="5.0" fill="#ccb48c" height="61.0" layoutX="307.0" layoutY="427.0" stroke="BLACK" strokeType="INSIDE" width="187.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dfd1a7" height="61.0" layoutX="307.0" layoutY="417.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dfd1a7" height="61.0" layoutX="479.0" layoutY="417.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dfd1a7" height="19.0" layoutX="315.0" layoutY="469.0" stroke="BLACK" strokeType="INSIDE" width="86.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dfd1a7" height="19.0" layoutX="400.0" layoutY="469.0" stroke="BLACK" strokeType="INSIDE" width="86.0" />
+                        <Text fx:id="houseChatBubble" layoutX="20.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="762.399932861328">
+                           <font>
+                              <Font name="Comic Sans MS Bold" size="20.0" />
+                           </font></Text>
+                        <Circle fill="#fffa1f" layoutX="777.0" layoutY="347.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Rectangle fx:id="houseDoorway" arcHeight="5.0" arcWidth="5.0" fill="#dfd1a7" height="140.0" layoutX="779.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="entireGym" prefHeight="600.0" prefWidth="800.0" visible="false">
+                     <children>
+                        <Rectangle fx:id="gymBackground" arcHeight="5.0" arcWidth="5.0" fill="#ffe88a7c" height="600.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
                         <Rectangle fx:id="classroom1" arcHeight="5.0" arcWidth="5.0" fill="#ff90213c" height="300.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
                         <Rectangle fx:id="targetClassroom" arcHeight="5.0" arcWidth="5.0" fill="#ff901f" height="300.0" layoutX="400.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
                         <HBox fx:id="otherMembers" layoutX="420.0" layoutY="172.0" prefHeight="70.0" prefWidth="200.0" />

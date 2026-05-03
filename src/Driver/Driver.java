@@ -141,8 +141,13 @@ public class Driver extends Application {
             //       in order to be able to set up the front end so it can communicate.
 
             // initialize the frontend components for the given metadata
-            gym.initOnsiteComponents(GYM_INIT_PACKAGE);
-//            gsmc.registerHardwareComponents();
+            gsmc.getEventAnalyzer().initDemEventAnalyzer(GYM_INIT_PACKAGE);
+            gym.initOnsiteComponents(
+                    GYM_INIT_PACKAGE,
+                    gsmc.getEventAnalyzer().getAudioComponentsToInit(GYM_INIT_PACKAGE.targetClassroom().roomId()),
+                    gsmc.getEventAnalyzer().getVideoComponentsToInit(GYM_INIT_PACKAGE.targetClassroom().roomId()),
+                    gsmc.getEventAnalyzer().getWearablesToInit(GYM_INIT_PACKAGE.targetClassroom().roomId())
+            );
 
         } catch (IOException ex) {
             ex.printStackTrace();

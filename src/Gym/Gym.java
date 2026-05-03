@@ -6,6 +6,9 @@ import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Common.AgentType;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 import Gym.AgentGraphics.InstructorGraphic;
 import Gym.AgentGraphics.MemberGraphic;
 import Gym.DemoManagement.DemoManager;
@@ -26,6 +29,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -55,6 +60,18 @@ public class Gym {
     /* FRONTEND PIECES FROM FXML -- DYNAMIC OBJECTS */
     @FXML
     public StackPane mainStage; // overarching gym intricacies
+
+    @FXML
+    public AnchorPane targetMemberHouse; // the anchor pane to signify the member house for scene 1
+    @FXML
+    public Shape rug; // hehe rug
+    @FXML
+    public Shape sofa; // hehe sofa as start point
+    @FXML
+    public Shape houseDoorway; // hehe sofa as start point
+    @FXML
+    public Text houseChatBubble; // hehe for some text
+
     @FXML
     public AnchorPane entireGym; // the main gym space container
     @FXML
@@ -84,7 +101,8 @@ public class Gym {
     public List<Hardware> allSensors; // this is muy mal, but helpful for handing off to demo manager
 
     /* OBJECTS CREATED DYNAMICALLY AND INSERTED TO FXML LAYOUT */
-    public MemberGraphic targetMember;
+    public MemberGraphic targetMemberInGym;
+    public MemberGraphic targetMemberInHouse;
     public InstructorGraphic targetInstructor;
 
     /* FRONTEND PIECES FROM FXML -- INTERACTIVE OBJECTS */
@@ -138,6 +156,10 @@ public class Gym {
     public void initialize() {
         // yield all these to manager
         manager.entryWay = this.entryWay;
+        manager.targetMemberHouse = this.targetMemberHouse;
+        manager.houseChatBubble = this.houseChatBubble;
+        manager.houseDoorway = this.houseDoorway;
+        manager.entireGym = this.entireGym;
         // the rest wait for dynamic creation
     } // end method
 
@@ -184,7 +206,7 @@ public class Gym {
         startButton.setDisable(false); // enable start button
         nextButton.setDisable(true);// disable next button
         restartButton.setDisable(true); // disable restart
-        // TODO: reset the main stage to first needed state
+
         manager.reset(); // reset the demo manager
     } // end method
 
@@ -211,7 +233,6 @@ public class Gym {
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) {
         System.out.println("Starting Instructor Application.");
-        // TODO: on close, app should really add itself back to the drop down. small detail if time.
         AgentId agentId = new AgentId((String)instructorSelection.getSelectionModel().getSelectedItem());
         instructorSelection.getItems().remove(agentId.getId());
         instructorApplications.get(agentId).start();
@@ -246,7 +267,6 @@ public class Gym {
 
             instructorSelection.getItems().add(id.getId());
             instructorSelection.setValue(id.getId());
-            // TODO would like to add agent id and name to the app here
 
             return instructorApp;
         } else {
@@ -263,7 +283,6 @@ public class Gym {
     @FXML
     private void startMemberApp(MouseEvent mouseEvent) {
         System.out.println("Starting Member Application.");
-        // TODO: on close, app should really add itself back to the drop down. small detail if time.
         AgentId agentId = new AgentId((String)memberSelection.getSelectionModel().getSelectedItem());
         memberSelection.getItems().remove(agentId.getId());
         memberApplications.get(agentId).start();
@@ -348,28 +367,48 @@ public class Gym {
      * TODO: more dynamic creation of hardware if time
      * @param initPackage
      */
-    public void initOnsiteComponents(GymInitializer initPackage) {
-        // insert the target member on necessary stages
-        targetMember = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
-//        targetMember.setLayoutX(entryWay.getLayoutX() - targetMember.width);
-        targetMember.setLayoutX(entryWay.getLayoutX() + entryWay.getWidth());
-        targetMember.setLayoutY(entryWay.getLayoutY()  + (entryWay.getHeight() / 2) - targetMember.height);
-        entireGym.getChildren().add(targetMember);
-        // insert the target instructor to necessary stages
+    public void initOnsiteComponents(
+            GymInitializer initPackage,
+            List<Audio> audioListeners,
+            List<Video> videoListeners,
+            List<Wearable> wearableListeners
+
+    ) {
+        /* VISUAL FRONTEND PEOPLE GRAPHICS */
+
+        // insert the target member on the gym stage
+        targetMemberInGym = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
+        targetMemberInGym.setLayoutX(entryWay.getLayoutX() + entryWay.getWidth());
+        targetMemberInGym.setLayoutY(entryWay.getLayoutY()  + (entryWay.getHeight() / 2) - targetMemberInGym.height);
+        entireGym.getChildren().add(targetMemberInGym);
+        // insert target member in their house as a separate component for now instead
+        // of refactoring a ton about the existing graphic.
+        targetMemberInHouse = new MemberGraphic(initPackage.targetMember().id(), Color.BLUE);
+        targetMemberInHouse.setLayoutX(sofa.getLayoutX() + targetMemberInHouse.width);
+        targetMemberInHouse.setLayoutY(sofa.getLayoutY());
+        targetMemberHouse.getChildren().add(targetMemberInHouse);
+        // insert the target instructor on the gym stage
         targetInstructor= new InstructorGraphic(initPackage.targetInstructor().id(), Color.PURPLE);
         targetInstructor.setLayoutX(targetInstructorStartPoint.getLayoutX() - targetInstructor.width);
         targetInstructor.setLayoutY(targetInstructorStartPoint.getLayoutY() - targetInstructor.height);
         entireGym.getChildren().add(targetInstructor);
-        // insert the general members to necessary stages
+        // insert the general members on the gym stage
         // only the target right now. room for change, but not right now, lol
         for (AgentInitializer member : initPackage.targetClassroom().membersInClass()) {
             otherMembers.getChildren().add(new MemberGraphic(member.id(), Color.GREEN));
         } // end loop
 
+        /* END VISUAL FRONTEND PEOPLE GRAPHICS */
+
+        /* VISUAL FRONTEND HARDWARE, CONNECTING TO BACKEND LISTENERS */
+
         // initalize the needed front end "signal senders"
         audioSensor1 = new AudioSensor(initPackage.targetClassroom().roomId());
+        audioSensor1.component = audioListeners.getFirst(); // set up component
         cameraFeed1 = new Camera(initPackage.targetClassroom().roomId());
+        cameraFeed1.component = videoListeners.getFirst(); // set up component
         cameraFeed2 = new Camera(initPackage.targetClassroom().roomId());
+        cameraFeed2.component = videoListeners.get(1); // set up component
 
         allSensors = new ArrayList<>(List.of(
                 audioSensor1,
@@ -377,19 +416,28 @@ public class Gym {
                 cameraFeed2
         ));
 
+        int i = 0;
         for (AgentInitializer agent : initPackage.allAgentsOnsite()) {
             if (agent.id().getType() == AgentType.MEMBER) {
                 WearableSensors wearable = new WearableSensors(agent.id());
+                wearable.component = wearableListeners.get(i++); // set up component
                 wearableSensors.add(wearable);
                 allSensors.add(wearable);
             } // end if
         } // end loop
 
+        /* END VISUAL FRONTEND HARDWARE, CONNECTING TO BACKEND LISTENERS */
+
+        /* CONNECT FRONTEND DEMO PIECES TO MANAGER */
+
         // add to demo manager
-        manager.targetMember = this.targetMember;
+        manager.targetMemberInGym = this.targetMemberInGym;
+        manager.targetMemberInHouse = this.targetMemberInHouse;
         manager.targetInstructor = this.targetInstructor;
         manager.otherMembers = this.otherMembers;
         manager.targetHardware = this.allSensors;
+
+        /* END CONNECT FRONTEND DEMO PIECES TO MANAGER */
     } // end method
 
     /*

@@ -1,14 +1,21 @@
 package GSMS.EventAnalysis;
 
+import Driver.ClassroomInitializer;
+import Driver.GymInitializer;
 import GSMS.Common.AgentId;
 import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Classroom;
 import GSMS.EventAnalysis.SignalReceivers.Event;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 import GSMS.EventAnalysis.SignalReceivers.SignalType;
 import GSMS.Notification.AlertLevel;
+import GSMS.Notification.Notification;
 import GSMS.Notification.NotificationDispatcher;
 import javafx.scene.control.Alert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +23,7 @@ import java.util.List;
  */
 
 public class EventAnalyzer {
-    private static final double THRESHOLD = 0.8;
+    private static final double THRESHOLD = 0.7;
     private List<Classroom> classrooms;
     private LiveEventAI liveEventAI;
     private NotificationDispatcher notificationDispatcher;
@@ -43,7 +50,54 @@ public class EventAnalyzer {
                       event.alertLevel(),
                       event.agentId());
         }
+        // TODO: log regardless insert here
     }
+
+    /** DEMO INITIALIZER SPECIFIC (START)**/
+
+    // TARGET CLASSROOM METHOD:
+    public void initDemEventAnalyzer(GymInitializer gymInitializer) {
+        classrooms = new ArrayList<>(); // adding due to null list error
+
+        ClassroomInitializer classInitializer =
+                gymInitializer.targetClassroom();
+
+        // Classroom itself.
+        Classroom initClassroom = new Classroom(this,
+                classInitializer.roomId());
+        // init Audio components.
+        for (int i = 0; i < classInitializer.numAudioSensors(); i++) {
+            initClassroom.addNewAudioComponent();
+        }
+        // init Video Components.
+        for (int i = 0; i < classInitializer.numCameras(); i++) {
+            initClassroom.addNewVideoComponent();
+        }
+        // inti Wearable Componenets.
+        for (int i = 0; i < classInitializer.membersInClass().size(); i++) {
+            initClassroom.addNewWearableComponent(classInitializer.membersInClass()
+                                                                  .get(i)
+                                                                  .id());
+        }
+
+        // add class to this EventAnalyzer.
+        classrooms.add(initClassroom);
+    }
+
+    public List<Audio> getAudioComponentsToInit(RoomId classroomId) {
+        Classroom classroom = findClassroom(classroomId);
+        return classroom.getAudioComponent();
+    }
+    public List<Video> getVideoComponentsToInit(RoomId classroomId) {
+        Classroom classroom = findClassroom(classroomId);
+        return classroom.getVideosComponents();
+    }
+    public List<Wearable> getWearablesToInit(RoomId classroomId) {
+        Classroom classroom = findClassroom(classroomId);
+        return classroom.getWearableComponents();
+    }
+    /** DEMO INITIALIZER SPECIFIC (END)**/
+
     /************************* NON-SAD * helper END   *************************/
 
     /**
@@ -152,8 +206,13 @@ public class EventAnalyzer {
      * @param targetId (member/instructor).
      */
     public void pushAlert(String alert, AlertLevel alertLevel, AgentId targetId) {
-        String fullNotification =
-                "ALERT LEVEL: "+alertLevel.toString()+"\n. ALERT: "+alert;
+        Notification fullNotification = new Notification(
+                "ALERT LEVEL: " + alertLevel.toString() + "\n. ALERT: " + alert,
+                alertLevel,
+                targetId
+        );
+//        String fullNotification =
+//                "ALERT LEVEL: "+alertLevel.toString()+"\n. ALERT: "+alert;
         notificationDispatcher.receiveNotification(fullNotification,
                                                    alertLevel,
                                                    targetId);

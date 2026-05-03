@@ -19,8 +19,7 @@ public class WearableSensors implements Hardware {
      */
     public void sendSignal() {
         System.out.println("Wearable ping.");
-        // TODO: when GSMC init, give this a reference to the associated component.
-        // then: component.receiveSignal(...)
+        component.receiveSignal("exhaustion");
     } // end method
 
 } // end class
