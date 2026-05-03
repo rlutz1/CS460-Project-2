@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -115,13 +116,13 @@
             <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="FROM" VBox.vgrow="ALWAYS" />
-                  <DatePicker fx:id="timeStart" />
+                  <DatePicker fx:id="timeStart" promptText="Start Date" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="TO" />
-                  <DatePicker fx:id="timeEnd" />
+                  <DatePicker fx:id="timeEnd" promptText="End Date" />
                </children>
             </VBox>
          </children>
@@ -130,6 +131,9 @@
          <font>
             <Font size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </VBox>

@@ -8,6 +8,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,8 @@ public class ReportWindow {
 
     @FXML
     public void initialize() {
-
+        timeStart.setValue(LocalDate.of(2026, Month.APRIL, 1));
+        timeEnd.setValue(LocalDate.now());
     } // end FXML init
 
     /**
