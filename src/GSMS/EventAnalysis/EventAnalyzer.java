@@ -45,7 +45,6 @@ public class EventAnalyzer {
         return null;
     }
     private void decideIfNeedToNotify(Event event){
-        System.out.println("slkdnasbkjdns");
         if (event.probabilityOfCorrectness() > THRESHOLD) {
             pushAlert(event.eventInfo(),
                       event.alertLevel(),

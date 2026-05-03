@@ -1,6 +1,7 @@
 package GSMS.EventAnalysis;
 
 import GSMS.Common.AgentId;
+import GSMS.Common.AgentType;
 import GSMS.EventAnalysis.SignalReceivers.Event;
 import GSMS.EventAnalysis.SignalReceivers.SignalType;
 import GSMS.Notification.AlertLevel;
@@ -36,7 +37,8 @@ public class LiveEventAI {
 
         if ( safetyOrConflictDetected ) {
             return new Event(alertLevel, eventInfo, confidenceProbability,
-                    new AgentId("12345"));
+                    new AgentId("JFONDA1", "Jane Fonda", AgentType.INSTRUCTOR)); // USE FOR TESTING AS NEEDED!
+//                    new AgentId("");
         }
         return null;
 
