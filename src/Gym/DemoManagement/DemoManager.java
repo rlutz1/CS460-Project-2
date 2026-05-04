@@ -27,6 +27,7 @@ public class DemoManager {
 //    public StackPane mainStage;
     public AnchorPane targetMemberHouse;
     public Text houseChatBubble;
+    public Text gymChatBubble;
     public AnchorPane entireGym;
     public MemberGraphic targetMemberInGym;
     public MemberGraphic targetMemberInHouse;
@@ -35,12 +36,6 @@ public class DemoManager {
     public HBox otherMembers;
     public Shape entryWay;
     public List<Hardware> targetHardware;
-
-    // for testing and sending basic crap to backend
-    // this may change to be more representative of the scenario, environment.
-//    public AudioSensor audioSensor;
-//    public Camera cameraFeed;
-//    public WearableSensors wearable;
 
     public DemoManager() {
         this.states = new ArrayList<>();
@@ -135,7 +130,7 @@ public class DemoManager {
         initScenario2();
         initScenario3();
         initScenario4();
-//        initScenario5();
+        initScenario5();
     } // end method
 
     /**
@@ -237,6 +232,9 @@ public class DemoManager {
                         true,
                         'x'
                 );
+                gymChatBubble.setText(
+                        "ROXANNE: Oh god, I'm already late..."
+                );
             }
             @Override
             public String toString() {
@@ -253,6 +251,9 @@ public class DemoManager {
                 } // end loop
 
                 Transitions.Workout(targetMemberInGym, 1, 0.5);
+                gymChatBubble.setText(
+                        "INSTRUCTOR JANE FONDA: COME ON EVERYONE! LET'S GET SWEATY!!"
+                );
             }
             @Override
             public String toString() {
@@ -266,6 +267,9 @@ public class DemoManager {
             @Override
             public void activate() {
                 Transitions.TriggerExhaustion(targetMemberInGym, 4);
+                gymChatBubble.setText(
+                        "ROXANNE: Those protein Doritos are like a rock in my stomach, ugh."
+                );
             }
             @Override
             public String toString() {
@@ -301,6 +305,9 @@ public class DemoManager {
                     member.setScaleX(1);
                     member.setScaleY(1);
                 } // end loop
+                gymChatBubble.setText(
+                        "INSTRUCTOR JANE FONDA: Howdy y'all! Let's take a little break from getting sexy!"
+                );
             }
             @Override
             public String toString() {
@@ -313,6 +320,9 @@ public class DemoManager {
             @Override
             public void activate() {
                 Transitions.RelieveExhaustion(targetMemberInGym, 4);
+                gymChatBubble.setText(
+                        "ROXANNE: Ugh, thank god for the break. Starting to feel better already!"
+                );
             }
             @Override
             public String toString() {
@@ -329,6 +339,10 @@ public class DemoManager {
                 } // end loop
 
                 Transitions.Workout(targetMemberInGym, 1, 0.5);
+
+                gymChatBubble.setText(
+                        "INSTRUCTOR JANE FONDA: ALRIGHT! Come on losers, let's get SWEATY!"
+                );
             }
             @Override
             public String toString() {
@@ -346,11 +360,16 @@ public class DemoManager {
             @Override
             public void activate() {
                 Transitions.TriggerConflict(targetMemberInGym, (AgentGraphic) otherMembers.getChildren().getLast(), 2);
+                gymChatBubble.setText(
+                        "OLD MAN JENKINS: You came in here reeking of doritos and SHAME.\n" +
+                                "ROXANNE: My mother was filled with shame! How dare you!"
+                );
             }
             @Override
             public String toString() {
                 return "Conflict arises between two members.";
             }
+
         });
 
         // trigger the sending of some bad signals to the backend.
@@ -381,6 +400,9 @@ public class DemoManager {
                     member.setScaleX(1);
                     member.setScaleY(1);
                 } // end loop
+                gymChatBubble.setText(
+                        "INSTRUCTOR JANE FONDA: Hey now! That's not very sexy! Let's resolve like adults!"
+                );
             }
             @Override
             public String toString() {
@@ -393,6 +415,10 @@ public class DemoManager {
             @Override
             public void activate() {
                 Transitions.RelieveConflict(targetMemberInGym, (AgentGraphic) otherMembers.getChildren().getLast(), 5);
+                gymChatBubble.setText(
+                        "OLD MAN JENKINS: My bad, my wife left me last night.\n"
+                            + "ROXANNE: No worries man, happens to the best of us."
+                );
             }
             @Override
             public String toString() {
@@ -409,6 +435,10 @@ public class DemoManager {
                 } // end loop
 
                 Transitions.Workout(targetMemberInGym, 1, 0.5);
+
+                gymChatBubble.setText(
+                        "INSTRUCTOR JANE FONDA: Alright guys, let's try this again!"
+                );
             }
             @Override
             public String toString() {
@@ -426,10 +456,13 @@ public class DemoManager {
             @Override
             public void activate() {
                 Transitions.TriggerHealthEmergency(targetMemberInGym, 1);
+                gymChatBubble.setText(
+                        "ROXANNE: OH GOD! SHARP DORITO SHRAPNEL ENTERED MY AORTA."
+                );
             }
             @Override
             public String toString() {
-                return "Health emergency arises in a member members.";
+                return "Health emergency arises in member.";
             }
         });
 
@@ -461,6 +494,10 @@ public class DemoManager {
                     member.setScaleX(1);
                     member.setScaleY(1);
                 } // end loop
+
+                gymChatBubble.setText(
+                        "INSTRUCTOR JANE FONDA: Everyone stop! Let me address the not-so-sexy situation!"
+                );
             }
             @Override
             public String toString() {
@@ -477,6 +514,9 @@ public class DemoManager {
                         0.5,
                         150, // TODO: funky layout positions, hardcoded for now.
                         70
+                );
+                gymChatBubble.setText(
+                        "INSTRUCTOR JANE FONDA: I'm calling 911! DON'T GO TOWARD THE DORITO LIGHT."
                 );
             }
             @Override
@@ -497,6 +537,9 @@ public class DemoManager {
                         true,
                         'y'
                 );
+                gymChatBubble.setText(
+                        "INSTRUCTOR JANE FONDA: Everyone stand back while this poor soul is carried to the hospital."
+                );
             }
             @Override
             public String toString() {
@@ -510,6 +553,9 @@ public class DemoManager {
             public void activate() {
                 otherMembers.setVisible(false);
                 targetInstructor.setVisible(false);
+                gymChatBubble.setText(
+                        "INSTRUCTOR JANE FONDA: Class dismissed--we've had enough sexy fun today!"
+                );
             }
             @Override
             public String toString() {
@@ -523,7 +569,22 @@ public class DemoManager {
      * remove out the fifth scenario frames
      */
     private void initScenario5() {
-
+        // class is done: instructor leaves, all other members leave
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                otherMembers.setVisible(false);
+                targetInstructor.setVisible(false);
+                gymChatBubble.setText(
+                        "INSTRUCTOR JOHN TAYLOR: Something weird has been afoot in Jane's classes.\n"
+                            + "I wonder what's been up in the last month..."
+                );
+            }
+            @Override
+            public String toString() {
+                return "Other attendant is snooping on his coworker.";
+            }
+        });
     } // end method
 
     private void sendBadSignals() {
