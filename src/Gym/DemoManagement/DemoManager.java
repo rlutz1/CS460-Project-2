@@ -3,7 +3,7 @@ package Gym.DemoManagement;
 import Gym.AgentGraphics.AgentGraphic;
 import Gym.AgentGraphics.InstructorGraphic;
 import Gym.AgentGraphics.MemberGraphic;
-import Gym.Hardware.Hardware;
+import Gym.Hardware.*;
 import javafx.animation.*;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
@@ -24,7 +24,6 @@ public class DemoManager {
     private final List<DemoState> states; // list of frames, or states for demo
     private int currState;
 
-//    public StackPane mainStage;
     public AnchorPane targetMemberHouse;
     public Text houseChatBubble;
     public Text gymChatBubble;
@@ -41,7 +40,7 @@ public class DemoManager {
         this.states = new ArrayList<>();
         this.currState = 0; // first state always
         init(); // init the manager
-    } // end constructor
+    }// end constructor
 
     /**
      * this method is to be called when the "next" or "start"
@@ -283,10 +282,11 @@ public class DemoManager {
             public void activate() {
                 sendBadSignals();
             }
-            @Override
-            public String toString() {
-                return "Sending triggering feed to the backend.";
-            }
+//            @Override
+//            public String toString() {
+//                return "Sending triggering feed to the backend.";
+//            }
+            @Override public String toString() { return "Sending exhaustion signal to backend."; }
         });
 
         // notification expected from the back end to both application windows
@@ -309,10 +309,11 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: Howdy y'all! Let's take a little break from getting sexy!"
                 );
             }
-            @Override
-            public String toString() {
-                return "Instructor stops class";
-            }
+//            @Override
+//            public String toString() {
+//                return "Instructor stops class";
+//            }
+            @Override public String toString() { return "Instructor stops class"; }
         });
 
         // member feels better
@@ -344,10 +345,7 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: ALRIGHT! Come on losers, let's get SWEATY!"
                 );
             }
-            @Override
-            public String toString() {
-                return "Trigger movement cycle (class continues).";
-            }
+            @Override public String toString() { return "Trigger movement cycle (class continues)."; }
         });
     } // end method
 
@@ -365,23 +363,23 @@ public class DemoManager {
                                 "ROXANNE: My mother was filled with shame! How dare you!"
                 );
             }
-            @Override
-            public String toString() {
-                return "Conflict arises between two members.";
-            }
-
+            @Override public String toString() { return "Conflict arises between two members."; }
         });
 
         // trigger the sending of some bad signals to the backend.
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                sendBadSignals();
+                // Use the first camera to send a conflict scene
+                for (Hardware h : targetHardware) {
+                    if (h instanceof Camera) {
+                        ((Camera) h).setScenarioSignal("physical_altercation");
+                        h.sendSignal();
+                        break;   // only one camera needed
+                    }
+                }
             }
-            @Override
-            public String toString() {
-                return "Sending triggering feed to the backend.";
-            }
+            @Override public String toString() { return "Sending conflict signal to backend."; }
         });
 
         // notification expected from the back end to both application windows
@@ -404,10 +402,11 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: Hey now! That's not very sexy! Let's resolve like adults!"
                 );
             }
-            @Override
-            public String toString() {
-                return "Instructor stops class";
-            }
+//            @Override
+//            public String toString() {
+//                return "Instructor stops class";
+//            }
+            @Override public String toString() { return "Instructor stops class"; }
         });
 
         // conflict deescalation
@@ -420,16 +419,12 @@ public class DemoManager {
                             + "ROXANNE: No worries man, happens to the best of us."
                 );
             }
-            @Override
-            public String toString() {
-                return "Conflict deescalates between two members.";
-            }
+            @Override public String toString() { return "Conflict deescalates between two members."; }
         });
 
-        // instructor continues class.
+        // resume class
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 for (Node member : otherMembers.getChildren()) {
                     Transitions.Workout((AgentGraphic) member, 1, 0.5);
                 } // end loop
@@ -440,10 +435,7 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: Alright guys, let's try this again!"
                 );
             }
-            @Override
-            public String toString() {
-                return "Trigger movement cycle (class continues).";
-            }
+            @Override public String toString() { return "Trigger movement cycle (class continues)."; }
         });
     } // end method
 
@@ -460,22 +452,29 @@ public class DemoManager {
                         "ROXANNE: OH GOD! SHARP DORITO SHRAPNEL ENTERED MY AORTA."
                 );
             }
+//            @Override public String toString() { return "Health emergency arises in a member."; }
             @Override
             public String toString() {
                 return "Health emergency arises in member.";
             }
         });
 
-        // trigger the sending of some bad signals to the backend.
+        // ---------- NEW: Send only the health‑emergency signal ----------
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                sendBadSignals();
+                for (Hardware h : targetHardware) {
+                    if (h instanceof WearableSensors) {
+                        WearableSensors ws = (WearableSensors) h;
+                        if (ws.member.getId().equals("JDANIELS1")) {   // target member
+                            ws.setScenarioSignal("critical_hr_drop");
+                            ws.sendSignal();
+                            break;
+                        }
+                    }
+                }
             }
-            @Override
-            public String toString() {
-                return "Sending triggering feed to the backend.";
-            }
+            @Override public String toString() { return "Sending health emergency signal to backend."; }
         });
 
         // notification expected from the back end to both application windows
@@ -499,10 +498,11 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: Everyone stop! Let me address the not-so-sexy situation!"
                 );
             }
-            @Override
-            public String toString() {
-                return "Instructor stops class";
-            }
+//            @Override
+//            public String toString() {
+//                return "Instructor stops class";
+//            }
+            @Override public String toString() { return "Instructor stops class"; }
         });
 
         // instructor attends to the collapsed member, calling emergency services

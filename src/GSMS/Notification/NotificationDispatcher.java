@@ -9,6 +9,7 @@ package GSMS.Notification;
  */
 
 import GSMS.Agents.AgentContainer;
+import GSMS.Agents.Instructor;
 import GSMS.Common.AgentId;
 import GSMS.Common.AgentType;
 
@@ -20,8 +21,10 @@ import GSMS.Common.AgentType;
 
 public class NotificationDispatcher {
 
-    public NotificationDispatcher() {
+    private final AgentRegistry agentRegistry;
 
+    public NotificationDispatcher(AgentRegistry agentRegistry) {
+        this.agentRegistry = agentRegistry;
     } // end constructor
 
     /**
@@ -33,9 +36,29 @@ public class NotificationDispatcher {
      */
     public void receiveNotification(Notification notification, AlertLevel alertLevel,
                                     AgentId recipientId) {
-        // right now, testing -- send to just the agent received
-         sendNotification(notification, recipientId); // end by sending the notification
-    } // end method
+        // 1. Always send to the primary recipient.
+        sendNotification(notification, recipientId);
+
+        // 2. If the recipient is a member, also alert their instructor.
+        if (recipientId.getType() == AgentType.MEMBER) {
+            Instructor instructor = agentRegistry.getInstructorForMember(recipientId);
+
+            // DEMO FALLBACK – if the room registry is empty, use the known instructor.
+            if (instructor == null) {
+                AgentId fallbackId = new AgentId("JFONDA1", "Jane Fonda", AgentType.INSTRUCTOR);
+                instructor = AgentContainer.InstructorApps.get(fallbackId);
+            }
+
+            if (instructor != null) {
+                Notification instructorNotif = new Notification(
+                        notification.getMessage(),
+                        alertLevel,
+                        instructor.getAgentId()
+                );
+                sendNotification(instructorNotif, instructor.getAgentId());
+            }
+        }
+    }// end method
 
     /**
      * send out a notification to this agent

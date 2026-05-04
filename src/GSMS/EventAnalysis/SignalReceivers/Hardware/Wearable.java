@@ -36,8 +36,16 @@ public class Wearable {
      */
     public void receiveSignal(String signal) {
         wearableData = signal;
-        classroom.receiveSignal(new Signal<String>(wearableData),
-                                    SignalType.WEARABLE);
+
+        // The front-end sends "memberId:scenarioSignal", extract the memberId.
+        String[] parts = signal.split(":", 2);
+        if (parts.length == 2) {
+            memberId = new AgentId(parts[0].trim());
+        }
+
+        Signal<String> sig = new Signal<>(wearableData);
+        sig.setAgentId(memberId);            // attach the ID so Classroom can use it
+        classroom.receiveSignal(sig, SignalType.WEARABLE);
     } // end method
 
 } // end class
