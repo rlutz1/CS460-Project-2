@@ -136,6 +136,17 @@ public class DataManager {
             Metadata timeFrame
         )
     {
+//        for each targetId
+//          depending on context of report type: alert level warning or alert
+//          logs = RetrieveLogs(...)
+//        for each targetId
+//          if is classid: classProfile = GetClass(id, null)
+//          if is instructorid or memberid: agentId = GetProfile(id, null)
+
+//        package into ReportPackage.
+//        the above calls have not been implemented, so we simulate below by
+//        only packing up the target, report type and time frame.
+
         String report = ai.generateReport(new ReportPackage(targetId, reportType, timeFrame));
 
         Notification information = new Notification(
