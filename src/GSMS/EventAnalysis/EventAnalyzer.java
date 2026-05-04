@@ -6,15 +6,14 @@ import GSMS.Common.AgentId;
 import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Classroom;
 import GSMS.EventAnalysis.SignalReceivers.Event;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.AudioListener;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.VideoListener;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.WearableListener;
 import GSMS.EventAnalysis.SignalReceivers.SignalType;
 import GSMS.Notification.AgentRegistry;
 import GSMS.Notification.AlertLevel;
 import GSMS.Notification.Notification;
 import GSMS.Notification.NotificationDispatcher;
-import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,15 +76,15 @@ public class EventAnalyzer {
         // Classroom itself.
         Classroom initClassroom = new Classroom(this,
                 classInitializer.roomId());
-        // init Audio components.
+        // init AudioListener components.
         for (int i = 0; i < classInitializer.numAudioSensors(); i++) {
             initClassroom.addNewAudioComponent();
         }
-        // init Video Components.
+        // init VideoListener Components.
         for (int i = 0; i < classInitializer.numCameras(); i++) {
             initClassroom.addNewVideoComponent();
         }
-        // inti Wearable Componenets.
+        // inti WearableListener Componenets.
         for (int i = 0; i < classInitializer.membersInClass().size(); i++) {
             initClassroom.addNewWearableComponent(classInitializer.membersInClass()
                                                                   .get(i)
@@ -96,15 +95,15 @@ public class EventAnalyzer {
         classrooms.add(initClassroom);
     }
 
-    public List<Audio> getAudioComponentsToInit(RoomId classroomId) {
+    public List<AudioListener> getAudioComponentsToInit(RoomId classroomId) {
         Classroom classroom = findClassroom(classroomId);
         return classroom.getAudioComponent();
     }
-    public List<Video> getVideoComponentsToInit(RoomId classroomId) {
+    public List<VideoListener> getVideoComponentsToInit(RoomId classroomId) {
         Classroom classroom = findClassroom(classroomId);
         return classroom.getVideosComponents();
     }
-    public List<Wearable> getWearablesToInit(RoomId classroomId) {
+    public List<WearableListener> getWearablesToInit(RoomId classroomId) {
         Classroom classroom = findClassroom(classroomId);
         return classroom.getWearableComponents();
     }

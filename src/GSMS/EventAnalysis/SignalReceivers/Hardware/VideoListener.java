@@ -8,16 +8,16 @@ import GSMS.EventAnalysis.SignalReceivers.SignalType;
  * class to stand as component for camera feed recipient
  */
 
-public class Video {
+public class VideoListener {
 
     private Classroom classroom;
     private String videoData;
 
     /**
-     * Constructs Video with a tied Classroom to send signals to.
+     * Constructs VideoListener with a tied Classroom to send signals to.
      * @param classroom
      */
-    public Video(Classroom classroom) {
+    public VideoListener(Classroom classroom) {
         this.classroom = classroom;
     } // end constructor
 

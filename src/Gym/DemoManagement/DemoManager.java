@@ -272,7 +272,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "Member starts having exhaustion.";
+                return "MemberDispatcher starts having exhaustion.";
             }
         });
 
@@ -327,9 +327,9 @@ public class DemoManager {
             }
 //            @Override
 //            public String toString() {
-//                return "Instructor stops class";
+//                return "InstructorDispatcher stops class";
 //            }
-            @Override public String toString() { return "Instructor stops class"; }
+            @Override public String toString() { return "InstructorDispatcher stops class"; }
         });
 
         // member feels better
@@ -343,7 +343,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "Member's exhaustion is relieving.";
+                return "MemberDispatcher's exhaustion is relieving.";
             }
         });
 
@@ -420,9 +420,9 @@ public class DemoManager {
             }
 //            @Override
 //            public String toString() {
-//                return "Instructor stops class";
+//                return "InstructorDispatcher stops class";
 //            }
-            @Override public String toString() { return "Instructor stops class"; }
+            @Override public String toString() { return "InstructorDispatcher stops class"; }
         });
 
         // conflict deescalation
@@ -516,9 +516,9 @@ public class DemoManager {
             }
 //            @Override
 //            public String toString() {
-//                return "Instructor stops class";
+//                return "InstructorDispatcher stops class";
 //            }
-            @Override public String toString() { return "Instructor stops class"; }
+            @Override public String toString() { return "InstructorDispatcher stops class"; }
         });
 
         // instructor attends to the collapsed member, calling emergency services
@@ -537,7 +537,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "Instructor rushes to help, calls emergency services.";
+                return "InstructorDispatcher rushes to help, calls emergency services.";
             }
         });
 

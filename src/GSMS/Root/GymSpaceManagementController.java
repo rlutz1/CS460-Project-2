@@ -1,9 +1,9 @@
 package GSMS.Root;
 
 import Driver.AgentInitializer;
-import GSMS.Agents.Instructor;
+import GSMS.Agents.InstructorDispatcher;
 import GSMS.Agents.InstructorApplicationAPI;
-import GSMS.Agents.Member;
+import GSMS.Agents.MemberDispatcher;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Common.JobInfo;
@@ -29,7 +29,7 @@ import java.util.Map;
  * Responsibilities the GSMC has:
  *   1. Instantiate and wire all backend components at startup.
  *   2. Implement AgentRegistry so the NotificationDispatcher can resolve
- *      Member and Instructor components by ID or by room at runtime.
+ *      MemberDispatcher and InstructorDispatcher components by ID or by room at runtime.
  *   3. Maintain a live room-occupancy state: which members and instructor
  *      are currently in each room. This state is updated by the EventAnalyzer
  *      as members enter/exit via doorway sensors (verifyRoomAccess).
@@ -45,13 +45,13 @@ import java.util.Map;
  *
  * AgentRegistry implementation:
  *   The GSMC maintains three in-memory maps for live room state:
- *     roomMembers : RoomId string → a list of Member components in that room.
- *     roomInstructor: RoomId string → Instructor component in that room.
+ *     roomMembers : RoomId string → a list of MemberDispatcher components in that room.
+ *     roomInstructor: RoomId string → InstructorDispatcher component in that room.
  *     memberRoom: AgentId string → RoomId string of the member's current room.
  *   These maps are populated by registerMemberInRoom() / registerInstructorInRoom()
  *   and cleared by removeMemberFromRoom() as doorway events are processed.
  *
- *   A separate memberRegistry map holds all known Member components by AgentId
+ *   A separate memberRegistry map holds all known MemberDispatcher components by AgentId
  *   regardless of whether they are currently in a room, so getMemberById() always
  *   works even before a member enters a classroom.
  *
@@ -71,19 +71,19 @@ public class GymSpaceManagementController implements AgentRegistry {
      The AgentRegistry live state
     /*
 
-    /** All known Member components, keyed by their AgentId string. */
-    private final Map<String, Member>       memberRegistry;
+    /** All known MemberDispatcher components, keyed by their AgentId string. */
+    private final Map<String, MemberDispatcher>       memberRegistry;
 
-    /** All known Instructor components, keyed by their AgentId string. */
-    private final Map<String, Instructor>   instructorRegistry;
+    /** All known InstructorDispatcher components, keyed by their AgentId string. */
+    private final Map<String, InstructorDispatcher>   instructorRegistry;
 
-    /** Maps a RoomId string to the list of Member components currently in it. */
-    private final Map<String, List<Member>> roomMembers;
+    /** Maps a RoomId string to the list of MemberDispatcher components currently in it. */
+    private final Map<String, List<MemberDispatcher>> roomMembers;
 
-    /** Maps a RoomId string to the Instructor currently in it. */
-    private final Map<String, Instructor>   roomInstructor;
+    /** Maps a RoomId string to the InstructorDispatcher currently in it. */
+    private final Map<String, InstructorDispatcher>   roomInstructor;
 
-    /** Maps a Member's AgentId string to the RoomId string they are currently in. */
+    /** Maps a MemberDispatcher's AgentId string to the RoomId string they are currently in. */
     private final Map<String, String>       memberRoom;
 
     // following necessary API components to enable correct communication flow with incoming app requests
@@ -134,7 +134,7 @@ public class GymSpaceManagementController implements AgentRegistry {
     /*
 
     /**
-     * Entry point for requests arriving from Member or Instructor Application APIs.
+     * Entry point for requests arriving from MemberDispatcher or InstructorDispatcher Application APIs.
      * Parses the request type and delegates to the appropriate internal component.
      *
      * Expected requestType values (consistent with use cases):
@@ -264,7 +264,7 @@ public class GymSpaceManagementController implements AgentRegistry {
 //
 //            case "RECOMMENDATION":
 //                // RecommendationDispatcher has a result ready to route back to a member
-//                // TODO: parse memberId/instructorId from info and call Member/Instructor sendInformation() directly,
+//                // TODO: parse memberId/instructorId from info and call MemberDispatcher/InstructorDispatcher sendInformation() directly,
 //                //  or route via the agent registry
 //                break;
 //
@@ -288,20 +288,20 @@ public class GymSpaceManagementController implements AgentRegistry {
 
     /**
      * {@inheritDoc}
-     * Resolves the Member component from the in-memory memberRegistry.
+     * Resolves the MemberDispatcher component from the in-memory memberRegistry.
      */
     @Override
-    public Member getMemberById(AgentId agentId) {
+    public MemberDispatcher getMemberById(AgentId agentId) {
         return memberRegistry.get(agentId.getId());
     } // end method
 
     /**
      * {@inheritDoc}
      * Resolves the member's current room via memberRoom, then returns
-     * the Instructor registered in that room via roomInstructor.
+     * the InstructorDispatcher registered in that room via roomInstructor.
      */
     @Override
-    public Instructor getInstructorForMember(AgentId agentId) {
+    public InstructorDispatcher getInstructorForMember(AgentId agentId) {
         String roomId = memberRoom.get(agentId.getId());
         if (roomId == null) {
             return null;
@@ -315,8 +315,8 @@ public class GymSpaceManagementController implements AgentRegistry {
      * the dispatcher cannot accidentally modify the live occupancy state.
      */
     @Override
-    public List<Member> getMembersInRoom(RoomId roomId) {
-        List<Member> members = roomMembers.get(roomId.getId());
+    public List<MemberDispatcher> getMembersInRoom(RoomId roomId) {
+        List<MemberDispatcher> members = roomMembers.get(roomId.getId());
         if (members == null) {
             return new ArrayList<>();
         } // end if
@@ -325,10 +325,10 @@ public class GymSpaceManagementController implements AgentRegistry {
 
     /**
      * {@inheritDoc}
-     * Returns the Instructor currently registered in the given room.
+     * Returns the InstructorDispatcher currently registered in the given room.
      */
     @Override
-    public Instructor getInstructorInRoom(RoomId roomId) {
+    public InstructorDispatcher getInstructorInRoom(RoomId roomId) {
         return roomInstructor.get(roomId.getId());
     } // end method
 
@@ -351,16 +351,16 @@ public class GymSpaceManagementController implements AgentRegistry {
     /*
 
     /**
-     * Registers a Member component as present in the given room.
+     * Registers a MemberDispatcher component as present in the given room.
      * Called when a member's RFID wearable is read by a doorway sensor.
      *
      * Also adds the member to memberRegistry if not already known,
      * so getMemberById() works from the first time a member is seen.
      *
-     * @param member The Member component to register.
+     * @param member The MemberDispatcher component to register.
      * @param roomId String ID of the room the member is entering.
      */
-    public void registerMemberInRoom(Member member, String roomId) {
+    public void registerMemberInRoom(MemberDispatcher member, String roomId) {
         //Ensure the member is in the global registry
         memberRegistry.putIfAbsent(member.getAgentId().getId(), member);
 
@@ -375,14 +375,14 @@ public class GymSpaceManagementController implements AgentRegistry {
     } // end method
 
     /**
-     * Removes a Member from a room's occupancy list when they exit.
+     * Removes a MemberDispatcher from a room's occupancy list when they exit.
      * Called when a member's exit is detected via a doorway sensor.
      *
      * @param agentId String ID of the exiting member.
      * @param roomId  String ID of the room the member is leaving.
      */
     public void removeMemberFromRoom(String agentId, String roomId) {
-        List<Member> members = roomMembers.get(roomId);
+        List<MemberDispatcher> members = roomMembers.get(roomId);
         if (members != null) {
             members.removeIf(m -> m.getAgentId().getId().equals(agentId));
         } // end if
@@ -393,13 +393,13 @@ public class GymSpaceManagementController implements AgentRegistry {
     } // end method
 
     /**
-     * Registers an Instructor as present in the given room.
+     * Registers an InstructorDispatcher as present in the given room.
      * Called when an instructor's session begins in a classroom.
      *
-     * @param instructor The Instructor component to register.
+     * @param instructor The InstructorDispatcher component to register.
      * @param roomId     String ID of the room the instructor is in.
      */
-    public void registerInstructorInRoom(Instructor instructor, String roomId) {
+    public void registerInstructorInRoom(InstructorDispatcher instructor, String roomId) {
         instructorRegistry.putIfAbsent(instructor.getAgentId().getId(), instructor);
         roomInstructor.put(roomId, instructor);
 
@@ -408,12 +408,12 @@ public class GymSpaceManagementController implements AgentRegistry {
     } // end method
 
     /**
-     * Removes an Instructor from a room when their session ends.
+     * Removes an InstructorDispatcher from a room when their session ends.
      *
      * @param roomId String ID of the room the instructor is leaving.
      */
     public void removeInstructorFromRoom(String roomId) {
-        Instructor removed = roomInstructor.remove(roomId);
+        InstructorDispatcher removed = roomInstructor.remove(roomId);
         if (removed != null) {
             System.out.println("[GSMC] removeInstructorFromRoom: instructor="
                     + removed.getAgentId() + " room=" + roomId);

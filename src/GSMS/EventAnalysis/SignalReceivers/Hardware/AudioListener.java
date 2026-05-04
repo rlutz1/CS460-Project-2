@@ -8,16 +8,16 @@ import GSMS.EventAnalysis.SignalReceivers.SignalType;
  * class to stand as component for audio sensor recipient
  */
 
-public class Audio {
+public class AudioListener {
 
     private Classroom classroom;
     private int decibelLevel;
 
     /**
-     * Constructs Audio with a tied Classroom to send signals to.
+     * Constructs AudioListener with a tied Classroom to send signals to.
      * @param classroom
      */
-    public Audio(Classroom classroom) {
+    public AudioListener(Classroom classroom) {
         this.classroom = classroom;
     } // end constructor
 

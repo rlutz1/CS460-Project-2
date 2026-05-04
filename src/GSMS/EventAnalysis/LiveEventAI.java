@@ -37,7 +37,7 @@ public class LiveEventAI {
             if (memberId == null) memberId = "JDANIELS1";
             return new Event(
                     AlertLevel.WARNING,
-                    "Member showing signs of exhaustion.",
+                    "MemberDispatcher showing signs of exhaustion.",
                     0.85,
                     new AgentId(memberId, "Jack Daniels", AgentType.MEMBER)  // name can be generic
             );
@@ -60,7 +60,7 @@ public class LiveEventAI {
             if (memberId == null) memberId = "JDANIELS1";
             return new Event(
                     AlertLevel.ALERT,
-                    "Member collapsed – possible health emergency.",
+                    "MemberDispatcher collapsed – possible health emergency.",
                     0.98,
                     new AgentId(memberId, "Jack Daniels", AgentType.MEMBER)
             );
@@ -70,7 +70,7 @@ public class LiveEventAI {
         if (lower.contains("member_fall") || lower.contains("collapse_thud")) {
             return new Event(
                     AlertLevel.ALERT,
-                    "Member fall detected.",
+                    "MemberDispatcher fall detected.",
                     0.95,
                     new AgentId("JDANIELS1", "Jack Daniels", AgentType.MEMBER)
             );

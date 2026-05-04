@@ -9,7 +9,7 @@ package GSMS.Notification;
  */
 
 import GSMS.Agents.AgentContainer;
-import GSMS.Agents.Instructor;
+import GSMS.Agents.InstructorDispatcher;
 import GSMS.Common.AgentId;
 import GSMS.Common.AgentType;
 
@@ -41,7 +41,7 @@ public class NotificationDispatcher {
 
         // 2. If the recipient is a member, also alert their instructor.
         if (recipientId.getType() == AgentType.MEMBER) {
-            Instructor instructor = agentRegistry.getInstructorForMember(recipientId);
+            InstructorDispatcher instructor = agentRegistry.getInstructorForMember(recipientId);
 
             // DEMO FALLBACK – if the room registry is empty, use the known instructor.
             if (instructor == null) {

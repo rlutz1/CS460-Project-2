@@ -6,9 +6,9 @@ import GSMS.Agents.InstructorApplicationAPI;
 import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Common.AgentType;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.AudioListener;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.VideoListener;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.WearableListener;
 import Gym.AgentGraphics.InstructorGraphic;
 import Gym.AgentGraphics.MemberGraphic;
 import Gym.DemoManagement.DemoManager;
@@ -47,9 +47,9 @@ public class Gym {
 
     /* METADATA ABOUT THE GYM AND CODE NEEDS */
     public final static String MAIN_INSTRUCTOR_FXML = "/fxml/instructor-app.fxml";
-    public final static String INSTRUCTOR_WINDOW_NAME = "Instructor Application";
+    public final static String INSTRUCTOR_WINDOW_NAME = "InstructorDispatcher Application";
     public final static String MAIN_MEMBER_FXML = "/fxml/member-app.fxml";
-    public final static String MEMBER_WINDOW_NAME = "Member Application";
+    public final static String MEMBER_WINDOW_NAME = "MemberDispatcher Application";
 
     // following maps are used for initialization between front/backend and mapping an agent id to a specific application
     public HashMap<AgentId, MemberApplication> memberApplications = new HashMap<AgentId, MemberApplication>();
@@ -232,7 +232,7 @@ public class Gym {
      */
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) {
-        System.out.println("Starting Instructor Application.");
+        System.out.println("Starting InstructorDispatcher Application.");
         AgentId agentId = new AgentId((String)instructorSelection.getSelectionModel().getSelectedItem());
         instructorSelection.getItems().remove(agentId.getId());
         instructorApplications.get(agentId).start();
@@ -282,7 +282,7 @@ public class Gym {
      */
     @FXML
     private void startMemberApp(MouseEvent mouseEvent) {
-        System.out.println("Starting Member Application.");
+        System.out.println("Starting MemberDispatcher Application.");
         AgentId agentId = new AgentId((String)memberSelection.getSelectionModel().getSelectedItem());
         memberSelection.getItems().remove(agentId.getId());
         memberApplications.get(agentId).start();
@@ -369,9 +369,9 @@ public class Gym {
      */
     public void initOnsiteComponents(
             GymInitializer initPackage,
-            List<Audio> audioListeners,
-            List<Video> videoListeners,
-            List<Wearable> wearableListeners
+            List<AudioListener> audioListeners,
+            List<VideoListener> videoListeners,
+            List<WearableListener> wearableListeners
 
     ) {
         /* VISUAL FRONTEND PEOPLE GRAPHICS */

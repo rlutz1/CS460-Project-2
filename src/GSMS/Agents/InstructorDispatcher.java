@@ -5,13 +5,13 @@ import GSMS.Notification.Notification;
 import InstructorApplication.InstructorApplication;
 
 /**
- * Stand-in for the Instructor component.
+ * Stand-in for the InstructorDispatcher component.
  * In charge of OUTgoing info to an instructor application.
- * Mirrors the structure of Member.java:
+ * Mirrors the structure of MemberDispatcher.java:
  *   - Holds an AgentId so the NotificationDispatcher can identify this instructor when resolving room recipients.
- *   - sendInformation(String) signature matches Member for consistency.
+ *   - sendInformation(String) signature matches MemberDispatcher for consistency.
  */
-public class Instructor {
+public class InstructorDispatcher {
 
     private final AgentId agentId;
     private InstructorApplication app;
@@ -19,7 +19,7 @@ public class Instructor {
     /**
      * @param agentId Unique identifier for this instructor.
      */
-    public Instructor(AgentId agentId) {
+    public InstructorDispatcher(AgentId agentId) {
         this.agentId = agentId;
         this.app = null;
     } // end constructor
@@ -28,7 +28,7 @@ public class Instructor {
      * @param agentId Unique identifier for this instructor.
      * @param app
      */
-    public Instructor(AgentId agentId, InstructorApplication app) {
+    public InstructorDispatcher(AgentId agentId, InstructorApplication app) {
         this.agentId = agentId;
         this.app = app;
     } // end constructor
@@ -46,7 +46,7 @@ public class Instructor {
      */
     public void sendInformation(Notification notificationOrInformation) {
         // TODO: implement network transmission to instructor application
-        System.out.println("[Instructor " + agentId + "] sendInformation: "
+        System.out.println("[InstructorDispatcher " + agentId + "] sendInformation: "
                 + notificationOrInformation);
 
         // use the access point to give the application data

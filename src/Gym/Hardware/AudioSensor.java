@@ -1,11 +1,11 @@
 package Gym.Hardware;
 
 import GSMS.Common.RoomId;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.AudioListener;
 
 public class AudioSensor implements Hardware {
 
-    public Audio component; // to receive signals from front end
+    public AudioListener component; // to receive signals from front end
     public RoomId room;     // for readability
     private String scenarioSignal = "10";   // default value
 
@@ -27,7 +27,7 @@ public class AudioSensor implements Hardware {
      */
     @Override
     public void sendSignal() {
-        System.out.println("Audio sensor ping: " + scenarioSignal);
+        System.out.println("AudioListener sensor ping: " + scenarioSignal);
         component.receiveSignal(scenarioSignal);
     }
 }
