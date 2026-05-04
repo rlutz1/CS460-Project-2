@@ -3,7 +3,7 @@ package Gym.DemoManagement;
 import Gym.AgentGraphics.AgentGraphic;
 import Gym.AgentGraphics.InstructorGraphic;
 import Gym.AgentGraphics.MemberGraphic;
-import Gym.Hardware.Hardware;
+import Gym.Hardware.*;
 import javafx.animation.*;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
@@ -16,15 +16,14 @@ import java.util.List;
 
 /**
  * this guy manages demo states and allows for more
- * encapsualtion of running the demo away from the
+ * encapsulation of running the demo away from the
  * physical gym representation.
  */
 public class DemoManager {
 
-    private final List<DemoState> states; // list of frames, or states for demo
+    private final List<DemoState> states;
     private int currState;
 
-//    public StackPane mainStage;
     public AnchorPane targetMemberHouse;
     public Text houseChatBubble;
     public AnchorPane entireGym;
@@ -36,18 +35,11 @@ public class DemoManager {
     public Shape entryWay;
     public List<Hardware> targetHardware;
 
-    // for testing and sending basic crap to backend
-    // this may change to be more representative of the scenario, environment.
-//    public AudioSensor audioSensor;
-//    public Camera cameraFeed;
-//    public WearableSensors wearable;
-
     public DemoManager() {
         this.states = new ArrayList<>();
         this.currState = 0; // first state always
         init(); // init the manager
-    } // end constructor
-
+    }// end constructor
     /**
      * this method is to be called when the "next" or "start"
      * buttons are pressed.
@@ -61,7 +53,6 @@ public class DemoManager {
             state.activate(); // activate the state
         } // end if
     } // end method
-
     /**
      * call when resetting the demo states.
      */
@@ -69,30 +60,21 @@ public class DemoManager {
         this.currState = 0;
         resetStage();
     } // end method
-
     /**
      * method to
      * 1. stop all animations.
      * 2. reset all animated objects to original state.
      */
     private void resetStage() {
-        // stop all current animations
-        for  (Transition anim : Transitions.LiveTransitions) {
+        for (Transition anim : Transitions.LiveTransitions) {
             anim.stop();
-        } // end loop
+        }
         Transitions.LiveTransitions.clear();
-
-        resetAllTransitionalObjects(); // reset all the animated objects
-
-        // reset the original scene setup.
+        resetAllTransitionalObjects();
         targetMemberHouse.setVisible(true);
         entireGym.setVisible(false);
-    } // end mehtod
+    }
 
-    /**
-     * method to hold the hard reset of any and all objects that have
-     * a transition at ANY point. add any and all here.
-     */
     private void resetAllTransitionalObjects() {
         targetMemberInGym.setTranslateX(0);
         targetMemberInGym.setTranslateY(0);
@@ -115,7 +97,7 @@ public class DemoManager {
             member.setScaleY(1);
             ((MemberGraphic)member).root.setFill(((AgentGraphic)member).baseColor);
             member.setVisible(true);
-        } // end loop
+        }
         otherMembers.setVisible(true);
 
         targetInstructor.setTranslateX(0);
@@ -124,71 +106,45 @@ public class DemoManager {
         targetInstructor.setScaleY(1);
         targetInstructor.root.setFill(targetInstructor.baseColor);
         targetInstructor.setVisible(true);
-    } // end method
+    }
 
-    /**
-     * this is going to be incredibly hardcoded, but testing.
-     * initialize the demo state list.
-     */
     private void init() {
         initScenario1();
         initScenario2();
         initScenario3();
         initScenario4();
-//        initScenario5();
-    } // end method
+    }
 
-    /**
-     * remove out the first scenario frames
-     */
     private void initScenario1() {
-
-        // enter the shame zone
+        // ... (unchanged, same as before)
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                // just to be sure correct scene is active, but it should be.
                 targetMemberHouse.setVisible(true);
                 entireGym.setVisible(false);
-
-                // simple text bubble for now, if time, make prettier
                 houseChatBubble.setText(
                         "Ugh, I've been here for hours, covered in Protein Dorito crumbs.\n" +
-                        "Maybe I should at least do something at home..."
-                        );
-            }
-            @Override
-            public String toString() {
-                return "Loser at home, spur a recommendation request.";
-            }
-        });
-
-        // control goes over to the applications
-
-        // you know what, screw it, go to the gym
-        this.states.add(new DemoState() {
-            @Override
-            public void activate() {
-                // simple text bubble for now, if time, make prettier
-                houseChatBubble.setText(
-                        "Come on, dawg, you're better than this.\n" +
-                        "Dust off the crumbs and get to the gym."
+                                "Maybe I should at least do something at home..."
                 );
             }
-            @Override
-            public String toString() {
-                return "Loser decides to stop being a loser.";
-            }
+            @Override public String toString() { return "Loser at home, spur a recommendation request."; }
         });
 
-        // transition to going to the gym
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                // empty the chat
-                houseChatBubble.setText("");
+                houseChatBubble.setText(
+                        "Come on, dawg, you're better than this.\n" +
+                                "Dust off the crumbs and get to the gym."
+                );
+            }
+            @Override public String toString() { return "Loser decides to stop being a loser."; }
+        });
 
-                // transition him out the house.
+        this.states.add(new DemoState() {
+            @Override
+            public void activate() {
+                houseChatBubble.setText("");
                 Transitions.MoveWithExit(
                         targetMemberInHouse,
                         3,
@@ -198,338 +154,236 @@ public class DemoManager {
                         'y'
                 );
             }
-            @Override
-            public String toString() {
-                return "Loser decides to stop being a loser.";
-            }
+            @Override public String toString() { return "Loser leaves house."; }
         });
+    }
 
-        // transition to scenario 2
-    } // end method
-
-    /**
-     * remove out the second scenario frames
-     */
     private void initScenario2() {
-        // set up the gym scene
+        // set up gym scene
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 targetMemberHouse.setVisible(false);
                 entireGym.setVisible(true);
             }
-            @Override
-            public String toString() {
-                return "Target arrives at gym.";
-            }
+            @Override public String toString() { return "Target arrives at gym."; }
         });
 
-        // move the target in the classroom
+        // move target into classroom
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 Transitions.Move(
                         targetMemberInGym,
                         2,
-                        // TODO: this should be based upon distance away
                         otherMembers.getLayoutX() + otherMembers.getWidth() - targetMemberInGym.width,
                         - otherMembers.getLayoutY() - otherMembers.getHeight(),
                         true,
                         'x'
                 );
             }
-            @Override
-            public String toString() {
-                return "Target moving into classroom";
-            }
+            @Override public String toString() { return "Target moving into classroom"; }
         });
 
-        // move everyone in room is working out
+        // everyone working out
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 for (Node member : otherMembers.getChildren()) {
                     Transitions.Workout((AgentGraphic) member, 1, 0.5);
-                } // end loop
-
+                }
                 Transitions.Workout(targetMemberInGym, 1, 0.5);
             }
-            @Override
-            public String toString() {
-                return "Trigger movement cycle (class begins).";
-            }
+            @Override public String toString() { return "Trigger movement cycle (class begins)."; }
         });
 
-
-        // member starts having over exhaustion
+        // exhaustion visual
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 Transitions.TriggerExhaustion(targetMemberInGym, 4);
             }
-            @Override
-            public String toString() {
-                return "Member starts having exhaustion.";
-            }
+            @Override public String toString() { return "Member starts having exhaustion."; }
         });
 
-        // trigger the sending of some bad signals to the backend.
+        // ---------- NEW: Send only the exhaustion signal ----------
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                sendBadSignals();
+                // Find the wearable of the target member (Jack Daniels = JDANIELS1)
+                // and send the over-exertion signal.
+                for (Hardware h : targetHardware) {
+                    if (h instanceof WearableSensors) {
+                        WearableSensors ws = (WearableSensors) h;
+                        if (ws.member.getId().equals("JDANIELS1")) {
+                            ws.setScenarioSignal("over_exertion");
+                            ws.sendSignal();
+                            break;
+                        }
+                    }
+                }
             }
-            @Override
-            public String toString() {
-                return "Sending triggering feed to the backend.";
-            }
+            @Override public String toString() { return "Sending exhaustion signal to backend."; }
         });
 
-        // notification expected from the back end to both application windows
-
-        // stop workouts and pause
+        // stop workouts
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
-                // stop all animations
+            @Override public void activate() {
                 Transitions.LiveTransitions.forEach(Animation::stop);
                 Transitions.LiveTransitions.clear();
-                // stop everyone from "working out"
                 targetMemberInGym.setScaleX(1);
                 targetMemberInGym.setScaleY(1);
                 for (Node member : otherMembers.getChildren()) {
                     member.setScaleX(1);
                     member.setScaleY(1);
-                } // end loop
+                }
             }
-            @Override
-            public String toString() {
-                return "Instructor stops class";
-            }
+            @Override public String toString() { return "Instructor stops class"; }
         });
 
-        // member feels better
+        // relieve exhaustion
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 Transitions.RelieveExhaustion(targetMemberInGym, 4);
             }
-            @Override
-            public String toString() {
-                return "Member's exhaustion is relieving.";
-            }
+            @Override public String toString() { return "Member's exhaustion is relieving."; }
         });
 
-        // instructor continues class.
+        // resume class
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 for (Node member : otherMembers.getChildren()) {
                     Transitions.Workout((AgentGraphic) member, 1, 0.5);
-                } // end loop
-
+                }
                 Transitions.Workout(targetMemberInGym, 1, 0.5);
             }
-            @Override
-            public String toString() {
-                return "Trigger movement cycle (class continues).";
-            }
+            @Override public String toString() { return "Trigger movement cycle (class continues)."; }
         });
-    } // end method
+    }
 
-    /**
-     * remove out the third scenario frames
-     */
     private void initScenario3() {
-        // a conflict arises between 2 members.
+        // conflict animation
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 Transitions.TriggerConflict(targetMemberInGym, (AgentGraphic) otherMembers.getChildren().getLast(), 2);
             }
-            @Override
-            public String toString() {
-                return "Conflict arises between two members.";
-            }
+            @Override public String toString() { return "Conflict arises between two members."; }
         });
 
-        // trigger the sending of some bad signals to the backend.
+        //  Send only the conflict signal
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                sendBadSignals();
+                // Use the first camera to send a conflict scene
+                for (Hardware h : targetHardware) {
+                    if (h instanceof Camera) {
+                        ((Camera) h).setScenarioSignal("physical_altercation");
+                        h.sendSignal();
+                        break;   // only one camera needed
+                    }
+                }
             }
-            @Override
-            public String toString() {
-                return "Sending triggering feed to the backend.";
-            }
+            @Override public String toString() { return "Sending conflict signal to backend."; }
         });
 
-        // notification expected from the back end to both application windows
-
-        // stop workouts and pause, instructor attempting to resolve conflict
+        // stop class
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
-                // stop all animations
+            @Override public void activate() {
                 Transitions.LiveTransitions.forEach(Animation::stop);
                 Transitions.LiveTransitions.clear();
-                // stop everyone from "working out"
                 targetMemberInGym.setScaleX(1);
                 targetMemberInGym.setScaleY(1);
                 for (Node member : otherMembers.getChildren()) {
                     member.setScaleX(1);
                     member.setScaleY(1);
-                } // end loop
+                }
             }
-            @Override
-            public String toString() {
-                return "Instructor stops class";
-            }
+            @Override public String toString() { return "Instructor stops class"; }
         });
 
-        // conflict deescalation
+        // de-escalation
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 Transitions.RelieveConflict(targetMemberInGym, (AgentGraphic) otherMembers.getChildren().getLast(), 5);
             }
-            @Override
-            public String toString() {
-                return "Conflict deescalates between two members.";
-            }
+            @Override public String toString() { return "Conflict deescalates between two members."; }
         });
 
-        // instructor continues class.
+        // resume class
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 for (Node member : otherMembers.getChildren()) {
                     Transitions.Workout((AgentGraphic) member, 1, 0.5);
-                } // end loop
-
+                }
                 Transitions.Workout(targetMemberInGym, 1, 0.5);
             }
-            @Override
-            public String toString() {
-                return "Trigger movement cycle (class continues).";
-            }
+            @Override public String toString() { return "Trigger movement cycle (class continues)."; }
         });
-    } // end method
+    }
 
-    /**
-     * remove out the fourth scenario frames
-     */
     private void initScenario4() {
-        // a health emergency arises between a member.
+        // health emergency animation
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 Transitions.TriggerHealthEmergency(targetMemberInGym, 1);
             }
-            @Override
-            public String toString() {
-                return "Health emergency arises in a member members.";
-            }
+            @Override public String toString() { return "Health emergency arises in a member."; }
         });
 
-        // trigger the sending of some bad signals to the backend.
+        // ---------- NEW: Send only the health‑emergency signal ----------
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                sendBadSignals();
+                for (Hardware h : targetHardware) {
+                    if (h instanceof WearableSensors) {
+                        WearableSensors ws = (WearableSensors) h;
+                        if (ws.member.getId().equals("JDANIELS1")) {   // target member
+                            ws.setScenarioSignal("critical_hr_drop");
+                            ws.sendSignal();
+                            break;
+                        }
+                    }
+                }
             }
-            @Override
-            public String toString() {
-                return "Sending triggering feed to the backend.";
-            }
+            @Override public String toString() { return "Sending health emergency signal to backend."; }
         });
 
-        // notification expected from the back end to both application windows
-
-        // instructor stops workouts
+        // stop class
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
-                // stop all animations
+            @Override public void activate() {
                 Transitions.LiveTransitions.forEach(Animation::stop);
                 Transitions.LiveTransitions.clear();
-                // stop everyone from "working out"
                 targetMemberInGym.setScaleX(1);
                 targetMemberInGym.setScaleY(1);
                 for (Node member : otherMembers.getChildren()) {
                     member.setScaleX(1);
                     member.setScaleY(1);
-                } // end loop
+                }
             }
-            @Override
-            public String toString() {
-                return "Instructor stops class";
-            }
+            @Override public String toString() { return "Instructor stops class"; }
         });
 
-        // instructor attends to the collapsed member, calling emergency services
+        // instructor rushes to help
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
-                Transitions.InstructorToHelp(
-                        targetInstructor,
-                        0.5,
-                        150, // TODO: funky layout positions, hardcoded for now.
-                        70
-                );
+            @Override public void activate() {
+                Transitions.InstructorToHelp(targetInstructor, 0.5, 150, 70);
             }
-            @Override
-            public String toString() {
-                return "Instructor rushes to help, calls emergency services.";
-            }
+            @Override public String toString() { return "Instructor rushes to help, calls emergency services."; }
         });
 
-        // services arrive, take member away
+        // member taken away
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
-                Transitions.MoveWithExit(
-                        targetMemberInGym,
-                        2,
-                        -20, // TODO: again, funky layout stuff that needs fixing
-                        20,
-                        true,
-                        'y'
-                );
+            @Override public void activate() {
+                Transitions.MoveWithExit(targetMemberInGym, 2, -20, 20, true, 'y');
             }
-            @Override
-            public String toString() {
-                return "Sick member whisked from classroom";
-            }
+            @Override public String toString() { return "Sick member whisked from classroom"; }
         });
 
-        // class is done: instructor leaves, all other members leave
+        // class dismissed
         this.states.add(new DemoState() {
-            @Override
-            public void activate() {
+            @Override public void activate() {
                 otherMembers.setVisible(false);
                 targetInstructor.setVisible(false);
             }
-            @Override
-            public String toString() {
-                return "Everyone leaves, class dismissed.";
-            }
+            @Override public String toString() { return "Everyone leaves, class dismissed."; }
         });
+    }
 
-    } // end method
-
-    /**
-     * remove out the fifth scenario frames
-     */
-    private void initScenario5() {
-
-    } // end method
-
-    private void sendBadSignals() {
-        for (Hardware hardware : targetHardware) {
-            hardware.sendSignal();
-        } // end method
-    } // end method
-
-} // end class
+   // Took out the old sendBadSignals()
+}

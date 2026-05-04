@@ -33,8 +33,9 @@ public class NotificationDispatcher {
      */
     public void receiveNotification(Notification notification, AlertLevel alertLevel,
                                     AgentId recipientId) {
-        // right now, testing -- send to just the agent received
-         sendNotification(notification, recipientId); // end by sending the notification
+        System.out.println("[NotificationDispatcher] RECEIVED: " + notification.getMessage()
+                + " | Level=" + alertLevel + " | Routing to " + recipientId);
+        sendNotification(notification, recipientId);
     } // end method
 
     /**

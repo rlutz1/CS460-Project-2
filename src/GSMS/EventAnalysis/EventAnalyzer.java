@@ -22,11 +22,13 @@ import java.util.List;
  * class to stand as component for event analyzer
  */
 
+
 public class EventAnalyzer {
     private static final double THRESHOLD = 0.7;
     private List<Classroom> classrooms;
     private LiveEventAI liveEventAI;
     private NotificationDispatcher notificationDispatcher;
+    private long lastAlertTimestamp = 0;   // for duplicate suppression
     public EventAnalyzer() {
         this.liveEventAI = new LiveEventAI();
         this.notificationDispatcher = new NotificationDispatcher();
@@ -45,12 +47,18 @@ public class EventAnalyzer {
         return null;
     }
     private void decideIfNeedToNotify(Event event){
-        if (event.probabilityOfCorrectness() > THRESHOLD) {
-            pushAlert(event.eventInfo(),
-                      event.alertLevel(),
-                      event.agentId());
+        long now = System.currentTimeMillis();
+        if (now - lastAlertTimestamp < 1000) {
+            System.out.println("[EventAnalyzer] Suppressed duplicate alert within 1 second.");
+            return;
         }
-        // TODO: log regardless insert here
+        lastAlertTimestamp = now;
+
+        if (event.probabilityOfCorrectness() > THRESHOLD) {
+            System.out.println("[EventAnalyzer] DECIDED TO PUSH ALERT: " + event.eventInfo()
+                    + " | Level=" + event.alertLevel() + " | Target=" + event.agentId());
+            pushAlert(event.eventInfo(), event.alertLevel(), event.agentId());
+        }
     }
 
     /** DEMO INITIALIZER SPECIFIC (START)**/
@@ -106,6 +114,7 @@ public class EventAnalyzer {
      * @param roomId classroom id.
      */
     public void getAudioData(RoomId roomId) {
+        System.out.println("[EventAnalyzer] getAudioData CALLED room=" + roomId);
         Classroom room = findClassroom(roomId);
         if (room != null) {
             Event audioEvent =
@@ -123,6 +132,7 @@ public class EventAnalyzer {
      * @param roomId classroom id.
      */
     public void getVideoData(RoomId roomId) {
+        System.out.println("[EventAnalyzer] getVideoData CALLED room=" + roomId);
         Classroom room = findClassroom(roomId);
         if (room != null) {
             Event videoEvent =
@@ -144,6 +154,8 @@ public class EventAnalyzer {
      * @param memberId
      */
     public void getWearableData(RoomId roomId, AgentId memberId) {
+        System.out.println("[EventAnalyzer] getWearableData CALLED room=" + roomId
+                + " memberId=" + memberId);
         Classroom room = findClassroom(roomId);
         if (room != null) {
             Event wearableEvent =
@@ -205,6 +217,7 @@ public class EventAnalyzer {
      * @param alertLevel
      * @param targetId (member/instructor).
      */
+
     public void pushAlert(String alert, AlertLevel alertLevel, AgentId targetId) {
         Notification fullNotification = new Notification(
                 "ALERT LEVEL: " + alertLevel.toString() + "\n. ALERT: " + alert,
