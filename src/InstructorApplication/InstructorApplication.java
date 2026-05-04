@@ -74,7 +74,6 @@ public class InstructorApplication {
 
     @FXML
     public void openGenReportWindow(MouseEvent mouseEvent) throws IOException {
-        System.out.println("slkdnasdskdlasmd");
         URL main = getClass().getResource(REPORT_WINDOW_FXML); // grab main xml
 
         if (main != null) { // null catch
@@ -192,8 +191,9 @@ public class InstructorApplication {
         if (newNotificationLog.getText() == null || newNotificationLog.getText().trim().isEmpty()) {
             instructorLog.appendText("No notification to mark\n");
         } else {
-            instructorLog.appendText(newNotificationLog.getText() + "\n");
-            inputArea.clear();
+//            instructorLog.appendText(newNotificationLog.getText() + "\n");
+//            inputArea.clear();
+            newNotificationLog.clear();
         }
     }
 

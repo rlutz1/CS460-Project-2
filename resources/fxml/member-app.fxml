@@ -36,7 +36,7 @@
             <children>
                 <TextArea fx:id="newNotificationLog" editable="false" minWidth="-Infinity" mouseTransparent="true" prefHeight="200.0" prefWidth="500.0" promptText="No new notifications... " wrapText="true" HBox.hgrow="ALWAYS">
                     <font>
-                        <Font size="27.0" />
+                        <Font size="20.0" />
                     </font>
                 </TextArea>
                 <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#confirm" prefHeight="102.0" prefWidth="198.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Acknowledge" textAlignment="CENTER">

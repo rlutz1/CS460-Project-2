@@ -175,8 +175,9 @@ public class MemberApplication {
         if (newNotificationLog.getText() == null || newNotificationLog.getText().trim().isEmpty()) {
             memberLog.appendText("No notification to mark\n");
         } else {
-            memberLog.appendText(newNotificationLog.getText() + "\n");
-            request.clear();
+//            memberLog.appendText(newNotificationLog.getText() + "\n");
+//            request.clear();
+            newNotificationLog.clear();
         }
     }
 
