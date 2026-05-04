@@ -10,6 +10,7 @@ import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 import GSMS.EventAnalysis.SignalReceivers.SignalType;
+import GSMS.Notification.AgentRegistry;
 import GSMS.Notification.AlertLevel;
 import GSMS.Notification.Notification;
 import GSMS.Notification.NotificationDispatcher;
@@ -29,9 +30,12 @@ public class EventAnalyzer {
     private LiveEventAI liveEventAI;
     private NotificationDispatcher notificationDispatcher;
     private long lastAlertTimestamp = 0;   // for duplicate suppression
-    public EventAnalyzer() {
+    private final AgentRegistry agentRegistry;   // new field
+
+    public EventAnalyzer(AgentRegistry agentRegistry) {
+        this.agentRegistry = agentRegistry;
         this.liveEventAI = new LiveEventAI();
-        this.notificationDispatcher = new NotificationDispatcher();
+        this.notificationDispatcher = new NotificationDispatcher(agentRegistry);
     } // end constructor
 
     /************************* NON-SAD * helper START *************************/
