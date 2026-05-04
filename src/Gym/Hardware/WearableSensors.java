@@ -6,20 +6,28 @@ import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
 public class WearableSensors implements Hardware {
 
     public Wearable component; // to receive signals from front end
-    public AgentId member; // for readability
+    public AgentId member;     // for readability
+    private String scenarioSignal = "normal";   // default
 
     public WearableSensors(AgentId member) {
         this.member = member;
-    } // end constructor
+    }
+
+    /** Set the signal data (without the member prefix) that will be sent. */
+    public void setScenarioSignal(String scenarioSignal) {
+        this.scenarioSignal = scenarioSignal;
+    }
 
     /**
      * action taken by the device driver to send
      * either a live transmission continuously on
      * intervals over the network or upon trigger
      */
+    @Override
     public void sendSignal() {
-        System.out.println("Wearable ping.");
-        component.receiveSignal("exhaustion");
-    } // end method
-
-} // end class
+        // Prepend the member ID so the backend can resolve the target agent.
+        String fullSignal = member.getId() + ":" + scenarioSignal;
+        System.out.println("Wearable ping: " + fullSignal);
+        component.receiveSignal(fullSignal);
+    }
+}

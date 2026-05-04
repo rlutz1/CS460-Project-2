@@ -1,0 +1,4 @@
+.button:hover {
+    -fx-background-color: lavenderblush;
+    -fx-cursor: hand;
+}

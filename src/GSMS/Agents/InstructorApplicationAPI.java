@@ -1,6 +1,6 @@
 package GSMS.Agents;
 
-import GSMS.Common.AgentId;
+import GSMS.Common.*;
 import GSMS.Root.GymSpaceManagementController;
 import InstructorApplication.InstructorApplication;
 
@@ -20,11 +20,18 @@ public class InstructorApplicationAPI {
     } // end constructor
 
     public void requestReport(
+            AgentId instructorId,
             List<String> targetIds,
-            String reportType,
-            String timeFrame
+            ReportType reportType,
+            Metadata timeFrame
     ) {
-        // TODO create a Job Info and send to root with jobtype data management
+        gsmc.scheduleJob(new JobInfo(
+                JobType.REPORT_GENERATION,
+                instructorId,
+                targetIds,
+                reportType,
+                timeFrame
+        ));
     }
 
 } // end class

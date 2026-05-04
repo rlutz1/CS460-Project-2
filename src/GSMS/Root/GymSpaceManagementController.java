@@ -107,8 +107,9 @@ public class GymSpaceManagementController implements AgentRegistry {
         this.liveEventAI = new LiveEventAI();
 
 
+
         //EventAnalyzer depends on NotificationDispatcher, LiveEventAI, Logger
-        this.eventAnalyzer = new EventAnalyzer();
+        this.eventAnalyzer = new EventAnalyzer(this);   // 'this' is the AgentRegistry
 
         //RecommendationDispatcher has no GSMC-level dependencies
         this.recommendationDispatcher = new RecommendationDispatcher();
@@ -159,6 +160,9 @@ public class GymSpaceManagementController implements AgentRegistry {
         switch (info.jobType()) {
             case RECOMMENDATION_ENGINE:
                 recommendationDispatcher.receiveRequest(info.senderId(), info.recommendationOrAnalysis(), info.data());
+                break;
+            case REPORT_GENERATION:
+                DataManager.GenerateReport(info.senderId(), info.targetIds(), info.reportType(), info.timeFrame());
                 break;
             default:
                 System.err.println("[GSMC] scheduleJob: unrecognized request type in info='"

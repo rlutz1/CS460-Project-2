@@ -80,6 +80,8 @@ public class Gym {
     public Rectangle entryWay; // for placing dynamically into fxml scene
     @FXML
     public Rectangle targetInstructorStartPoint; // for placing dynamically into fxml scene
+    @FXML
+    public Text gymChatBubble; // hehe for some text
 
     /* FRONTEND PIECES FROM FXML -- SENSORS */
     @FXML
@@ -119,18 +121,15 @@ public class Gym {
     @FXML
     public ComboBox instructorSelection; // for app initialization
 
-    /* TESTING OBJECTS ONLY */
-    public AudioSensor audioTester;
-    public Camera cameraTester;
-    public WearableSensors wearableTester;
-    public DoorwaySensor doorwayTester;
+//    /* TESTING OBJECTS ONLY */
+//    public AudioSensor audioTester;
+//    public Camera cameraTester;
+//    public WearableSensors wearableTester;
+//    public DoorwaySensor doorwayTester;
 
     /* CONSTRUCTOR */
     public Gym() {
-        audioTester = new AudioSensor(null);
-        cameraTester = new Camera(null);
-        wearableTester = new WearableSensors(null);
-        doorwayTester = new DoorwaySensor(null);
+
     } // end constructor
 
     /**
@@ -160,6 +159,7 @@ public class Gym {
         manager.houseChatBubble = this.houseChatBubble;
         manager.houseDoorway = this.houseDoorway;
         manager.entireGym = this.entireGym;
+        manager.gymChatBubble = this.gymChatBubble;
         // the rest wait for dynamic creation
     } // end method
 
@@ -446,37 +446,37 @@ public class Gym {
      * =========================================================================
      */
 
-    @FXML
-    private void testCameraFeed(MouseEvent mouseEvent) {
-        System.out.println("Sending a camera feed signal.");
-        cameraTester.sendSignal();
-    } // end method
-
-    @FXML
-    private void testWearableSignal(MouseEvent mouseEvent) {
-        System.out.println("Sending a wearable medical stat signal.");
-        wearableTester.sendSignal();
-    } // end method
-
-    @FXML
-    private void testAudioSensor(MouseEvent mouseEvent) {
-        System.out.println("Sending an audio sensor signal.");
-        audioTester.sendSignal();
-    } // end method
-
-    @FXML
-    private void testDoorwaySensor(MouseEvent mouseEvent) {
-        System.out.println("Sending a doorway sensor signal.");
-        doorwayTester.sendSignal();
-    } // end method
-
-    @FXML
-    private void sendAll3Signals(MouseEvent mouseEvent) {
-        System.out.println("Sending camera, audio, and wearable signal.");
-        cameraTester.sendSignal();
-        audioTester.sendSignal();
-        wearableTester.sendSignal();
-    } // end method
+//    @FXML
+//    private void testCameraFeed(MouseEvent mouseEvent) {
+//        System.out.println("Sending a camera feed signal.");
+//        cameraTester.sendSignal();
+//    } // end method
+//
+//    @FXML
+//    private void testWearableSignal(MouseEvent mouseEvent) {
+//        System.out.println("Sending a wearable medical stat signal.");
+//        wearableTester.sendSignal();
+//    } // end method
+//
+//    @FXML
+//    private void testAudioSensor(MouseEvent mouseEvent) {
+//        System.out.println("Sending an audio sensor signal.");
+//        audioTester.sendSignal();
+//    } // end method
+//
+//    @FXML
+//    private void testDoorwaySensor(MouseEvent mouseEvent) {
+//        System.out.println("Sending a doorway sensor signal.");
+//        doorwayTester.sendSignal();
+//    } // end method
+//
+//    @FXML
+//    private void sendAll3Signals(MouseEvent mouseEvent) {
+//        System.out.println("Sending camera, audio, and wearable signal.");
+//        cameraTester.sendSignal();
+//        audioTester.sendSignal();
+//        wearableTester.sendSignal();
+//    } // end method
 
     // testing only
     public void test() {

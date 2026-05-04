@@ -36,13 +36,13 @@ public class RecommendationDispatcher {
         switch (requestType) {
             case SYSTEM_GENERATE:
                 // generate with AI
-                recommendation = ai.generateWorkout(DataManager.getProfile(senderId, null), requestData);
+                recommendation = ai.generateWorkout(DataManager.GetProfile(senderId, null), requestData);
                 break;
 
             case ANALYZE:
                 // low priority, not in demo, so don't stress this for now.
                 // analyze with AI
-                // generate list of enrolled members with DataManager.getProfile()
+                // generate list of enrolled members with DataManager.GetProfile()
                 // recommendation = ai.analyzeItinerary(list of enrolled, requestData)
                 break;
 

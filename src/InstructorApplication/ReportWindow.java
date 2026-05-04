@@ -1,8 +1,17 @@
 package InstructorApplication;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ReportWindow {
@@ -10,13 +19,16 @@ public class ReportWindow {
     public InstructorApplication parent;
     // TODO: this would make more sense contextually as check boxes.
     @FXML
-    public ComboBox classIds;
+    public Pane classIds;
     @FXML
-    public ComboBox instructorIds;
+    public Pane instructorIds;
     @FXML
-    public ComboBox reportType;
+    public Pane reportType;
     @FXML
-    public ComboBox timeFrame;
+    public DatePicker timeStart;
+    @FXML
+    public DatePicker timeEnd;
+
 
     public ReportWindow() {
 
@@ -24,29 +36,8 @@ public class ReportWindow {
 
     @FXML
     public void initialize() {
-        // right now we're going to HARD code this puppy to test functionality.
-        classIds.getItems().add("ALL");
-        classIds.getItems().add("JFONDA1,AEROBICS");
-        classIds.getItems().add("JTAYLOR1,CARDIO");
-        classIds.setValue(classIds.getItems().getFirst());
-
-        instructorIds.getItems().add("ALL");
-        instructorIds.getItems().add("JFONDA1");
-        instructorIds.getItems().add("JTAYLOR1");
-        instructorIds.setValue(instructorIds.getItems().getFirst());
-
-        reportType.getItems().add("OVERVIEW");
-        reportType.getItems().add("SAFETY INCIDENTS");
-        reportType.getItems().add("CONFLICTS");
-        reportType.getItems().add("HEALTH EMERGENCIES");
-        reportType.setValue(reportType.getItems().getFirst());
-
-        // obviously not very specific, lol
-        timeFrame.getItems().add("DAY");
-        timeFrame.getItems().add("MONTH");
-        timeFrame.getItems().add("YEAR");
-        timeFrame.setValue(timeFrame.getItems().getFirst());
-
+        timeStart.setValue(LocalDate.of(2026, Month.APRIL, 1));
+        timeEnd.setValue(LocalDate.now());
     } // end FXML init
 
     /**
@@ -56,11 +47,26 @@ public class ReportWindow {
     @FXML
     public void submit(MouseEvent mouseEvent) {
         if (parent != null) {
+            List<String> targetIds = new ArrayList<>();
+            List<String> selectedReportTypes = new ArrayList<>();
+
+            for (Node checkBox : classIds.getChildren()) {
+                if (((CheckBox)checkBox).isSelected()) {
+                    targetIds.add(((CheckBox)checkBox).getText());
+                } // end if
+            } // end loop
+
+            for (Node checkBox : instructorIds.getChildren()) {
+                if (((CheckBox)checkBox).isSelected()) {
+                    targetIds.add(((CheckBox)checkBox).getText());
+                } // end if
+            } // end loop
+
             parent.generateReport(
-                    (String)classIds.getValue(),
-                    (String)instructorIds.getValue(),
-                    (String)reportType.getValue(),
-                    (String)timeFrame.getValue()
+                    targetIds,
+                    selectedReportTypes,
+                    timeStart.getValue().toString(),
+                    timeEnd.getValue().toString()
             );
             // TODO: would be nice if the window autoclosed here, but not necessary
         } // end if
