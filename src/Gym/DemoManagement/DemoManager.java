@@ -276,16 +276,32 @@ public class DemoManager {
             }
         });
 
-        // trigger the sending of some bad signals to the backend.
+//        // trigger the sending of some bad signals to the backend.
+//        this.states.add(new DemoState() {
+//            @Override
+//            public void activate() {
+//                sendBadSignals();
+//            }
+//            @Override public String toString() { return "Sending exhaustion signal to backend."; }
+//        });
+
+        // ---------- NEW: Send only the exhaustion signal ----------
         this.states.add(new DemoState() {
             @Override
             public void activate() {
-                sendBadSignals();
+                // Find the wearable of the target member (Jack Daniels = RKRAUSE1)
+                // and send the over-exertion signal.
+                for (Hardware h : targetHardware) {
+                    if (h instanceof WearableSensors) {
+                        WearableSensors ws = (WearableSensors) h;
+                        if (ws.member.getId().equals("RKRAUSE1")) {
+                            ws.setScenarioSignal("over_exertion");
+                            ws.sendSignal();
+                            break;
+                        }
+                    }
+                }
             }
-//            @Override
-//            public String toString() {
-//                return "Sending triggering feed to the backend.";
-//            }
             @Override public String toString() { return "Sending exhaustion signal to backend."; }
         });
 
@@ -466,7 +482,7 @@ public class DemoManager {
                 for (Hardware h : targetHardware) {
                     if (h instanceof WearableSensors) {
                         WearableSensors ws = (WearableSensors) h;
-                        if (ws.member.getId().equals("JDANIELS1")) {   // target member
+                        if (ws.member.getId().equals("RKRAUSE1")) {   // target member
                             ws.setScenarioSignal("critical_hr_drop");
                             ws.sendSignal();
                             break;
