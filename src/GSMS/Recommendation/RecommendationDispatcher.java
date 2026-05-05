@@ -2,6 +2,7 @@ package GSMS.Recommendation;
 
 import GSMS.Agents.AgentContainer;
 import GSMS.Common.AgentId;
+import GSMS.Common.AgentType;
 import GSMS.Common.RecommendationType;
 import GSMS.DataManagement.DataManager;
 import GSMS.Notification.AlertLevel;
@@ -27,9 +28,9 @@ public class RecommendationDispatcher {
      * entry point to receive an
      * analysis/recommendation request from a specific agent sender.
      * Optional data to include with the request may be given, such as an itinerary.
-     * @param senderId
-     * @param requestType
-     * @param requestData
+     * @param senderId id of the sending agent
+     * @param requestType type of recc request: sys gen or analyze
+     * @param requestData any additional info
      */
     public void receiveRequest(AgentId senderId, RecommendationType requestType, String requestData) {
         String recommendation = "No recc generated.";
@@ -37,6 +38,8 @@ public class RecommendationDispatcher {
             case SYSTEM_GENERATE:
                 // generate with AI
                 recommendation = ai.generateWorkout(DataManager.GetProfile(senderId, null), requestData);
+                // keeping recommendation a string here, but would be a Workout(...)
+                sendGeneratedWorkout(senderId, recommendation);
                 break;
 
             case ANALYZE:
@@ -44,78 +47,53 @@ public class RecommendationDispatcher {
                 // analyze with AI
                 // generate list of enrolled members with DataManager.GetProfile()
                 // recommendation = ai.analyzeItinerary(list of enrolled, requestData)
+                //
+                // sendItinerary(senderId, new Itinerary(...))
                 break;
 
-            case SEND_SCHEDULE:
-                recommendation = "Nothing planned for today! Schedule now, ya slacker!";
-                break;
             default:
                 System.out.println("[RECC DISPATCH] A request type was received that is not recognized: " + requestType);
         } // end switch case
-
-        Notification information = new Notification(
-                recommendation,
-                AlertLevel.INFORMATIONAL_MESSAGE,
-                senderId
-        );
-
-        switch (senderId.getType()) {
-            case MEMBER -> AgentContainer.MemberApps.get(senderId).sendInformation(information);
-            case INSTRUCTOR -> AgentContainer.InstructorApps.get(senderId).sendInformation(information);
-            default -> System.out.println("[RECC DISPATCH] Somehow a sender id was sent with not defined type: " + senderId);
-        } // end switch case
-
-//        String result;
-//        String splitData[] = requestData.replace(",", "").split(" ");
-//        switch (requestType) {
-//            case "make itinerary request":
-//                System.out.println("making itinerary for member " + senderId);
-//                result = "Lift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
-//                break;
-//            case "generate itinerary":
-//                System.out.println("generating itinerary based on recommendations from " + senderId + " to " + splitData[2]);
-//                result = senderId +"'s recommendation to " + splitData[2] + ":\n\tLift 20 lbs dumbbells: 5 sets of 20 reps each hand\n";
-//                break;
-////            case "view schedule":
-////                System.out.println("Retrieving gym schedule for member " + senderId);
-////                result = "Nothing planned for today! Schedule now, ya slacker!\n";
-////                break;
-////            case "clear":
-////                result = "clear";
-////                break;
-//            default:
-//                result = "Invalid request!\n";
-//                System.out.println(result);
-//        }
-//        return result;
     } // end method
 
     /**
      * dispatches an exercise itinerary analyzed by the
      * Recommendation AI for a given instructor
      * associated with their ID.
-     * @param instructorId
-     * @param responseData
+     * @param instructorId instructor id
+     * @param responseData the itineraru feedback
      */
-    public String sendItinerary(String instructorId, String responseData) {
-        String output;
-        String data[] = responseData.split(" ");
-        String member = data[0];
-        String itinerary = data[1];
-        output = instructorId + " has made itinerary for " + member + ":\n" + itinerary + "\n";
-        return output;
+    public void sendItinerary(AgentId instructorId, String responseData) {
+        Notification information = new Notification(
+                responseData, // Itinerary
+                AlertLevel.INFORMATIONAL_MESSAGE,
+                instructorId
+        );
+        if (instructorId.getType() == AgentType.INSTRUCTOR) {
+            AgentContainer.MemberApps.get(instructorId).sendInformation(information);
+        } else {
+            System.out.println("[RECC DISPATCH] Somehow a member or else used system generate: " + instructorId);
+        } // end if
     } // end method
 
     /**
      * dispatches a generated workout as generated by the
      * Recommendation AI for a given member
      * associated with their ID
-     * @param memberId
-     * @param responseData
+     * @param memberId member id
+     * @param responseData the system generated workout
      */
-    public String sendGeneratedWorkout(String memberId, String responseData) {
-        String output = memberId + " gets the following workout:\n" + responseData + "\n";
-        return output;
+    public void sendGeneratedWorkout(AgentId memberId, String responseData) {
+        Notification information = new Notification(
+                responseData, // Workout
+                AlertLevel.INFORMATIONAL_MESSAGE,
+                memberId
+        );
+        if (memberId.getType() == AgentType.MEMBER) {
+            AgentContainer.MemberApps.get(memberId).sendInformation(information);
+        } else {
+            System.out.println("[RECC DISPATCH] Somehow an instructor or else used system generate: " + memberId);
+        } // end if
     } // end method
 
 } // end class
