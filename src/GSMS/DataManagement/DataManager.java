@@ -20,12 +20,6 @@ import java.util.List;
  */
 
 public class DataManager {
-    // Potential variables for storage to apply to database?
-    public record AlertPair(String key, Enum level) {}
-    private List<AlertPair> notificationList = new ArrayList<>();
-    private List<String> attendanceList = new ArrayList<>();
-    private List<String> memberList = new ArrayList<>();
-    private List<String> instructorList = new ArrayList<>();
 
     private static ReportAI ai = new ReportAI();
 
@@ -33,14 +27,28 @@ public class DataManager {
 
     } // end constructor
 
+    /**
+     * Add a new member profile to the database,
+     * along with their corresponding communication component instantiation
+     * @param agentId agent id
+     * @param profileInfo profile info to add
+     * @param app "network" communication info to instantiate
+     */
     public static void AddProfile(AgentId agentId, Metadata profileInfo, MemberApplication app) {
         // write new member to the database (implicit for now), but what the profile info is for
         // create a new member component.
         MemberDispatcher member = new MemberDispatcher(agentId, app);
         AgentContainer.MemberApps.put(agentId, member);
         System.out.println("[DATA MAN] Added profile for member " + agentId);
-    }
+    } // end method
 
+    /**
+     *  Add a new instructor profile to the database,
+     *  along with their corresponding communication component instantiation
+     * @param agentId agent id
+     * @param profileInfo profile info to add
+     * @param app network" communication info to instantiate
+     */
     public static void AddProfile(AgentId agentId, Metadata profileInfo, InstructorApplication app) {
         // write new instructor to the database (implicit for now), but what the profile info is for
         // create a new instructor component.
@@ -49,16 +57,22 @@ public class DataManager {
         System.out.println("[DATA MAN] Added profile for instructor " + agentId);
     } // end method
 
+    /**
+     * Add a new class for a specific instructor.
+     * @param instructorId instructor of class
+     * @param classInfo the initial class information package
+     */
     public static void AddClass(AgentId instructorId, Metadata classInfo) {
 
-    }
+    } // and method
+
     /**
      * return a member or instructor’s profile information
      * requested by the requesting component
      * Optionally include what piece of information to focus on.
-     * @param agentId
-     * @param dataSpec
-     * @return
+     * @param agentId agent id
+     * @param dataSpec specific info to pull out
+     * @return profile data
      */
     public static String GetProfile(AgentId agentId, String dataSpec) {
         return null;
@@ -68,9 +82,9 @@ public class DataManager {
      * return a class’s profile information requested
      * by the requesting component
      * Optionally include what piece of information to focus on.
-     * @param classId
-     * @param dataSpec
-     * @return
+     * @param classId class id
+     * @param dataSpec specific info to pull out
+     * @return class data
      */
     public static String GetClass(String classId, String dataSpec) {
         return null;
@@ -79,8 +93,8 @@ public class DataManager {
     /**
      * modify a member or instructor’s profile information as
      * requested by the requesting component
-     * @param agentId
-     * @param modifiction
+     * @param agentId agent id
+     * @param modifiction modification specifics to the agent profile
      */
     public static void ModifyProfile(String agentId, String modifiction) {
 
@@ -89,8 +103,8 @@ public class DataManager {
     /**
      * modify a class’s profile information as requested
      * by the requesting component
-     * @param classId
-     * @param modifiction
+     * @param classId class id
+     * @param modifiction modification specifics to the class info
      */
     public static void ModifyClass(String classId, String modifiction) {
 
@@ -100,11 +114,11 @@ public class DataManager {
      * retrieve all alerts about a specific target
      * (member, instructor, class)
      * with an optional alertLevel and time frame
-     * @param agentId
-     * @param targetId
-     * @param alertLevel
-     * @param timeFrame
-     * @return
+     * @param agentId target id (agent here)
+     * @param targetId class id
+     * @param alertLevel alert level to focus on
+     * @param timeFrame optional time frame
+     * @return logs from the database
      */
     public static List<String> RetrieveLogs(
             String agentId,
@@ -125,9 +139,10 @@ public class DataManager {
      *  Optionally, it can be filtered by giving a
      *  specific target ID (instructor, member, class, room)
      *  or a list of them.
-     * @param targetId
-     * @param reportType
-     * @param timeFrame
+     * @param senderId sender id
+     * @param targetId target(s) to focus on for report
+     * @param reportType the type of report (focused or overivew)
+     * @param timeFrame optional time frame
      */
     public static void GenerateReport(
             AgentId senderId,
@@ -136,6 +151,10 @@ public class DataManager {
             Metadata timeFrame
         )
     {
+//        here are the following steps given our outline of process.
+//        for demo purposes, we will not be implementing all of the following,
+//        but this is here for acknowledgement of the actual flow.
+
 //        for each targetId
 //          depending on context of report type: alert level warning or alert
 //          logs = RetrieveLogs(...)
