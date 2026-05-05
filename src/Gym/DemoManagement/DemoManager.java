@@ -148,7 +148,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "Loser at home, spur a recommendation request.";
+                return "Target at home, spur a recommendation request.";
             }
         });
 
@@ -166,7 +166,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "Loser decides to stop being a loser.";
+                return "Target decides to stop being a loser.";
             }
         });
 
@@ -189,7 +189,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "Loser decides to stop being a loser.";
+                return "Target decides to stop being a loser.";
             }
         });
 
