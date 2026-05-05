@@ -142,7 +142,7 @@ public class DemoManager {
 
                 // simple text bubble for now, if time, make prettier
                 houseChatBubble.setText(
-                        "Ugh, I've been here for hours, covered in Protein Dorito crumbs.\n" +
+                        "ROXANNE: Ugh, I've been here for hours, covered in Protein Dorito crumbs.\n" +
                         "Maybe I should at least do something at home..."
                         );
             }
@@ -160,7 +160,7 @@ public class DemoManager {
             public void activate() {
                 // simple text bubble for now, if time, make prettier
                 houseChatBubble.setText(
-                        "Come on, dawg, you're better than this.\n" +
+                        "ROXANNE: Come on, dawg, you're better than this.\n" +
                         "Dust off the crumbs and get to the gym."
                 );
             }
@@ -270,17 +270,8 @@ public class DemoManager {
                 return "MemberDispatcher starts having exhaustion.";
             }
         });
-
-//        // trigger the sending of some bad signals to the backend.
-//        this.states.add(new DemoState() {
-//            @Override
-//            public void activate() {
-//                sendBadSignals();
-//            }
-//            @Override public String toString() { return "Sending exhaustion signal to backend."; }
-//        });
-
-        // ---------- NEW: Send only the exhaustion signal ----------
+        
+        // ---------- NEW Send only the exhaustion signal ----------
         this.states.add(new DemoState() {
             @Override
             public void activate() {
@@ -297,7 +288,9 @@ public class DemoManager {
                     }
                 }
             }
-            @Override public String toString() { return "Sending exhaustion signal to backend."; }
+            @Override public String toString() { 
+                return "Sending exhaustion signal to backend."; 
+            }
         });
 
         // notification expected from the back end to both application windows
@@ -322,7 +315,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "InstructorDispatcher stops class";
+                return "Instructor stops class";
             }
         });
 
@@ -512,7 +505,7 @@ public class DemoManager {
                 );
             }
             @Override public String toString() {
-                return "InstructorDispatcher stops class";
+                return "Instructor stops class";
             }
         });
 
@@ -532,7 +525,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "InstructorDispatcher rushes to help, calls emergency services.";
+                return "Instructor rushes to help, calls emergency services.";
             }
         });
 
