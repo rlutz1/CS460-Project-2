@@ -3,6 +3,9 @@ package Gym.Hardware;
 import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.AudioListener;
 
+/**
+ * representative of on-site audio sensor functionality.
+ */
 public class AudioSensor implements Hardware {
 
     public AudioListener component; // to receive signals from front end

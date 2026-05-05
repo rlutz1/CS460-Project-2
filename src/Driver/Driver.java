@@ -25,11 +25,12 @@ import java.util.List;
 
 public class Driver extends Application {
 
+    /* METADATA ABOUT MAIN APP WINDOW */
     public final static String MAIN_FXML = "/fxml/gym.fxml";
     public final static String ROOT_WINDOW_NAME = "GSMS Simulator";
     public final static String TARGET_CLASSROOM_ID = "TARGET_CLASSROOM";
 
-    // hard-code init some people into the system.
+    /* ALL AGENTS ONSITE */
     public final static List<AgentInitializer> AGENTS_ONSITE = new ArrayList<>(List.of(
             new AgentInitializer(
                     new AgentId("KBEEBLE1", "Krex Beeble", AgentType.MEMBER),
@@ -52,11 +53,12 @@ public class Driver extends Application {
             new AgentInitializer(
                     new AgentId("JFONDA1", "Jane Fonda", AgentType.INSTRUCTOR),
                     new Metadata("All around babe instructor.")),
-            new AgentInitializer(
+            new AgentInitializer( // FOR GEN REPORT CONTEXT ONLY
                     new AgentId("JTAYLOR1", "John Taylor", AgentType.INSTRUCTOR),
                     new Metadata("Very nosy instructor, gym gossip."))
     ));
 
+    /* CLASSROOMS ON SITE - ONLY TARGET FOR DEMO */
     public final static List<ClassroomInitializer> CLASSROOMS = new ArrayList<>(List.of(
         new ClassroomInitializer(
                   new RoomId(TARGET_CLASSROOM_ID),
@@ -71,7 +73,7 @@ public class Driver extends Application {
                   )
     ));
 
-    // for initializing a fake gym
+    /* PACK ALL INIT INFO TOGETHER */
     public final static GymInitializer GYM_INIT_PACKAGE = new GymInitializer(
       AGENTS_ONSITE,
       CLASSROOMS,
@@ -107,7 +109,7 @@ public class Driver extends Application {
         if (main != null) { // null catch
             FXMLLoader loader = new FXMLLoader(main); // loader
             Parent root = loader.load();
-            // how to grab the object associated with the fxml load (MUST BE AFTER .load()):
+            // grab the object associated with the fxml load (MUST BE AFTER .load()):
             Gym gym = loader.getController();
 
             // initialize the physical simulation and the controller together.
@@ -125,26 +127,23 @@ public class Driver extends Application {
 
     } // end method
 
-    // TODO:
-    // init members and instructors on the gsmc side of things
-    // gym needs to init the applications for all those people and HOLD
-    // gym needs to pass on to the gsmc the references to all the applications
-    //      along with id information to tie to the corresponding backend component
-    //      so that the component can "push" a notification.
+    /**
+     * init members and instructors on the gsmc side of things
+     * gym needs to init the applications for all those people and HOLD
+     * gym needs to pass on to the gsmc the references to all the applications
+     * along with id information to tie to the corresponding backend component
+     * so that the component can "push" a notification.
+     * @param gym main gym space/window
+     * @param gsmc the GSMC root
+     */
     private void initDemoSpace(Gym gym, GymSpaceManagementController gsmc) {
         try {
             gym.initAgentApplications(AGENTS_ONSITE, gsmc.getMemberApi(), gsmc.getInstructorApi()); // initialize the visual agents and apps
             gsmc.registerAgentApplications(gym.memberApplications, gym.instructorApplications, AGENTS_ONSITE); // init the apps for responses
 
-            // TODO: need to init the front end components in same way as backend such that i can tie the
-            //       components made back there to the visual front-enders so i can "sendSignal" to the back end.
-            //       i can get a single classroom id with numbers of sensors and members with ids to the back end
-            //       to init, no problem.
-            //       then, i'll need an access point through gsmc to grab all the component refs of a class room
-            //       in order to be able to set up the front end so it can communicate.
-
-            // initialize the frontend components for the given metadata
+            // initialize the backend listener components given data
             gsmc.getEventAnalyzer().initDemEventAnalyzer(GYM_INIT_PACKAGE);
+            // init the front end components, allowing for access to listeners for simulation purposes
             gym.initOnsiteComponents(
                     GYM_INIT_PACKAGE,
                     gsmc.getEventAnalyzer().getAudioComponentsToInit(GYM_INIT_PACKAGE.targetClassroom().roomId()),
@@ -155,7 +154,6 @@ public class Driver extends Application {
         } catch (IOException ex) {
             ex.printStackTrace();
         } // end try/catch
-
 
     } // end method
 

@@ -3,6 +3,9 @@ package Gym.Hardware;
 import GSMS.Common.AgentId;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.WearableListener;
 
+/**
+ * representative of on-site wearable sensor functionality.
+ */
 public class WearableSensors implements Hardware {
 
     public WearableListener component; // to receive signals from front end

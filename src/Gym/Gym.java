@@ -46,7 +46,7 @@ import java.util.List;
  */
 public class Gym {
 
-    /* METADATA ABOUT THE GYM AND CODE NEEDS */
+    /* METADATA ABOUT THE OTHER APPLICATIONS */
     public final static String MAIN_INSTRUCTOR_FXML = "/fxml/instructor-app.fxml";
     public final static String INSTRUCTOR_WINDOW_NAME = "Instructor Application";
     public final static String MAIN_MEMBER_FXML = "/fxml/member-app.fxml";
@@ -121,7 +121,6 @@ public class Gym {
     public ComboBox instructorSelection; // for app initialization
 
 
-    /* CONSTRUCTOR */
     public Gym() { } // end constructor
 
     /**
@@ -225,8 +224,9 @@ public class Gym {
     /**
      * initialize an instructor application.
      * not starting it--but mapping it to an agent dynamically.
-     * @param id
-     * @return
+     * @param id id of instructor
+     * @param api api to talk through to the gsmc
+     * @return the instructor app created
      * @throws IOException
      */
     private InstructorApplication initInstructorApp(AgentId id, InstructorApplicationAPI api) throws IOException {
@@ -275,8 +275,9 @@ public class Gym {
     /**
      * initialize a member application.
      * not starting it--but mapping it to an agent dynamically.
-     * @param id
-     * @return
+     * @param id id of instructor
+     * @param api api to talk through to the gsmc
+     * @return the member app created
      * @throws IOException
      */
     private MemberApplication initMemberApp(AgentId id, MemberApplicationAPI api) throws IOException {
@@ -310,7 +311,9 @@ public class Gym {
     /**
      *  gym needs to init the applications for all those people and HOLD
      *  these are kept in a map and differentiated by agent id.
-     * @param initPackage
+     * @param initPackage initialization package for all agents
+     * @param memberApi the api to send member comms through
+     * @param instructorApi the api to send instructor comms through
      */
     public void initAgentApplications(
             List<AgentInitializer> initPackage,
@@ -349,7 +352,10 @@ public class Gym {
      * components for mimicking hardware.
      * TODO: better auto positioning of the dynamic movement of agents
      * TODO: more dynamic creation of hardware if time
-     * @param initPackage
+     * @param initPackage initialization package with all gym start data needed
+     * @param audioListeners the listeners of the backend to send signals to in demo
+     * @param videoListeners the listeners of the backend to send signals to in demo
+     * @param wearableListeners the listeners of the backend to send signals to in demo
      */
     public void initOnsiteComponents(
             GymInitializer initPackage,

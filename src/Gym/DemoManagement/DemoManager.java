@@ -6,7 +6,6 @@ import Gym.AgentGraphics.MemberGraphic;
 import Gym.Hardware.*;
 import javafx.animation.*;
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Shape;
@@ -38,7 +37,6 @@ public class DemoManager {
     public Shape entryWay;
     public List<Hardware> targetHardware;
 
-    /* CONSTRUCTOR */
     public DemoManager() {
         this.states = new ArrayList<>();
         this.currState = 0; // first state always

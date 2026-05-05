@@ -3,6 +3,9 @@ package Gym.Hardware;
 import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.VideoListener;
 
+/**
+ * representative of on-site camera functionality.
+ */
 public class Camera implements Hardware {
 
     public VideoListener component; // to receive signals from front end

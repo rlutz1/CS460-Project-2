@@ -17,4 +17,4 @@ public abstract class AgentGraphic extends StackPane {
     public AgentId id = null;
     public Shape root = new Circle(height);
 
-}
+} // end class

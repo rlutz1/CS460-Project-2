@@ -3,6 +3,11 @@ package Gym.Hardware;
 import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.WearableListener;
 
+/**
+ * representative of on-site door sensor functionality.
+ *
+ * not used in this demo.
+ */
 public class DoorwaySensor implements Hardware {
 
     public WearableListener component; // to receive signals from front end
