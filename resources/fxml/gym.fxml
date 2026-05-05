@@ -178,9 +178,9 @@
                   </GridPane>
                </children>
             </VBox>
-          <VBox fx:id="logger" layoutX="825.0" layoutY="19.0" prefHeight="645.0" prefWidth="170.0" style="-fx-background-color: #fcd2e5;" AnchorPane.rightAnchor="5.0">
+          <VBox fx:id="logger" layoutX="825.0" layoutY="19.0" prefHeight="645.0" prefWidth="170.0" style="-fx-background-color: lavenderblush;" AnchorPane.rightAnchor="5.0">
               <children>
-                  <Label alignment="TOP_CENTER" prefHeight="39.0" prefWidth="170.0" text="Logging (?)">
+                  <Label alignment="TOP_CENTER" prefHeight="39.0" prefWidth="170.0" text="Demo Logging">
                       <font>
                           <Font size="16.0" />
                       </font>

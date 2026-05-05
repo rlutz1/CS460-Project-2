@@ -6,6 +6,7 @@ import Gym.AgentGraphics.MemberGraphic;
 import Gym.Hardware.*;
 import javafx.animation.*;
 import javafx.scene.Node;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Shape;
@@ -24,6 +25,7 @@ public class DemoManager {
     private final List<DemoState> states; // list of frames, or states for demo
     private int currState;
 
+    /* ALL FRONT END COMPONENTS DEMO MANAGER USES DYNAMICALLY*/
     public AnchorPane targetMemberHouse;
     public Text houseChatBubble;
     public Text gymChatBubble;
@@ -36,6 +38,7 @@ public class DemoManager {
     public Shape entryWay;
     public List<Hardware> targetHardware;
 
+    /* CONSTRUCTOR */
     public DemoManager() {
         this.states = new ArrayList<>();
         this.currState = 0; // first state always
@@ -51,7 +54,7 @@ public class DemoManager {
         if (!this.states.isEmpty()) {
             DemoState state = this.states.get(this.currState);
             this.currState = ((this.currState + 1) % this.states.size()); // for looping
-            System.out.println(state.toString());
+            DemoLogger.update(state.toString());
             state.activate(); // activate the state
         } // end if
     } // end method
@@ -88,36 +91,28 @@ public class DemoManager {
      * a transition at ANY point. add any and all here.
      */
     private void resetAllTransitionalObjects() {
-        targetMemberInGym.setTranslateX(0);
-        targetMemberInGym.setTranslateY(0);
-        targetMemberInGym.setScaleX(1);
-        targetMemberInGym.setScaleY(1);
-        targetMemberInGym.root.setFill(targetMemberInGym.baseColor);
-        targetMemberInGym.setVisible(true);
-
-        targetMemberInHouse.setTranslateX(0);
-        targetMemberInHouse.setTranslateY(0);
-        targetMemberInHouse.setScaleX(1);
-        targetMemberInHouse.setScaleY(1);
-        targetMemberInHouse.root.setFill(targetMemberInHouse.baseColor);
-        targetMemberInHouse.setVisible(true);
+        resetTransitionalObject(targetMemberInGym);
+        resetTransitionalObject(targetMemberInHouse);
+        resetTransitionalObject(targetInstructor);
 
         for (Node member : otherMembers.getChildren()) {
-            member.setTranslateX(0);
-            member.setTranslateY(0);
-            member.setScaleX(1);
-            member.setScaleY(1);
-            ((MemberGraphic)member).root.setFill(((AgentGraphic)member).baseColor);
-            member.setVisible(true);
+            resetTransitionalObject((AgentGraphic) member);
         } // end loop
         otherMembers.setVisible(true);
 
-        targetInstructor.setTranslateX(0);
-        targetInstructor.setTranslateY(0);
-        targetInstructor.setScaleX(1);
-        targetInstructor.setScaleY(1);
-        targetInstructor.root.setFill(targetInstructor.baseColor);
-        targetInstructor.setVisible(true);
+    } // end method
+
+    /**
+     * to avoid repetition of above code
+     * @param graphic graphic to reset
+     */
+    private void resetTransitionalObject(AgentGraphic graphic) {
+        graphic.setTranslateX(0);
+        graphic.setTranslateY(0);
+        graphic.setScaleX(1);
+        graphic.setScaleY(1);
+        graphic.root.setFill(graphic.baseColor);
+        graphic.setVisible(true);
     } // end method
 
     /**
@@ -325,11 +320,10 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: Howdy y'all! Let's take a little break from getting sexy!"
                 );
             }
-//            @Override
-//            public String toString() {
-//                return "InstructorDispatcher stops class";
-//            }
-            @Override public String toString() { return "InstructorDispatcher stops class"; }
+            @Override
+            public String toString() {
+                return "InstructorDispatcher stops class";
+            }
         });
 
         // member feels better
@@ -361,7 +355,9 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: ALRIGHT! Come on losers, let's get SWEATY!"
                 );
             }
-            @Override public String toString() { return "Trigger movement cycle (class continues)."; }
+            @Override public String toString() {
+                return "Trigger movement cycle (class continues).";
+            }
         });
     } // end method
 
@@ -379,7 +375,9 @@ public class DemoManager {
                                 "ROXANNE: My mother was filled with shame! How dare you!"
                 );
             }
-            @Override public String toString() { return "Conflict arises between two members."; }
+            @Override public String toString() {
+                return "Conflict arises between two members.";
+            }
         });
 
         // trigger the sending of some bad signals to the backend.
@@ -395,10 +393,10 @@ public class DemoManager {
                     }
                 }
             }
-            @Override public String toString() { return "Sending conflict signal to backend."; }
+            @Override public String toString() {
+                return "Sending conflict signal to backend.";
+            }
         });
-
-        // notification expected from the back end to both application windows
 
         // stop workouts and pause, instructor attempting to resolve conflict
         this.states.add(new DemoState() {
@@ -418,11 +416,9 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: Hey now! That's not very sexy! Let's resolve like adults!"
                 );
             }
-//            @Override
-//            public String toString() {
-//                return "InstructorDispatcher stops class";
-//            }
-            @Override public String toString() { return "InstructorDispatcher stops class"; }
+            @Override public String toString() {
+                return "Instructor stops class";
+            }
         });
 
         // conflict deescalation
@@ -435,7 +431,9 @@ public class DemoManager {
                             + "ROXANNE: No worries man, happens to the best of us."
                 );
             }
-            @Override public String toString() { return "Conflict deescalates between two members."; }
+            @Override public String toString() {
+                return "Conflict deescalates between two members.";
+            }
         });
 
         // resume class
@@ -451,7 +449,9 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: Alright guys, let's try this again!"
                 );
             }
-            @Override public String toString() { return "Trigger movement cycle (class continues)."; }
+            @Override public String toString() {
+                return "Trigger movement cycle (class continues).";
+            }
         });
     } // end method
 
@@ -468,7 +468,6 @@ public class DemoManager {
                         "ROXANNE: OH GOD! SHARP DORITO SHRAPNEL ENTERED MY AORTA."
                 );
             }
-//            @Override public String toString() { return "Health emergency arises in a member."; }
             @Override
             public String toString() {
                 return "Health emergency arises in member.";
@@ -493,8 +492,6 @@ public class DemoManager {
             @Override public String toString() { return "Sending health emergency signal to backend."; }
         });
 
-        // notification expected from the back end to both application windows
-
         // instructor stops workouts
         this.states.add(new DemoState() {
             @Override
@@ -514,11 +511,9 @@ public class DemoManager {
                         "INSTRUCTOR JANE FONDA: Everyone stop! Let me address the not-so-sexy situation!"
                 );
             }
-//            @Override
-//            public String toString() {
-//                return "InstructorDispatcher stops class";
-//            }
-            @Override public String toString() { return "InstructorDispatcher stops class"; }
+            @Override public String toString() {
+                return "InstructorDispatcher stops class";
+            }
         });
 
         // instructor attends to the collapsed member, calling emergency services
@@ -601,12 +596,6 @@ public class DemoManager {
                 return "Other attendant is snooping on his coworker.";
             }
         });
-    } // end method
-
-    private void sendBadSignals() {
-        for (Hardware hardware : targetHardware) {
-            hardware.sendSignal();
-        } // end method
     } // end method
 
 } // end class

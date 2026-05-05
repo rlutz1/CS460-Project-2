@@ -11,6 +11,7 @@ import GSMS.EventAnalysis.SignalReceivers.Hardware.VideoListener;
 import GSMS.EventAnalysis.SignalReceivers.Hardware.WearableListener;
 import Gym.AgentGraphics.InstructorGraphic;
 import Gym.AgentGraphics.MemberGraphic;
+import Gym.DemoManagement.DemoLogger;
 import Gym.DemoManagement.DemoManager;
 import Gym.Hardware.*;
 import InstructorApplication.InstructorApplication;
@@ -63,8 +64,6 @@ public class Gym {
 
     @FXML
     public AnchorPane targetMemberHouse; // the anchor pane to signify the member house for scene 1
-    @FXML
-    public Shape rug; // hehe rug
     @FXML
     public Shape sofa; // hehe sofa as start point
     @FXML
@@ -121,16 +120,9 @@ public class Gym {
     @FXML
     public ComboBox instructorSelection; // for app initialization
 
-//    /* TESTING OBJECTS ONLY */
-//    public AudioSensor audioTester;
-//    public Camera cameraTester;
-//    public WearableSensors wearableTester;
-//    public DoorwaySensor doorwayTester;
 
     /* CONSTRUCTOR */
-    public Gym() {
-
-    } // end constructor
+    public Gym() { } // end constructor
 
     /**
      * invoked at runtime. this is better compared to the
@@ -160,6 +152,7 @@ public class Gym {
         manager.houseDoorway = this.houseDoorway;
         manager.entireGym = this.entireGym;
         manager.gymChatBubble = this.gymChatBubble;
+        DemoLogger.frontendLogger = this.frontendLogger; // setup static loggin access
         // the rest wait for dynamic creation
     } // end method
 
@@ -176,7 +169,7 @@ public class Gym {
     @FXML
     private void start(MouseEvent mouseEvent) {
         System.out.println("Starting demo sequence.");
-        appendLoggingWindow("Starting demo.");
+        DemoLogger.update("Starting demo.");
         startButton.setDisable(true); // disable start button
         nextButton.setDisable(false);// enable next button
         restartButton.setDisable(false); // enable restart
@@ -202,7 +195,7 @@ public class Gym {
     @FXML
     private void restart(MouseEvent mouseEvent) {
         System.out.println("Restarting demo sequence from beginning.");
-        appendLoggingWindow("Resetting demo.");
+        DemoLogger.update("Resetting demo.");
         startButton.setDisable(false); // enable start button
         nextButton.setDisable(true);// disable next button
         restartButton.setDisable(true); // disable restart
@@ -215,15 +208,6 @@ public class Gym {
      * GENERAL FUNCTIONALITY
      * =========================================================================
      */
-
-    /**
-     * append the front-end logging window. for
-     * general purpose.
-     * @param str str to add
-     */
-    public void appendLoggingWindow(String str) {
-        frontendLogger.appendText("\n" + str);
-    } // end method
 
     /**
      * start an "instructor application".
@@ -439,49 +423,5 @@ public class Gym {
 
         /* END CONNECT FRONTEND DEMO PIECES TO MANAGER */
     } // end method
-
-    /*
-     * =========================================================================
-     * TESTING FUNCTIONS
-     * =========================================================================
-     */
-
-//    @FXML
-//    private void testCameraFeed(MouseEvent mouseEvent) {
-//        System.out.println("Sending a camera feed signal.");
-//        cameraTester.sendSignal();
-//    } // end method
-//
-//    @FXML
-//    private void testWearableSignal(MouseEvent mouseEvent) {
-//        System.out.println("Sending a wearable medical stat signal.");
-//        wearableTester.sendSignal();
-//    } // end method
-//
-//    @FXML
-//    private void testAudioSensor(MouseEvent mouseEvent) {
-//        System.out.println("Sending an audio sensor signal.");
-//        audioTester.sendSignal();
-//    } // end method
-//
-//    @FXML
-//    private void testDoorwaySensor(MouseEvent mouseEvent) {
-//        System.out.println("Sending a doorway sensor signal.");
-//        doorwayTester.sendSignal();
-//    } // end method
-//
-//    @FXML
-//    private void sendAll3Signals(MouseEvent mouseEvent) {
-//        System.out.println("Sending camera, audio, and wearable signal.");
-//        cameraTester.sendSignal();
-//        audioTester.sendSignal();
-//        wearableTester.sendSignal();
-//    } // end method
-
-    // testing only
-    public void test() {
-        System.out.println("testing hehe");
-    } // end method
-
 
 } // end class
