@@ -185,7 +185,7 @@
                           <Font size="16.0" />
                       </font>
                   </Label>
-                  <TextArea id="frontendLogger" fx:id="frontendLogger" editable="false" prefHeight="609.0" prefWidth="170.0" text="GSMS Initialized." wrapText="true" />
+                  <TextArea id="frontendLogger" fx:id="frontendLogger" editable="false" prefHeight="609.0" prefWidth="170.0" text="" wrapText="true" />
               </children>
           </VBox>
       </children>

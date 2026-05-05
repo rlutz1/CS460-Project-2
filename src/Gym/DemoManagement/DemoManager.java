@@ -77,6 +77,10 @@ public class DemoManager {
         } // end loop
         Transitions.LiveTransitions.clear();
 
+        // reset all text
+        houseChatBubble.setText("");
+        gymChatBubble.setText("");
+
         resetAllTransitionalObjects(); // reset all the animated objects
 
         // reset the original scene setup.
@@ -140,8 +144,8 @@ public class DemoManager {
 
                 // simple text bubble for now, if time, make prettier
                 houseChatBubble.setText(
-                        "ROXANNE: Ugh, I've been here for hours, covered in Protein Dorito crumbs.\n" +
-                        "Maybe I should at least do something at home..."
+                        "ROXANNE: Ugh, look at me, covered in Protein Dorito crumbs.\n" +
+                        "Maybe I should at least workout at home..."
                         );
             }
             @Override
@@ -265,7 +269,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "MemberDispatcher starts having exhaustion.";
+                return "Member starts having exhaustion.";
             }
         });
         
@@ -328,7 +332,7 @@ public class DemoManager {
             }
             @Override
             public String toString() {
-                return "MemberDispatcher's exhaustion is relieving.";
+                return "Member's exhaustion is relieving.";
             }
         });
 
