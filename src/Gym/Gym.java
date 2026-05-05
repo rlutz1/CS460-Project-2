@@ -47,9 +47,9 @@ public class Gym {
 
     /* METADATA ABOUT THE GYM AND CODE NEEDS */
     public final static String MAIN_INSTRUCTOR_FXML = "/fxml/instructor-app.fxml";
-    public final static String INSTRUCTOR_WINDOW_NAME = "InstructorDispatcher Application";
+    public final static String INSTRUCTOR_WINDOW_NAME = "Instructor Application";
     public final static String MAIN_MEMBER_FXML = "/fxml/member-app.fxml";
-    public final static String MEMBER_WINDOW_NAME = "MemberDispatcher Application";
+    public final static String MEMBER_WINDOW_NAME = "Member Application";
 
     // following maps are used for initialization between front/backend and mapping an agent id to a specific application
     public HashMap<AgentId, MemberApplication> memberApplications = new HashMap<AgentId, MemberApplication>();
@@ -232,7 +232,7 @@ public class Gym {
      */
     @FXML
     private void startInstructorApp(MouseEvent mouseEvent) {
-        System.out.println("Starting InstructorDispatcher Application.");
+        System.out.println("Starting Instructor Application.");
         AgentId agentId = new AgentId((String)instructorSelection.getSelectionModel().getSelectedItem());
         instructorSelection.getItems().remove(agentId.getId());
         instructorApplications.get(agentId).start();
@@ -282,7 +282,7 @@ public class Gym {
      */
     @FXML
     private void startMemberApp(MouseEvent mouseEvent) {
-        System.out.println("Starting MemberDispatcher Application.");
+        System.out.println("Starting Member Application.");
         AgentId agentId = new AgentId((String)memberSelection.getSelectionModel().getSelectedItem());
         memberSelection.getItems().remove(agentId.getId());
         memberApplications.get(agentId).start();

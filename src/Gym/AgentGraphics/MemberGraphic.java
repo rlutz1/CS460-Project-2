@@ -10,6 +10,7 @@ public class MemberGraphic extends AgentGraphic {
     public MemberGraphic(AgentId id, Color color) {
         super();
         root = new Circle(width);
+        root.setStroke(Color.BLACK);
         baseColor = color;
         root.setFill(baseColor);
         getChildren().add(root);

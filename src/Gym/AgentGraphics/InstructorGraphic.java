@@ -9,6 +9,7 @@ public class InstructorGraphic extends AgentGraphic {
     public InstructorGraphic(AgentId id, Color color) {
         super();
         root = new Circle(width);
+        root.setStroke(Color.BLACK);
         baseColor = color;
         root.setFill(baseColor);
         getChildren().add(root);

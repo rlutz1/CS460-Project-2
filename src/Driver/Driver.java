@@ -51,7 +51,10 @@ public class Driver extends Application {
                     new Metadata("Easily irritated, low energy, and basically falling apart. All around mess.")),
             new AgentInitializer(
                     new AgentId("JFONDA1", "Jane Fonda", AgentType.INSTRUCTOR),
-                    new Metadata("All around babe instructor."))
+                    new Metadata("All around babe instructor.")),
+            new AgentInitializer(
+                    new AgentId("JTAYLOR1", "John Taylor", AgentType.INSTRUCTOR),
+                    new Metadata("Very nosy instructor, gym gossip."))
     ));
 
     public final static List<ClassroomInitializer> CLASSROOMS = new ArrayList<>(List.of(
