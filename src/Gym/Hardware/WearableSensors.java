@@ -1,11 +1,14 @@
 package Gym.Hardware;
 
 import GSMS.Common.AgentId;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.WearableListener;
 
+/**
+ * representative of on-site wearable sensor functionality.
+ */
 public class WearableSensors implements Hardware {
 
-    public Wearable component; // to receive signals from front end
+    public WearableListener component; // to receive signals from front end
     public AgentId member;     // for readability
     private String scenarioSignal = "normal";   // default
 
@@ -27,7 +30,7 @@ public class WearableSensors implements Hardware {
     public void sendSignal() {
         // Prepend the member ID so the backend can resolve the target agent.
         String fullSignal = member.getId() + ":" + scenarioSignal;
-        System.out.println("Wearable ping: " + fullSignal);
+        System.out.println("WearableListener ping: " + fullSignal);
         component.receiveSignal(fullSignal);
     }
 }

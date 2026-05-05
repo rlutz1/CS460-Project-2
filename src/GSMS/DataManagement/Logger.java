@@ -1,7 +1,8 @@
 package GSMS.DataManagement;
 
 /**
- * class to stand as component for logger
+ * class to stand as component for logger.
+ * this will not be used in demo.
  */
 
 public class Logger {

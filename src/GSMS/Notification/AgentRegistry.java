@@ -1,7 +1,7 @@
 package GSMS.Notification;
 
-import GSMS.Agents.Instructor;
-import GSMS.Agents.Member;
+import GSMS.Agents.InstructorDispatcher;
+import GSMS.Agents.MemberDispatcher;
 import GSMS.Common.AgentId;
 import GSMS.Common.RoomId;
 
@@ -33,33 +33,33 @@ import java.util.List;
 public interface AgentRegistry {
 
     /**
-     * Returns the Member component for the given AgentId.
+     * Returns the MemberDispatcher component for the given AgentId.
      * @param agentId Unique identifier of the member.
-     * @return The Member component, or null if not found.
+     * @return The MemberDispatcher component, or null if not found.
      */
-    Member getMemberById(AgentId agentId);
+    MemberDispatcher getMemberById(AgentId agentId);
 
     /**
-     * Returns the Instructor currently assigned to the classroom
+     * Returns the InstructorDispatcher currently assigned to the classroom
      * that the specified member is attending.
      * @param agentId Unique identifier of the member.
-     * @return The Instructor component, or null if not found.
+     * @return The InstructorDispatcher component, or null if not found.
      */
-    Instructor getInstructorForMember(AgentId agentId);
+    InstructorDispatcher getInstructorForMember(AgentId agentId);
 
     /**
-     * Returns all Member components currently present in the given room.
+     * Returns all MemberDispatcher components currently present in the given room.
      * @param roomId Unique identifier of the room.
-     * @return List of Member components; empty list if room is empty.
+     * @return List of MemberDispatcher components; empty list if room is empty.
      */
-    List<Member> getMembersInRoom(RoomId roomId);
+    List<MemberDispatcher> getMembersInRoom(RoomId roomId);
 
     /**
-     * Returns the Instructor currently present in the given room.
+     * Returns the InstructorDispatcher currently present in the given room.
      * @param roomId Unique identifier of the room.
-     * @return The Instructor component, or null if none present.
+     * @return The InstructorDispatcher component, or null if none present.
      */
-    Instructor getInstructorInRoom(RoomId roomId);
+    InstructorDispatcher getInstructorInRoom(RoomId roomId);
 
     /**
      * Returns the RoomId of the classroom the given member is currently in.

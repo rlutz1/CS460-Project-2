@@ -160,7 +160,7 @@
                            </GridPane.margin>
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-<!--                                    <String fx:value="New Instructor" />-->
+<!--                                    <String fx:value="New InstructorDispatcher" />-->
                                 </FXCollections>
                             </items>
                         </ComboBox>
@@ -170,7 +170,7 @@
                            </GridPane.margin>
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
-<!--                                    <String fx:value="New Member" />-->
+<!--                                    <String fx:value="New MemberDispatcher" />-->
                                 </FXCollections>
                             </items>
                         </ComboBox>
@@ -178,14 +178,14 @@
                   </GridPane>
                </children>
             </VBox>
-          <VBox fx:id="logger" layoutX="825.0" layoutY="19.0" prefHeight="645.0" prefWidth="170.0" style="-fx-background-color: #fcd2e5;" AnchorPane.rightAnchor="5.0">
+          <VBox fx:id="logger" layoutX="825.0" layoutY="19.0" prefHeight="645.0" prefWidth="170.0" style="-fx-background-color: lavenderblush;" AnchorPane.rightAnchor="5.0">
               <children>
-                  <Label alignment="TOP_CENTER" prefHeight="39.0" prefWidth="170.0" text="Logging (?)">
+                  <Label alignment="TOP_CENTER" prefHeight="39.0" prefWidth="170.0" text="Demo Logging">
                       <font>
                           <Font size="16.0" />
                       </font>
                   </Label>
-                  <TextArea id="frontendLogger" fx:id="frontendLogger" editable="false" prefHeight="609.0" prefWidth="170.0" text="GSMS Initialized." wrapText="true" />
+                  <TextArea id="frontendLogger" fx:id="frontendLogger" editable="false" prefHeight="609.0" prefWidth="170.0" text="" wrapText="true" />
               </children>
           </VBox>
       </children>

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  * Both are stored here as their raw String values, so this class stays
  * neutral. The NotificationDispatcher interprets the targetId using
  * the alert level. toString() is used when handing the notification
- * off to Member/Instructor.sendInformation(String).
+ * off to MemberDispatcher/InstructorDispatcher.sendInformation(String).
  */
 public class Notification {
 
@@ -76,7 +76,7 @@ public class Notification {
     public LocalDateTime getTimestamp() { return timestamp; }
 
     /**
-     * String form passed to Member/Instructor.sendInformation(String).
+     * String form passed to MemberDispatcher/InstructorDispatcher.sendInformation(String).
      * Format: [LEVEL] timestamp | target=id | message
      */
     @Override

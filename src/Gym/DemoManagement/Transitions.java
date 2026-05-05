@@ -8,8 +8,12 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: probably everything shouldn't be static, this was done for ease of initial use
-// TODO: just make this a transition manager with non static fields, init in the demo manager.
+/**
+ * this is simply to hold transitional methods for animations
+ * used in the demo.
+ *
+ * this has NO safeguards on the static list.
+ */
 public class Transitions {
 
     public static List<Transition> LiveTransitions = new ArrayList<>();

@@ -3,9 +3,9 @@ package GSMS.EventAnalysis.SignalReceivers;
 import GSMS.Common.AgentId;
 import GSMS.Common.RoomId;
 import GSMS.EventAnalysis.EventAnalyzer;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Audio;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Video;
-import GSMS.EventAnalysis.SignalReceivers.Hardware.Wearable;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.AudioListener;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.VideoListener;
+import GSMS.EventAnalysis.SignalReceivers.Hardware.WearableListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,9 +24,9 @@ public class Classroom {
     private Integer audioDecibelData;
     private Map<AgentId, String> memberIdsToWearableData;
 
-    private List<Audio> audioComponents;
-    private List<Video> videosComponents;
-    private List<Wearable> wearableComponents;
+    private List<AudioListener> audioComponents;
+    private List<VideoListener> videosComponents;
+    private List<WearableListener> wearableComponents;
 
     public Classroom(EventAnalyzer eventAnalyzer, RoomId classroomId) {
         this.eventAnalyzer = eventAnalyzer;
@@ -56,22 +56,22 @@ public class Classroom {
         return null;
     }
     public void addNewAudioComponent() {
-        audioComponents.add(new Audio(this));
+        audioComponents.add(new AudioListener(this));
     }
     public void addNewVideoComponent(){
-        videosComponents.add(new Video(this));
+        videosComponents.add(new VideoListener(this));
     }
     public void addNewWearableComponent(AgentId memberId){
-        wearableComponents.add(new Wearable(this, memberId));
+        wearableComponents.add(new WearableListener(this, memberId));
     }
 
-    public List<Audio> getAudioComponent(){
+    public List<AudioListener> getAudioComponent(){
         return audioComponents;
     }
-    public List<Video> getVideosComponents(){
+    public List<VideoListener> getVideosComponents(){
         return videosComponents;
     }
-    public List<Wearable> getWearableComponents(){
+    public List<WearableListener> getWearableComponents(){
         return wearableComponents;
     }
 

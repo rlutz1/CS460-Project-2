@@ -10,17 +10,17 @@ import GSMS.EventAnalysis.SignalReceivers.SignalType;
  * INCLUDING: medical info from wearable && doorway rfid sensors
  */
 
-public class Wearable {
+public class WearableListener {
 
     private Classroom classroom;
     private String wearableData;
     private AgentId memberId;
 
     /**
-     * Constructs Wearable with a tied Classroom to send signals to.
+     * Constructs WearableListener with a tied Classroom to send signals to.
      * @param classroom
      */
-    public Wearable(Classroom classroom, AgentId memberId) {
+    public WearableListener(Classroom classroom, AgentId memberId) {
         this.classroom = classroom;
         this.memberId = memberId;
     } // end constructor

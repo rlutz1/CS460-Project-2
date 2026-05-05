@@ -13,11 +13,16 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * for use in generating a report in a way
+ * that doesn't affect the main application window
+ * and is more realistic to what information you would
+ * give given our capabilities.
+ */
 public class ReportWindow {
 
     public InstructorApplication parent;
-    // TODO: this would make more sense contextually as check boxes.
+
     @FXML
     public Pane classIds;
     @FXML
@@ -68,8 +73,7 @@ public class ReportWindow {
                     timeStart.getValue().toString(),
                     timeEnd.getValue().toString()
             );
-            // TODO: would be nice if the window autoclosed here, but not necessary
         } // end if
     } // end method
 
-}
+} // end class
