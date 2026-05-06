@@ -3,16 +3,12 @@ package GSMS.DataManagement;
 import GSMS.Agents.AgentContainer;
 import GSMS.Agents.InstructorDispatcher;
 import GSMS.Agents.MemberDispatcher;
-import GSMS.Common.AgentId;
-import GSMS.Common.Metadata;
-import GSMS.Common.ReportPackage;
-import GSMS.Common.ReportType;
+import GSMS.Common.*;
 import GSMS.Notification.AlertLevel;
 import GSMS.Notification.Notification;
 import MemberApplication.MemberApplication;
 import InstructorApplication.InstructorApplication;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -174,11 +170,11 @@ public class DataManager {
                 senderId
         );
 
-        switch (senderId.getType()) {
-            case MEMBER -> AgentContainer.MemberApps.get(senderId).sendInformation(information);
-            case INSTRUCTOR -> AgentContainer.InstructorApps.get(senderId).sendInformation(information);
-            default -> System.out.println("[DATA MAN DISPATCH] Somehow a sender id was sent with not defined type: " + senderId);
-        } // end switch case
+        if (senderId.getType() == AgentType.INSTRUCTOR) {
+            AgentContainer.InstructorApps.get(senderId).sendInformation(information);
+        } else {
+            System.out.println("[DATA MAN DISPATCH] Somehow a sender id was sent with not allowed type: " + senderId);
+        } // end if
     } // end method
 
 } // end class

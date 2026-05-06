@@ -29,12 +29,12 @@ public class MemberApplicationAPI {
         ));
     } // end method
 
-    public void transmitScheduleViewingRequest(AgentId memberId, String viewRequest) {
-        gsmc.scheduleJob(new JobInfo(
-                JobType.RECOMMENDATION_ENGINE,
-                memberId,
-                RecommendationType.SEND_SCHEDULE,
-                viewRequest
-        ));
-    }
+//    public void transmitScheduleViewingRequest(AgentId memberId, String viewRequest) {
+//        gsmc.scheduleJob(new JobInfo(
+//                JobType.RECOMMENDATION_ENGINE,
+//                memberId,
+//                RecommendationType.SEND_SCHEDULE,
+//                viewRequest
+//        ));
+//    }
 } // end class
