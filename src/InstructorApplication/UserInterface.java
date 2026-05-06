@@ -47,14 +47,6 @@ public class UserInterface {
      * @param msg
      */
     public void displayNotification(AlertLevel alertLevel, String msg) {
-//        attempting something with text flow, was not working
-//        Text text = new Text();
-//        switch (alertLevel){
-//            case WARNING -> text.setStyle("-fx-fill: yellow; -fx-font-weight: bold;");
-//            case ALERT -> text.setStyle("-fx-fill: red; -fx-font-weight: bold;");
-//            default -> text.setStyle("-fx-fill: black; -fx-font-weight: bold;"); // should not hit this
-//        }
-//        text.setText(msg);
         newNotificationLog.appendText(msg);
     } // end method
 
