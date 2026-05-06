@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,13 +25,10 @@ import java.util.List;
  */
 public class InstructorApplication {
 
-    public final static String REPORT_WINDOW_FXML = "/fxml/report-window.fxml";
-    public final static String REPORT_WINDOW_TITLE = "Report Request Form";
-
     private Stage myStage; // this is for holding onto the initialized application to show later
     private AgentId id; // for ease of use as needed.
     private InstructorApplicationAPI api; // api to communicate through
-    private Stage reportWindow;
+    private UserInterface ui;
 
     @FXML
     private TextArea inputArea;
@@ -39,9 +37,22 @@ public class InstructorApplication {
     @FXML
     private TextArea newNotificationLog;
 
-    public InstructorApplication(){
 
+    public InstructorApplication(){
+        ui = new UserInterface();
     } // end method
+
+    /**
+     * FXML init method
+     */
+    @FXML
+    public void initialize() {
+        // hand ui control of manipulating these visually
+        ui.inputArea = inputArea;
+        ui.instructorLog = instructorLog;
+        ui.newNotificationLog = newNotificationLog;
+    } // end method
+
 
     /**
      * directive to generate a report about specific targets
@@ -64,9 +75,7 @@ public class InstructorApplication {
                 new ReportType(reportTypes),
                 new Metadata(timeStart + "&" + timeEnd)
         );
-        // close the report window
-        reportWindow.close();
-        reportWindow = null;
+        ui.closeReportWindow();
     } // end method
 
     /**
@@ -95,22 +104,19 @@ public class InstructorApplication {
     public void receiveInformation(Notification notificationOrInformation) {
         // assume right now it's just a recc
         if (notificationOrInformation.getAlertLevel() == AlertLevel.INFORMATIONAL_MESSAGE) {
-            instructorLog.appendText(notificationOrInformation.getMessage() + "\n");
+            ui.updateGUI(notificationOrInformation);
         } else {
-            newNotificationLog.appendText(notificationOrInformation.getMessage() + "\n");
+            ui.displayNotification(notificationOrInformation.getAlertLevel(), notificationOrInformation.getMessage());
         } // end if
     } // end method
 
-
-    // TODO: we need to work in the next to methods with displayNotification(...)
-    //       instead of doing directly here.
+    /**
+     * acknowledge the notification
+     * @param mouseEvent click
+     */
     @FXML
-    public void confirm(MouseEvent mouseEvent) {
-        if (newNotificationLog.getText() == null || newNotificationLog.getText().trim().isEmpty()) {
-            instructorLog.appendText("No notification to mark\n");
-        } else {
-            newNotificationLog.clear();
-        } // end if
+    public void acknowledge(MouseEvent mouseEvent) {
+        ui.markNotificationResolved();
     } // end method
 
     /**
@@ -121,21 +127,7 @@ public class InstructorApplication {
      */
     @FXML
     public void openGenReportWindow(MouseEvent mouseEvent) throws IOException {
-        URL main = getClass().getResource(REPORT_WINDOW_FXML); // grab main xml
-
-        if (main != null) { // null catch
-            FXMLLoader loader = new FXMLLoader(main);
-            Parent root = loader.load(); // load it
-            reportWindow = new Stage();
-            reportWindow.setTitle(REPORT_WINDOW_TITLE);
-            reportWindow.setScene(new Scene(root));
-
-            ReportWindow controller = loader.getController();
-            controller.parent = this; // set this as the parent controller
-            reportWindow.show();
-        } else {
-            System.out.println("Something went wrong: " + REPORT_WINDOW_FXML + " returned null on start.");
-        } // end if
+        ui.openReportWindow(this);
     } // end method
 
 
