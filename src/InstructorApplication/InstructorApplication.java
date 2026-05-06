@@ -1,13 +1,11 @@
 package InstructorApplication;
 
 import GSMS.Agents.InstructorApplicationAPI;
-import GSMS.Agents.MemberApplicationAPI;
 import GSMS.Common.AgentId;
 import GSMS.Common.Metadata;
 import GSMS.Common.ReportType;
 import GSMS.Notification.AlertLevel;
 import GSMS.Notification.Notification;
-import GSMS.Recommendation.RecommendationDispatcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,11 +16,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * encapsulation of a driver for an instructor application
+ * instructor application to interact through to send requests
+ * "over the network" to the GSMC
  */
 public class InstructorApplication {
 
@@ -34,65 +32,24 @@ public class InstructorApplication {
     private InstructorApplicationAPI api; // api to communicate through
     private Stage reportWindow;
 
-    private boolean isCoveredEntity;
-
-    public InstructorApplication(){
-        this.isCoveredEntity = true;
-    } // end method
-
-    /**
-     * Organizes a list of workouts and general class
-     * information for the instructor’s class to transmit
-     * and send to other enrolled members
-     * @param info
-     */
-    public void createItinerary(String info) {
-
-    } // end method
-
-    /**
-     * Organizes a request for gathering instructor profile
-     * information for general and classroom-related data.
-     * @param instructorId
-     */
-    public void getInstructorProfile(AgentId instructorId) {
-        if (instructorId.getId().matches(id.getId())) {
-            // do something
-        } else {
-            System.err.println("Unauthorized access to another account! Access Denied");
-        }
-    } // end method
-
     @FXML
     private TextArea inputArea;
-
     @FXML
     public TextArea instructorLog;
-
     @FXML
     private TextArea newNotificationLog;
 
-    @FXML
-    public void openGenReportWindow(MouseEvent mouseEvent) throws IOException {
-        URL main = getClass().getResource(REPORT_WINDOW_FXML); // grab main xml
+    public InstructorApplication(){
 
-        if (main != null) { // null catch
-            FXMLLoader loader = new FXMLLoader(main);
-            Parent root = loader.load(); // load it
-            reportWindow = new Stage();
-            reportWindow.setTitle(REPORT_WINDOW_TITLE);
-            reportWindow.setScene(new Scene(root));
-
-            ReportWindow controller = loader.getController();
-            controller.parent = this; // set this as the parent controller
-            reportWindow.show();
-        } else {
-            System.out.println("Something went wrong: " + REPORT_WINDOW_FXML + " returned null on start.");
-        } // end if
     } // end method
 
     /**
-     * called from the report window
+     * directive to generate a report about specific targets
+     * and any special categories as needed.
+     * @param targetIds target ids, whether agent or class
+     * @param reportTypes report type, or categories to focus on if not general
+     * @param timeStart start date
+     * @param timeEnd end date
      */
     public void generateReport(
             List<String> targetIds,
@@ -112,6 +69,81 @@ public class InstructorApplication {
         reportWindow = null;
     } // end method
 
+    /**
+     * Organizes a list of workouts and general class
+     * information for the instructor’s class to transmit
+     * and send to other enrolled members
+     * @param info packet to send out itinerary as
+     */
+    public void createItinerary(String info) {
+
+    } // end method
+
+    /**
+     * Organizes a request for gathering instructor profile
+     * information for general and classroom-related data.
+     * @param instructorId instructor's id
+     */
+    public void getInstructorProfile(AgentId instructorId) {
+
+    } // end method
+
+    /**
+     * Access point to receive information from network.
+     * @param notificationOrInformation Notification type if time
+     */
+    public void receiveInformation(Notification notificationOrInformation) {
+        // assume right now it's just a recc
+        if (notificationOrInformation.getAlertLevel() == AlertLevel.INFORMATIONAL_MESSAGE) {
+            instructorLog.appendText(notificationOrInformation.getMessage() + "\n");
+        } else {
+            newNotificationLog.appendText(notificationOrInformation.getMessage() + "\n");
+        } // end if
+    } // end method
+
+
+    // TODO: we need to work in the next to methods with displayNotification(...)
+    //       instead of doing directly here.
+    @FXML
+    public void confirm(MouseEvent mouseEvent) {
+        if (newNotificationLog.getText() == null || newNotificationLog.getText().trim().isEmpty()) {
+            instructorLog.appendText("No notification to mark\n");
+        } else {
+            newNotificationLog.clear();
+        } // end if
+    } // end method
+
+    /**
+     * open the report window, used for demo purposes
+     * to put together a report request to GSMC.
+     * @param mouseEvent click
+     * @throws IOException
+     */
+    @FXML
+    public void openGenReportWindow(MouseEvent mouseEvent) throws IOException {
+        URL main = getClass().getResource(REPORT_WINDOW_FXML); // grab main xml
+
+        if (main != null) { // null catch
+            FXMLLoader loader = new FXMLLoader(main);
+            Parent root = loader.load(); // load it
+            reportWindow = new Stage();
+            reportWindow.setTitle(REPORT_WINDOW_TITLE);
+            reportWindow.setScene(new Scene(root));
+
+            ReportWindow controller = loader.getController();
+            controller.parent = this; // set this as the parent controller
+            reportWindow.show();
+        } else {
+            System.out.println("Something went wrong: " + REPORT_WINDOW_FXML + " returned null on start.");
+        } // end if
+    } // end method
+
+
+    /*
+     ========================================================================
+     METHODS FOR TESTING APPLICATION GUI
+     ========================================================================
+     */
     @FXML
     public void sendAction(MouseEvent mouseEvent) {
 //        if (inputArea.getText() == null || inputArea.getText().trim().isEmpty()) {
@@ -184,31 +216,7 @@ public class InstructorApplication {
 //        inputArea.clear();
     }
 
-    // TODO: we need to work in the next to methods with displayNotification(...)
-    //       instead of doing directly here.
-    @FXML
-    public void confirm(MouseEvent mouseEvent) {
-        if (newNotificationLog.getText() == null || newNotificationLog.getText().trim().isEmpty()) {
-            instructorLog.appendText("No notification to mark\n");
-        } else {
-//            instructorLog.appendText(newNotificationLog.getText() + "\n");
-//            inputArea.clear();
-            newNotificationLog.clear();
-        }
-    }
 
-    /**
-     * Access point to receive information from network.
-     * @param notificationOrInformation Notification type if time
-     */
-    public void receiveInformation(Notification notificationOrInformation) {
-        // assume right now it's just a recc
-        if (notificationOrInformation.getAlertLevel() == AlertLevel.INFORMATIONAL_MESSAGE) {
-            instructorLog.appendText(notificationOrInformation.getMessage() + "\n");
-        } else {
-            newNotificationLog.appendText(notificationOrInformation.getMessage() + "\n");
-        }
-    } // end method
 
 
     // ==============================================================================
