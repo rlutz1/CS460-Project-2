@@ -163,8 +163,8 @@ public class InstructorApplication {
 //                    }
 //                }
 //            }
-////            String output = dispatch.receiveRequest(id, request.getText(), age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
-////            memberLog.appendText(output);
+//            String output = dispatch.receiveRequest(id, request.getText(), age + ", " + normalHeartRateAvg + ", is member an athlete: " + isAthlete);
+//            memberLog.appendText(output);
 //            inputArea.clear();
 //        }
     }

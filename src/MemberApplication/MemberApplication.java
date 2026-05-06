@@ -109,29 +109,29 @@ public class MemberApplication {
 
     @FXML
     public void sendAction(MouseEvent mouseEvent) {
-        if (request.getText() == null || request.getText().trim().isEmpty()) {
-            memberLog.appendText("No request made\n");
-        } else {
-            String actions[] = request.getText().toLowerCase().split("\n");
-            for (String action:actions) {
-                switch (action) {
-                    case "clear":
-                        memberLog.clear();
-                        break;
-                      //  commenting out since this is not quite adhering to architecture.
-//                    case "view schedule":
-//                        api.transmitScheduleViewingRequest(id, "");
+//        if (request.getText() == null || request.getText().trim().isEmpty()) {
+//            memberLog.appendText("No request made\n");
+//        } else {
+//            String actions[] = request.getText().toLowerCase().split("\n");
+//            for (String action:actions) {
+//                switch (action) {
+//                    case "clear":
+//                        memberLog.clear();
 //                        break;
-                    case "generate workout":
-                        getGeneratedWorkout(id, "Anything is fine");
-                        break;
-                    default:
-                        api.transmitRecommendationRequest(id, "XXX");
-                        break;
-                }
-            }
-        }
-        request.clear();
+//                      //  commenting out since this is not quite adhering to architecture.
+////                    case "view schedule":
+////                        api.transmitScheduleViewingRequest(id, "");
+////                        break;
+//                    case "generate workout":
+//                        getGeneratedWorkout(id, "Anything is fine");
+//                        break;
+//                    default:
+//                        api.transmitRecommendationRequest(id, "XXX");
+//                        break;
+//                }
+//            }
+//        }
+//        request.clear();
     } // end method
 
     @FXML
