@@ -19,6 +19,7 @@ public class MemberApplication {
     private Stage myStage; // this is for holding onto the initialized application to show later
     private AgentId id; // for ease of use as needed.
     private MemberApplicationAPI api; // this is set during initialization; api to communicate through
+    private UserInterface ui;
 
     @FXML
     private TextArea request;
@@ -28,8 +29,19 @@ public class MemberApplication {
     private TextArea newNotificationLog;
 
     public MemberApplication() {
-
+        this.ui = new UserInterface();
     } // end constructor
+
+    /**
+     * FXML init method
+     */
+    @FXML
+    public void initialize() {
+        // hand ui control of manipulating these visually
+        ui.inputArea = request;
+        ui.memberLog = memberLog;
+        ui.newNotificationLog = newNotificationLog;
+    } // end method
 
     /**
      * Requests for a member-specific workout
@@ -76,21 +88,19 @@ public class MemberApplication {
     public void receiveInformation(Notification notificationOrInformation) {
         // assume right now it's just a recc
         if (notificationOrInformation.getAlertLevel() == AlertLevel.INFORMATIONAL_MESSAGE) {
-            memberLog.appendText(notificationOrInformation.getMessage() + "\n");
+            ui.updateGUI(notificationOrInformation);
         } else {
-            newNotificationLog.appendText(notificationOrInformation.getMessage() + "\n");
+            ui.displayNotification(notificationOrInformation.getAlertLevel(), notificationOrInformation.getMessage());
         } // end if
     } // end method
 
-    // TODO: we need to work in the next to methods with displayNotification(...)
-    //       instead of doing directly here.
+    /**
+     * acknowledge the notification
+     * @param mouseEvent click
+     */
     @FXML
-    public void confirm(MouseEvent mouseEvent) {
-        if (newNotificationLog.getText() == null || newNotificationLog.getText().trim().isEmpty()) {
-            memberLog.appendText("No notification to mark\n");
-        } else {
-            newNotificationLog.clear();
-        } // end if
+    public void acknowledge(MouseEvent mouseEvent) {
+        ui.markNotificationResolved();
     } // end method
 
     // ========================================================================

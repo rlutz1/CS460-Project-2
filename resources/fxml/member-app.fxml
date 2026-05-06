@@ -39,7 +39,7 @@
                         <Font size="20.0" />
                     </font>
                 </TextArea>
-                <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#confirm" prefHeight="102.0" prefWidth="198.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Acknowledge" textAlignment="CENTER">
+                <Button mnemonicParsing="false" mouseTransparent="false" onMouseClicked="#acknowledge" prefHeight="102.0" prefWidth="198.0" style="-fx-background-color: lavender; -fx-border-color: black" text="Acknowledge" textAlignment="CENTER">
                     <font>
                         <Font name="Calibri" size="24.0" />
                     </font>
