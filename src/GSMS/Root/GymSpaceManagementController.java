@@ -137,10 +137,9 @@ public class GymSpaceManagementController implements AgentRegistry {
      * Entry point for requests arriving from MemberDispatcher or InstructorDispatcher Application APIs.
      * Parses the request type and delegates to the appropriate internal component.
      *
-     * Expected requestType values (consistent with use cases):
-     *   "GENERATE_WORKOUT" → routes to RecommendationDispatcher (Use Case 3)
-     *   "ANALYZE_ITINERARY" → routes to RecommendationDispatcher (Use Case 3 instructor path)
-     *   "GENERATE_REPORT" → routes to DataManager (Use Case 5)
+     * Expected jobType values (consistent with use cases):
+     *   "RECOMMENDATION_ENGINE" → routes to RecommendationDispatcher (Use Case 3)
+     *   "REPORT_GENERATION" → routes to DataManager (Use Case 5)
      *
      * @param info Serialized request payload (sender ID, request data, etc.).
      * @param sender String identifying the requesting API ("MEMBER_API" or "INSTRUCTOR_API").
@@ -154,9 +153,6 @@ public class GymSpaceManagementController implements AgentRegistry {
             return;
         } // end if
 
-        // TODO: define a structured request format (e.g. JSON or delimited string and parse requestType
-        //  + payload from info. Stub routing shown below using placeholder parsing.
-
         switch (info.jobType()) {
             case RECOMMENDATION_ENGINE:
                 recommendationDispatcher.receiveRequest(info.senderId(), info.recommendationOrAnalysis(), info.data());
@@ -167,119 +163,8 @@ public class GymSpaceManagementController implements AgentRegistry {
             default:
                 System.err.println("[GSMC] scheduleJob: unrecognized request type in info='"
                     + info + "'. No component delegated.");
-        }
-
-//        if (info.contains("GENERATE_WORKOUT")) {
-//            // Use Case 3 — member requests a system-generated workout
-//            recommendationDispatcher.receiveRequest(sender, "GENERATE_WORKOUT", info);
-//
-//        } else if (info.contains("ANALYZE_ITINERARY")) {
-//            // Use Case 3 instructor path — instructor submits itinerary for analysis
-//            recommendationDispatcher.receiveRequest(sender, "ANALYZE_ITINERARY", info);
-//
-//        } else if (info.contains("GENERATE_REPORT")) {
-//            // Use Case 5 — attendant requests a usage or attendance report
-//            dataManager.generateReport(sender, "GENERAL", info);
-//
-//        } else {
-//
-//        } // end if-else
-
+        } // end switch case
     } // end method
-    // OLD VERSION:
-//    public void scheduleJob(String info, String sender) {
-//        System.out.println("[GSMC] scheduleJob | sender=" + sender + " | info=" + info);
-//
-//        if (info == null || info.isBlank()) {
-//            System.err.println("[GSMC] scheduleJob: received null or blank info. Ignored.");
-//            return;
-//        } // end if
-//
-//        // TODO: define a structured request format (e.g. JSON or delimited string and parse requestType
-//        //  + payload from info. Stub routing shown below using placeholder parsing.
-//
-//        if (info.contains("GENERATE_WORKOUT")) {
-//            // Use Case 3 — member requests a system-generated workout
-//            recommendationDispatcher.receiveRequest(sender, "GENERATE_WORKOUT", info);
-//
-//        } else if (info.contains("ANALYZE_ITINERARY")) {
-//            // Use Case 3 instructor path — instructor submits itinerary for analysis
-//            recommendationDispatcher.receiveRequest(sender, "ANALYZE_ITINERARY", info);
-//
-//        } else if (info.contains("GENERATE_REPORT")) {
-//            // Use Case 5 — attendant requests a usage or attendance report
-//            dataManager.generateReport(sender, "GENERAL", info);
-//
-//        } else {
-//            System.err.println("[GSMC] scheduleJob: unrecognized request type in info='"
-//                    + info + "'. No component delegated.");
-//        } // end if-else
-//
-//    } // end method
-
-    // NOTE: commenting out only because we should ALWAYS know who the sender is.
-    // otherwise, we don't know who to send data back to.
-//    /**
-//     * Preserved original single-parameter overload for backward compatibility
-//     * with existing call sites that only pass info.
-//     * Delegates to scheduleJob(String info, String sender) with sender="UNKNOWN".
-//     * @param info Serialized request payload.
-//     */
-//    public void scheduleJob(String info) {
-//        scheduleJob(info, "UNKNOWN");
-//    } // end method
-
-//    ====================================================================
-//    NOTE: COMMENTING DUE TO REMOVAL FROM THE SAD
-//    ====================================================================
-//    /**
-//     * Entry point for inter-component communication. Other backend components
-//     * call this when they need the GSMC to coordinate an action that crosses
-//     * component boundaries.
-//     *
-//     * Expected sender values:
-//     *   "EVENT_ANALYZER" → sensor-triggered event needing cross-component action
-//     *   "RECOMMENDATION" → workout/itinerary result ready to deliver
-//     *   "DATA_MANAGER" → report generation complete, ready to return
-//     *
-//     * @param info   Serialized payload describing the needed action.
-//     * @param sender String identifying the requesting component.
-//     */
-//    public void requestJob(String info, String sender) {
-//        System.out.println("[GSMC] requestJob | sender=" + sender + " | info=" + info);
-//
-//        if (info == null || info.isBlank()) {
-//            System.err.println("[GSMC] requestJob: received null or blank info. Ignored.");
-//            return;
-//        } // end if
-//
-//        // TODO: expand routing cases as components are implemented
-//        switch (sender) {
-//
-//            case "EVENT_ANALYZER":
-//                // EventAnalyzer is requesting cross-component coordination
-//                // (e.g. room access verification needs a DataManager lookup)
-//                // TODO: parse info and delegate to DataManager or NotificationDispatcher
-//                break;
-//
-//            case "RECOMMENDATION":
-//                // RecommendationDispatcher has a result ready to route back to a member
-//                // TODO: parse memberId/instructorId from info and call MemberDispatcher/InstructorDispatcher sendInformation() directly,
-//                //  or route via the agent registry
-//                break;
-//
-//            case "DATA_MANAGER":
-//                // DataManager has a report ready to return to the requesting application
-//                // TODO: parse target application from info and deliver
-//                break;
-//
-//            default:
-//                System.err.println("[GSMC] requestJob: unrecognized sender '"
-//                        + sender + "'. No action taken.");
-//
-//        } // end switch
-//
-//    } // end method
 
     /*
     The AgentRegistry implementation

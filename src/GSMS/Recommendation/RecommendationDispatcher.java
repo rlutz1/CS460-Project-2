@@ -70,9 +70,9 @@ public class RecommendationDispatcher {
                 instructorId
         );
         if (instructorId.getType() == AgentType.INSTRUCTOR) {
-            AgentContainer.MemberApps.get(instructorId).sendInformation(information);
+            AgentContainer.InstructorApps.get(instructorId).sendInformation(information);
         } else {
-            System.out.println("[RECC DISPATCH] Somehow a member or else used system generate: " + instructorId);
+            System.out.println("[RECC DISPATCH] Somehow a member or else used itinerary create: " + instructorId);
         } // end if
     } // end method
 

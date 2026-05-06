@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * stand in class for an instructor application.
+ * stand in class for an instructor application user interface controller
  */
 
 public class UserInterface {

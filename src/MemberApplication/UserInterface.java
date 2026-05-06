@@ -5,7 +5,7 @@ import GSMS.Notification.Notification;
 import javafx.scene.control.TextArea;
 
 /**
- * stand in class for a member application.
+ * stand in class for a member application user interface controller
  */
 
 public class UserInterface {

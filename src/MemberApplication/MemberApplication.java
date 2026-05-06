@@ -86,7 +86,7 @@ public class MemberApplication {
      * @param notificationOrInformation Notification type if time
      */
     public void receiveInformation(Notification notificationOrInformation) {
-        // assume right now it's just a recc
+        // assume right now it's just a recc or general info
         if (notificationOrInformation.getAlertLevel() == AlertLevel.INFORMATIONAL_MESSAGE) {
             ui.updateGUI(notificationOrInformation);
         } else {

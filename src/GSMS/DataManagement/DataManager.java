@@ -12,7 +12,6 @@ import GSMS.Notification.Notification;
 import MemberApplication.MemberApplication;
 import InstructorApplication.InstructorApplication;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
